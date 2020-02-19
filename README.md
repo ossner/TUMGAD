@@ -9,5 +9,5 @@ semester of 2019 and 2020 as well as the Book [Algorithms and Data Structures: T
 Hence there may be different definitions in this project than you are used to.
 
 ## How to Use
-Visit [sebastianoner.github.io/tumgad](https://sebastianoner.github.io/tumgad)
+Visit [sebastianoner.github.io/TUMGAD](https://sebastianoner.github.io/tumgad)
 ## Contributing
