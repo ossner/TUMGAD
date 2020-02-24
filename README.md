@@ -10,7 +10,7 @@ Hence there may be different definitions in this project than you are used to.
 
 ## How to Use
 There are 2 main ways to use this resource:
-1. You can look at the [MarkDown (.md) files](https://sebastianoner.github.io/TUMGAD/routes) to find some description on how the Algorithm/Data Structure
+1. You can look at the [MarkDown (.md) files](https://sebastianoner.github.io/TUMGAD/src/routes) to find some description on how the Algorithm/Data Structure
 works (Either on Github or look at )
 2.
 Visit [sebastianoner.github.io/TUMGAD](https://sebastianoner.github.io/TUMGAD)
