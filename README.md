@@ -16,3 +16,6 @@ works (Either on Github or look at )
 2.
 Visit [sebastianoner.github.io/TUMGAD](https://sebastianoner.github.io/TUMGAD)
 ## Contributing
+If you spot an issue you can report it [here](https://github.com/SebastianOner/TUMGAD/issues/new?assignees=&labels=&template=bug_report.md&title=)
+
+If you have an idea for a feature you can submit it [here](https://github.com/SebastianOner/TUMGAD/issues/new?assignees=&labels=&template=feature_request.md&title=)
