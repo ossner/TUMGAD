@@ -1,4 +1,5 @@
 # TUMGAD
+<!-- favicon by Becris from flaticon.com -->
 Exercise generation and helpful materials for the course Introduction to Algorithms and Data Structures
 ## About
 TUMGAD is a tool for anyone wanting to learn about the foundations of Algorithms and Data Structures, though it 
