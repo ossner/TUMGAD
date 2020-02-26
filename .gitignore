@@ -36,3 +36,6 @@ classes/
 .java/
 out/
 desktop.ini
+docs/ExerciseTemplate.aux
+docs/ExerciseTemplate.pdf
+docs/ExerciseTemplate.out
