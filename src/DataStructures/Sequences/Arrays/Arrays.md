@@ -12,9 +12,13 @@ allocated into the new array.
 Given:
 
 `β = growth factor`
+
 `α = max. storage overhead`
+
 `w = current array size`
+
 `n = current nr. of elements in array`
+
 `b = array (new Element[w])`
 
 ### 1. push(Element e)
@@ -45,9 +49,13 @@ If the array size after the removal of the last element results in `n <= w/α`, 
 Else if the array size is too small, the last element is simply removed.
 
 - Example:
+
 `β = 2` //the array size is doubled/halved\
+
 `α = 3` //if n is a third of the current size of w, then the array is shortened\
+
 `w = 12`
+
 `n = 5` 
 
 | 0  | 1  | 2  | 3  | 4  | 5 | 6 | 7 | 8 | 9 | 10 | 11 |
