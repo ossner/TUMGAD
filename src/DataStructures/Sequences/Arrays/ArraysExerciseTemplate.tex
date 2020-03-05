@@ -16,6 +16,8 @@
 \usepackage{enumitem,amssymb}
 \definecolor{tumgadPurple}{RGB}{105,0,168}
 
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}} % Center column values in content table
+
 % Header/Footer definitions
 \rhead{\thepage}
 \renewcommand{\headrulewidth}{0.4pt}
@@ -25,15 +27,40 @@
 \renewcommand{\footrulewidth}{0.4pt}
 
 \begin{document}
+    \textbf{\LARGE{Dynamic Arrays}}\\
+    \\
     \noindent
-    Given a Dynamic Array with this snapshot (Cells without index are not initialized):\\
-    %\begin{tabular}{$_INITTABLELAYOUT_$}
-        %$_INITTABLEVALUES_$
-    %\end{tabular}
+    Given a Dynamic Array with this snapshot:\\
+    \begin{center}
+        $INITARRAY$
+    \end{center}
     \begin{enumerate}[label=\alph*]
-        \item) What are the values of the following variables?\\
+        \item \hspace{-5px}) What are the values of the following variables?\\
+        \\
         $w = $\\
+        \\
         $n = $
-        \item) another item
+        \\
+        \item \hspace{-5px}) Consider the following sequence of push() and pop() operations, determine the \textbf{max. storage overhead $\alpha$}
+        and the \textbf{growth factor $\beta$}\\
+        \\
+        $EXERCISEBGENERATION$\\
+        \\
+        $\alpha = $\\
+        \\
+        $\beta = $\\
+        \\
+        \item \hspace{-5px}) Perform the following operations on the array below and enter the values after each operation in the provided empty
+        tables below. Assume $\beta = BETACVALUE$ and $\alpha = ALPHACVALUE$. Also give a value to $w$ after the operations.\\
+        \begin{center}
+            $ARRAYCGENERATION$
+        \end{center}
+        $EXERCISECGENERATION$
     \end{enumerate}
 \end{document}
+
+
+Process finished with exit code 0
+
+
+
