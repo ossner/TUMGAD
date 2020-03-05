@@ -1,0 +1,39 @@
+\UseRawInputEncoding
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage[table]{xcolor}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=tumgadPurple,
+}
+\usepackage[a4paper, total={6in, 9in}]{geometry}
+\usepackage[nodisplayskipstretch]{setspace}
+\usepackage[printwatermark]{xwatermark}
+\usepackage{enumitem,amssymb}
+\definecolor{tumgadPurple}{RGB}{105,0,168}
+
+% Header/Footer definitions
+\rhead{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\cfoot{TUMGAD was created by Sebastian Oßner and Daniel Krüger \href{https://github.com/SebastianOner/TUMGAD}{\underline{View it on GitHub}}}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\begin{document}
+    \noindent
+    Given a Dynamic Array with this snapshot (Cells without index are not initialized):\\
+    \begin{tabular}{$_INITTABLELAYOUT_$}
+        $_INITTABLEVALUES_$
+    \end{tabular}
+    \begin{enumerate}[label=\alph*]
+        \item) What are the values of the following variables?\\
+        $w = $\\
+        $n = $
+        \item) another item
+    \end{enumerate}
+\end{document}
