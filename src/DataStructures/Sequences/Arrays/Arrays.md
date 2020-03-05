@@ -2,8 +2,8 @@
 An array sequence is basically an ArrayList: 
 an object consisting of an array and methods to modify the array.
 
-The space in this array is dynamic
----
+The space in a dynamic array is dynamic, meaning it is subject to change based on certain conditions.
+
 ## Dynamic fields
 The array is not restricted to a set amount of space.
 Once a certain threshold is reached, a new array is copied with an increased/decreased size and the old values are 
@@ -21,6 +21,9 @@ Given:
 
 `b = array (new Element[w])`
 
+The first n entries are used to store the information in the array. The last `(w-n)` entries
+are empty and available for use.
+
 ### 1. push(Element e)
 If the array is full `(n == w)`, a new array is created with the increased size `β*w` and all the values from `b`
 are then copied to the new array. Finally, the element e is added to the next free position in the array `(n+1)`.
@@ -28,8 +31,11 @@ are then copied to the new array. Finally, the element e is added to the next fr
 Else if the array is not full, the element e is simply pushed to the array at position n+1.
 
 - Example:
-`β = 2` //the array size is doubled
+
+`β = 2` // the array size is doubled
+
 `w = 4`
+
 `n = 4`
 
 | 0  | 1  | 2  | 3  |
@@ -50,9 +56,9 @@ Else if the array size is too small, the last element is simply removed.
 
 - Example:
 
-`β = 2` //the array size is doubled/halved\
+`β = 2` // the array size is doubled/halved
 
-`α = 3` //if n is a third of the current size of w, then the array is shortened\
+`α = 3` // if n is a third of the current size of w, then the array is shortened
 
 `w = 12`
 

@@ -27,6 +27,4 @@ public class TumgadCLI {
     private void print(String text) {
         System.out.println(text);
     }
-
-
 }
