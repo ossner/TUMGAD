@@ -36,10 +36,9 @@ classes/
 .java/
 out/
 desktop.ini
-docs/ExerciseTemplate.aux
-docs/ExerciseTemplate.pdf
-docs/ExerciseTemplate.out
-docs/SolutionTemplate.pdf
-docs/SolutionTemplate.aux
-docs/SolutionTemplate.out
-docs/SolutionTemplate.xwm
+
+# LaTeX generated
+*.aux
+*.pdf
+*.out
+*.xwm
