@@ -1,8 +1,5 @@
 package DataStructures.Sequences.Arrays;
 
-
-import java.util.ArrayList;
-
 /**
  * Class represents Dynamic Array (read about it in the md),
  * an unbounded Array that changes its size based on its current size
