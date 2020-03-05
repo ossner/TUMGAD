@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class DynamicArrayTest {
     @Test
     public void testPushLecture() {
-        DynamicArray array = new DynamicArray(2, 4);
+        DynamicArray array = new DynamicArray(2, 4, 1);
         array.push(0);
         array.push(1);
         array.push(2);
@@ -20,7 +20,7 @@ class DynamicArrayTest {
 
     @Test
     public void testPopLecture() {
-        DynamicArray array = new DynamicArray(2, 4);
+        DynamicArray array = new DynamicArray(2, 4, 1);
         array.push(0);
         array.push(1);
         array.push(2);
@@ -36,7 +36,7 @@ class DynamicArrayTest {
 
     @Test
     public void testPushMarkdownExample() {
-        DynamicArray array = new DynamicArray(2, 4);
+        DynamicArray array = new DynamicArray(2, 4, 1);
         array.push(15);
         array.push(18);
         array.push(20);
