@@ -38,4 +38,8 @@ public class Terminal {
             e.printStackTrace();
         }
     }
+    public static void replaceinSB(StringBuilder sb, String toReplace, String replaceWith) {
+        int start = sb.indexOf(toReplace);
+        sb.replace(start, start + toReplace.length(), replaceWith);
+    }
 }
