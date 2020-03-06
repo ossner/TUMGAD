@@ -40,7 +40,7 @@ public class DynamicArray {
      * Generates a new dynamic array with random values for alpha, beta and the initialSize
      */
     public static DynamicArray generateRandomArray() {
-        int alpha = new Random().nextInt(3) + 2;
+        int alpha = new Random().nextInt(2) + 3;
         int beta = new Random().nextInt(2) + 2;
         int initialSize = new Random().nextInt(5) + 3;
         return new DynamicArray(beta, alpha, initialSize);
