@@ -39,11 +39,11 @@ public class DynamicArray {
      * Generates a new dynamic array with random values for alpha, beta and the initialSize
      */
     public static DynamicArray generateRandomArray() {
-        int alpha = new Random().nextInt(3) + 3;
+        int alpha = new Random().nextInt(2) + 3;
         int beta;
         while (alpha == (beta = new Random().nextInt(2) + 2)) {
         }
-        int initialSize = new Random().nextInt(5) + 3;
+        int initialSize = new Random().nextInt(5) + 4;
         return new DynamicArray(beta, alpha, initialSize);
     }
 
@@ -52,15 +52,25 @@ public class DynamicArray {
         generateExercise();
         try {
             Process process = Runtime.getRuntime().exec("pdflatex -output-directory=src/DataStructures/Sequences/Arrays src/DataStructures/Sequences/Arrays/ArraysExercise.tex");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
 
-            BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(process.getInputStream()));
             String line;
+
             while ((line = reader.readLine()) != null) {
                 System.out.println(line);
             }
 
             reader.close();
+
+            Process process2 = Runtime.getRuntime().exec("pdflatex -output-directory=src/DataStructures/Sequences/Arrays src/DataStructures/Sequences/Arrays/ArraysSolution.tex");
+            BufferedReader reader2 = new BufferedReader(new InputStreamReader(process2.getInputStream()));
+            String line2;
+
+            while ((line2 = reader2.readLine()) != null) {
+                System.out.println(line2);
+            }
+
+            reader2.close();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -81,23 +91,34 @@ public class DynamicArray {
 
         // Writing the initial Array into the tex file
         StringBuilder exerciseStringBuilder = Terminal.readFile("src/DataStructures/Sequences/Arrays/ArraysExerciseTemplate.tex");
+        StringBuilder solutionStringBuilder = Terminal.readFile("src/DataStructures/Sequences/Arrays/ArraysSolutionTemplate.tex");
+
         Terminal.replaceinSB(exerciseStringBuilder, "$INITARRAY$", exerciseArray.arrayToTable());
+
+        Terminal.replaceinSB(solutionStringBuilder, "$INITARRAY$", exerciseArray.arrayToTable());
+
+        Terminal.replaceinSB(solutionStringBuilder, "INITIALWVALUE", "" + exerciseArray.getB().length);
+        Terminal.replaceinSB(solutionStringBuilder, "INITIALNVALUE", "" + exerciseArray.getN());
+        Terminal.replaceinSB(solutionStringBuilder, "INITALPHAVALUE", "" + exerciseArray.getAlpha());
+        Terminal.replaceinSB(solutionStringBuilder, "INITIALBETAVALUE", "" + exerciseArray.getBeta());
 
         // generate the initial sequence of pop operations on the array
         int numPops = exerciseArray.getN() - 1;
         for (int i = 0; i < numPops; i++) {
-            System.out.println(exerciseArray.alpha + " " + exerciseArray.beta);
             exerciseArray.pop();
             // TODO 06/03/2020 sebas: Fix indexoutofbounds after pop operations reallocate
             Terminal.replaceinSB(exerciseStringBuilder, "$EXERCISEBGENERATION$", exerciseArray.arrayToTable() + "\\vspace{10px}\\\\\n" + "$EXERCISEBGENERATION$\n");
+            Terminal.replaceinSB(solutionStringBuilder, "$EXERCISEBGENERATION$", exerciseArray.arrayToTable() + "\\vspace{10px}\\\\\n" + "$EXERCISEBGENERATION$\n");
         }
 
         for (int i = 0; i < 3; i++) {
             exerciseArray.push(new Random().nextInt(100));
             Terminal.replaceinSB(exerciseStringBuilder, "$EXERCISEBGENERATION$", exerciseArray.arrayToTable() + "\\vspace{10px}\\\\\n" + "$EXERCISEBGENERATION$\n");
+            Terminal.replaceinSB(solutionStringBuilder, "$EXERCISEBGENERATION$", exerciseArray.arrayToTable() + "\\vspace{10px}\\\\\n" + "$EXERCISEBGENERATION$\n");
         }
         exerciseArray.push(new Random().nextInt(100));
         Terminal.replaceinSB(exerciseStringBuilder, "$EXERCISEBGENERATION$", exerciseArray.arrayToTable() + "\\vspace{10px}\\\\\n");
+        Terminal.replaceinSB(solutionStringBuilder, "$EXERCISEBGENERATION$", exerciseArray.arrayToTable() + "\\vspace{10px}\\\\\n");
 
         // Generating the Array for exercise c
         exerciseArray = generateRandomArray();
@@ -107,18 +128,33 @@ public class DynamicArray {
         Terminal.replaceinSB(exerciseStringBuilder, "ALPHACVALUE", "" + exerciseArray.getAlpha());
         Terminal.replaceinSB(exerciseStringBuilder, "$ARRAYCGENERATION$", exerciseArray.arrayToTable());
 
+        Terminal.replaceinSB(solutionStringBuilder, "BETACVALUE", "" + exerciseArray.getBeta());
+        Terminal.replaceinSB(solutionStringBuilder, "ALPHACVALUE", "" + exerciseArray.getAlpha());
+        Terminal.replaceinSB(solutionStringBuilder, "$ARRAYCGENERATION$", exerciseArray.arrayToTable());
+
         // The number of elements in the array determines the number of operations we will generate
         numPops = exerciseArray.getN() - 1;
         String exerciseCOperations = "";
         for (int i = 0; i < numPops; i++) {
-            // TODO 06/03/2020 sebas: simulate pop for solution
+            Terminal.replaceinSB(solutionStringBuilder, "$OPERATIONSCGENERATION$", "\\vspace{10px}pop():\n");
+            exerciseArray.pop();
+            Terminal.replaceinSB(solutionStringBuilder, "$ARRAYSCGENERATION$", exerciseArray.arrayToTable()
+                    + "\\\\\n$OPERATIONSCGENERATION$\\\\\n$ARRAYSCGENERATION$");
             exerciseCOperations += "pop(), ";
         }
         for (int i = 0; i < 4; i++) {
             int pushValue = new Random().nextInt(100);
+            Terminal.replaceinSB(solutionStringBuilder, "$OPERATIONSCGENERATION$", "\\vspace{10px}push(" + pushValue +"):\n");
+            exerciseArray.push(pushValue);
+            Terminal.replaceinSB(solutionStringBuilder, "$ARRAYSCGENERATION$", exerciseArray.arrayToTable()
+                    + "\\\\\n$OPERATIONSCGENERATION$\\\\\n$ARRAYSCGENERATION$");
             // TODO 06/03/2020 sebas: simulate push of values in exerciseArray for solution
             exerciseCOperations += "push(" + pushValue + "), ";
         }
+        Terminal.replaceinSB(solutionStringBuilder, "$OPERATIONSCGENERATION$", "\\vspace{10px}pop():\n");
+        exerciseArray.pop();
+        Terminal.replaceinSB(solutionStringBuilder, "$ARRAYSCGENERATION$", exerciseArray.arrayToTable());
+
         exerciseCOperations += "pop()";
         Terminal.replaceinSB(exerciseStringBuilder, "$OPERATIONSCGENERATION$", exerciseCOperations);
 
@@ -128,6 +164,7 @@ public class DynamicArray {
 
         Terminal.replaceinSB(exerciseStringBuilder, "$ARRAYSCGENERATION$", EMPTY_MAX_TABLE + "\\\\");
         Terminal.saveToFile("src/DataStructures/Sequences/Arrays/ArraysExercise.tex", exerciseStringBuilder);
+        Terminal.saveToFile("src/DataStructures/Sequences/Arrays/ArraysSolution.tex", solutionStringBuilder);
     }
 
     /**
