@@ -5,7 +5,6 @@ import DataStructures.Terminal;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -62,28 +61,42 @@ public class DynamicArray {
         }
     }
 
+    private static void replaceinSB(StringBuilder sb, String toReplace, String replaceWith) {
+        int start = sb.indexOf(toReplace);
+        sb.replace(start, start + toReplace.length(), replaceWith);
+    }
+
     public static void generateExercise() {
         // Generating the initial Array
         DynamicArray exerciseArray = generateRandomArray();
         exerciseArray.fillArrayRandom();
 
         // Writing the initial Array into the tex file
-        StringBuilder sb = Terminal.readFile("src/DataStructures/Sequences/Arrays/ArraysExerciseTemplate.tex");
-        int start = sb.indexOf("$INITARRAY$");
-        sb.replace(start, start + 11, exerciseArray.arrayToTable());
+        StringBuilder exerciseStringBuilder = Terminal.readFile("src/DataStructures/Sequences/Arrays/ArraysExerciseTemplate.tex");
+        replaceinSB(exerciseStringBuilder, "$INITARRAY$", exerciseArray.arrayToTable());
+
+        // generate the initial sequence of pop operations on the array
+        int numPops = exerciseArray.getN() - 1;
+        for (int i = 0; i < numPops; i++) {
+            exerciseArray.pop();
+            // TODO 06/03/2020 sebas: Fix indexoutofbounds after pop operations reallocate
+            replaceinSB(exerciseStringBuilder, "$EXERCISEBGENERATION$", exerciseArray.arrayToTable() + "\\vspace{10px}\\\\\n" + "$EXERCISEBGENERATION$\n");
+        }
+
+        for (int i = 0; i < 3; i++) {
+            exerciseArray.push(new Random().nextInt(100));
+            replaceinSB(exerciseStringBuilder, "$EXERCISEBGENERATION$", exerciseArray.arrayToTable() + "\\vspace{10px}\\\\\n" + "$EXERCISEBGENERATION$\n");
+        }
+        exerciseArray.push(new Random().nextInt(100));
+        replaceinSB(exerciseStringBuilder, "$EXERCISEBGENERATION$", exerciseArray.arrayToTable() + "\\vspace{10px}\\\\\n");
 
         // Generating the Array for exercise c
         exerciseArray = generateRandomArray();
         exerciseArray.fillArrayRandom();
 
-        start = sb.indexOf("BETACVALUE");
-        sb.replace(start, start + 10, "" + exerciseArray.getBeta());
-
-        start = sb.indexOf("ALPHACVALUE");
-        sb.replace(start, start + 11, "" + exerciseArray.getAlpha());
-
-        start = sb.indexOf("$ARRAYCGENERATION$");
-        sb.replace(start, start + 18, "" + exerciseArray.arrayToTable());
+        replaceinSB(exerciseStringBuilder, "BETACVALUE", "" + exerciseArray.getBeta());
+        replaceinSB(exerciseStringBuilder, "ALPHACVALUE", "" + exerciseArray.getAlpha());
+        replaceinSB(exerciseStringBuilder, "$ARRAYCGENERATION$", exerciseArray.arrayToTable());
 
         // The number of elements in the array determines the number of operations we will generate
         numPops = exerciseArray.getN() - 1;
@@ -98,19 +111,14 @@ public class DynamicArray {
             exerciseCOperations += "push(" + pushValue + "), ";
         }
         exerciseCOperations += "pop()";
-
-        start = sb.indexOf("$OPERATIONSCGENERATION$");
-        sb.replace(start, start + 23, exerciseCOperations);
+        replaceinSB(exerciseStringBuilder, "$OPERATIONSCGENERATION$", exerciseCOperations);
 
         for (int i = 0; i < 9; i++) {
-            start = sb.indexOf("$ARRAYSCGENERATION$");
-            sb.replace(start, start + 19, EMPTY_MAX_TABLE + "\\vspace{10px}\\\\\n" + "$ARRAYSCGENERATION$\n");
+            replaceinSB(exerciseStringBuilder, "$ARRAYSCGENERATION$",  EMPTY_MAX_TABLE + "\\vspace{10px}\\\\\n" + "$ARRAYSCGENERATION$\n");
         }
 
-        start = sb.indexOf("$ARRAYSCGENERATION$");
-        sb.replace(start, start + 19, EMPTY_MAX_TABLE + "\\\\");
-
-        Terminal.saveToFile("src/DataStructures/Sequences/Arrays/ArraysExercise.tex", sb);
+        replaceinSB(exerciseStringBuilder, "$ARRAYSCGENERATION$",  EMPTY_MAX_TABLE + "\\\\");
+        Terminal.saveToFile("src/DataStructures/Sequences/Arrays/ArraysExercise.tex", exerciseStringBuilder);
     }
 
     /**
@@ -128,7 +136,7 @@ public class DynamicArray {
     }
 
     public int pop() {
-        if (n-1 <= b.length / alpha) {
+        if (n - 1 <= b.length / alpha) {
             int[] btick = new int[b.length / beta];
             copyValues(b, btick);
             b = btick;
