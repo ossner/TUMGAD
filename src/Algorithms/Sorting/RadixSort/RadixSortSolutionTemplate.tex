@@ -1,0 +1,143 @@
+\UseRawInputEncoding
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage[table]{xcolor}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=tumgadPurple,
+}
+\usepackage[a4paper, total={6in, 9in}]{geometry}
+\usepackage[nodisplayskipstretch]{setspace}
+\usepackage[printwatermark]{xwatermark}
+\usepackage{enumitem,amssymb}
+\definecolor{tumgadPurple}{RGB}{105,0,168}
+\definecolor{tumgadRed}{RGB}{255,85,85}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}} % Center column values in content table
+
+% Header/Footer definitions
+\rhead{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\cfoot{TUMGAD was created by Sebastian Oßner and Daniel Krüger \href{https://github.com/SebastianOner/TUMGAD}{\underline{View it on GitHub}}}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\begin{document}
+    \textbf{\LARGE{\color{tumgadPurple} RadixSort}}\\
+    \\
+    \noindent
+    a) Sort the following array of integers according to the \textbf{LSD RadixSort} algorithm: %Types can be integers or hexadecimals
+    \begin{center}
+        $LSDARRAY$
+    \end{center}
+    \vspace{10px}
+    \noindent\fbox{
+        \parbox{\textwidth}{
+            \vspace{5px}
+            First round:
+            \begin{center}
+                \begin{tabular}{|P{1cm}|P{1cm}|P{1cm}|P{1cm}|P{1cm}|P{1cm}|P{1cm}|P{1cm}|P{1cm}|P{1cm}|}
+                    \hline
+                    0& 1& 2& 3& 4& 5& 6& 7& 8& 9\\
+                    \hline
+                    $LSDFIRSTROUND$\\[13ex]
+                    \hline
+                \end{tabular}
+                \vspace{10px}
+            \end{center}
+            \vspace{5px}
+            New List:\underline{\hspace{12cm}}
+            \\
+            \\
+            Second round:
+            \begin{center}
+                \begin{tabular}{|P{1cm}|P{1cm}|P{1cm}|P{1cm}|P{1cm}|P{1cm}|P{1cm}|P{1cm}|P{1cm}|P{1cm}|}
+                    \hline
+                    0& 1& 2& 3& 4& 5& 6& 7& 8& 9\\
+                    \hline
+                    $LSDSECONDROUND$\\[13ex]
+                    \hline
+                \end{tabular}
+                \vspace{10px}
+            \end{center}
+            \vspace{5px}
+            New List:\underline{\hspace{12cm}}
+            \\
+            \\
+            Third round:
+            \begin{center}
+                \begin{tabular}{|P{1cm}|P{1cm}|P{1cm}|P{1cm}|P{1cm}|P{1cm}|P{1cm}|P{1cm}|P{1cm}|P{1cm}|}
+                    \hline
+                    0& 1& 2& 3& 4& 5& 6& 7& 8& 9\\
+                    \hline
+                    $LSDTHIRDROUND$\\[13ex]
+                    \hline
+                \end{tabular}
+                \vspace{10px}
+            \end{center}
+            \vspace{5px}
+            Sorted Array:\underline{\hspace{12cm}}
+            \vspace{5px}
+        }
+    }
+    \newpage
+    \noindent
+    b) Sort the following array of integers according to the \textbf{MSD RadixSort} algorithm: %Types can be integers or hexadecimals
+    \begin{center}
+        $MSDARRAY$
+    \end{center}
+    \vspace{10px}
+    \noindent\fbox{
+        \parbox{\textwidth}{
+            \vspace{5px}
+            First round:
+            \begin{center}
+                \begin{tabular}{|P{1cm}|P{1cm}|P{1cm}|P{1cm}|P{1cm}|P{1cm}|P{1cm}|P{1cm}|P{1cm}|P{1cm}|}
+                    \hline
+                    0& 1& 2& 3& 4& 5& 6& 7& 8& 9\\
+                    \hline
+                    $MSDFIRSTROUND$\\[13ex]
+                    \hline
+                \end{tabular}
+                \vspace{10px}
+            \end{center}
+            \vspace{5px}
+            New List:\underline{\hspace{12cm}}
+            \\
+            \\
+            Second round:
+            \begin{center}
+                \begin{tabular}{|P{1cm}|P{1cm}|P{1cm}|P{1cm}|P{1cm}|P{1cm}|P{1cm}|P{1cm}|P{1cm}|P{1cm}|}
+                    \hline
+                    0& 1& 2& 3& 4& 5& 6& 7& 8& 9\\
+                    \hline
+                    $MSDSECONDROUND$\\[13ex]
+                    \hline
+                \end{tabular}
+                \vspace{10px}
+            \end{center}
+            \vspace{5px}
+            New List:\underline{\hspace{12cm}}
+            \\
+            \\
+            Third round:
+            \begin{center}
+                \begin{tabular}{|P{1cm}|P{1cm}|P{1cm}|P{1cm}|P{1cm}|P{1cm}|P{1cm}|P{1cm}|P{1cm}|P{1cm}|}
+                    \hline
+                    0& 1& 2& 3& 4& 5& 6& 7& 8& 9\\
+                    \hline
+                    $MSDTHIRDROUND$\\[13ex]
+                    \hline
+                \end{tabular}
+                \vspace{10px}
+            \end{center}
+            \vspace{5px}
+            Sorted Array:\underline{\hspace{12cm}}
+            \vspace{5px}
+        }
+    }
+\end{document}
