@@ -5,6 +5,7 @@ import DataStructures.Terminal;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -14,11 +15,11 @@ import java.util.Random;
  */
 public class DynamicArray {
     // An empty table with the maximum number of entries (i.e. print template for solutions)
-    private final String EMPTY_MAX_TABLE = "" +
+    private static final String EMPTY_MAX_TABLE =
             "\\begin{tabular}{|P{0.65cm}|P{0.65cm}|P{0.65cm}|P{0.65cm}|P{0.65cm}|P{0.65cm}|P{0.65cm}|P{0.65cm}|P{0.65cm}|P{0.65cm}|P{0.65cm}|P{0.65cm}|P{0.65cm}|P{0.65cm}|} \\hline \n" +
-            "0& 1& 2& 3& 4& 5& 6& 7& 8& 9& 10& 11& 12& 13\\\\ \\hline \n" +
-            "58& 20& 47& 73& 63& 80& & & & & & & & \\\\ \\hline \n" +
-            "\\end{tabular}";
+                    "0& 1& 2& 3& 4& 5& 6& 7& 8& 9& 10& 11& 12& 13\\\\ \\hline \n" +
+                    " & & & & & & & & & & & & & \\\\ \\hline \n" +
+                    "\\end{tabular}";
     private int beta; // growth factor
     private int alpha; // storage overhead
     private int n; // current number of elements in array
@@ -84,6 +85,31 @@ public class DynamicArray {
         start = sb.indexOf("$ARRAYCGENERATION$");
         sb.replace(start, start + 18, "" + exerciseArray.arrayToTable());
 
+        // The number of elements in the array determines the number of operations we will generate
+        numPops = exerciseArray.getN() - 1;
+        String exerciseCOperations = "";
+        for (int i = 0; i < numPops; i++) {
+            // TODO 06/03/2020 sebas: simulate pop for solution
+            exerciseCOperations += "pop(), ";
+        }
+        for (int i = 0; i < 4; i++) {
+            int pushValue = new Random().nextInt(100);
+            // TODO 06/03/2020 sebas: simulate push of values in exerciseArray for solution
+            exerciseCOperations += "push(" + pushValue + "), ";
+        }
+        exerciseCOperations += "pop()";
+
+        start = sb.indexOf("$OPERATIONSCGENERATION$");
+        sb.replace(start, start + 23, exerciseCOperations);
+
+        for (int i = 0; i < 9; i++) {
+            start = sb.indexOf("$ARRAYSCGENERATION$");
+            sb.replace(start, start + 19, EMPTY_MAX_TABLE + "\\vspace{10px}\\\\\n" + "$ARRAYSCGENERATION$\n");
+        }
+
+        start = sb.indexOf("$ARRAYSCGENERATION$");
+        sb.replace(start, start + 19, EMPTY_MAX_TABLE + "\\\\");
+
         Terminal.saveToFile("src/DataStructures/Sequences/Arrays/ArraysExercise.tex", sb);
     }
 
@@ -102,7 +128,7 @@ public class DynamicArray {
     }
 
     public int pop() {
-        if (n - 1 <= b.length / alpha) {
+        if (n-1 <= b.length / alpha) {
             int[] btick = new int[b.length / beta];
             copyValues(b, btick);
             b = btick;
@@ -126,22 +152,25 @@ public class DynamicArray {
      * generates a LaTeX table from the current Array
      */
     private String arrayToTable() {
-        String ret = "\\begin{tabular}{|";
-        for (int i = 0; i < b.length; i++) {
+        String ret = "\\begin{tabular}{|"; // Initial setup and begin of the table
+        for (int i = 0; i < b.length; i++) { // Defining the number and spacing of columns (number = b.length)
             ret += "P{0.65cm}|";
         }
         ret += "} \\hline \n";
         ret += 0;
+        if (b.length == 1) { // If the array is too small it generates a latex error after a pop operation
+            ret += " & ";
+        }
         for (int i = 1; i < b.length; i++) {
-            ret += "& " + i;
+            ret += " & " + i;
         }
         ret += "\\\\ \\hline \n";
         ret += b[0];
         for (int i = 1; i < n; i++) {
-            ret += "& " + b[i];
+            ret += " & " + b[i];
         }
         for (int i = n; i < b.length; i++) {
-            ret += "& ";
+            ret += " & ";
         }
         ret += "\\\\ \\hline \n";
         return ret + "\\end{tabular}";
