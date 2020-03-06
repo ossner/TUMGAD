@@ -110,14 +110,14 @@ public class List {
     /**
      * Removes the first element in the list
      */
-    private void popFront() {
+    public void popFront() {
         remove(first());
     }
 
     /**
      * Removes the last element in the list
      */
-    private void popBack() {
+    public void popBack() {
         remove(last());
     }
 
@@ -127,7 +127,7 @@ public class List {
      * @param a new element is placed after a
      * @return the new element
      */
-    private Element insertAfter(int v, Element a) {
+    public Element insertAfter(int v, Element a) {
         Element b = new Element();
         b.setValue(v);
         moveAfter(b, a);
@@ -140,7 +140,7 @@ public class List {
      * @param a new element is placed before a
      * @return the new element
      */
-    private Element insertBefore(int v, Element a) {
+    public Element insertBefore(int v, Element a) {
         return insertAfter(v, a.getPrev());
     }
 
@@ -149,7 +149,7 @@ public class List {
      * @param v value of new element
      * @return the new element
      */
-    private Element pushFront(int v) {
+    public Element pushFront(int v) {
         return insertAfter(v, h);
     }
 
@@ -158,7 +158,7 @@ public class List {
      * @param v value of new element
      * @return the new element
      */
-    private Element pushBack(int v) {
+    public Element pushBack(int v) {
         return insertAfter(v, last());
     }
 
