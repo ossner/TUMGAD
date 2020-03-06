@@ -38,6 +38,10 @@ public class Terminal {
             e.printStackTrace();
         }
     }
+
+    /**
+     * replaces placeholders in the latex StringBuilders
+     */
     public static void replaceinSB(StringBuilder sb, String toReplace, String replaceWith) {
         int start = sb.indexOf(toReplace);
         sb.replace(start, start + toReplace.length(), replaceWith);
