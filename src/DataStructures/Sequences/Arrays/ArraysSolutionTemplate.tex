@@ -15,6 +15,9 @@
 \usepackage[printwatermark]{xwatermark}
 \usepackage{enumitem,amssymb}
 \definecolor{tumgadPurple}{RGB}{105,0,168}
+\definecolor{tumgadRed}{RGB}{255,85,85}
+
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}} % Center column values in content table
 
 % Header/Footer definitions
 \rhead{\thepage}
@@ -25,14 +28,46 @@
 \renewcommand{\footrulewidth}{0.4pt}
 
 \begin{document}
-    Given a Dynamic Array with this snapshot (Cells without index are not initialized):\\
-    \begin{tabular}{$_INITTABLELAYOUT_$}
-        $_INITTABLEVALUES_$
-    \end{tabular}
-    \begin{enumerate}[label=\Alph*]
-        \item What are the values of the following variables?\\
-        $w = $\\
-        $n = $\\
-        \item another item
+    \textbf{\LARGE{\color{tumgadRed} Dynamic Arrays}}\\
+    \\
+    \noindent
+    Given a Dynamic Array with this snapshot:
+    \begin{center}
+        $INITARRAY$
+    \end{center}
+    \begin{enumerate}[label=\alph*]
+        \item \hspace{-5px}) What are the values of the following variables?\\
+        \\
+        \color{tumgadRed}
+        $w = INITIALWVALUE$\\
+        \\
+        $n = INITIALNVALUE$
+        \\
+        \color{black}
+        \item \hspace{-5px}) Consider the following sequence of push() and pop() operations (on the above array), determine the \textbf{max. storage overhead $\alpha$}
+        and the \textbf{growth factor $\beta$}
+        \begin{center}
+            $EXERCISEBGENERATION$
+        \end{center}
+        \color{tumgadRed}
+        $\alpha = INITALPHAVALUE$\\
+        \\
+        $\beta = INITIALBETAVALUE$\\
+        \color{black}
+        \item \hspace{-5px}) Perform the following operations on the array below and enter the values after each operation in the provided empty
+        tables below. Assume $\beta = BETACVALUE$ and $\alpha = ALPHACVALUE$. Tip: clearly mark the size of the array in the table after each operation.
     \end{enumerate}
+    \begin{center}
+        $ARRAYCGENERATION$\\
+        \color{tumgadRed}
+        $OPERATIONSCGENERATION$\\
+        $ARRAYSCGENERATION$
+        \color{black}
+    \end{center}
 \end{document}
+
+
+Process finished with exit code 0
+
+
+
