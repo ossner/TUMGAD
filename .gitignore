@@ -44,3 +44,5 @@ desktop.ini
 *.xwm
 src/DataStructures/Sequences/Arrays/ArraysExercise.tex
 src/DataStructures/Sequences/Arrays/ArraysSolution.tex
+docs/Exercises.tex
+docs/solutions.tex
