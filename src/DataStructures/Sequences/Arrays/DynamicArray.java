@@ -149,12 +149,13 @@ public class DynamicArray {
      * @return the element at index n-1
      */
     public int pop() {
-        if (n - 1 <= b.length / alpha) {
+        n--;
+        if (n *alpha <= b.length) {
             int[] btick = new int[b.length / beta];
             copyValues(b, btick);
             b = btick;
         }
-        return b[--n];
+        return b[n];
     }
 
     /**
@@ -164,7 +165,7 @@ public class DynamicArray {
      * @param to   the destination array
      */
     private void copyValues(int[] from, int[] to) {
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < n && i < to.length; i++) {
             to[i] = from[i];
         }
     }
