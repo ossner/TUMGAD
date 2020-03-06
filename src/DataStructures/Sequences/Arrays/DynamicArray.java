@@ -5,7 +5,6 @@ import DataStructures.Terminal;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -40,8 +39,10 @@ public class DynamicArray {
      * Generates a new dynamic array with random values for alpha, beta and the initialSize
      */
     public static DynamicArray generateRandomArray() {
-        int alpha = new Random().nextInt(2) + 3;
-        int beta = new Random().nextInt(2) + 2;
+        int alpha = new Random().nextInt(3) + 3;
+        int beta;
+        while (alpha == (beta = new Random().nextInt(2) + 2)) {
+        }
         int initialSize = new Random().nextInt(5) + 3;
         return new DynamicArray(beta, alpha, initialSize);
     }
@@ -136,9 +137,7 @@ public class DynamicArray {
      */
     public void push(int x) {
         if (n == b.length) {
-            int[] btick = new int[beta * b.length];
-            copyValues(b, btick);
-            b = btick;
+            reallocate(beta * b.length);
         }
         b[n++] = x;
     }
@@ -150,25 +149,23 @@ public class DynamicArray {
      */
     public int pop() {
         n--;
-        if (n *alpha <= b.length) {
-            int[] btick = new int[b.length / beta];
-            copyValues(b, btick);
-            b = btick;
+        if (n * alpha <= b.length) {
+            reallocate(b.length / beta);
         }
         return b[n];
     }
 
     /**
-     * copies the values from the first array into the second array
-     *
-     * @param from the origin array
-     * @param to   the destination array
+     * creates a new array with the updated length and copies the values to that array
      */
-    private void copyValues(int[] from, int[] to) {
-        for (int i = 0; i < n && i < to.length; i++) {
-            to[i] = from[i];
+    private void reallocate(int newLength) {
+        int[] btick = new int[newLength];
+        for (int i = 0; i < n; i++) {
+            btick[i] = b[i];
         }
+        b = btick;
     }
+
 
     /**
      * generates a LaTeX table from the current Array
