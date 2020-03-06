@@ -21,9 +21,13 @@ public class TumgadCLI {
         try {
             DynamicArray.generateExercise();
         } catch (IndexOutOfBoundsException e) {
-            DynamicArray.generateExercise();
+            cli.error("There was an error generating Dynamic Array Exercises, please try again");
+            return;
         }
+        cli.generateLatex();
+    }
 
+    private void generateLatex() {
         try {
             Process process = Runtime.getRuntime().exec("pdflatex -output-directory=docs docs/Exercises.tex");
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
@@ -47,20 +51,8 @@ public class TumgadCLI {
             reader2.close();
 
         } catch (IOException e) {
-            e.printStackTrace();
+            error("There was an error while generating the LaTeX, please try again");
         }
-    }
-
-    private void say(String toSay) {
-        System.out.println(new Date().toString() + ": " + toSay);
-    }
-
-    private void error(String errorText) {
-        System.err.println(new Date().toString() + ": " + errorText);
-    }
-
-    private void print(String text) {
-        System.out.println(text);
     }
 
     public static StringBuilder readFile(String fileName) {
@@ -105,5 +97,17 @@ public class TumgadCLI {
     public static void replaceinSB(StringBuilder sb, String toReplace, String replaceWith) {
         int start = sb.indexOf(toReplace);
         sb.replace(start, start + toReplace.length(), replaceWith);
+    }
+
+    private void say(String toSay) {
+        System.out.println(new Date().toString() + ": " + toSay);
+    }
+
+    private void error(String errorText) {
+        System.err.println(new Date().toString() + ": " + errorText);
+    }
+
+    private void print(String text) {
+        System.out.println(text);
     }
 }

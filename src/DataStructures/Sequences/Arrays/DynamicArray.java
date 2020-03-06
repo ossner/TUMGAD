@@ -136,10 +136,10 @@ public class DynamicArray {
         StringBuilder exerciseStringBuilder = Terminal.readFile("docs/ExerciseTemplate.tex");
         StringBuilder solutionStringBuilder = Terminal.readFile("docs/SolutionTemplate.tex");
         // Placeholder is commented, so that it doesn't show if the exercise is not selected
-        Terminal.replaceinSB(exerciseStringBuilder, "%$DYNAMICARRAYS$", arrayExerciseStringBuilder.toString() + "\n\\newpage");
-        Terminal.replaceinSB(solutionStringBuilder, "%$DYNAMICARRAYS$", arraySolutionStringBuilder.toString() + "\n\\newpage");
-        Terminal.replaceinSB(exerciseStringBuilder, "$ARRAYS$", "\\cellcolor{tumgadPurple}");
-        Terminal.replaceinSB(solutionStringBuilder, "$ARRAYS$", "\\cellcolor{tumgadRed}");
+        Terminal.replaceinSB(exerciseStringBuilder, "%$DYNAMICARRAYS$", "\\newpage\n" + arrayExerciseStringBuilder.toString());
+        Terminal.replaceinSB(solutionStringBuilder, "%$DYNAMICARRAYS$", "\\newpage\n" + arraySolutionStringBuilder.toString());
+        Terminal.replaceinSB(exerciseStringBuilder, "%$ARRAYS$", "\\cellcolor{tumgadPurple}");
+        Terminal.replaceinSB(solutionStringBuilder, "%$ARRAYS$", "\\cellcolor{tumgadRed}");
         Terminal.saveToFile("docs/Exercises.tex", exerciseStringBuilder);
         Terminal.saveToFile("docs/solutions.tex", solutionStringBuilder);
     }
