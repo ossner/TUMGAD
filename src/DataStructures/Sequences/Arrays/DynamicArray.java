@@ -5,6 +5,7 @@ import DataStructures.Terminal;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -39,8 +40,8 @@ public class DynamicArray {
      * Generates a new dynamic array with random values for alpha, beta and the initialSize
      */
     public static DynamicArray generateRandomArray() {
-        int beta = new Random().nextInt(2) + 2;
         int alpha = new Random().nextInt(3) + 2;
+        int beta = new Random().nextInt(2) + 2;
         int initialSize = new Random().nextInt(5) + 3;
         return new DynamicArray(beta, alpha, initialSize);
     }
@@ -84,6 +85,7 @@ public class DynamicArray {
         // generate the initial sequence of pop operations on the array
         int numPops = exerciseArray.getN() - 1;
         for (int i = 0; i < numPops; i++) {
+            System.out.println(exerciseArray.alpha + " " + exerciseArray.beta);
             exerciseArray.pop();
             // TODO 06/03/2020 sebas: Fix indexoutofbounds after pop operations reallocate
             Terminal.replaceinSB(exerciseStringBuilder, "$EXERCISEBGENERATION$", exerciseArray.arrayToTable() + "\\vspace{10px}\\\\\n" + "$EXERCISEBGENERATION$\n");
@@ -141,6 +143,11 @@ public class DynamicArray {
         b[n++] = x;
     }
 
+    /**
+     * removes and element from the array and decrements the value of n
+     *
+     * @return the element at index n-1
+     */
     public int pop() {
         if (n - 1 <= b.length / alpha) {
             int[] btick = new int[b.length / beta];
