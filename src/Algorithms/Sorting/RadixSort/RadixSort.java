@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import static DataStructures.Terminal.printArray;
 
 public class RadixSort {
+    // TODO 08/03/2020 sebas: documentation
     private static final int DIGITS = 10;
     static StringBuilder radixSortExerciseStringBuilder;
     static StringBuilder radixSortSolutionStringBuilder;

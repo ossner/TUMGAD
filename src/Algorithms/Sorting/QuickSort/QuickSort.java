@@ -65,7 +65,7 @@ public class QuickSort {
                 }
             } while (i < j);
             swap(a, i, r);
-            // TODO 07/03/2020 sebas: Find a good way to indicate subarrays in the solution
+            // TODO 07/03/2020 sebas: perhaps find a good way to indicate subarrays in the solution
             Terminal.replaceinSB(quickSortSolutionStringBuilder, "%$SORTINGSTEP$", sortToTex(p, a));
             quickSort(a, l, i - 1);
             quickSort(a, i + 1, r);
