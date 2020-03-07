@@ -73,3 +73,10 @@ ___pop():___
 | 0  | 1  | 2  | 3  | 4 | 5 |
 |----|----|----|----|---|---|
 | 15 | 18 | 20 | 45 |   |   |
+
+## Time Complexity:
+The time complexity for insertion and deletion in dynamic arrays can differ because of the time used for reallocate.
+
+| Access  | Search  | Insertion  | Deletion  |
+|----|----|----|----|
+| `O(1)` | `O(n)` | `O(n)` | `O(n)` |
