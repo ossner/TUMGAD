@@ -5,29 +5,19 @@ import DataStructures.Terminal;
 import java.util.ArrayList;
 import java.util.Random;
 
+import static DataStructures.Terminal.printArray;
+
 public class QuickSort {
-    StringBuilder quickSortExerciseStringBuilder;
-    StringBuilder quickSortSolutionStringBuilder;
-
-
-    /**
-     * prints an array without parentheses for the pdf
-     */
-    private static String printArray(int[] a) {
-        String ret = "" + a[0];
-        for (int i = 1; i < a.length; i++) {
-            ret += ", " + a[i];
-        }
-        return ret;
-    }
+    static StringBuilder quickSortExerciseStringBuilder;
+    static StringBuilder quickSortSolutionStringBuilder;
 
     /**
      * generates a quicksort exercise and matching solutions
      * by reading and writing to the templates
      */
-    public void generateExercise() {
+    public static void generateExercise() {
         QuickSort s = new QuickSort();
-        int[] a = s.randomArray();
+        int[] a = Terminal.generateRandomArray(8, 12);
 
         quickSortExerciseStringBuilder = Terminal.readFile("src/Algorithms/Sorting/QuickSort/QuickSortExerciseTemplate.tex");
         quickSortSolutionStringBuilder = Terminal.readFile("src/Algorithms/Sorting/QuickSort/QuickSortSolutionTemplate.tex");
@@ -35,9 +25,9 @@ public class QuickSort {
         StringBuilder exerciseStringBuilder = Terminal.readFile("docs/Exercises.tex");
         StringBuilder solutionStringBuilder = Terminal.readFile("docs/Solutions.tex");
 
-        Terminal.replaceinSB(quickSortExerciseStringBuilder, "INITARRAY", s.printArray(a));
-        Terminal.replaceinSB(quickSortSolutionStringBuilder, "INITARRAY", s.printArray(a));
-        s.setQuickSortSolutionStringBuilder(quickSortSolutionStringBuilder);
+        Terminal.replaceinSB(quickSortExerciseStringBuilder, "INITARRAY", printArray(a));
+        Terminal.replaceinSB(quickSortSolutionStringBuilder, "INITARRAY", printArray(a));
+
         s.sort(a);
 
         Terminal.replaceinSB(exerciseStringBuilder, "%$QuickSort$", "\\cellcolor{tumgadPurple}");
@@ -49,22 +39,6 @@ public class QuickSort {
         Terminal.saveToFile("docs/Exercises.tex", exerciseStringBuilder);
         Terminal.saveToFile("docs/Solutions.tex", solutionStringBuilder);
 
-    }
-
-    /**
-     * generates an array with random length and fills it with random values
-     */
-    private int[] randomArray() {
-        int arraySize = new Random().nextInt(5) + 8; // min 8 max 12
-        ArrayList<Integer> list = new ArrayList<>(arraySize);
-        for (int i = 0; i <= arraySize; i++) {
-            list.add(i * 2);
-        }
-        int[] a = new int[arraySize];
-        for (int count = 0; count < arraySize; count++) {
-            a[count] = list.remove((int) (Math.random() * list.size()));
-        }
-        return a;
     }
 
     public void sort(int[] a) {
@@ -115,11 +89,7 @@ public class QuickSort {
         a[j] = temp;
     }
 
-    public void setQuickSortExerciseStringBuilder(StringBuilder quickSortExerciseStringBuilder) {
-        this.quickSortExerciseStringBuilder = quickSortExerciseStringBuilder;
-    }
-
     public void setQuickSortSolutionStringBuilder(StringBuilder quickSortSolutionStringBuilder) {
-        this.quickSortSolutionStringBuilder = quickSortSolutionStringBuilder;
+        QuickSort.quickSortSolutionStringBuilder = quickSortSolutionStringBuilder;
     }
 }
