@@ -15,7 +15,9 @@ Please be aware that this is still very much a work in progress and a lot of thi
 There are 2 main ways to use this resource:
 1. You can look at the [MarkDown (.md) files](https://sebastianoner.github.io/TUMGAD/src/routes) to find a description on how the Algorithm/Data Structure
 works.
-2. You can generate exercises and their solutions by executing the main method in the TumgadCLI.java file. For this the only prerequisite is a working version of [pdflatex](https://www.latex-project.org/get/).
+2. You can generate exercises and their solutions by executing the main method in the TumgadCLI.java file.
+For this the only prerequisite is a working version of [pdflatex](https://www.latex-project.org/get/) added 
+to your PATH.
 
 Visit [sebastianoner.github.io/TUMGAD](https://sebastianoner.github.io/TUMGAD)
 ## Contributing
