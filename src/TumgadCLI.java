@@ -1,3 +1,4 @@
+import Algorithms.Sorting.QuickSort.QuickSort;
 import DataStructures.Sequences.Arrays.DynamicArray;
 
 import java.io.*;
@@ -24,6 +25,7 @@ public class TumgadCLI {
             cli.error("There was an error generating Dynamic Array Exercises, please try again");
             return;
         }
+        new QuickSort().generateExercise();
         cli.generateLatex();
     }
 
