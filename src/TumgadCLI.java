@@ -1,4 +1,5 @@
 import Algorithms.Sorting.QuickSort.QuickSort;
+import Algorithms.Sorting.RadixSort.RadixSort;
 import DataStructures.Sequences.Arrays.DynamicArray;
 
 import java.io.*;
@@ -18,13 +19,18 @@ public class TumgadCLI {
                 "    | |  | |  | | |\\/| | | |_ | / /\\ \\ | |  | |\n" +
                 "    | |  | |__| | |  | | |__| |/ ____ \\| |__| |\n" +
                 "    |_|   \\____/|_|  |_|\\_____/_/    \\_\\_____/" + ANSI_RESET);
-        // TODO 06/03/2020 sebas: insert check if user wants to generate this
+        // TODO 06/03/2020 sebas: insert check if user wants to generate the specific exercise
         try { // Decrease chance of failure by 50%
             DynamicArray.generateExercise();
         } catch (IndexOutOfBoundsException e) {
-            DynamicArray.generateExercise();
+            try { // Decrease chance of failure by 75% Incredibly ugly, only until we figure out the bug
+                DynamicArray.generateExercise();
+            } catch (IndexOutOfBoundsException e2) {
+                DynamicArray.generateExercise();
+            }
         }
-        new QuickSort().generateExercise();
+        QuickSort.generateExercise();
+        RadixSort.generateExercise();
         cli.generateLatex();
     }
 
