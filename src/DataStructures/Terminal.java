@@ -1,6 +1,8 @@
 package DataStructures;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class Terminal {
     public static StringBuilder readFile(String fileName) {
@@ -26,6 +28,62 @@ public class Terminal {
             return null;
         }
         return sb;
+    }
+
+    /**
+     * prints an array without parentheses for the pdf
+     */
+    public static String printArray(int[] a) {
+        String ret = "" + a[0];
+        for (int i = 1; i < a.length; i++) {
+            ret += ", " + a[i];
+        }
+        return ret;
+    }
+
+    /**
+     * prints an array without parentheses for the pdf
+     */
+    public static String printArray(Integer[] a) {
+        String ret = "" + a[0];
+        for (int i = 1; i < a.length; i++) {
+            ret += ", " + a[i];
+        }
+        return ret;
+    }
+
+    /**
+     * generates an Integer array with random length and fills it with random values
+     * generated array size: minsize <= arraysize <= maxsize
+     */
+    public static Integer[] generateRandomIntegerArray(int minsize, int maxsize) {
+        int arraySize = new Random().nextInt(maxsize - minsize + 1) + minsize;
+        ArrayList<Integer> list = new ArrayList<>(arraySize);
+        for (int i = 0; i <= arraySize; i++) {
+            list.add(new Random().nextInt(400) + 100 + new Random().nextInt(400) + 100);
+        }
+        Integer[] a = new Integer[arraySize];
+        for (int count = 0; count < arraySize; count++) {
+            a[count] = list.remove((int) (Math.random() * list.size()));
+        }
+        return a;
+    }
+
+    /**
+     * generates an array with random length and fills it with random values
+     * generated array size: minsize <= arraysize <= maxsize
+     */
+    public static int[] generateRandomArray(int minsize, int maxsize) {
+        int arraySize = new Random().nextInt(maxsize - minsize + 1) + minsize;
+        ArrayList<Integer> list = new ArrayList<>(arraySize);
+        for (int i = 0; i <= arraySize; i++) {
+            list.add(i * 2);
+        }
+        int[] a = new int[arraySize];
+        for (int count = 0; count < arraySize; count++) {
+            a[count] = list.remove((int) (Math.random() * list.size()));
+        }
+        return a;
     }
 
     public static void saveToFile(String fileName, StringBuilder toSave) {
