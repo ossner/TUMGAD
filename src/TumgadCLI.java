@@ -19,11 +19,10 @@ public class TumgadCLI {
                 "    | |  | |__| | |  | | |__| |/ ____ \\| |__| |\n" +
                 "    |_|   \\____/|_|  |_|\\_____/_/    \\_\\_____/" + ANSI_RESET);
         // TODO 06/03/2020 sebas: insert check if user wants to generate this
-        try {
+        try { // Decrease chance of failure by 50%
             DynamicArray.generateExercise();
         } catch (IndexOutOfBoundsException e) {
-            cli.error("There was an error generating Dynamic Array Exercises, please try again");
-            return;
+            DynamicArray.generateExercise();
         }
         new QuickSort().generateExercise();
         cli.generateLatex();

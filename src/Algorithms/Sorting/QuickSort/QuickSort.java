@@ -2,9 +2,6 @@ package Algorithms.Sorting.QuickSort;
 
 import DataStructures.Terminal;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -13,6 +10,9 @@ public class QuickSort {
     StringBuilder quickSortSolutionStringBuilder;
 
 
+    /**
+     * prints an array without parentheses for the pdf
+     */
     private static String printArray(int[] a) {
         String ret = "" + a[0];
         for (int i = 1; i < a.length; i++) {
@@ -21,6 +21,10 @@ public class QuickSort {
         return ret;
     }
 
+    /**
+     * generates a quicksort exercise and matching solutions
+     * by reading and writing to the templates
+     */
     public void generateExercise() {
         QuickSort s = new QuickSort();
         int[] a = s.randomArray();
@@ -47,8 +51,11 @@ public class QuickSort {
 
     }
 
+    /**
+     * generates an array with random length and fills it with random values
+     */
     private int[] randomArray() {
-        int arraySize = new Random().nextInt(5) + 8;
+        int arraySize = new Random().nextInt(5) + 8; // min 8 max 12
         ArrayList<Integer> list = new ArrayList<>(arraySize);
         for (int i = 0; i <= arraySize; i++) {
             list.add(i * 2);
@@ -64,6 +71,9 @@ public class QuickSort {
         quickSort(a, 0, a.length - 1);
     }
 
+    /**
+     * sorting algorithm, selects the rightmost element of the array as pivot
+     */
     private void quickSort(int[] a, int l, int r) {
         if (l < r) {
             int p = a[r];
@@ -88,6 +98,9 @@ public class QuickSort {
         }
     }
 
+    /**
+     * creates a prettyprint of the sortng step with pivot and array
+     */
     private String sortToTex(int pivot, int[] a) {
         return "pivot: \\underline{\\color{tumgadRed}" + pivot + "\\color{tumgadPurple}}\\\\\n" +
                 "\\\\\n" +
