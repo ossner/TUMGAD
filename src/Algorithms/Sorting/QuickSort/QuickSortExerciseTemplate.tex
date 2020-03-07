@@ -1,0 +1,82 @@
+\UseRawInputEncoding
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage[table]{xcolor}
+\usepackage{hyperref}
+\usepackage{tikz}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=tumgadPurple,
+}
+\usepackage[a4paper, total={6in, 9in}]{geometry}
+\usepackage[nodisplayskipstretch]{setspace}
+\usepackage[printwatermark]{xwatermark}
+\usepackage{enumitem,amssymb}
+\definecolor{tumgadPurple}{RGB}{105,0,168}
+\definecolor{tumgadRed}{RGB}{255,85,85}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}} % Center column values in content table
+
+% Header/Footer definitions
+\rhead{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\cfoot{TUMGAD was created by Sebastian Oßner and Daniel Krüger \href{https://github.com/SebastianOner/TUMGAD}{\underline{View it on GitHub}}}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\begin{document}
+    \textbf{\LARGE{\color{tumgadPurple} QuickSort}}\\
+    \\
+    \noindent
+    Sort the following array according to the QuickSort algorithm:
+    \begin{center}
+        $INITARRAY$
+    \end{center}
+    Choose the last element of the array as the pivot element. Sort arrays with 2 elements in the last step.\\
+    Clearly mark sub-arrays in each step like so:
+    \noindent
+    \begin{center}
+        Step one - pivot: i\\
+        b, h, f, l, g, a, c, e, d $|$ i $|$ j, k\\
+        \vspace{10px}
+    \end{center}
+    \noindent\fbox{
+        \parbox{\textwidth}{
+            \vspace{10px}
+            pivot: \underline{\hspace{25px}}\\
+            \\
+            New Array: \underline{\hspace{12cm}}\\
+            \\
+            pivot: \underline{\hspace{25px}}\\
+            \\
+            New Array: \underline{\hspace{12cm}}\\
+            \\
+            pivot: \underline{\hspace{25px}}\\
+            \\
+            New Array: \underline{\hspace{12cm}}\\
+            \\
+            pivot: \underline{\hspace{25px}}\\
+            \\
+            New Array: \underline{\hspace{12cm}}\\
+            \\
+            pivot: \underline{\hspace{25px}}\\
+            \\
+            New Array: \underline{\hspace{12cm}}\\
+            \\
+            pivot: \underline{\hspace{25px}}\\
+            \\
+            New Array: \underline{\hspace{12cm}}\\
+            \\
+            pivot: \underline{\hspace{25px}}\\
+            \\
+            New Array: \underline{\hspace{12cm}}\\
+            \\
+            pivot: \underline{\hspace{25px}}\\
+            \\
+            New Array: \underline{\hspace{12cm}}\\
+        }
+    }
+\end{document}
