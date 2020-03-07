@@ -6,30 +6,19 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 public class QuickSort {
     StringBuilder quickSortExerciseStringBuilder;
     StringBuilder quickSortSolutionStringBuilder;
 
-    public static void main(String[] args) {
-        QuickSort s = new QuickSort();
-        s.generateExercise();
-        try {
-            Process process = Runtime.getRuntime().exec("pdflatex -output-directory=src/Algorithms/Sorting/QuickSort src/Algorithms/Sorting/QuickSort/QuickSortExercise.tex");
-            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
 
-            String line;
-
-            while ((line = reader.readLine()) != null) {
-                System.out.println(line);
-            }
-
-            reader.close();
-
-        } catch (IOException e) {
+    private static String printArray(int[] a) {
+        String ret = "" + a[0];
+        for (int i = 1; i < a.length; i++) {
+            ret += ", " + a[i];
         }
+        return ret;
     }
 
     public void generateExercise() {
@@ -39,15 +28,30 @@ public class QuickSort {
         quickSortExerciseStringBuilder = Terminal.readFile("src/Algorithms/Sorting/QuickSort/QuickSortExerciseTemplate.tex");
         quickSortSolutionStringBuilder = Terminal.readFile("src/Algorithms/Sorting/QuickSort/QuickSortSolutionTemplate.tex");
 
+        StringBuilder exerciseStringBuilder = Terminal.readFile("docs/Exercises.tex");
+        StringBuilder solutionStringBuilder = Terminal.readFile("docs/Solutions.tex");
+
         Terminal.replaceinSB(quickSortExerciseStringBuilder, "INITARRAY", s.printArray(a));
-        Terminal.saveToFile("src/Algorithms/Sorting/QuickSort/QuickSortExercise.tex", quickSortExerciseStringBuilder);
+        Terminal.replaceinSB(quickSortSolutionStringBuilder, "INITARRAY", s.printArray(a));
+        s.setQuickSortSolutionStringBuilder(quickSortSolutionStringBuilder);
+        s.sort(a);
+
+        Terminal.replaceinSB(exerciseStringBuilder, "%$QuickSort$", "\\cellcolor{tumgadPurple}");
+        Terminal.replaceinSB(solutionStringBuilder, "%$QuickSort$", "\\cellcolor{tumgadRed}");
+
+        Terminal.replaceinSB(exerciseStringBuilder, "%$QUICKSORT$", "\\newpage\n" + quickSortExerciseStringBuilder.toString());
+        Terminal.replaceinSB(solutionStringBuilder, "%$QUICKSORT$", "\\newpage\n" + quickSortSolutionStringBuilder.toString());
+
+        Terminal.saveToFile("docs/Exercises.tex", exerciseStringBuilder);
+        Terminal.saveToFile("docs/Solutions.tex", solutionStringBuilder);
+
     }
 
     private int[] randomArray() {
-        int arraySize = new Random().nextInt(3) + 8;
+        int arraySize = new Random().nextInt(5) + 8;
         ArrayList<Integer> list = new ArrayList<>(arraySize);
-        for (int i = 0; i <= 10; i++) {
-            list.add(i);
+        for (int i = 0; i <= arraySize; i++) {
+            list.add(i * 2);
         }
         int[] a = new int[arraySize];
         for (int count = 0; count < arraySize; count++) {
@@ -63,7 +67,6 @@ public class QuickSort {
     private void quickSort(int[] a, int l, int r) {
         if (l < r) {
             int p = a[r];
-            System.out.println("pivot: " + p);
             int i = l - 1;
             int j = r;
             do {
@@ -78,10 +81,19 @@ public class QuickSort {
                 }
             } while (i < j);
             swap(a, i, r);
-            System.out.println(printArray(a));
+            // TODO 07/03/2020 sebas: Find a good way to indicate subarrays in the solution
+            Terminal.replaceinSB(quickSortSolutionStringBuilder, "%$SORTINGSTEP$", sortToTex(p, a));
             quickSort(a, l, i - 1);
             quickSort(a, i + 1, r);
         }
+    }
+
+    private String sortToTex(int pivot, int[] a) {
+        return "pivot: \\underline{\\color{tumgadRed}" + pivot + "\\color{tumgadPurple}}\\\\\n" +
+                "\\\\\n" +
+                "New Array: \\underline{\\color{tumgadRed}" + printArray(a) + "\\color{black}}\\\\\n" +
+                "\\\\" +
+                "\n%$SORTINGSTEP$";
     }
 
     private void swap(int[] a, int i, int j) {
@@ -90,11 +102,11 @@ public class QuickSort {
         a[j] = temp;
     }
 
-    private String printArray(int[] a) {
-        String ret = "" + a[0];
-        for (int i = 1; i < a.length; i++) {
-            ret += ", " + a[i];
-        }
-        return ret;
+    public void setQuickSortExerciseStringBuilder(StringBuilder quickSortExerciseStringBuilder) {
+        this.quickSortExerciseStringBuilder = quickSortExerciseStringBuilder;
+    }
+
+    public void setQuickSortSolutionStringBuilder(StringBuilder quickSortSolutionStringBuilder) {
+        this.quickSortSolutionStringBuilder = quickSortSolutionStringBuilder;
     }
 }
