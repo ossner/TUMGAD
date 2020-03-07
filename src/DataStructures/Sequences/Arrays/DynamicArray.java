@@ -141,7 +141,7 @@ public class DynamicArray {
         Terminal.replaceinSB(exerciseStringBuilder, "%$ARRAYS$", "\\cellcolor{tumgadPurple}");
         Terminal.replaceinSB(solutionStringBuilder, "%$ARRAYS$", "\\cellcolor{tumgadRed}");
         Terminal.saveToFile("docs/Exercises.tex", exerciseStringBuilder);
-        Terminal.saveToFile("docs/solutions.tex", solutionStringBuilder);
+        Terminal.saveToFile("docs/Solutions.tex", solutionStringBuilder);
     }
 
     /**
