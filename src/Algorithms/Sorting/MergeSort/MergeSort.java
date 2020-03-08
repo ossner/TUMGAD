@@ -61,9 +61,9 @@ public class MergeSort {
     }
 
     public static void main(String[] args) {
-        int[] a = new int[]{21, 82, 2, 34, 79, 9, 65, 60, 95, 38, 62, 88, 90, 7, 94, 49};
+        int[] a = new int[]{21, 82, 2, 34, 79, 9, 65, 60, 95, 38, 62, 88, 90, 7, 12, 124};
         System.out.println(printSplit(a, a.length));
-        sort(a);
+        System.out.println(printMerge(a));
     }
 
     static String printSplit(int[] a, int m) {
@@ -79,5 +79,48 @@ public class MergeSort {
             }
         }
         return ret + "\n" + printSplit(a, m / 2);
+    }
+
+    static String printMerge(int[] a) {
+        String result = "";
+        for (int i = 0; i <= a.length / Math.pow(2, i) + 2; i++) {
+            result += printMerge(a, i + 1) + "\n";
+        }
+        return result;
+    }
+
+    static String printMerge(int[] a, int depth) {
+        //depth starts at 1 for pairs. 2 for groups of 4's
+        int level = (int)Math.pow(2, depth);
+        for (int i = 0, r = level; i < r; i = r, r += level) {
+            if (i >= a.length)
+                break;
+            if (r > a.length)
+                r = a.length;
+
+            for (int k = i; k < r; k++) {
+                for (int j = i; j < r - 1; j++) {
+                    if (a[j] > a[j + 1]) {
+                        // swap temp and arr[i]
+                        int temp = a[j];
+                        a[j] = a[j + 1];
+                        a[j + 1] = temp;
+                    }
+                }
+            }
+
+        }
+
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < a.length - 1; i++) {
+            if(i % level == level-1) {
+                result.append(a[i] + " ");
+                result.append("| ");
+                continue;
+            }
+           result.append(a[i] + ", ");
+        }
+        result.append(a[a.length - 1]);
+        return result.toString();
     }
 }
