@@ -57,6 +57,9 @@ public class DynamicArray {
     public static void generateExercise() {
         // Generating the initial Array
         DynamicArray exerciseArray = generateRandomArray();
+        System.out.println("alpha: " + exerciseArray.getAlpha());
+        System.out.println("beta: " + exerciseArray.getBeta());
+        System.out.println("initlength: " + exerciseArray.getB().length);
         exerciseArray.fillArrayRandom();
 
         // Writing the initial Array into the tex file

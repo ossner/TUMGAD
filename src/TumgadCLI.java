@@ -19,14 +19,22 @@ public class TumgadCLI {
                 "    | |  | |  | | |\\/| | | |_ | / /\\ \\ | |  | |\n" +
                 "    | |  | |__| | |  | | |__| |/ ____ \\| |__| |\n" +
                 "    |_|   \\____/|_|  |_|\\_____/_/    \\_\\_____/" + ANSI_RESET);
-        // TODO 06/03/2020 sebas: insert check if user wants to generate the specific exercise
-        try { // Decrease chance of failure by 50%
+        // TODO 06/03/2020 sebas: insert interactive check if user wants to generate the specific exercise
+        try { // Incredibly ugly, only until we figure out the bug
             DynamicArray.generateExercise();
         } catch (IndexOutOfBoundsException e) {
-            try { // Decrease chance of failure by 75% Incredibly ugly, only until we figure out the bug
+            try { // But this decreases the chance of failure substantially
                 DynamicArray.generateExercise();
             } catch (IndexOutOfBoundsException e2) {
-                DynamicArray.generateExercise();
+                try {
+                    DynamicArray.generateExercise();
+                } catch (IndexOutOfBoundsException e3) {
+                    try {
+                        DynamicArray.generateExercise();
+                    } catch (IndexOutOfBoundsException e4) {
+                        DynamicArray.generateExercise();
+                    }
+                }
             }
         }
         QuickSort.generateExercise();
