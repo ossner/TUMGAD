@@ -157,11 +157,6 @@ public class RadixSort {
         return ret;
     }
 
-    public static void main(String[] args) {
-        generateExercise();
-        generateLatex();
-    }
-
     private static void generateLatex() {
         try {
             Process process = Runtime.getRuntime().exec("pdflatex -output-directory=src/Algorithms/Sorting/RadixSort src/Algorithms/Sorting/RadixSort/RadixSortExercise.tex");
