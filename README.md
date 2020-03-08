@@ -29,6 +29,9 @@ works.
 For this the only prerequisite is a working version of [pdflatex](https://www.latex-project.org/get/) added 
 to your [PATH](https://tex.stackexchange.com/questions/60702/setting-up-miktex-and-texworks) (However you can work around this by manually compiling docs/Exercises.tex and docs/Solutions.tex).
 
+Please note: For now, the exercise generator is optimized for IDE, if you want to use it in your command line, you will likely
+have to make some small adjustments.
+
 Visit [sebastianoner.github.io/TUMGAD](https://sebastianoner.github.io/TUMGAD)
 ## Contributing
 If you spot an issue you can report it [here](https://github.com/SebastianOner/TUMGAD/issues/new?assignees=&labels=&template=bug_report.md&title=)
