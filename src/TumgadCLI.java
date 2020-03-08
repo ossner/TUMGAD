@@ -24,8 +24,8 @@ public class TumgadCLI {
                 "    |_|   \\____/|_|  |_|\\_____/_/    \\_\\_____/" + ANSI_RESET);
         // TODO 06/03/2020 sebas: insert interactive check if user wants to generate the specific exercise
 
-        System.out.println("Which exercizes should be generated?");
-        chooseExercizes(input);
+        System.out.println("Which exercises should be generated?");
+        chooseExercises(input);
         /*try { // Incredibly ugly, only until we figure out the bug
             DynamicArray.generateExercise();
         } catch (IndexOutOfBoundsException e) {
@@ -100,13 +100,13 @@ public class TumgadCLI {
         System.out.println(text);
     }
 
-    private static void chooseExercizes(Scanner input) {
+    private static void chooseExercises(Scanner input) {
         StringBuilder temp = new StringBuilder();
         temp.append("0. Finish selection\n");
         temp.append("1. Dynamic Arrays\n");
         temp.append("2. Quicksort\n");
         temp.append("3. Radixsort\n");
-        //TODO: add further exercize
+        //TODO: add further exercise
         while(true) {
             System.out.println(temp.toString());
             switch (input.nextInt()) {
