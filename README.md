@@ -17,7 +17,7 @@ There are 2 main ways to use this resource:
 works.
 2. You can generate exercises and their solutions by executing the main method in the TumgadCLI.java file.
 For this the only prerequisite is a working version of [pdflatex](https://www.latex-project.org/get/) added 
-to your [PATH](https://tex.stackexchange.com/questions/60702/setting-up-miktex-and-texworks).
+to your [PATH](https://tex.stackexchange.com/questions/60702/setting-up-miktex-and-texworks) (However you can work around this by manually compiling docs/Exercises.tex and docs/Solutions.tex).
 
 Visit [sebastianoner.github.io/TUMGAD](https://sebastianoner.github.io/TUMGAD)
 ## Contributing
