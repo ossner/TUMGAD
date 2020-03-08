@@ -21,7 +21,7 @@ Best case (pivot is always the median element):
 
 ![](../../../../docs/QuickSortBestCase.png)
 
-Worst case (here pivot is always the biggest element):
+Worst case (here pivot is always the smallest element):
 
 ![](../../../../docs/QuickSortWorstCase.png)
 
