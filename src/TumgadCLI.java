@@ -17,6 +17,7 @@ public class TumgadCLI {
 
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_GREEN = "\u001B[32m";
 
     public static void main(String[] args) {
         templateSetup();
@@ -70,6 +71,7 @@ public class TumgadCLI {
             }
         });
         pool.shutdown();
+        //System.out.println(ANSI_GREEN + "Generating exercises... You can find them in docs/Exercises.pdf and docs/Solutions.pdf" + ANSI_RESET);
     }
 
     /**
@@ -86,6 +88,8 @@ public class TumgadCLI {
         }
 
         reader.close();
+        System.out.println(ANSI_GREEN + "Finished generating exercises! You can find them in docs/Exercises.pdf" + ANSI_RESET);
+
     }
 
     private static void generateSolutions() throws IOException {
@@ -99,6 +103,8 @@ public class TumgadCLI {
         }
 
         reader.close();
+        System.out.println(ANSI_GREEN + "Finished generating solutions! You can find them in docs/Solutions.pdf" + ANSI_RESET);
+
     }
 
     private static void error(String errorText) {
