@@ -4,6 +4,7 @@ import DataStructures.Sequences.Arrays.DynamicArray;
 import DataStructures.Terminal;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -24,7 +25,8 @@ public class TumgadCLI {
                 "    |_|   \\____/|_|  |_|\\_____/_/    \\_\\_____/" + ANSI_RESET);
         // TODO 06/03/2020 sebas: insert interactive check if user wants to generate the specific exercise
 
-        System.out.println("Which exercises should be generated?");
+        System.out.println("Which exercises should be generated? Please select the corresponding numbers seperated by commas");
+        System.out.println("Reminder: Each exercise can only be generated ONCE");
         chooseExercises(input);
         /*try { // Incredibly ugly, only until we figure out the bug
             DynamicArray.generateExercise();
@@ -102,14 +104,37 @@ public class TumgadCLI {
 
     private static void chooseExercises(Scanner input) {
         StringBuilder temp = new StringBuilder();
-        temp.append("0. Finish selection\n");
+        temp.append("exit. Finish selection");
+        temp.append("0. All exercises\n");
         temp.append("1. Dynamic Arrays\n");
         temp.append("2. Quicksort\n");
         temp.append("3. Radixsort\n");
         //TODO: add further exercise
-        while(true) {
-            System.out.println(temp.toString());
-            switch (input.nextInt()) {
+        temp.append("An example selection: 1,2,3 will generate Dynamic Array, Quicksort, and Radixsort");
+        System.out.println(temp.toString());
+        String selected = input.next();
+        String[] selections = selected.split(",");
+        /*while (!selected.equals("exit")) {
+            try {
+                int parsed = Integer.parseInt(selected);
+                if (!selections.contains(parsed)) {
+                    selections.add(parsed);
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Not a number. Please select using the corresponding number");
+            }
+        }*/
+        for (String num : selections) {
+            int parsed = 0;
+            try {
+                 parsed = Integer.parseInt(selected);
+                if (!selections.contains(parsed)) {
+                    selections.add(parsed);
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Not a number. Please select using the corresponding number");
+            }
+            switch (num) {
                 case 1:
                     try { // Incredibly ugly, only until we figure out the bug
                         DynamicArray.generateExercise();
