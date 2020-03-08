@@ -25,4 +25,4 @@ If you spot an issue you can report it [here](https://github.com/SebastianOner/T
 
 If you have an idea for a feature you can submit it [here](https://github.com/SebastianOner/TUMGAD/issues/new?assignees=&labels=&template=feature_request.md&title=)
 
-Or just submit a pull request if you're familiar with GitHub
+Or just submit a pull request if you're familiar with GitHub. Contributung guidelines can be found [here](CONTRIBUTING.md)
