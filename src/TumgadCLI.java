@@ -33,6 +33,11 @@ public class TumgadCLI {
         generateLatex();
     }
 
+    /**
+     * Reads the template (which should not be modified itself) into a StringBuilder
+     * and inserts the date the pdf was generated
+     * then the TeX string gets saved to the modifiable Exercises.tex (and Solutions.tex)
+     */
     private static void templateSetup() {
         StringBuilder exerciseStringBuilder = Terminal.readFile("docs/ExerciseTemplate.tex");
         StringBuilder solutionStringBuilder = Terminal.readFile("docs/SolutionTemplate.tex");
@@ -44,6 +49,10 @@ public class TumgadCLI {
         Terminal.saveToFile("docs/Solutions.tex", solutionStringBuilder);
     }
 
+    /**
+     * Paralellizing the generation of the two latex files
+     * by using threadpools with a fixed size
+     */
     private static void generateLatex() {
         final ExecutorService pool = Executors.newFixedThreadPool(2);
         pool.execute(() -> {
@@ -63,6 +72,9 @@ public class TumgadCLI {
         pool.shutdown();
     }
 
+    /**
+     * Calls on pdflatex system command to compile Exercise tex file and write ot do the docs-directory for output
+     */
     private static void generateExercises() throws IOException {
         Process process = Runtime.getRuntime().exec("pdflatex -output-directory=docs docs/Exercises.tex");
         BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
@@ -97,6 +109,10 @@ public class TumgadCLI {
         System.out.println(text);
     }
 
+    /**
+     * Interactive, yet minimal Tool to choose the preferred exercises the user wants to generate
+     * by providing the Command line with shorthands
+     */
     private static void chooseExercises() {
         System.out.println(
                 "Dynamic Arrays: " + ANSI_PURPLE + "DA" + ANSI_RESET + "\n" +
@@ -191,6 +207,9 @@ public class TumgadCLI {
         }
     }
 
+    /**
+     * Forgive me father for I have sinned, Don't look into this method for only pain you'll find
+     */
     private static void gernerateDynamicArray() {
         try { // Incredibly ugly, only until we figure out the bug
             DynamicArray.generateExercise();
@@ -209,14 +228,6 @@ public class TumgadCLI {
                 }
             }
         }
-    }
-
-    private static void generateEverything() {
-        DynamicArray.generateExercise();
-        // MergeSort
-        QuickSort.generateExercise();
-        RadixSort.generateExercise();
-        // Rest
     }
 
     private static void say(String toSay) {
