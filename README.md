@@ -11,16 +11,6 @@ semester of 2019 and 2020 as well as the Book [Algorithms and Data Structures: T
 Hence there may be different definitions in this project than you are used to.
 
 Please be aware that this is still very much a work in progress and a lot of things still have to be figured out.
-
-### How it works
-In the source code of TUMGAD all the data strucures and algorithms are already
-implemented, as well as a method that takes the products of these components 
-and visualizes them using LaTeX, whereby the placeholders in the LaTeX templates 
-will be replaced with the generated structures.
-
-Easy example: The implementation for QuickSort generates a random array and converts it
-to a string (simple enough) and then that string replaces the placeholder "$INITARRAY$" in the 
-exercise template. Later, the LaTeX will be compiled and the output written to PDF. 
 ## How to Use
 There are 2 main ways to use this resource:
 1. You can look at the [MarkDown (.md) files](https://sebastianoner.github.io/TUMGAD/src/routes) to find a description on how the Algorithm/Data Structure
