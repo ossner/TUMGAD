@@ -25,7 +25,7 @@ Worst case (here pivot is always the biggest element):
 
 ![](../../../../docs/QuickSortWorstCase.png)
 
-## Runtime
+## Complexity
 
 | Best | Average | Worst | Stability |
 |----|----|----|----|
