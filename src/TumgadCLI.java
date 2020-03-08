@@ -10,6 +10,8 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class TumgadCLI {
 
@@ -25,12 +27,9 @@ public class TumgadCLI {
                 "    | |  | |  | | |\\/| | | |_ | / /\\ \\ | |  | |\n" +
                 "    | |  | |__| | |  | | |__| |/ ____ \\| |__| |\n" +
                 "    |_|   \\____/|_|  |_|\\_____/_/    \\_\\_____/" + ANSI_RESET);
-        // TODO 06/03/2020 sebas: insert interactive check if user wants to generate the specific exercise
-
         System.out.println("Which exercises should be generated? Please select the corresponding shorthands seperated by SPACES or " + ANSI_PURPLE + "X" + ANSI_RESET + " for everything");
         System.out.println("Reminder: Each exercise can only be generated ONCE");
         chooseExercises();
-
         generateLatex();
     }
 
@@ -46,31 +45,48 @@ public class TumgadCLI {
     }
 
     private static void generateLatex() {
-        try {
-            Process process = Runtime.getRuntime().exec("pdflatex -output-directory=docs docs/Exercises.tex");
-            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-
-            String line;
-
-            while ((line = reader.readLine()) != null) {
-                System.out.println(line);
+        final ExecutorService pool = Executors.newFixedThreadPool(2);
+        pool.execute(() -> {
+            try {
+                generateExercises();
+            } catch (IOException e) {
+                error("There was an error while generating the LaTeX Exercises, please try again");
             }
-
-            reader.close();
-
-            process = Runtime.getRuntime().exec("pdflatex -output-directory=docs docs/Solutions.tex");
-            reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            String line2;
-
-            while ((line2 = reader.readLine()) != null) {
-                System.out.println(line2);
+        });
+        pool.execute(() -> {
+            try {
+                generateSolutions();
+            } catch (IOException e) {
+                error("There was an error while generating the LaTeX Solutions, please try again");
             }
+        });
+        pool.shutdown();
+    }
 
-            reader.close();
+    private static void generateExercises() throws IOException {
+        Process process = Runtime.getRuntime().exec("pdflatex -output-directory=docs docs/Exercises.tex");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
 
-        } catch (IOException e) {
-            error("There was an error while generating the LaTeX, please try again");
+        String line;
+
+        while ((line = reader.readLine()) != null) {
+            System.out.println(line);
         }
+
+        reader.close();
+    }
+
+    private static void generateSolutions() throws IOException {
+        Process process = Runtime.getRuntime().exec("pdflatex -output-directory=docs docs/Solutions.tex");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+
+        String line;
+
+        while ((line = reader.readLine()) != null) {
+            System.out.println(line);
+        }
+
+        reader.close();
     }
 
     private static void error(String errorText) {
