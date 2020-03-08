@@ -67,7 +67,6 @@ public class DynamicArray {
         StringBuilder arraySolutionStringBuilder = Terminal.readFile("src/DataStructures/Sequences/Arrays/ArraysSolutionTemplate.tex");
 
         Terminal.replaceinSB(arrayExerciseStringBuilder, "$INITARRAY$", exerciseArray.arrayToTable());
-
         Terminal.replaceinSB(arraySolutionStringBuilder, "$INITARRAY$", exerciseArray.arrayToTable());
 
         Terminal.replaceinSB(arraySolutionStringBuilder, "INITIALWVALUE", "" + exerciseArray.getB().length);
@@ -136,8 +135,9 @@ public class DynamicArray {
 
         Terminal.replaceinSB(arrayExerciseStringBuilder, "$ARRAYSCGENERATION$", EMPTY_MAX_TABLE + "\\\\");
 
-        StringBuilder exerciseStringBuilder = Terminal.readFile("docs/ExerciseTemplate.tex");
-        StringBuilder solutionStringBuilder = Terminal.readFile("docs/SolutionTemplate.tex");
+        StringBuilder exerciseStringBuilder = Terminal.readFile("docs/Exercises.tex");
+        StringBuilder solutionStringBuilder = Terminal.readFile("docs/Solutions.tex");
+
         // Placeholder is commented, so that it doesn't show if the exercise is not selected
         Terminal.replaceinSB(exerciseStringBuilder, "%$DYNAMICARRAYS$", "\\newpage\n" + arrayExerciseStringBuilder.toString());
         Terminal.replaceinSB(solutionStringBuilder, "%$DYNAMICARRAYS$", "\\newpage\n" + arraySolutionStringBuilder.toString());

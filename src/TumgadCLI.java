@@ -1,6 +1,7 @@
 import Algorithms.Sorting.QuickSort.QuickSort;
 import Algorithms.Sorting.RadixSort.RadixSort;
 import DataStructures.Sequences.Arrays.DynamicArray;
+import DataStructures.Terminal;
 
 import java.io.*;
 import java.util.Date;
@@ -11,8 +12,8 @@ public class TumgadCLI {
     public static final String ANSI_PURPLE = "\u001B[35m";
 
     public static void main(String[] args) {
-        TumgadCLI cli = new TumgadCLI();
-        cli.print(ANSI_PURPLE +
+        templateSetup();
+        print(ANSI_PURPLE +
                 "  _______ _    _ __  __  _____          _____  \n" +
                 " |__   __| |  | |  \\/  |/ ____|   /\\   |  __ \\ \n" +
                 "    | |  | |  | | \\  / | |  __   /  \\  | |  | |\n" +
@@ -39,10 +40,21 @@ public class TumgadCLI {
         }
         QuickSort.generateExercise();
         RadixSort.generateExercise();
-        cli.generateLatex();
+        generateLatex();
     }
 
-    private void generateLatex() {
+    private static void templateSetup() {
+        StringBuilder exerciseStringBuilder = Terminal.readFile("docs/ExerciseTemplate.tex");
+        StringBuilder solutionStringBuilder = Terminal.readFile("docs/SolutionTemplate.tex");
+
+        Terminal.replaceinSB(exerciseStringBuilder, "$GENERATEDDATE$", new Date().toString());
+        Terminal.replaceinSB(solutionStringBuilder, "$GENERATEDDATE$", new Date().toString());
+
+        Terminal.saveToFile("docs/Exercises.tex", exerciseStringBuilder);
+        Terminal.saveToFile("docs/Solutions.tex", solutionStringBuilder);
+    }
+
+    private static void generateLatex() {
         try {
             Process process = Runtime.getRuntime().exec("pdflatex -output-directory=docs docs/Exercises.tex");
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
@@ -70,59 +82,15 @@ public class TumgadCLI {
         }
     }
 
-    public static StringBuilder readFile(String fileName) {
-        BufferedReader bufferedReader;
-
-        try {
-            bufferedReader = new BufferedReader(new FileReader(fileName));
-        } catch (FileNotFoundException e) {
-            System.err.println("could not read File (" + fileName + ") (" + e + ")");
-            return null;
-        }
-        StringBuilder sb = new StringBuilder();
-        try {
-            String line = bufferedReader.readLine();
-
-            while (line != null) {
-                sb.append(line).append("\n");
-                line = bufferedReader.readLine();
-            }
-            bufferedReader.close();
-        } catch (IOException e) {
-            System.err.println("could not read File (" + fileName + ") (" + e + ")");
-            return null;
-        }
-        return sb;
-    }
-
-    public static void saveToFile(String fileName, StringBuilder toSave) {
-        try {
-            PrintWriter out = new PrintWriter(fileName);
-            out.println(toSave);
-            out.flush();
-            out.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * replaces placeholders in the latex StringBuilders
-     */
-    public static void replaceinSB(StringBuilder sb, String toReplace, String replaceWith) {
-        int start = sb.indexOf(toReplace);
-        sb.replace(start, start + toReplace.length(), replaceWith);
-    }
-
     private void say(String toSay) {
         System.out.println(new Date().toString() + ": " + toSay);
     }
 
-    private void error(String errorText) {
+    private static void error(String errorText) {
         System.err.println(new Date().toString() + ": " + errorText);
     }
 
-    private void print(String text) {
+    private static void print(String text) {
         System.out.println(text);
     }
 }
