@@ -23,7 +23,7 @@ Best case (pivot is always the median element):
 
 Worst case (here pivot is always the biggest element):
 
-![](../../../../docs/QuickSortworstCase.png)
+![](../../../../docs/QuickSortWorstCase.png)
 
 ## Runtime
 
