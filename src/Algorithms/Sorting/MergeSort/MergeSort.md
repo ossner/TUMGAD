@@ -12,6 +12,7 @@ sequence with later merge-back of the sub-sequences.
 4. Repeat 3 until you have arrived at the inital length of the sequence
 
 ## Complexity
+
 | Best | Average | Worst | Stability |
 |----|----|----|----|
 | `Ω(n log(n))` | `Θ(n log(n))` | `O(n log(n))` | yes |
