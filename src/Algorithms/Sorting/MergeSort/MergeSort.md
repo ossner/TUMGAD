@@ -12,6 +12,9 @@ sequence with later merge-back of the sub-sequences.
 4. Repeat 3 until you have arrived at the inital length of the sequence
 
 ## Complexity
+The complexity of MergeSort is pretty straight-forward as opposed to e.g. RadixSort.
+As you can see it is not able to break the lower bound of `O(n log(n))`, due to it being
+comparison-based.
 
 | Best | Average | Worst | Stability |
 |----|----|----|----|
