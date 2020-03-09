@@ -1,3 +1,4 @@
+import Algorithms.Hashing.Double.DoubleHashing;
 import Algorithms.Sorting.MergeSort.MergeSort;
 import Algorithms.Sorting.QuickSort.QuickSort;
 import Algorithms.Sorting.RadixSort.RadixSort;
@@ -172,7 +173,8 @@ public class TumgadCLI {
                         say("Hashing (Chaining) can not be generated yet, still in development");
                         break;
                     case "HD":
-                        say("Hashing (Double) can not be generated yet, still in development");
+                        System.out.println(ANSI_PURPLE + "Generating Double Hashing" + ANSI_RESET);
+                        DoubleHashing.generateExercise();
                         break;
                     case "HP":
                         say("Hashing (Perfect) can not be generated yet, still in development");

@@ -31,7 +31,7 @@ public class DoubleHashing {
         return a;
     }
 
-    static void generateExercise() {
+    public static void generateExercise() {
         doubleHashingExerciseStringBuilder = Terminal.readFile("src/Algorithms/Hashing/Double/DoubleHashingExerciseTemplate.tex");
         doubleHashingSolutionStringBuilder = Terminal.readFile("src/Algorithms/Hashing/Double/DoubleHashingSolutionTemplate.tex");
 
@@ -44,7 +44,16 @@ public class DoubleHashing {
         Terminal.replaceinSB(doubleHashingExerciseStringBuilder, "COLLISIONFUNCTION", "h'(x) = " + b[0] + " - (x \\mod " + b[1] + ") ");
         Terminal.replaceinSB(doubleHashingSolutionStringBuilder, "COLLISIONFUNCTION", "h'(x) = " + b[0] + " - (x \\mod " + b[1] + ") ");
 
-        Terminal.saveToFile("src/Algorithms/Hashing/Double/DoubleHashingExercise.tex", doubleHashingExerciseStringBuilder);
-        Terminal.saveToFile("src/Algorithms/Hashing/Double/DoubleHashingSolution.tex", doubleHashingSolutionStringBuilder);
+        StringBuilder exerciseStringBuilder = Terminal.readFile("docs/Exercises.tex");
+        StringBuilder solutionStringBuilder = Terminal.readFile("docs/Solutions.tex");
+
+        Terminal.replaceinSB(exerciseStringBuilder, "%$DoubleHashing$", "\\cellcolor{tumgadPurple}");
+        Terminal.replaceinSB(solutionStringBuilder, "%$DoubleHashing$", "\\cellcolor{tumgadRed}");
+
+        Terminal.replaceinSB(exerciseStringBuilder, "%$DOUBLEHASHING$", "\\newpage\n" + doubleHashingExerciseStringBuilder.toString());
+        Terminal.replaceinSB(solutionStringBuilder, "%$DOUBLEHASHING$", "\\newpage\n" + doubleHashingSolutionStringBuilder.toString());
+
+        Terminal.saveToFile("docs/Exercises.tex", exerciseStringBuilder);
+        Terminal.saveToFile("docs/Solutions.tex", solutionStringBuilder);
     }
 }
