@@ -1,3 +1,4 @@
+import Algorithms.Sorting.MergeSort.MergeSort;
 import Algorithms.Sorting.QuickSort.QuickSort;
 import Algorithms.Sorting.RadixSort.RadixSort;
 import DataStructures.Sequences.Arrays.DynamicArray;
@@ -156,7 +157,8 @@ public class TumgadCLI {
                         gernerateDynamicArray();
                         break;
                     case "MS":
-                        say("MergeSort can not be generated yet, still in development");
+                        System.out.println(ANSI_PURPLE + "Generating MergeSort" + ANSI_RESET);
+                        MergeSort.generateExercise();
                         break;
                     case "QS":
                         System.out.println(ANSI_PURPLE + "Generating QuickSort" + ANSI_RESET);
@@ -209,6 +211,7 @@ public class TumgadCLI {
             }
         } catch (Exception e) {
             error("Invalid selection, please follow the steps and try again");
+            e.printStackTrace();
             System.exit(1);
         }
     }
