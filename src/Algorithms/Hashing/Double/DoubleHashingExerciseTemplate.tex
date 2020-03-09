@@ -1,130 +1,153 @@
 \textbf{\LARGE{\color{tumgadPurple} Double Hashing}}\\
 \\
 \noindent
-Use \href{https://sebastianoner.github.io/TUMGAD/src/Algorithms/Hashing/Double/DoubleHashing}{\textbf{\underline{Double Hashing}}} with
-the below provided Hash functions to resolve any collisions.
+Use \href{https://sebastianoner.github.io/TUMGAD/src/Algorithms/Hashing/Double/DoubleHashing}{\textbf{\underline{Double Hashing}}}
+and the following Hash functions to resolve any collisions.
 \begin{center}
     $h(x,i) = (h(x) + i* h'(x)) \mod 11$\\
     $NORMALFUNCTION$\\
     $COLLISIONFUNCTION$\\
 \end{center}
-Execute the following operations in the provided order, also provide all checked positions in the field "Position(s)" above the table.\\
+Consider these operations:
 \begin{center}
     Insert: $FIRSTINSERTIONS$\\
     Delete: $DELETIONS$\\
     Insert: $SECONDINSERTIONS$\\
 \end{center}
-A hashtable with the size $m = 11$ is provided on the next page, on this page you will have room for extra calculations:\\
+Multiple hashtables with the size $m = 11$ are provided on the next page.\\
+\\
+a) Generate the \textbf{collision table}, in the printed template on this page for the numbers above.\\
+b) Execute the above operations in the provided order, also explicitly state \textbf{all checked positions} in the field "Position(s)" above the table (even in deletions).\\
 \newline
 \noindent\fbox{
     \parbox{\textwidth}{
-        \vspace{12cm}
+        \vspace{10px}
+        This table shows the collisions the numbers could go through when inserting them into the hashtable:
+        \begin{center}
+            \begin{tabular}{|P{1.1cm}|P{1.1cm}|P{1.1cm}|P{1.1cm}|P{1.1cm}|P{1.1cm}|P{1.1cm}|P{1.1cm}|}
+                \hline
+                $x$ & $h(x)$ & $h'(x)$ & $h(x,0)$ & $h(x,1)$ & $h(x,2)$ & $h(x,3)$ & $h(x,4)$  \\
+                \hline
+                &&&&&&& \\
+                \hline
+                &&&&&&& \\
+                \hline
+                &&&&&&& \\
+                \hline
+                &&&&&&& \\
+                \hline
+                &&&&&&& \\
+                \hline
+                &&&&&&& \\
+                \hline
+                &&&&&&& \\
+                \hline
+            \end{tabular}
+        \end{center}
+    Space for additional calculations:
+    \vspace{6cm}
         \hspace{11cm}
     }
 }
 \newpage
-\noindent\fbox{
-    \parbox{\textwidth}{
-        \vspace{10px}
-        Operation: \underline{\hspace{3cm}} \hspace{10px} Position(s): \underline{\hspace{2cm}}
-        \begin{center}
-            \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
-                \hline
-                0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
-                \hline
-                &&&&&&&&&& \\
-                \hline
-            \end{tabular}
-        \end{center}
-        Operation: \underline{\hspace{3cm}} \hspace{10px} Position(s): \underline{\hspace{2cm}}
-        \begin{center}
-            \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
-                \hline
-                0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
-                \hline
-                &&&&&&&&&& \\
-                \hline
-            \end{tabular}
-        \end{center}
-        Operation: \underline{\hspace{3cm}} \hspace{10px} Position(s): \underline{\hspace{2cm}}
-        \begin{center}
-            \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
-                \hline
-                0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
-                \hline
-                &&&&&&&&&& \\
-                \hline
-            \end{tabular}
-        \end{center}
-        Operation: \underline{\hspace{3cm}} \hspace{10px} Position(s): \underline{\hspace{2cm}}
-        \begin{center}
-            \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
-                \hline
-                0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
-                \hline
-                &&&&&&&&&& \\
-                \hline
-            \end{tabular}
-        \end{center}
-        Operation: \underline{\hspace{3cm}} \hspace{10px} Position(s): \underline{\hspace{2cm}}
-        \begin{center}
-            \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
-                \hline
-                0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
-                \hline
-                &&&&&&&&&& \\
-                \hline
-            \end{tabular}
-        \end{center}
-        Operation: \underline{\hspace{3cm}} \hspace{10px} Position(s): \underline{\hspace{2cm}}
-        \begin{center}
-            \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
-                \hline
-                0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
-                \hline
-                &&&&&&&&&& \\
-                \hline
-            \end{tabular}
-        \end{center}
-        Operation: \underline{\hspace{3cm}} \hspace{10px} Position(s): \underline{\hspace{2cm}}
-        \begin{center}
-            \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
-                \hline
-                0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
-                \hline
-                &&&&&&&&&& \\
-                \hline
-            \end{tabular}
-        \end{center}
-        Operation: \underline{\hspace{3cm}} \hspace{10px} Position(s): \underline{\hspace{2cm}}
-        \begin{center}
-            \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
-                \hline
-                0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
-                \hline
-                &&&&&&&&&& \\
-                \hline
-            \end{tabular}
-        \end{center}
-        Operation: \underline{\hspace{3cm}} \hspace{10px} Position(s): \underline{\hspace{2cm}}
-        \begin{center}
-            \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
-                \hline
-                0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
-                \hline
-                &&&&&&&&&& \\
-                \hline
-            \end{tabular}
-        \end{center}
-        Operation: \underline{\hspace{3cm}} \hspace{10px} Position(s): \underline{\hspace{2cm}}
-        \begin{center}
-            \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
-                \hline
-                0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
-                \hline
-                &&&&&&&&&& \\
-                \hline
-            \end{tabular}
-        \end{center}
-    }
-}
+\vspace{10px}
+Operation: \underline{\hspace{3cm}} \hspace{10px} Position(s): \underline{\hspace{2cm}}
+\begin{center}
+    \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
+        \hline
+        0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
+        \hline
+        &&&&&&&&&& \\
+        \hline
+    \end{tabular}
+\end{center}
+Operation: \underline{\hspace{3cm}} \hspace{10px} Position(s): \underline{\hspace{2cm}}
+\begin{center}
+    \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
+        \hline
+        0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
+        \hline
+        &&&&&&&&&& \\
+        \hline
+    \end{tabular}
+\end{center}
+Operation: \underline{\hspace{3cm}} \hspace{10px} Position(s): \underline{\hspace{2cm}}
+\begin{center}
+    \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
+        \hline
+        0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
+        \hline
+        &&&&&&&&&& \\
+        \hline
+    \end{tabular}
+\end{center}
+Operation: \underline{\hspace{3cm}} \hspace{10px} Position(s): \underline{\hspace{2cm}}
+\begin{center}
+    \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
+        \hline
+        0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
+        \hline
+        &&&&&&&&&& \\
+        \hline
+    \end{tabular}
+\end{center}
+Operation: \underline{\hspace{3cm}} \hspace{10px} Position(s): \underline{\hspace{2cm}}
+\begin{center}
+    \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
+        \hline
+        0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
+        \hline
+        &&&&&&&&&& \\
+        \hline
+    \end{tabular}
+\end{center}
+Operation: \underline{\hspace{3cm}} \hspace{10px} Position(s): \underline{\hspace{2cm}}
+\begin{center}
+    \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
+        \hline
+        0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
+        \hline
+        &&&&&&&&&& \\
+        \hline
+    \end{tabular}
+\end{center}
+Operation: \underline{\hspace{3cm}} \hspace{10px} Position(s): \underline{\hspace{2cm}}
+\begin{center}
+    \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
+        \hline
+        0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
+        \hline
+        &&&&&&&&&& \\
+        \hline
+    \end{tabular}
+\end{center}
+Operation: \underline{\hspace{3cm}} \hspace{10px} Position(s): \underline{\hspace{2cm}}
+\begin{center}
+    \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
+        \hline
+        0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
+        \hline
+        &&&&&&&&&& \\
+        \hline
+    \end{tabular}
+\end{center}
+Operation: \underline{\hspace{3cm}} \hspace{10px} Position(s): \underline{\hspace{2cm}}
+\begin{center}
+    \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
+        \hline
+        0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
+        \hline
+        &&&&&&&&&& \\
+        \hline
+    \end{tabular}
+\end{center}
+Operation: \underline{\hspace{3cm}} \hspace{10px} Position(s): \underline{\hspace{2cm}}
+\begin{center}
+    \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
+        \hline
+        0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
+        \hline
+        &&&&&&&&&& \\
+        \hline
+    \end{tabular}
+\end{center}

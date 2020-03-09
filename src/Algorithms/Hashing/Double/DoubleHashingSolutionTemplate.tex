@@ -1,121 +1,39 @@
 \textbf{\LARGE{\color{tumgadRed} Double Hashing}}\\
 \\
 \noindent
-Use \href{https://sebastianoner.github.io/TUMGAD/src/Algorithms/Hashing/Double/DoubleHashing}{\textbf{\underline{Double Hashing}}} with
-the below provided Hash functions to resolve any collisions.
+Use \href{https://sebastianoner.github.io/TUMGAD/src/Algorithms/Hashing/Double/DoubleHashing}{\textbf{\underline{Double Hashing}}}
+and the following Hash functions to resolve any collisions.
 \begin{center}
     $h(x,i) = (h(x) + i* h'(x)) \mod 11$\\
     $NORMALFUNCTION$\\
     $COLLISIONFUNCTION$\\
 \end{center}
-Execute the following operations in the provided order, also provide all checked positions in the field "Position(s)" above the table.\\
+Consider these operations:
 \begin{center}
     Insert: $FIRSTINSERTIONS$\\
     Delete: $DELETIONS$\\
     Insert: $SECONDINSERTIONS$\\
 \end{center}
-A hashtable with the size $m = 11$ is provided on the next page, on this page you will have room for extra calculations:\\
+Multiple hashtables with the size $m = 11$ are provided on the next page.\\
+\\
+a) Generate the \textbf{collision table}, in the printed template on this page for the numbers above.\\
+b) Execute the above operations in the provided order, also explicitly state \textbf{all checked positions} in the field "Position(s)" above the table (even in deletions).\\
 \newline
 \noindent\fbox{
     \parbox{\textwidth}{
-        $DOUBLEHASHINGCOLLISIONTABLE$
+        \vspace{10px}
+        This table shows the collisions the numbers could go through when inserting them into the hashtable:
+        \color{tumgadRed}
+        \begin{center}
+            \begin{tabular}{|P{1.1cm}|P{1.1cm}|P{1.1cm}|P{1.1cm}|P{1.1cm}|P{1.1cm}|P{1.1cm}|P{1.1cm}|P{1.1cm}|}
+                \hline
+                $x$ & $h(x)$ & $h'(x)$ & $h(x,0)$ & $h(x,1)$ & $h(x,2)$ & $h(x,3)$ & $h(x,4)$ & $h(x,5)$  \\
+                \hline
+                %$COLLISIONTABLE$
+            \end{tabular}
+        \end{center}
     }
 }
 \newpage
-\noindent\fbox{
-    \parbox{\textwidth}{
-        \vspace{10px}
-        Operation: \underline{\color{tumgadRed}$DHOPERATION1$} \hspace{10px} Position(s): \underline{\color{tumgadRed}$DHPOSITIONS1$}
-        \begin{center}
-            \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
-                \hline
-                0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
-                \hline
-                $DHTABLE1$ \\
-                \hline
-            \end{tabular}
-        \end{center}
-        Operation: \underline{\color{tumgadRed}$DHOPERATION2$} \hspace{10px} Position(s): \underline{\color{tumgadRed}$DHPOSITIONS2$}
-        \begin{center}
-            \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
-                \hline
-                0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
-                \hline
-                $DHTABLE2$ \\
-                \hline
-            \end{tabular}
-        \end{center}Operation: \underline{\color{tumgadRed}$DHOPERATION3$} \hspace{10px} Position(s): \underline{\color{tumgadRed}$DHPOSITIONS3$}
-        \begin{center}
-            \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
-                \hline
-                0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
-                \hline
-                $DHTABLE3$ \\
-                \hline
-            \end{tabular}
-        \end{center}Operation: \underline{\color{tumgadRed}$DHOPERATION4$} \hspace{10px} Position(s): \underline{\color{tumgadRed}$DHPOSITIONS4$}
-        \begin{center}
-            \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
-                \hline
-                0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
-                \hline
-                $DHTABLE4$ \\
-                \hline
-            \end{tabular}
-        \end{center}Operation: \underline{\color{tumgadRed}$DHOPERATION5$} \hspace{10px} Position(s): \underline{\color{tumgadRed}$DHPOSITIONS5$}
-        \begin{center}
-            \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
-                \hline
-                0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
-                \hline
-                $DHTABLE5$ \\
-                \hline
-            \end{tabular}
-        \end{center}Operation: \underline{\color{tumgadRed}$DHOPERATION6$} \hspace{10px} Position(s): \underline{\color{tumgadRed}$DHPOSITIONS6$}
-        \begin{center}
-            \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
-                \hline
-                0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
-                \hline
-                $DHTABLE6$ \\
-                \hline
-            \end{tabular}
-        \end{center}Operation: \underline{\color{tumgadRed}$DHOPERATION7$} \hspace{10px} Position(s): \underline{\color{tumgadRed}$DHPOSITIONS7$}
-        \begin{center}
-            \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
-                \hline
-                0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
-                \hline
-                $DHTABLE7$ \\
-                \hline
-            \end{tabular}
-        \end{center}Operation: \underline{\color{tumgadRed}$DHOPERATION8$} \hspace{10px} Position(s): \underline{\color{tumgadRed}$DHPOSITIONS8$}
-        \begin{center}
-            \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
-                \hline
-                0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
-                \hline
-                $DHTABLE8$ \\
-                \hline
-            \end{tabular}
-        \end{center}Operation: \underline{\color{tumgadRed}$DHOPERATION9$} \hspace{10px} Position(s): \underline{\color{tumgadRed}$DHPOSITIONS9$}
-        \begin{center}
-            \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
-                \hline
-                0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
-                \hline
-                $DHTABLE9$ \\
-                \hline
-            \end{tabular}
-        \end{center}Operation: \underline{\color{tumgadRed}$DHOPERATION10$} \hspace{10px} Position(s): \underline{\color{tumgadRed}$DHPOSITIONS10$}
-        \begin{center}
-            \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
-                \hline
-                0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
-                \hline
-                $DHTABLE10$ \\
-                \hline
-            \end{tabular}
-        \end{center}
-    }
-}
+\vspace{-10px}
+%$DHTABLE$
