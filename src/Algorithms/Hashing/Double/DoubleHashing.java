@@ -7,6 +7,10 @@ import java.util.*;
 public class DoubleHashing {
     static StringBuilder doubleHashingExerciseStringBuilder;
     static StringBuilder doubleHashingSolutionStringBuilder;
+    /**
+     * Template for the solution of a single operation when inserting/deleting number into
+     * Hashtable. 3 replacable placeholders and a non-replacable for the next table
+     */
     static String tableTemplate = "Operation: \\underline{\\color{tumgadRed}$DHOPERATION$} \\hspace{10px} Position(s): \\underline{\\color{tumgadRed}$DHPOSITIONS$}\n" +
             "        \\begin{center}\n" +
             "            \\begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}\n" +
@@ -23,6 +27,9 @@ public class DoubleHashing {
         generateExercise();
     }
 
+    /**
+     * generates a first hashfunction matching /\([1-9]x \+ 9\) mod 11/
+     */
     static int[] generateH1Function() {
         Random rand = new Random();
         int[] a = new int[2];
@@ -31,7 +38,9 @@ public class DoubleHashing {
         return a;
     }
 
-    //h2(x) = prime1 - (x % prime2)
+    /**
+     * h2(x) = prime1 - (x % prime2)
+     */
     static int[] generateH2Function() {
         int[] primes = {5, 7, 11};
         Random rand = new Random();
@@ -88,7 +97,6 @@ public class DoubleHashing {
             allInsertions.add(secondInsertions[i]);
         }
 
-        int[][] collisionTable = generateCollisionTable(new HashSet<Integer>(allInsertions).toArray(new Integer[0]), hash1, hash2);
         generateSteps(hash1, hash2, firstInsertions, deletionsArr, secondInsertions);
 
         Terminal.replaceinSB(doubleHashingExerciseStringBuilder, "$FIRSTINSERTIONS$", Terminal.printArray(firstInsertions));
@@ -113,6 +121,13 @@ public class DoubleHashing {
         Terminal.saveToFile("docs/Solutions.tex", solutionStringBuilder);
     }
 
+    /**
+     * Insert a value into a hashtable, ensuring it to get a free space using double hashing
+     * @param hashTable the current state of the hashtable the value should be inserted into
+     * @param value the int value to be inserted
+     * @param h1 the first hashfunction
+     * @param h2 the second hash-function, coming into play if the value collides
+     */
     private static void insertToTable(int[] hashTable, int value, int[] h1, int[] h2) {
         int firstHash, hashValue;
         firstHash = hashValue = ((h1[0] * value + h1[1]) % 11);
@@ -130,7 +145,9 @@ public class DoubleHashing {
                 .replace("$DHTABLEROW$", arrayToRow(hashTable))
         );
     }
-
+    /**
+     * see insertFromTable, only with delete
+     */
     private static void deleteFromTable(int[] hashTable, int value, int[] h1, int[] h2) {
         int firstHash, hashValue;
         firstHash = hashValue = ((h1[0] * value + h1[1]) % 11);
@@ -143,12 +160,16 @@ public class DoubleHashing {
         }
         hashTable[hashValue] = -1;
         Terminal.replaceinSB(doubleHashingSolutionStringBuilder, "%$DHTABLE$", tableTemplate
-                .replace("$DHOPERATION$", "Insert(" + value +")")
+                .replace("$DHOPERATION$", "Delete(" + value +")")
                 .replace("$DHPOSITIONS$", positionString)
                 .replace("$DHTABLEROW$", arrayToRow(hashTable))
         );
     }
 
+    /**
+     * generates a LaTeX-friendly row from a provided array
+     * @param hashTable the array that should be converted into a LaTeX table row
+     */
     private static String arrayToRow(int[] hashTable) {
         String ret = hashTable[0] == -1 ? "" : "" + hashTable[0];
         for (int i = 1; i < hashTable.length; i++) {
@@ -157,25 +178,42 @@ public class DoubleHashing {
         return ret;
     }
 
+    /**
+     * generates the separate insertions/deletion steps of the operations (always 10)
+     *
+     * @param h1 The first hash-function
+     * @param h2 The second hash-function, if a collision appears
+     * @param firstInsertions the first couple of values that should be inserted into the hashtable
+     * @param deletionsArr the 3 values that should be deleted after the insertions (a subset of firstInsertions)
+     * @param secondInsertions the last couple of values to be inserted
+     */
     private static void generateSteps(int[] h1, int[] h2, Integer[] firstInsertions, int[] deletionsArr, int[] secondInsertions) {
         int[] hashTable = new int[11];
         for (int i = 0; i < hashTable.length; i++) {
             hashTable[i] = -1;
         }
         for (int i = 0; i < firstInsertions.length; i++) {
-            //Terminal.replaceinSB(doubleHashingSolutionStringBuilder, "$DHOPERATION" + (i + 1) + "$", "Insert(" + firstInsertions[i] + ")");
             insertToTable(hashTable, firstInsertions[i], h1, h2);
         }
         for (int i = 0; i < deletionsArr.length; i++) {
-            //Terminal.replaceinSB(doubleHashingSolutionStringBuilder, "$DHOPERATION" + (firstInsertions.length + i + 1) + "$", "Delete(" + deletionsArr[i] + ")");
             deleteFromTable(hashTable, deletionsArr[i], h1, h2);
         }
         for (int i = 0; i < secondInsertions.length; i++) {
-            //Terminal.replaceinSB(doubleHashingSolutionStringBuilder, "$DHOPERATION" + (firstInsertions.length + deletionsArr.length + i + 1) + "$", "Insert(" + secondInsertions[i] + ")");
             insertToTable(hashTable, secondInsertions[i], h1, h2);
         }
     }
 
+    /**
+     * Generates a collision table, a table that gives you the values to which
+     * the numbers in question map to when inserted into the hashfunctions
+     *
+     * This method generates the table with a width/depth of 5, meaning you can look up
+     * the initial hash-value and 4 collision values after
+     *
+     * @param numbers the numbers that have to be inserted into the table
+     * @param h1 first hash function
+     * @param h2 second hash function
+     */
     private static int[][] generateCollisionTable(Integer[] numbers, int[] h1, int[] h2) {
         int[][] collisionTable = new int[numbers.length][9];
 
