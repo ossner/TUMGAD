@@ -10,10 +10,10 @@ public class DoubleHashing {
 
 
     public static void main(String[] args) {
-        generateExercise();
+        System.out.println(Terminal.printArray(generateH2Function()));
     }
 
-    static int[] generateHashfunction() {
+    static int[] generateH1Function() {
         Random rand = new Random();
         int[] a = new int[2];
         a[0] = (rand.nextInt(10) + 1);
@@ -21,11 +21,21 @@ public class DoubleHashing {
         return a;
     }
 
+    //h2(x) = prime1 - (x % prime2)
+    static int[] generateH2Function() {
+        int[] primes = {5,7,11};
+        Random rand = new Random();
+        int[] a = new int[2];
+        a[0] = primes[rand.nextInt(3)];
+        a[1] = primes[rand.nextInt(3)];
+        return a;
+    }
+
     static void generateExercise() {
         doubleHashingExerciseStringBuilder = Terminal.readFile("src/Algorithms/Hashing/Double/DoubleHashingExerciseTemplate.tex");
         doubleHashingSolutionStringBuilder = Terminal.readFile("src/Algorithms/Hashing/Double/DoubleHashingSolutionTemplate.tex");
 
-        int[] a = generateHashfunction();
+        int[] a = generateH1Function();
 
         Terminal.replaceinSB(doubleHashingExerciseStringBuilder, "NORMALFUNCTION", "h(x) = (" + a[0] + "x + " + a[1] + ") \\mod 11");
         Terminal.replaceinSB(doubleHashingSolutionStringBuilder, "NORMALFUNCTION", "h(x) = (" + a[0] + "x + " + a[1] + ") \\mod 11");
