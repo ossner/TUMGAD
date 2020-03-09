@@ -10,7 +10,7 @@ public class DoubleHashing {
 
 
     public static void main(String[] args) {
-        System.out.println(Terminal.printArray(generateH2Function()));
+        generateExercise();
     }
 
     static int[] generateH1Function() {
@@ -36,9 +36,13 @@ public class DoubleHashing {
         doubleHashingSolutionStringBuilder = Terminal.readFile("src/Algorithms/Hashing/Double/DoubleHashingSolutionTemplate.tex");
 
         int[] a = generateH1Function();
+        int[] b = generateH2Function();
 
         Terminal.replaceinSB(doubleHashingExerciseStringBuilder, "NORMALFUNCTION", "h(x) = (" + a[0] + "x + " + a[1] + ") \\mod 11");
         Terminal.replaceinSB(doubleHashingSolutionStringBuilder, "NORMALFUNCTION", "h(x) = (" + a[0] + "x + " + a[1] + ") \\mod 11");
+
+        Terminal.replaceinSB(doubleHashingExerciseStringBuilder, "COLLISIONFUNCTION", "h'(x) = " + b[0] + " - (x \\mod " + b[1] + ") ");
+        Terminal.replaceinSB(doubleHashingSolutionStringBuilder, "COLLISIONFUNCTION", "h'(x) = " + b[0] + " - (x \\mod " + b[1] + ") ");
 
         Terminal.saveToFile("src/Algorithms/Hashing/Double/DoubleHashingExercise.tex", doubleHashingExerciseStringBuilder);
         Terminal.saveToFile("src/Algorithms/Hashing/Double/DoubleHashingSolution.tex", doubleHashingSolutionStringBuilder);
