@@ -76,8 +76,8 @@ public class Terminal {
     public static int[] generateRandomArray(int minsize, int maxsize) {
         int arraySize = new Random().nextInt(maxsize - minsize + 1) + minsize;
         ArrayList<Integer> list = new ArrayList<>(arraySize);
-        for (int i = 0; i <= arraySize; i++) {
-            list.add(i * 2);
+        for (int i = 0; i <= arraySize * 2; i++) {
+            list.add(i);
         }
         int[] a = new int[arraySize];
         for (int count = 0; count < arraySize; count++) {
