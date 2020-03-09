@@ -151,7 +151,7 @@ public class TumgadCLI {
             }
             for (int i = 0; i < options.length; i++) {
                 String option = options[i];
-                switch (option) {
+                switch (option.toUpperCase()) {
                     case "DA":
                         System.out.println(ANSI_PURPLE + "Generating Dynamic Array" + ANSI_RESET);
                         gernerateDynamicArray();
