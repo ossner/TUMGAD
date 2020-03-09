@@ -1,155 +1,122 @@
-\UseRawInputEncoding
-\documentclass[12pt]{article}
-\usepackage[utf8]{inputenc}
-\usepackage{graphicx}
-\usepackage[table]{xcolor}
-\usepackage{hyperref}
-\usepackage{tikz}
-\usepackage{amsmath}
-\hypersetup{
-    colorlinks=true,
-    linkcolor=blue,
-    filecolor=magenta,
-    urlcolor=tumgadBlue,
+\textbf{\LARGE{\color{tumgadRed} Double Hashing}}\\
+\\
+\noindent
+Use \href{https://sebastianoner.github.io/TUMGAD/src/Algorithms/Hashing/Double/DoubleHashing}{\textbf{\underline{Double Hashing}}} with
+the below provided Hash functions to resolve any collisions.
+\begin{center}
+    $h(x,i) = (h(x) + i* h'(x)) \mod 11$\\
+    $NORMALFUNCTION$\\
+    $COLLISIONFUNCTION$\\
+\end{center}
+Execute the following operations in the provided order, also provide all checked positions in the field "Position(s)" above the table.
+After a deletion an element should be substituted with the placeholder 'X'.\\
+\begin{center}
+    Insert: $FIRSTINSERTIONS$\\
+    Delete: $DELETIONS$\\
+    Insert: $SECONDINSERTIONS$\\
+\end{center}
+A hashtable with the size $m = 11$ is provided on the next page, on this page you will have room for extra calculations:\\
+\newline
+\noindent\fbox{
+    \parbox{\textwidth}{
+        $DOUBLEHASHINGCOLLISIONTABLE$
+    }
 }
-\usepackage[a4paper, total={6in, 9in}]{geometry}
-\usepackage[nodisplayskipstretch]{setspace}
-\usepackage[printwatermark]{xwatermark}
-\usepackage{enumitem,amssymb}
-\definecolor{tumgadPurple}{RGB}{105,0,168}
-\definecolor{tumgadBlue}{RGB}{79, 100, 255}
-\definecolor{tumgadRed}{RGB}{255,85,85}
-\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}} % Center column values in content table
-
-% Header/Footer definitions
-\rhead{\thepage}
-\renewcommand{\headrulewidth}{0.4pt}
-\usepackage{fancyhdr}
-\pagestyle{fancy}
-\cfoot{TUMGAD was created by Sebastian Oßner and Daniel Krüger \href{https://github.com/SebastianOner/TUMGAD}{\underline{View it on GitHub}}}
-\renewcommand{\footrulewidth}{0.4pt}
-
-\begin{document}
-    \textbf{\LARGE{\color{tumgadRed} Double Hashing}}\\
-    \\
-    \noindent
-    Use \href{https://sebastianoner.github.io/TUMGAD/src/Algorithms/Hashing/Double/DoubleHashing}{\textbf{\underline{Double Hashing}}} with
-    the below provided Hash functions to resolve any collisions.
-    \begin{center}
-        $h(x,i) = (h(x) + i* h'(x)) \mod 11$\\
-        $NORMALFUNCTION$\\
-        $COLLISIONFUNCTION$\\
-    \end{center}
-    Execute the following operations in the provided order, also provide all checked positions in the field "Position(s)" above the table.
-    After a deletion an element should be substituted with the placeholder 'X'.\\
-    \begin{center}
-        Insert: $FIRSTINSERTIONS$\\
-        Delete: $DELETIONS$\\
-        Insert: $SECONDINSERTIONS$\\
-    \end{center}
-    A hashtable with the size $m = 11$ is provided on the next page, on this page you will have room for extra calculations:\\
-    \newline
-    \noindent\fbox{
-        \parbox{\textwidth}{
-            $DOUBLEHASHINGCOLLISIONTABLE$
-        }
+\newpage
+\noindent\fbox{
+    \parbox{\textwidth}{
+        \vspace{10px}
+        Operation: \underline{$DHOPERATION1$} \hspace{10px} Position(s): \underline{$DHPOSITIONS1$}
+        \begin{center}
+            \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
+                \hline
+                0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
+                \hline
+                $DHTABLE1$&&&&&&&&&& \\
+                \hline
+            \end{tabular}
+        \end{center}
+        Operation: \underline{$DHOPERATION2$} \hspace{10px} Position(s): \underline{$DHPOSITIONS2$}
+        \begin{center}
+            \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
+                \hline
+                0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
+                \hline
+                $DHTABLE2$&&&&&&&&&& \\
+                \hline
+            \end{tabular}
+        \end{center}Operation: \underline{$DHOPERATION3$} \hspace{10px} Position(s): \underline{$DHPOSITIONS3$}
+        \begin{center}
+            \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
+                \hline
+                0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
+                \hline
+                $DHTABLE3$&&&&&&&&&& \\
+                \hline
+            \end{tabular}
+        \end{center}Operation: \underline{$DHOPERATION4$} \hspace{10px} Position(s): \underline{$DHPOSITIONS4$}
+        \begin{center}
+            \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
+                \hline
+                0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
+                \hline
+                $DHTABLE4$&&&&&&&&&& \\
+                \hline
+            \end{tabular}
+        \end{center}Operation: \underline{$DHOPERATION5$} \hspace{10px} Position(s): \underline{$DHPOSITIONS5$}
+        \begin{center}
+            \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
+                \hline
+                0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
+                \hline
+                $DHTABLE5$&&&&&&&&&& \\
+                \hline
+            \end{tabular}
+        \end{center}Operation: \underline{$DHOPERATION6$} \hspace{10px} Position(s): \underline{$DHPOSITIONS6$}
+        \begin{center}
+            \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
+                \hline
+                0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
+                \hline
+                $DHTABLE6$&&&&&&&&&& \\
+                \hline
+            \end{tabular}
+        \end{center}Operation: \underline{$DHOPERATION7$} \hspace{10px} Position(s): \underline{$DHPOSITIONS7$}
+        \begin{center}
+            \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
+                \hline
+                0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
+                \hline
+                $DHTABLE7$&&&&&&&&&& \\
+                \hline
+            \end{tabular}
+        \end{center}Operation: \underline{$DHOPERATION8$} \hspace{10px} Position(s): \underline{$DHPOSITIONS8$}
+        \begin{center}
+            \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
+                \hline
+                0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
+                \hline
+                $DHTABLE8$&&&&&&&&&& \\
+                \hline
+            \end{tabular}
+        \end{center}Operation: \underline{$DHOPERATION9$} \hspace{10px} Position(s): \underline{$DHPOSITIONS9$}
+        \begin{center}
+            \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
+                \hline
+                0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
+                \hline
+                $DHTABLE9$&&&&&&&&&& \\
+                \hline
+            \end{tabular}
+        \end{center}Operation: \underline{$DHOPERATION10$} \hspace{10px} Position(s): \underline{$DHPOSITIONS10$}
+        \begin{center}
+            \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
+                \hline
+                0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
+                \hline
+                $DHTABLE10$&&&&&&&&&& \\
+                \hline
+            \end{tabular}
+        \end{center}
     }
-    \newpage
-    \noindent\fbox{
-        \parbox{\textwidth}{
-            \vspace{10px}
-            Operation: \underline{$DHOPERATION1$} \hspace{10px} Position(s): \underline{$DHPOSITIONS1$}
-            \begin{center}
-                \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
-                    \hline
-                    0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
-                    \hline
-                    $DHTABLE1$&&&&&&&&&& \\
-                    \hline
-                \end{tabular}
-            \end{center}
-            Operation: \underline{$DHOPERATION2$} \hspace{10px} Position(s): \underline{$DHPOSITIONS2$}
-            \begin{center}
-                \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
-                    \hline
-                    0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
-                    \hline
-                    $DHTABLE2$&&&&&&&&&& \\
-                    \hline
-                \end{tabular}
-            \end{center}Operation: \underline{$DHOPERATION3$} \hspace{10px} Position(s): \underline{$DHPOSITIONS3$}
-            \begin{center}
-                \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
-                    \hline
-                    0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
-                    \hline
-                    $DHTABLE3$&&&&&&&&&& \\
-                    \hline
-                \end{tabular}
-            \end{center}Operation: \underline{$DHOPERATION4$} \hspace{10px} Position(s): \underline{$DHPOSITIONS4$}
-            \begin{center}
-                \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
-                    \hline
-                    0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
-                    \hline
-                    $DHTABLE4$&&&&&&&&&& \\
-                    \hline
-                \end{tabular}
-            \end{center}Operation: \underline{$DHOPERATION5$} \hspace{10px} Position(s): \underline{$DHPOSITIONS5$}
-            \begin{center}
-                \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
-                    \hline
-                    0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
-                    \hline
-                    $DHTABLE5$&&&&&&&&&& \\
-                    \hline
-                \end{tabular}
-            \end{center}Operation: \underline{$DHOPERATION6$} \hspace{10px} Position(s): \underline{$DHPOSITIONS6$}
-            \begin{center}
-                \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
-                    \hline
-                    0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
-                    \hline
-                    $DHTABLE6$&&&&&&&&&& \\
-                    \hline
-                \end{tabular}
-            \end{center}Operation: \underline{$DHOPERATION7$} \hspace{10px} Position(s): \underline{$DHPOSITIONS7$}
-            \begin{center}
-                \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
-                    \hline
-                    0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
-                    \hline
-                    $DHTABLE7$&&&&&&&&&& \\
-                    \hline
-                \end{tabular}
-            \end{center}Operation: \underline{$DHOPERATION8$} \hspace{10px} Position(s): \underline{$DHPOSITIONS8$}
-            \begin{center}
-                \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
-                    \hline
-                    0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
-                    \hline
-                    $DHTABLE8$&&&&&&&&&& \\
-                    \hline
-                \end{tabular}
-            \end{center}Operation: \underline{$DHOPERATION9$} \hspace{10px} Position(s): \underline{$DHPOSITIONS9$}
-            \begin{center}
-                \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
-                    \hline
-                    0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
-                    \hline
-                    $DHTABLE9$&&&&&&&&&& \\
-                    \hline
-                \end{tabular}
-            \end{center}Operation: \underline{$DHOPERATION10$} \hspace{10px} Position(s): \underline{$DHPOSITIONS10$}
-            \begin{center}
-                \begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}
-                    \hline
-                    0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\
-                    \hline
-                    $DHTABLE10$&&&&&&&&&& \\
-                    \hline
-                \end{tabular}
-            \end{center}
-        }
-    }
-\end{document}
+}
