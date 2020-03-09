@@ -2,9 +2,6 @@ package DataStructures.Sequences.Arrays;
 
 import DataStructures.Terminal;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Random;
 
 /**
@@ -113,7 +110,7 @@ public class DynamicArray {
         }
         for (int i = 0; i < 4; i++) {
             int pushValue = new Random().nextInt(100);
-            Terminal.replaceinSB(arraySolutionStringBuilder, "$OPERATIONSCGENERATION$", "\\vspace{10px}push(" + pushValue +"):\n");
+            Terminal.replaceinSB(arraySolutionStringBuilder, "$OPERATIONSCGENERATION$", "\\vspace{10px}push(" + pushValue + "):\n");
             exerciseArray.push(pushValue);
             Terminal.replaceinSB(arraySolutionStringBuilder, "$ARRAYSCGENERATION$", exerciseArray.arrayToTable()
                     + "\\\\\n$OPERATIONSCGENERATION$\\\\\n$ARRAYSCGENERATION$");

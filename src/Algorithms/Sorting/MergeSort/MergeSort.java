@@ -3,8 +3,12 @@ package Algorithms.Sorting.MergeSort;
 import DataStructures.Terminal;
 
 import java.util.ArrayList;
-import java.util.Random;
 
+/**
+ * Please note that this class offers no actual implementation of the MergeSort
+ * Algorithm at this time (09/03/20) this is due to the fact that generating
+ * an exercise with the actual sorting algorithm is way too complex than is needed
+ */
 public class MergeSort {
     static StringBuilder mergeSortExerciseStringBuilder;
     static StringBuilder mergeSortSolutionStringBuilder;

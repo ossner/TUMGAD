@@ -2,9 +2,6 @@ package Algorithms.Sorting.QuickSort;
 
 import DataStructures.Terminal;
 
-import java.util.ArrayList;
-import java.util.Random;
-
 import static DataStructures.Terminal.printArray;
 
 public class QuickSort {
