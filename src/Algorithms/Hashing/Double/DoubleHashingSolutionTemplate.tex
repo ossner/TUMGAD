@@ -5,6 +5,7 @@
 \usepackage[table]{xcolor}
 \usepackage{hyperref}
 \usepackage{tikz}
+\usepackage{amsmath}
 \hypersetup{
     colorlinks=true,
     linkcolor=blue,
@@ -35,7 +36,7 @@
     Use \href{https://sebastianoner.github.io/TUMGAD/src/Algorithms/Hashing/Double/DoubleHashing}{\textbf{\underline{Double Hashing}}} with
     the below provided Hash functions to resolve any collisions.
     \begin{center}
-        $INDEXFUNCTION$\\
+        $h(x,i) = (h(x) + i* h'(x)) \mod 11$\\
         $NORMALFUNCTION$\\
         $COLLISIONFUNCTION$\\
     \end{center}
@@ -46,7 +47,7 @@
         Delete: $DELETIONS$\\
         Insert: $SECONDINSERTIONS$\\
     \end{center}
-    A hashtable with the size $m = DOUBLEHASHTABLESIZE$ is provided on the next page, on this page you will have room for extra calculations:\\
+    A hashtable with the size $m = 11$ is provided on the next page, on this page you will have room for extra calculations:\\
     \newline
     \noindent\fbox{
         \parbox{\textwidth}{
