@@ -119,12 +119,29 @@ public class DoubleHashing {
         String positionString = "" + hashValue;
         int i = 1;
         while (hashTable[hashValue] != -1) {
-            System.out.println("COLLISION!");
             hashValue = Math.floorMod((firstHash + i * (h2[0] - Math.floorMod(value, h2[1]))), 11);
             positionString += ", " + hashValue;
             i++;
         }
         hashTable[hashValue] = value;
+        Terminal.replaceinSB(doubleHashingSolutionStringBuilder, "%$DHTABLE$", tableTemplate
+                .replace("$DHOPERATION$", "Insert(" + value +")")
+                .replace("$DHPOSITIONS$", positionString)
+                .replace("$DHTABLEROW$", arrayToRow(hashTable))
+        );
+    }
+
+    private static void deleteFromTable(int[] hashTable, int value, int[] h1, int[] h2) {
+        int firstHash, hashValue;
+        firstHash = hashValue = ((h1[0] * value + h1[1]) % 11);
+        String positionString = "" + hashValue;
+        int i = 1;
+        while (hashTable[hashValue] != value) {
+            hashValue = Math.floorMod((firstHash + i * (h2[0] - Math.floorMod(value, h2[1]))), 11);
+            positionString += ", " + hashValue;
+            i++;
+        }
+        hashTable[hashValue] = -1;
         Terminal.replaceinSB(doubleHashingSolutionStringBuilder, "%$DHTABLE$", tableTemplate
                 .replace("$DHOPERATION$", "Insert(" + value +")")
                 .replace("$DHPOSITIONS$", positionString)
@@ -140,25 +157,6 @@ public class DoubleHashing {
         return ret;
     }
 
-    private static void deleteFromTable(int[] hashTable, int value, int[] h1, int[] h2) {
-        int firstHash, hashValue;
-        firstHash = hashValue = ((h1[0] * value + h1[1]) % 11);
-        String positionString = "" + hashValue;
-        int i = 1;
-        while (hashTable[hashValue] != value) {
-            System.out.println("COLLISION!");
-            hashValue = Math.floorMod((firstHash + i * (h2[0] - Math.floorMod(value, h2[1]))), 11);
-            positionString += ", " + hashValue;
-            i++;
-        }
-        hashTable[hashValue] = -1;
-        Terminal.replaceinSB(doubleHashingSolutionStringBuilder, "%$DHTABLE$", tableTemplate
-                .replace("$DHOPERATION$", "Insert(" + value +")")
-                .replace("$DHPOSITIONS$", positionString)
-                .replace("$DHTABLEROW$", arrayToRow(hashTable))
-        );
-    }
-
     private static void generateSteps(int[] h1, int[] h2, Integer[] firstInsertions, int[] deletionsArr, int[] secondInsertions) {
         int[] hashTable = new int[11];
         for (int i = 0; i < hashTable.length; i++) {
@@ -168,17 +166,14 @@ public class DoubleHashing {
             //Terminal.replaceinSB(doubleHashingSolutionStringBuilder, "$DHOPERATION" + (i + 1) + "$", "Insert(" + firstInsertions[i] + ")");
             insertToTable(hashTable, firstInsertions[i], h1, h2);
         }
-        System.out.println(Terminal.printArray(hashTable));
         for (int i = 0; i < deletionsArr.length; i++) {
             //Terminal.replaceinSB(doubleHashingSolutionStringBuilder, "$DHOPERATION" + (firstInsertions.length + i + 1) + "$", "Delete(" + deletionsArr[i] + ")");
             deleteFromTable(hashTable, deletionsArr[i], h1, h2);
         }
-        System.out.println(Terminal.printArray(hashTable));
         for (int i = 0; i < secondInsertions.length; i++) {
             //Terminal.replaceinSB(doubleHashingSolutionStringBuilder, "$DHOPERATION" + (firstInsertions.length + deletionsArr.length + i + 1) + "$", "Insert(" + secondInsertions[i] + ")");
             insertToTable(hashTable, secondInsertions[i], h1, h2);
         }
-        System.out.println(Terminal.printArray(hashTable));
     }
 
     private static int[][] generateCollisionTable(Integer[] numbers, int[] h1, int[] h2) {
