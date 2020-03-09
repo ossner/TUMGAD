@@ -2,15 +2,22 @@ package Algorithms.Hashing.Double;
 
 import DataStructures.Terminal;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class DoubleHashing {
     static StringBuilder doubleHashingExerciseStringBuilder;
     static StringBuilder doubleHashingSolutionStringBuilder;
-
+    static String tableTemplate = "Operation: \\underline{\\color{tumgadRed}$DHOPERATION$} \\hspace{10px} Position(s): \\underline{\\color{tumgadRed}$DHPOSITIONS$}\n" +
+            "        \\begin{center}\n" +
+            "            \\begin{tabular}{|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|}\n" +
+            "                \\hline\n" +
+            "                0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10  \\\\\n" +
+            "                \\hline\n" +
+            "                $DHTABLEROW$ \\\\\n" +
+            "                \\hline\n" +
+            "            \\end{tabular}\n" +
+            "        \\end{center}\n" +
+            "%$DHTABLE$";
 
     public static void main(String[] args) {
         generateExercise();
@@ -47,6 +54,8 @@ public class DoubleHashing {
         Terminal.replaceinSB(doubleHashingExerciseStringBuilder, "COLLISIONFUNCTION", "h'(x) = " + hash2[0] + " - (x \\mod " + hash2[1] + ") ");
         Terminal.replaceinSB(doubleHashingSolutionStringBuilder, "COLLISIONFUNCTION", "h'(x) = " + hash2[0] + " - (x \\mod " + hash2[1] + ") ");
 
+        // TODO 09/03/2020 sebas: generate more numbers because of small collision rate
+        // The next couple of lines generate the numbers the students will have to work with
         int[] numbers = Terminal.generateRandomArray(7, 7);
         int numOfFirstInsertions = new Random().nextInt(3) + 4;
         int numOfSecondInsertions = 7 - numOfFirstInsertions;
@@ -74,6 +83,14 @@ public class DoubleHashing {
             secondInsertions[i] = deletionsArr[k++];
         }
 
+        ArrayList allInsertions = new ArrayList(Arrays.asList(firstInsertions));
+        for (int i = 0; i < numOfSecondInsertions; i++) {
+            allInsertions.add(secondInsertions[i]);
+        }
+
+        int[][] collisionTable = generateCollisionTable(new HashSet<Integer>(allInsertions).toArray(new Integer[0]), hash1, hash2);
+        generateSteps(hash1, hash2, firstInsertions, deletionsArr, secondInsertions);
+
         Terminal.replaceinSB(doubleHashingExerciseStringBuilder, "$FIRSTINSERTIONS$", Terminal.printArray(firstInsertions));
         Terminal.replaceinSB(doubleHashingSolutionStringBuilder, "$FIRSTINSERTIONS$", Terminal.printArray(firstInsertions));
 
@@ -94,5 +111,102 @@ public class DoubleHashing {
 
         Terminal.saveToFile("docs/Exercises.tex", exerciseStringBuilder);
         Terminal.saveToFile("docs/Solutions.tex", solutionStringBuilder);
+    }
+
+    private static void insertToTable(int[] hashTable, int value, int[] h1, int[] h2) {
+        int firstHash, hashValue;
+        firstHash = hashValue = ((h1[0] * value + h1[1]) % 11);
+        String positionString = "" + hashValue;
+        int i = 1;
+        while (hashTable[hashValue] != -1) {
+            System.out.println("COLLISION!");
+            hashValue = Math.floorMod((firstHash + i * (h2[0] - Math.floorMod(value, h2[1]))), 11);
+            positionString += ", " + hashValue;
+            i++;
+        }
+        hashTable[hashValue] = value;
+        Terminal.replaceinSB(doubleHashingSolutionStringBuilder, "%$DHTABLE$", tableTemplate
+                .replace("$DHOPERATION$", "Insert(" + value +")")
+                .replace("$DHPOSITIONS$", positionString)
+                .replace("$DHTABLEROW$", arrayToRow(hashTable))
+        );
+    }
+
+    private static String arrayToRow(int[] hashTable) {
+        String ret = hashTable[0] == -1 ? "" : "" + hashTable[0];
+        for (int i = 1; i < hashTable.length; i++) {
+            ret += hashTable[i] == -1 ? "&" : "&" + hashTable[i];
+        }
+        return ret;
+    }
+
+    private static void deleteFromTable(int[] hashTable, int value, int[] h1, int[] h2) {
+        int firstHash, hashValue;
+        firstHash = hashValue = ((h1[0] * value + h1[1]) % 11);
+        String positionString = "" + hashValue;
+        int i = 1;
+        while (hashTable[hashValue] != value) {
+            System.out.println("COLLISION!");
+            hashValue = Math.floorMod((firstHash + i * (h2[0] - Math.floorMod(value, h2[1]))), 11);
+            positionString += ", " + hashValue;
+            i++;
+        }
+        hashTable[hashValue] = -1;
+        Terminal.replaceinSB(doubleHashingSolutionStringBuilder, "%$DHTABLE$", tableTemplate
+                .replace("$DHOPERATION$", "Insert(" + value +")")
+                .replace("$DHPOSITIONS$", positionString)
+                .replace("$DHTABLEROW$", arrayToRow(hashTable))
+        );
+    }
+
+    private static void generateSteps(int[] h1, int[] h2, Integer[] firstInsertions, int[] deletionsArr, int[] secondInsertions) {
+        int[] hashTable = new int[11];
+        for (int i = 0; i < hashTable.length; i++) {
+            hashTable[i] = -1;
+        }
+        for (int i = 0; i < firstInsertions.length; i++) {
+            //Terminal.replaceinSB(doubleHashingSolutionStringBuilder, "$DHOPERATION" + (i + 1) + "$", "Insert(" + firstInsertions[i] + ")");
+            insertToTable(hashTable, firstInsertions[i], h1, h2);
+        }
+        System.out.println(Terminal.printArray(hashTable));
+        for (int i = 0; i < deletionsArr.length; i++) {
+            //Terminal.replaceinSB(doubleHashingSolutionStringBuilder, "$DHOPERATION" + (firstInsertions.length + i + 1) + "$", "Delete(" + deletionsArr[i] + ")");
+            deleteFromTable(hashTable, deletionsArr[i], h1, h2);
+        }
+        System.out.println(Terminal.printArray(hashTable));
+        for (int i = 0; i < secondInsertions.length; i++) {
+            //Terminal.replaceinSB(doubleHashingSolutionStringBuilder, "$DHOPERATION" + (firstInsertions.length + deletionsArr.length + i + 1) + "$", "Insert(" + secondInsertions[i] + ")");
+            insertToTable(hashTable, secondInsertions[i], h1, h2);
+        }
+        System.out.println(Terminal.printArray(hashTable));
+    }
+
+    private static int[][] generateCollisionTable(Integer[] numbers, int[] h1, int[] h2) {
+        int[][] collisionTable = new int[numbers.length][9];
+
+        for (int i = 0; i < numbers.length; i++) {
+            int hash1 = Math.floorMod(h1[0] * numbers[i] + h1[1], 11);
+            int hash2 = h2[0] - (numbers[i] % h2[1]);
+            String collisionRow = "" + numbers[i] + " & " + hash1 + " & " + hash2;
+            collisionTable[i][0] = numbers[i];
+            collisionTable[i][1] = hash1;
+            collisionTable[i][2] = hash2;
+
+            int[] collisionHash = new int[6];
+            for (int j = 0; j < 6; j++) {
+                collisionHash[j] = Math.floorMod((hash1 + j * hash2), 11);
+                if (collisionHash[j] < 0) {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                collisionTable[i][j + 3] = collisionHash[j];
+                collisionRow += " & " + collisionHash[j];
+            }
+            Terminal.replaceinSB(doubleHashingSolutionStringBuilder, "%$COLLISIONTABLE$", collisionRow + "\\\\\n\\hline\n%$COLLISIONTABLE$");
+        }
+        return collisionTable;
     }
 }
