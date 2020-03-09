@@ -1,51 +1,58 @@
-\UseRawInputEncoding
-\documentclass[12pt]{article}
-\usepackage[utf8]{inputenc}
-\usepackage{graphicx}
-\usepackage[table]{xcolor}
-\usepackage{hyperref}
-\hypersetup{
-    colorlinks=true,
-    linkcolor=blue,
-    filecolor=magenta,
-    urlcolor=tumgadPurple,
-}
-\usepackage[a4paper, total={6in, 9in}]{geometry}
-\usepackage[nodisplayskipstretch]{setspace}
-\usepackage[printwatermark]{xwatermark}
-\usepackage{enumitem,amssymb}
-\definecolor{tumgadPurple}{RGB}{105,0,168}
-\definecolor{tumgadRed}{RGB}{255,85,85}
-\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}} % Center column values in content table
-
-% Header/Footer definitions
-\rhead{\thepage}
-\renewcommand{\headrulewidth}{0.4pt}
-\usepackage{fancyhdr}
-\pagestyle{fancy}
-\cfoot{TUMGAD was created by Sebastian Oßner and Daniel Krüger \href{https://github.com/SebastianOner/TUMGAD}{\underline{View it on GitHub}}}
-\renewcommand{\footrulewidth}{0.4pt}
-
-\begin{document}
-    \textbf{\LARGE{\color{tumgadPurple} MergeSort}}\\
-    \\
-    \noindent
-    Sort the following array according to the MergeSort algorithm:
-    \begin{center}
-        $INITARRAY$
-    \end{center}
-    Indicate divisions of the array by clear vertical lines like so:
-    \noindent
-    \begin{center}
+\textbf{\LARGE{\color{tumgadPurple} MergeSort}}\\
+\\
+\noindent
+Sort the following array according to the \href{https://sebastianoner.github.io/TUMGAD/src/Algorithms/Sorting/MergeSort/MergeSort}{\textbf{\underline{MergeSort}}} algorithm:
+\begin{center}
+    $INITARRAY$
+\end{center}
+Indicate divisions of the array by clear vertical lines like so:
+\noindent
+\begin{center}
+    \begin{tabular}{|c|}
+        \hline
         b, h, j, l, g, a $|$ c, e, d, k, f, i\\
+        \hline
+    \end{tabular}
+    \vspace{10px}
+\end{center}
+\noindent\fbox{
+    \parbox{\textwidth}{
         \vspace{10px}
-    \end{center}
-    \noindent\fbox{
-        \parbox{\textwidth}{
+        Step 1: \underline{\hspace{50px}}
         \begin{center}
-            $SORTINGARRAY$\\
-            \vspace{10px}
+            \fbox{\parbox{12cm}{\hspace{12cm}\\}}
         \end{center}
-        }
+        Step 2: \underline{\hspace{50px}}
+        \begin{center}
+            \fbox{\parbox{12cm}{\hspace{12cm}\\}}
+        \end{center}
+        Step 3: \underline{\hspace{50px}}
+        \begin{center}
+            \fbox{\parbox{12cm}{\hspace{12cm}\\}}
+        \end{center}
+        Step 4: \underline{\hspace{50px}}
+        \begin{center}
+            \fbox{\parbox{12cm}{\hspace{12cm}\\}}
+        \end{center}
+        Step 5: \underline{\hspace{50px}}
+        \begin{center}
+            \fbox{\parbox{12cm}{\hspace{12cm}\\}}
+        \end{center}
+        Step 6: \underline{\hspace{50px}}
+        \begin{center}
+            \fbox{\parbox{12cm}{\hspace{12cm}\\}}
+        \end{center}
+        Step 7: \underline{\hspace{50px}}
+        \begin{center}
+            \fbox{\parbox{12cm}{\hspace{12cm}\\}}
+        \end{center}
+        Step 8: \underline{\hspace{50px}}
+        \begin{center}
+            \fbox{\parbox{12cm}{\hspace{12cm}\\}}
+        \end{center}
+        Step 9: \underline{\hspace{50px}}
+        \begin{center}
+            \fbox{\parbox{12cm}{\hspace{12cm}\\}}
+        \end{center}
     }
-\end{document}
+}
