@@ -9,6 +9,7 @@ The implementation-details are similar to the implementation of dynamic list.
 However, only the last element of the sequence can be popped or pushed
 
 ### pop()
+
 | 0  | 1  | 2  | 3  | 4 | 5 |
 |----|----|----|----|---|---|
 | 15 | 18 | 20 | 45 |   |   |
@@ -18,6 +19,7 @@ However, only the last element of the sequence can be popped or pushed
 | 15 | 18 | 20 |   |   |   |
 
 ### push(42)
+
 | 0  | 1  | 2  | 3  | 4 | 5 |
 |----|----|----|----|---|---|
 | 15 | 18 | 20 | 45 |   |   |
