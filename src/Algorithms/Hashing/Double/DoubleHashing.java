@@ -62,11 +62,6 @@ public class DoubleHashing {
         // The next couple of lines generate the numbers the students will have to work with
         int[] numbers = Terminal.generateRandomArray(7, 7);
 
-        // validates that there is no issue with the hash2 function and the selected numbers
-        while (!checkNumbers(numbers, hash2)) {
-            numbers = Terminal.generateRandomArray(7, 7);
-        }
-
         int numOfFirstInsertions = new Random().nextInt(3) + 4;
         int numOfSecondInsertions = 7 - numOfFirstInsertions;
         Integer[] firstInsertions = new Integer[numOfFirstInsertions];
@@ -127,15 +122,6 @@ public class DoubleHashing {
 
         Terminal.saveToFile("docs/Exercises.tex", exerciseStringBuilder);
         Terminal.saveToFile("docs/Solutions.tex", solutionStringBuilder);
-    }
-
-    private static boolean checkNumbers(int[] numbers, int[] hash2) {
-        for (int i = 0; i < numbers.length; i++) {
-            if (hash2[0] - (Math.floorMod(numbers[i], hash2[1])) == 0) {
-                return false;
-            }
-        }
-        return true;
     }
 
     /**
