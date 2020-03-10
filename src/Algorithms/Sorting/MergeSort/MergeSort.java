@@ -84,7 +84,6 @@ public class MergeSort {
     static String printMerge(int[] a) {
         String result = "";
         for (int i = 0; i <= a.length / Math.pow(2, i) + 2; i++) {
-            // TODO 09/03/2020 sebas: removed concatenation to make latex replacement work better (temporary)
             result = printMerge(a, i + 1) + "\n";
             Terminal.replaceinSB(mergeSortSolutionStringBuilder, "%$SORTINGARRAY$", "\n" +
                     "\\underline{Merge:}\n" +

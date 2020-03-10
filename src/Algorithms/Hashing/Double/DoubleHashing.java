@@ -57,8 +57,6 @@ public class DoubleHashing {
         int[] hash1 = generateH1Function();
         int[] hash2 = generateH2Function();
 
-
-        // TODO 09/03/2020 sebas: generate more numbers because of small collision rate
         // The next couple of lines generate the numbers the students will have to work with
         int[] numbers = Terminal.generateRandomArray(7, 7);
 
