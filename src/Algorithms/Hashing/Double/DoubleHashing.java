@@ -30,7 +30,7 @@ public class DoubleHashing {
     /**
      * generates a first hashfunction matching /\([1-9]x \+ 9\) mod 11/
      */
-    static int[] generateH1Function() {
+    public static int[] generateH1Function() {
         Random rand = new Random();
         int[] a = new int[2];
         a[0] = (rand.nextInt(10) + 1);
@@ -57,15 +57,16 @@ public class DoubleHashing {
         int[] hash1 = generateH1Function();
         int[] hash2 = generateH2Function();
 
-        Terminal.replaceinSB(doubleHashingExerciseStringBuilder, "NORMALFUNCTION", "h(x) = (" + hash1[0] + "x + " + hash1[1] + ") \\mod 11");
-        Terminal.replaceinSB(doubleHashingSolutionStringBuilder, "NORMALFUNCTION", "h(x) = (" + hash1[0] + "x + " + hash1[1] + ") \\mod 11");
-
-        Terminal.replaceinSB(doubleHashingExerciseStringBuilder, "COLLISIONFUNCTION", "h'(x) = " + hash2[0] + " - (x \\mod " + hash2[1] + ") ");
-        Terminal.replaceinSB(doubleHashingSolutionStringBuilder, "COLLISIONFUNCTION", "h'(x) = " + hash2[0] + " - (x \\mod " + hash2[1] + ") ");
 
         // TODO 09/03/2020 sebas: generate more numbers because of small collision rate
         // The next couple of lines generate the numbers the students will have to work with
         int[] numbers = Terminal.generateRandomArray(7, 7);
+
+        // validates that there is no issue with the hash2 function and the selected numbers
+        while (!checkNumbers(numbers, hash2)) {
+            numbers = Terminal.generateRandomArray(7, 7);
+        }
+
         int numOfFirstInsertions = new Random().nextInt(3) + 4;
         int numOfSecondInsertions = 7 - numOfFirstInsertions;
         Integer[] firstInsertions = new Integer[numOfFirstInsertions];
@@ -100,6 +101,12 @@ public class DoubleHashing {
         generateCollisionTable(new HashSet<Integer>(allInsertions).toArray(new Integer[0]), hash1, hash2);
         generateSteps(hash1, hash2, firstInsertions, deletionsArr, secondInsertions);
 
+        Terminal.replaceinSB(doubleHashingExerciseStringBuilder, "NORMALFUNCTION", "h(x) = (" + hash1[0] + "x + " + hash1[1] + ") \\mod 11");
+        Terminal.replaceinSB(doubleHashingSolutionStringBuilder, "NORMALFUNCTION", "h(x) = (" + hash1[0] + "x + " + hash1[1] + ") \\mod 11");
+
+        Terminal.replaceinSB(doubleHashingExerciseStringBuilder, "COLLISIONFUNCTION", "h'(x) = " + hash2[0] + " - (x \\mod " + hash2[1] + ") ");
+        Terminal.replaceinSB(doubleHashingSolutionStringBuilder, "COLLISIONFUNCTION", "h'(x) = " + hash2[0] + " - (x \\mod " + hash2[1] + ") ");
+
         Terminal.replaceinSB(doubleHashingExerciseStringBuilder, "$FIRSTINSERTIONS$", Terminal.printArray(firstInsertions));
         Terminal.replaceinSB(doubleHashingSolutionStringBuilder, "$FIRSTINSERTIONS$", Terminal.printArray(firstInsertions));
 
@@ -120,6 +127,15 @@ public class DoubleHashing {
 
         Terminal.saveToFile("docs/Exercises.tex", exerciseStringBuilder);
         Terminal.saveToFile("docs/Solutions.tex", solutionStringBuilder);
+    }
+
+    private static boolean checkNumbers(int[] numbers, int[] hash2) {
+        for (int i = 0; i < numbers.length; i++) {
+            if (hash2[0] - (Math.floorMod(numbers[i], hash2[1])) == 0) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
