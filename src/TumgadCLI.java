@@ -1,3 +1,4 @@
+import Algorithms.Hashing.Chaining.HashingChaining;
 import Algorithms.Hashing.Double.DoubleHashing;
 import Algorithms.Sorting.MergeSort.MergeSort;
 import Algorithms.Sorting.QuickSort.QuickSort;
@@ -206,13 +207,17 @@ public class TumgadCLI {
                     case "FW":
                         say("Floyd-Warshall can not be generated yet, still in development");
                         break;
+                    case "DEV":
+                        say("Generating components that are still in development");
+                        HashingChaining.generateExercise();
+                        break;
                     default:
                         error("There is no exercise with the shorthand " + option);
                         break;
                 }
             }
         } catch (Exception e) {
-            error("Invalid selection, please follow the steps and try again");
+            error("Something went wrong... please try again");
             e.printStackTrace();
             System.exit(1);
         }
