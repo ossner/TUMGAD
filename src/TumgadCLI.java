@@ -218,6 +218,10 @@ public class TumgadCLI {
         }
     }
 
+    private static void say(String toSay) {
+        System.out.println(new Date().toString() + ": " + toSay);
+    }
+
     /**
      * Forgive me father for I have sinned, Don't look into this method for only pain you'll find
      */
@@ -225,23 +229,7 @@ public class TumgadCLI {
         try { // Incredibly ugly, only until we figure out the bug
             DynamicArray.generateExercise();
         } catch (IndexOutOfBoundsException e) {
-            try { // But this decreases the chance of failure substantially
-                DynamicArray.generateExercise();
-            } catch (IndexOutOfBoundsException e2) {
-                try {
-                    DynamicArray.generateExercise();
-                } catch (IndexOutOfBoundsException e3) {
-                    try {
-                        DynamicArray.generateExercise();
-                    } catch (IndexOutOfBoundsException e4) {
-                        DynamicArray.generateExercise();
-                    }
-                }
-            }
+            gernerateDynamicArray();
         }
-    }
-
-    private static void say(String toSay) {
-        System.out.println(new Date().toString() + ": " + toSay);
     }
 }
