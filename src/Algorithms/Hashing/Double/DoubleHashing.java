@@ -46,7 +46,7 @@ public class DoubleHashing {
         Random rand = new Random();
         int[] a = new int[2];
         a[0] = primes[rand.nextInt(3)];
-        a[1] = primes[rand.nextInt(3)];
+        a[1] = a[0];
         return a;
     }
 
