@@ -42,13 +42,8 @@ desktop.ini
 *.pdf
 *.out
 *.xwm
-src/DataStructures/Sequences/Arrays/ArraysExercise.tex
-src/DataStructures/Sequences/Arrays/ArraysSolution.tex
 docs/Exercises.tex
 docs/solutions.tex
 src/META-INF/MANIFEST.MF
-src/Algorithms/Hashing/Double/DoubleHashingExercise.tex
-src/Algorithms/Hashing/Double/DoubleHashingSolution.tex
-*.gz
 docs/SolutionTemplate.synctex.gz
 docs/ExerciseTemplate.synctex.gz
