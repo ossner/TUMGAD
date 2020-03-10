@@ -97,6 +97,7 @@ public class DoubleHashing {
             allInsertions.add(secondInsertions[i]);
         }
 
+        generateCollisionTable(new HashSet<Integer>(allInsertions).toArray(new Integer[0]), hash1, hash2);
         generateSteps(hash1, hash2, firstInsertions, deletionsArr, secondInsertions);
 
         Terminal.replaceinSB(doubleHashingExerciseStringBuilder, "$FIRSTINSERTIONS$", Terminal.printArray(firstInsertions));
@@ -214,16 +215,12 @@ public class DoubleHashing {
      * @param h1 first hash function
      * @param h2 second hash function
      */
-    private static int[][] generateCollisionTable(Integer[] numbers, int[] h1, int[] h2) {
-        int[][] collisionTable = new int[numbers.length][9];
+    private static void generateCollisionTable(Integer[] numbers, int[] h1, int[] h2) {
 
         for (int i = 0; i < numbers.length; i++) {
             int hash1 = Math.floorMod(h1[0] * numbers[i] + h1[1], 11);
             int hash2 = h2[0] - (numbers[i] % h2[1]);
             String collisionRow = "" + numbers[i] + " & " + hash1 + " & " + hash2;
-            collisionTable[i][0] = numbers[i];
-            collisionTable[i][1] = hash1;
-            collisionTable[i][2] = hash2;
 
             int[] collisionHash = new int[6];
             for (int j = 0; j < 6; j++) {
@@ -235,11 +232,9 @@ public class DoubleHashing {
                         e.printStackTrace();
                     }
                 }
-                collisionTable[i][j + 3] = collisionHash[j];
                 collisionRow += " & " + collisionHash[j];
             }
             Terminal.replaceinSB(doubleHashingSolutionStringBuilder, "%$COLLISIONTABLE$", collisionRow + "\\\\\n\\hline\n%$COLLISIONTABLE$");
         }
-        return collisionTable;
     }
 }
