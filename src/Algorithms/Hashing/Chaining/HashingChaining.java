@@ -45,7 +45,7 @@ public class HashingChaining {
         }
 
         Arrays.sort(numbers);
-        createMappingTable(numbers, hashFunction, hashTableSize);
+        createMappingTable(numbers);
         for (int i = 0; i < numbers.length; i++) {
             generateTablePrePrints();
         }
@@ -63,7 +63,13 @@ public class HashingChaining {
         Terminal.saveToFile("docs/Solutions.tex", solutionStringBuilder);
     }
 
-    private static void createMappingTable(int[] numbers, int[] hashFunction, int hashTableSize) {
+    /**
+     * generates the mapping table, a table that shows the value a number maps
+     * to when inserting it into the hashfunction
+     *
+     * @param numbers the sorted array of all the numbers that will be mapped
+     */
+    private static void createMappingTable(int[] numbers) {
         String template = "\\begin{tabular}{P{1.2cm}|";
         for (int i = 0; i < numbers.length; i++) {
             template += "|P{0.6cm}";
@@ -78,7 +84,7 @@ public class HashingChaining {
             prePrint += "&";
         }
         for (int i = 0; i < numbers.length; i++) {
-            template += " & " + Math.floorMod((hashFunction[0] * numbers[i] + hashFunction[1]), hashTableSize);
+            template += " & " + Math.floorMod((hashFunction[0] * numbers[i] + hashFunction[1]), hashTable.length);
         }
         template += "\\\\\n";
         template += "\\end{tabular}";
@@ -89,6 +95,12 @@ public class HashingChaining {
         Terminal.replaceinSB(hashingChainingSolutionStringBuilder, "$MAPPINGTABLESOLUTION$", template);
     }
 
+    /**
+     * Insert a value into a table and generate the new table and add it to the LaTeX
+     * template
+     *
+     * @param value the value to be inserted into the hashtable
+     */
     private static void insertIntoTable(int value) {
         hashTable[Math.floorMod(hashFunction[0] * value + hashFunction[1], hashTable.length)].add(value);
         String template = "\\color{black}Insert: \\underline{\\color{tumgadRed}" + value + "}\\begin{center}\\begin{tabular}{|P{0.6cm}";
@@ -119,6 +131,9 @@ public class HashingChaining {
         Terminal.replaceinSB(hashingChainingSolutionStringBuilder, "%$HASHTABLE$", template + "\n%$HASHTABLE$");
     }
 
+    /**
+     * generate the empty hashtable preprints, one for every insert operation
+     */
     private static void generateTablePrePrints() {
         String template = "Insert: \\underline{\\hspace{1cm}}\\begin{center}\\begin{tabular}{|P{0.6cm}";
         for (int i = 0; i < hashTable.length - 1; i++) {
