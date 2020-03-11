@@ -171,7 +171,8 @@ public class TumgadCLI {
                         RadixSort.generateExercise();
                         break;
                     case "HC":
-                        say("Hashing (Chaining) can not be generated yet, still in development");
+                        HashingChaining.generateExercise();
+                        System.out.println(ANSI_PURPLE + "Generating Hashing with Chaining" + ANSI_RESET);
                         break;
                     case "HD":
                         System.out.println(ANSI_PURPLE + "Generating Double Hashing" + ANSI_RESET);
@@ -209,7 +210,6 @@ public class TumgadCLI {
                         break;
                     case "DEV":
                         say("Generating components that are still in development");
-                        HashingChaining.generateExercise();
                         break;
                     default:
                         error("There is no exercise with the shorthand " + option);
