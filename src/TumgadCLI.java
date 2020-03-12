@@ -1,3 +1,4 @@
+import Algorithms.Graphs.Traversal.Graph;
 import Algorithms.Hashing.Chaining.HashingChaining;
 import Algorithms.Hashing.Double.DoubleHashing;
 import Algorithms.Sorting.MergeSort.MergeSort;
@@ -171,8 +172,8 @@ public class TumgadCLI {
                         RadixSort.generateExercise();
                         break;
                     case "HC":
-                        HashingChaining.generateExercise();
                         System.out.println(ANSI_PURPLE + "Generating Hashing with Chaining" + ANSI_RESET);
+                        HashingChaining.generateExercise();
                         break;
                     case "HD":
                         System.out.println(ANSI_PURPLE + "Generating Double Hashing" + ANSI_RESET);
@@ -182,7 +183,8 @@ public class TumgadCLI {
                         say("Hashing (Perfect) can not be generated yet, still in development");
                         break;
                     case "BFS":
-                        say("Breadth First Search can not be generated yet, still in development");
+                        System.out.println(ANSI_PURPLE + "Generating Breadth-First-Search" + ANSI_RESET);
+                        Graph.generateExercise();
                         break;
                     case "DFS":
                         say("Depth First Search can not be generated yet, still in development");
