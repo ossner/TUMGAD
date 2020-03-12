@@ -19,11 +19,11 @@ Here are the impacts bad pivot selection can have:
 
 Best case (pivot is always the median element):
 
-![](../../../../docs/QuickSortBestCase.png)
+![](../../../../resources/QuickSortBestCase.png)
 
 Worst case (here pivot is always the smallest element):
 
-![](../../../../docs/QuickSortWorstCase.png)
+![](../../../../resources/QuickSortWorstCase.png)
 
 ## Complexity
 
