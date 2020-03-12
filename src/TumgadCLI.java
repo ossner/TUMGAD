@@ -145,7 +145,7 @@ public class TumgadCLI {
         String[] options;
         try {
             if (answer.equalsIgnoreCase("X")) {
-                options = new String[]{"DA", "MS", "QS", "RS", "HC", "HD", "HP", "TRAV", "ABT", "AVLT", "BH", "BNH", "D", "P", "FW"};
+                options = new String[]{"DA", "MS", "QS", "RS", "HC", "HD", "TRAV", "ABT", "AVLT", "BH", "BNH", "D", "P", "FW"};
             } else {
                 options = answer.split(" ");
                 options = new HashSet<String>(Arrays.asList(options)).toArray(new String[0]); // remove duplicates
@@ -176,9 +176,6 @@ public class TumgadCLI {
                     case "HD":
                         System.out.println(ANSI_PURPLE + "Generating Double Hashing" + ANSI_RESET);
                         DoubleHashing.generateExercise();
-                        break;
-                    case "HP":
-                        say("Hashing (Perfect) can not be generated yet, still in development");
                         break;
                     case "TRAV":
                         System.out.println(ANSI_PURPLE + "Generating Traversal" + ANSI_RESET);
