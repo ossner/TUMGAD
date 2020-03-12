@@ -1,14 +1,13 @@
 package Algorithms.Graphs.Traversal;
 
-// Java program to print BFS traversal from a given source vertex.
-// BFS(int s) traverses vertices reachable from s.
-
 import DataStructures.Terminal;
 
 import java.util.*;
 
-// This class represents a directed graph using adjacency list
-// representation
+/**
+ * A Graph class with adjacency list representation, capable of generating
+ * exercises for BFS-traversal
+ */
 public class Graph {
     static StringBuilder traversalExerciseStringBuilder;
     static StringBuilder traversalSolutionStringBuilder;
@@ -45,6 +44,9 @@ public class Graph {
         Terminal.saveToFile("docs/Solutions.tex", solutionStringBuilder);
     }
 
+    /**
+     * Method that generates a random graph with min. 10 nodes and max. 12 nodes
+     */
     static Graph generateRandomGraph() {
         // minimum of 10, max of 12
         int numNodes = new Random().nextInt(3) + 10;
@@ -57,6 +59,13 @@ public class Graph {
         return graph;
     }
 
+    /**
+     * Method that assigns every node in the graph a number, depending on how many nodes there are
+     * e.g. if there are 12 nodes, they will be numbered from 0-11
+     *
+     * @param nodes The final list of nodes that the graph will hold
+     * @return A HashMap mapping every node-id in the list of nodes to its representational number
+     */
     private static HashMap<String, Integer> assignNodeNumbers(ArrayList<String> nodes) {
         HashMap<String, Integer> numMap = new HashMap<>();
         ArrayList<Integer> numbers = new ArrayList<>();
@@ -71,6 +80,14 @@ public class Graph {
         return numMap;
     }
 
+    /**
+     * In the beginning, every node is invisible in the LaTeX template, this method takes the node-ids
+     * from the nodes that will be in the graph and makes them visible. It will also assign them
+     * the number they should have
+     *
+     * @param nodes      The list of node-ids that are in the graph
+     * @param nodeNumMap A HashMap mapping the node-ids of a graph to its actual number
+     */
     private static void nodesToLatex(ArrayList<String> nodes, HashMap<String, Integer> nodeNumMap) {
         for (int i = 1; i < nodes.size(); i++) {
             Terminal.replaceinSB(traversalExerciseStringBuilder, ", draw=none] (" + nodes.get(i), "] (" + nodes.get(i));
@@ -80,6 +97,13 @@ public class Graph {
         }
     }
 
+    /**
+     * Method that will generate a List of node-ids that will be in the graph (think of
+     * them as aligned on a 4x4 grid)
+     *
+     * @param numNodes The number of nodes the graph should contain
+     * @return The list of node-ids that will be in the graph in the end
+     */
     private static ArrayList<String> generateNodes(int numNodes) {
         int numRemovals = 16 - numNodes;
         ArrayList<String> nodes = new ArrayList<>(Arrays.asList("00", "01", "02", "03", "10", "11", "12", "13", "20", "21", "22", "23", "30", "31", "32", "33"));
@@ -92,6 +116,23 @@ public class Graph {
         return nodes;
     }
 
+    /**
+     * Generates connections between nodes of a graph, without making them unreadable on LaTeX while still
+     * making sure enough nodes for a (mildly) challenging exercise are generated
+     * <p>
+     * What it will not do: generate vertices from a node to another node, when the vertex would
+     * "go through" another node in the LaTeX graph.
+     * <p>
+     * What it will do: since our nodes are stationed on a 4x4 grid, with some nodes being invisible,
+     * this method will
+     * - connect every node with its successor in the Graph
+     * - connect a node with its neighbour below if possible
+     * - connect a node with its neighbour below to the right if possible
+     *
+     * @param nodes  The list of node-ids that are actually in the graph
+     * @param graph  The graph to which the edges will be added to
+     * @param numMap The HashMap mapping every node-id in the graph to its actual number
+     */
     private static void generateVertices(ArrayList<String> nodes, Graph graph, HashMap<String, Integer> numMap) {
         for (int i = 1; i < nodes.size(); i++) {
             // connect each node with its successor
@@ -115,12 +156,17 @@ public class Graph {
         }
     }
 
+    /**
+     * Adds a LaTeX graph connection from one given node to another
+     *
+     * @param from The node from which the connection will go out of
+     * @param to   The node to which the arrow will point
+     */
     private static void addVertex(String from, String to) {
         Terminal.replaceinSB(traversalExerciseStringBuilder, "%$CONNECTIONS$", "\\path[->] (" + from + ") edge node {} (" + to + ");\n%$CONNECTIONS$");
         Terminal.replaceinSB(traversalSolutionStringBuilder, "%$CONNECTIONS$", "\\path[->] (" + from + ") edge node {} (" + to + ");\n%$CONNECTIONS$");
     }
-
-    // Function to add an edge into the graph
+    
     void addEdge(int v, int w) {
         adj[v].add(w);
     }
@@ -132,7 +178,12 @@ public class Graph {
         Terminal.replaceinSB(traversalSolutionStringBuilder, "%$BFSVISITSEQUENCE$", "" + 0 + BFS(0));
     }
 
-    // prints BFS traversal from a given source s
+    /**
+     * Simulates the Breadth-First-Search algorithm from a starting node s
+     *
+     * @param s The node from which the BFS-algorithm will start
+     * @return A String of node-numbers in the sequence of their visitation (excluding the start node)
+     */
     String BFS(int s) {
         String ret = "";
         // Mark all the vertices as not visited(By default
