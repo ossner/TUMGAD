@@ -131,8 +131,7 @@ public class TumgadCLI {
                         "Hashing (Chaining): " + ANSI_PURPLE + "HC" + ANSI_RESET + "\n" +
                         "Hashing (Double): " + ANSI_PURPLE + "HD" + ANSI_RESET + "\n" +
                         "Hashing (Perfect): " + ANSI_PURPLE + "HP" + ANSI_RESET + "\n" +
-                        "Breadth-First-Search: " + ANSI_PURPLE + "BFS" + ANSI_RESET + "\n" +
-                        "Depth-First-Search: " + ANSI_PURPLE + "DFS" + ANSI_RESET + "\n" +
+                        "Graph-Traversal (BFS & DFS): " + ANSI_PURPLE + "TRAV" + ANSI_RESET + "\n" +
                         "AB Trees: " + ANSI_PURPLE + "ABT" + ANSI_RESET + "\n" +
                         "AVL Trees: " + ANSI_PURPLE + "AVLT" + ANSI_RESET + "\n" +
                         "Binary Heaps: " + ANSI_PURPLE + "BH" + ANSI_RESET + "\n" +
@@ -146,7 +145,7 @@ public class TumgadCLI {
         String[] options;
         try {
             if (answer.equalsIgnoreCase("X")) {
-                options = new String[]{"DA", "MS", "QS", "RS", "HC", "HD", "HP", "BFS", "DFS", "ABT", "AVLT", "BH", "BNH", "D", "P", "FW"};
+                options = new String[]{"DA", "MS", "QS", "RS", "HC", "HD", "HP", "TRAV", "ABT", "AVLT", "BH", "BNH", "D", "P", "FW"};
             } else {
                 options = answer.split(" ");
                 options = new HashSet<String>(Arrays.asList(options)).toArray(new String[0]); // remove duplicates
@@ -181,12 +180,9 @@ public class TumgadCLI {
                     case "HP":
                         say("Hashing (Perfect) can not be generated yet, still in development");
                         break;
-                    case "BFS":
-                        System.out.println(ANSI_PURPLE + "Generating Breadth-First-Search" + ANSI_RESET);
+                    case "TRAV":
+                        System.out.println(ANSI_PURPLE + "Generating Traversal" + ANSI_RESET);
                         Graph.generateExercise();
-                        break;
-                    case "DFS":
-                        say("Depth First Search can not be generated yet, still in development");
                         break;
                     case "ABT":
                         say("AB Trees can not be generated yet, still in development");
