@@ -35,8 +35,8 @@ public class Graph {
         graph.BFS();
         graph.DFS();
 
-        Terminal.replaceinSB(exerciseStringBuilder, "%$BFS$", "\\cellcolor{tumgadPurple}");
-        Terminal.replaceinSB(solutionStringBuilder, "%$BFS$", "\\cellcolor{tumgadRed}");
+        Terminal.replaceinSB(exerciseStringBuilder, "%$TRAV$", "\\cellcolor{tumgadPurple}");
+        Terminal.replaceinSB(solutionStringBuilder, "%$TRAV$", "\\cellcolor{tumgadRed}");
 
         Terminal.replaceinSB(exerciseStringBuilder, "%$TRAVERSAL$", "\\newpage\n" + traversalExerciseStringBuilder.toString());
         Terminal.replaceinSB(solutionStringBuilder, "%$TRAVERSAL$", "\\newpage\n" + traversalSolutionStringBuilder.toString());
