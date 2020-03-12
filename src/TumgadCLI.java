@@ -75,7 +75,6 @@ public class TumgadCLI {
             }
         });
         pool.shutdown();
-        //System.out.println(ANSI_GREEN + "Generating exercises... You can find them in docs/Exercises.pdf and docs/Solutions.pdf" + ANSI_RESET);
     }
 
     /**
