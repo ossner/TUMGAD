@@ -33,6 +33,7 @@ public class Graph {
         Graph graph = generateRandomGraph();
 
         graph.BFS();
+        graph.DFS();
 
         Terminal.replaceinSB(exerciseStringBuilder, "%$BFS$", "\\cellcolor{tumgadPurple}");
         Terminal.replaceinSB(solutionStringBuilder, "%$BFS$", "\\cellcolor{tumgadRed}");
@@ -166,7 +167,7 @@ public class Graph {
         Terminal.replaceinSB(traversalExerciseStringBuilder, "%$CONNECTIONS$", "\\path[->] (" + from + ") edge node {} (" + to + ");\n%$CONNECTIONS$");
         Terminal.replaceinSB(traversalSolutionStringBuilder, "%$CONNECTIONS$", "\\path[->] (" + from + ") edge node {} (" + to + ");\n%$CONNECTIONS$");
     }
-    
+
     void addEdge(int v, int w) {
         adj[v].add(w);
     }
@@ -175,7 +176,7 @@ public class Graph {
         for (int i = 0; i < adj.length; i++) {
             Collections.sort(adj[i]);
         }
-        Terminal.replaceinSB(traversalSolutionStringBuilder, "%$BFSVISITSEQUENCE$", "" + 0 + BFS(0));
+        Terminal.replaceinSB(traversalSolutionStringBuilder, "%$BFSVISITSEQUENCE$", "0" + BFS(0));
     }
 
     /**
@@ -214,6 +215,45 @@ public class Graph {
                     visited[n] = true;
                     queue.add(n);
                 }
+            }
+        }
+        return ret;
+    }
+
+    void DFS() {
+        for (int i = 0; i < adj.length; i++) {
+            Collections.sort(adj[i]);
+        }
+        Terminal.replaceinSB(traversalSolutionStringBuilder, "%$DFSVISITSEQUENCE$", "0" + DFS(0));
+
+    }
+
+    // The function to do DFS traversal. It uses recursive DFSUtil()
+    String DFS(int v) {
+        // Mark all the vertices as not visited(set as
+        // false by default in java)
+        boolean[] visited = new boolean[numVertices];
+
+        // Call the recursive helper function to print DFS traversal
+        return DFSUtil(v, visited);
+    }
+
+    // A function used by DFS
+    String DFSUtil(int v, boolean[] visited) {
+        String ret = "";
+        // Mark the current node as visited and print it
+        visited[v] = true;
+
+        if (v != 0) {
+            ret += ", " + v;
+        }
+
+        // Recur for all the vertices adjacent to this vertex
+        Iterator<Integer> i = adj[v].listIterator();
+        while (i.hasNext()) {
+            int n = i.next();
+            if (!visited[n]) {
+                ret += DFSUtil(n, visited);
             }
         }
         return ret;
