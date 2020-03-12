@@ -1,6 +1,6 @@
 package Algorithms.Graphs.Traversal;
 
-import DataStructures.Terminal;
+import Util.Terminal;
 
 import java.util.*;
 

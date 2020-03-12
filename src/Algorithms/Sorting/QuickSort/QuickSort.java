@@ -1,8 +1,8 @@
 package Algorithms.Sorting.QuickSort;
 
-import DataStructures.Terminal;
+import Util.Terminal;
 
-import static DataStructures.Terminal.printArray;
+import static Util.Terminal.printArray;
 
 public class QuickSort {
     static StringBuilder quickSortExerciseStringBuilder;

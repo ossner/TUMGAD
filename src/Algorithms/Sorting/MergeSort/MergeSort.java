@@ -1,6 +1,6 @@
 package Algorithms.Sorting.MergeSort;
 
-import DataStructures.Terminal;
+import Util.Terminal;
 
 import java.util.ArrayList;
 

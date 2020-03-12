@@ -1,6 +1,6 @@
 package Algorithms.Hashing.Double;
 
-import DataStructures.Terminal;
+import Util.Terminal;
 
 import java.util.*;
 

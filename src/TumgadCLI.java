@@ -5,7 +5,7 @@ import Algorithms.Sorting.MergeSort.MergeSort;
 import Algorithms.Sorting.QuickSort.QuickSort;
 import Algorithms.Sorting.RadixSort.RadixSort;
 import DataStructures.Sequences.Arrays.DynamicArray;
-import DataStructures.Terminal;
+import Util.Terminal;
 
 import java.io.BufferedReader;
 import java.io.IOException;

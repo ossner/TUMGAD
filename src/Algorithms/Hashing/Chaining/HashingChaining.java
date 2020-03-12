@@ -1,7 +1,7 @@
 package Algorithms.Hashing.Chaining;
 
 import Algorithms.Hashing.Double.DoubleHashing;
-import DataStructures.Terminal;
+import Util.Terminal;
 
 import java.util.ArrayList;
 import java.util.Arrays;

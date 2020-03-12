@@ -1,6 +1,6 @@
 package Algorithms.Sorting.RadixSort;
 
-import DataStructures.Terminal;
+import Util.Terminal;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-import static DataStructures.Terminal.printArray;
+import static Util.Terminal.printArray;
 
 public class RadixSort {
     // TODO 08/03/2020 sebas: documentation

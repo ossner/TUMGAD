@@ -1,6 +1,6 @@
 package DataStructures.Sequences.Arrays;
 
-import DataStructures.Terminal;
+import Util.Terminal;
 
 import java.util.Random;
 
