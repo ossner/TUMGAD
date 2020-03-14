@@ -18,12 +18,14 @@ public class AVLTree {
     private Node root;
     private static boolean checkBoxWritten;
 
-    // A utility function to get height of the tree
-    int height(Node N) {
-        if (N == null) {
+    /**
+     * returns the height of the tree
+     */
+    int height(Node n) {
+        if (n == null) {
             return 0;
         }
-        return N.height;
+        return n.height;
     }
 
     // A utility function to get maximum of two integers
@@ -31,8 +33,11 @@ public class AVLTree {
         return Math.max(a, b);
     }
 
-    // A utility function to right rotate subtree rooted with y
-    // See the diagram given above.
+    /**
+     * rotates the tree right at a given node
+     *
+     * @param y the central node affected by the rotation
+     */
     Node rightRotate(Node y) {
         Node x = y.left;
         Node T2 = x.right;
@@ -49,8 +54,11 @@ public class AVLTree {
         return x;
     }
 
-    // A utility function to left rotate subtree rooted with x
-    // See the diagram given above.
+    /**
+     * rotates the tree left at a given node
+     *
+     * @param x the central node affected by the rotation
+     */
     Node leftRotate(Node x) {
         Node y = x.right;
         Node T2 = y.left;
@@ -67,7 +75,9 @@ public class AVLTree {
         return y;
     }
 
-    // Get Balance factor of node N
+    /**
+     * returns the balance of a node (discrepancy between left height and right height)
+     */
     int getBalance(Node N) {
         if (N == null) {
             return 0;
@@ -75,6 +85,13 @@ public class AVLTree {
         return height(N.left) - height(N.right);
     }
 
+    /**
+     * insert a node into the tree
+     *
+     * @param key  the key which has to be inserted
+     * @param node the node at which the key has to be inserted (usually root when
+     *             called from outside)
+     */
     Node insert(Node node, int key) {
         if (node == null) {
             return (new Node(key));
@@ -88,16 +105,11 @@ public class AVLTree {
             return node;
         }
 
-        /* 2. Update height of this ancestor node */
         node.height = 1 + max(height(node.left), height(node.right));
 
-		/* 3. Get the balance factor of this ancestor
-		node to check whether this node became
-		Wunbalanced */
         int balance = getBalance(node);
 
-        // If this node becomes unbalanced, then
-        // there are 4 cases Left Left Case
+        // perform rotations in case of imbalance
         if (balance > 1 && key < node.left.key) {
             if (!checkBoxWritten) {
                 Terminal.replaceinSB(avlTreeSolutionStringBuilder, "%$AVLTREE$", "\n" +
@@ -157,14 +169,12 @@ public class AVLTree {
         return node;
     }
 
-    /* Given a non-empty binary search tree, return the
-    node with minimum key value found in that tree.
-    Note that the entire tree does not need to be
-    searched. */
+    /**
+     * returns a reference to the minimal node in the given tree
+     */
     Node minValueNode(Node node) {
         Node current = node;
 
-        /* loop down to find the leftmost leaf */
         while (current.left != null) {
             current = current.left;
         }
@@ -173,26 +183,15 @@ public class AVLTree {
     }
 
     Node deleteNode(Node root, int key) {
-        // STEP 1: PERFORM STANDARD BST DELETE
         if (root == null) {
-            return root;
+            return null;
         }
 
-        // If the key to be deleted is smaller than
-        // the root's key, then it lies in left subtree
         if (key < root.key) {
             root.left = deleteNode(root.left, key);
-        }
-
-        // If the key to be deleted is greater than the
-        // root's key, then it lies in right subtree
-        else if (key > root.key) {
+        } else if (key > root.key) {
             root.right = deleteNode(root.right, key);
-        }
-
-        // if key is same as root's key, then this is the node
-        // to be deleted
-        else {
+        } else {
 
             // node with only one child or no child
             if (root.left == null || root.right == null) {
@@ -202,24 +201,15 @@ public class AVLTree {
                 } else {
                     temp = root.left;
                 }
-
                 // No child case
                 if (temp == null) {
                     root = null;
                 } else {
-                    root = temp; // Copy the contents of
+                    root = temp;
                 }
-                // the non-empty child
             } else {
-
-                // node with two children: Get the inorder
-                // successor (smallest in the right subtree)
                 Node temp = minValueNode(root.right);
-
-                // Copy the inorder successor's data to this node
                 root.key = temp.key;
-
-                // Delete the inorder successor
                 root.right = deleteNode(root.right, temp.key);
             }
         }
@@ -229,15 +219,10 @@ public class AVLTree {
             return root;
         }
 
-        // STEP 2: UPDATE HEIGHT OF THE CURRENT NODE
         root.height = max(height(root.left), height(root.right)) + 1;
 
-        // STEP 3: GET THE BALANCE FACTOR OF THIS NODE (to check whether
-        // this node became unbalanced)
         int balance = getBalance(root);
 
-        // If this node becomes unbalanced, then there are 4 cases
-        // Left Left Case
         if (balance > 1 && getBalance(root.left) >= 0) {
             if (!checkBoxWritten) {
                 Terminal.replaceinSB(avlTreeSolutionStringBuilder, "%$AVLTREE$", "\n" +
@@ -297,9 +282,22 @@ public class AVLTree {
         return root;
     }
 
-    // A utility function to print preorder traversal of
-    // the tree. The function also prints height of every
-    // node
+    void inOrder(Node node) {
+        if (node != null) {
+            inOrder(node.left);
+            System.out.print(node.key + " ");
+            inOrder(node.right);
+        }
+    }
+
+    void postOrder(Node node) {
+        if (node != null) {
+            postOrder(node.left);
+            postOrder(node.right);
+            System.out.print(node.key + " ");
+        }
+    }
+
     void preOrder(Node node) {
         if (node != null) {
             System.out.print(node.key + " ");
