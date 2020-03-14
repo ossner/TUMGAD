@@ -41,6 +41,14 @@ public class Terminal {
         return ret;
     }
 
+    public static String printArrayList(ArrayList<Integer> list) {
+        String ret = "" + list.get(0);
+        for (int i = 1; i < list.size(); i++) {
+            ret += ", " + list.get(i);
+        }
+        return ret;
+    }
+
     /**
      * prints an array without parentheses for the pdf
      */
