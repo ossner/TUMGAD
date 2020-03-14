@@ -2,6 +2,11 @@ package DataStructures.SearchStructures.AVLTrees;
 
 import Util.Terminal;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
+
 class Node {
     int key, height;
     Node left, right;
@@ -253,7 +258,7 @@ public class AVLTree {
         } else if (balance < -1 && getBalance(root.right) <= 0) {
             if (!checkBoxWritten) {
                 Terminal.replaceinSB(avlTreeSolutionStringBuilder, "%$AVLTREE$", "\n" +
-                        "Delete: \\underline{\\color{tumgadRed}" + key + "\\color{black}\n" +
+                        "Delete: \\underline{\\color{tumgadRed}" + key + "\\color{black}}\n" +
                         "\\hspace{.1cm}\n" +
                         "\\makebox[2.3cm][l]{$\\boxtimes$ l rotation}\n" +
                         "\\makebox[2.3cm][l]{$\\square$ r rotation}\n" +
@@ -282,28 +287,24 @@ public class AVLTree {
         return root;
     }
 
-    void inOrder(Node node) {
+    private ArrayList<Integer> postOrder(Node node) {
+        ArrayList<Integer> postOrder = new ArrayList<>();
         if (node != null) {
-            inOrder(node.left);
-            System.out.print(node.key + " ");
-            inOrder(node.right);
+            postOrder.addAll(postOrder(node.left));
+            postOrder.addAll(postOrder(node.right));
+            postOrder.add(node.key);
         }
+        return postOrder;
     }
 
-    void postOrder(Node node) {
+    private ArrayList<Integer> preOrder(Node node) {
+        ArrayList<Integer> preOrder = new ArrayList<>();
         if (node != null) {
-            postOrder(node.left);
-            postOrder(node.right);
-            System.out.print(node.key + " ");
+            preOrder.add(node.key);
+            preOrder.addAll(preOrder(node.left));
+            preOrder.addAll(preOrder(node.right));
         }
-    }
-
-    void preOrder(Node node) {
-        if (node != null) {
-            System.out.print(node.key + " ");
-            preOrder(node.left);
-            preOrder(node.right);
-        }
+        return preOrder;
     }
 
     void treeToTex(String placeholder) {
@@ -384,7 +385,7 @@ public class AVLTree {
             checkBoxWritten = false;
             tree.treeToTex("%$AVLTREE$");
         }
-        Terminal.replaceinSB(avlTreeSolutionStringBuilder, "%$AVLTREE$", "\\newpage\n%$AVLTREE$");
+        Terminal.replaceinSB(avlTreeSolutionStringBuilder, "%$AVLTREE$", "\\newpage\\noindent%$AVLTREE$");
         for (int i = 0; i < secondInserts.length; i++) {
             tree.root = tree.insert(tree.root, secondInserts[i]);
             if (!checkBoxWritten) {
@@ -392,6 +393,16 @@ public class AVLTree {
             }
             checkBoxWritten = false;
             tree.treeToTex("%$AVLTREE$");
+        }
+
+        if (new Random().nextBoolean()) {
+            Terminal.replaceinSB(avlTreeExerciseStringBuilder, "$PRINTORDER$", "PostOrder");
+            Terminal.replaceinSB(avlTreeSolutionStringBuilder, "$PRINTORDER$", "PostOrder");
+            Terminal.replaceinSB(avlTreeSolutionStringBuilder, "%$AVLVISITSEQUENCE$", Terminal.printArrayList(tree.postOrder(tree.root)));
+        } else {
+            Terminal.replaceinSB(avlTreeExerciseStringBuilder, "$PRINTORDER$", "PreOrder");
+            Terminal.replaceinSB(avlTreeSolutionStringBuilder, "$PRINTORDER$", "PreOrder");
+            Terminal.replaceinSB(avlTreeSolutionStringBuilder, "%$AVLVISITSEQUENCE$", Terminal.printArrayList(tree.preOrder(tree.root)));
         }
 
         Terminal.replaceinSB(exerciseStringBuilder, "%$AVLTREES$", "\\newpage\n" + avlTreeExerciseStringBuilder.toString());
