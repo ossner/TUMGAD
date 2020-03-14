@@ -93,7 +93,6 @@ public class TumgadCLI {
 
         reader.close();
         System.out.println(ANSI_GREEN + "Finished generating exercises! You can find them in docs/Exercises.pdf" + ANSI_RESET);
-
     }
 
     private static void generateSolutions() throws IOException {
@@ -133,8 +132,8 @@ public class TumgadCLI {
                         "Hashing (Double): " + ANSI_PURPLE + "HD" + ANSI_RESET + "\n" +
                         "Hashing (Perfect): " + ANSI_PURPLE + "HP" + ANSI_RESET + "\n" +
                         "Graph-Traversal (BFS & DFS): " + ANSI_PURPLE + "TRAV" + ANSI_RESET + "\n" +
-                        "AB Trees: " + ANSI_PURPLE + "ABT" + ANSI_RESET + "\n" +
-                        "AVL Trees: " + ANSI_PURPLE + "AVLT" + ANSI_RESET + "\n" +
+                        "AB Trees: " + ANSI_PURPLE + "AB" + ANSI_RESET + "\n" +
+                        "AVL Trees: " + ANSI_PURPLE + "AVL" + ANSI_RESET + "\n" +
                         "Binary Heaps: " + ANSI_PURPLE + "BH" + ANSI_RESET + "\n" +
                         "Binomial Heaps: " + ANSI_PURPLE + "BNH" + ANSI_RESET + "\n" +
                         "Dijkstra: " + ANSI_PURPLE + "D" + ANSI_RESET + "\n" +
@@ -146,7 +145,7 @@ public class TumgadCLI {
         String[] options;
         try {
             if (answer.equalsIgnoreCase("X")) {
-                options = new String[]{"DA", "MS", "QS", "RS", "HC", "HD", "TRAV", "ABT", "AVLT", "BH", "BNH", "D", "P", "FW"};
+                options = new String[]{"DA", "MS", "QS", "RS", "HC", "HD", "TRAV", "AB", "AVL", "BH", "BNH", "D", "P", "FW"};
             } else {
                 options = answer.split(" ");
                 options = new HashSet<String>(Arrays.asList(options)).toArray(new String[0]); // remove duplicates
@@ -182,11 +181,12 @@ public class TumgadCLI {
                         System.out.println(ANSI_PURPLE + "Generating Traversal" + ANSI_RESET);
                         Graph.generateExercise();
                         break;
-                    case "ABT":
+                    case "AB":
                         say("AB Trees can not be generated yet, still in development");
                         break;
-                    case "AVLT":
-                        say("AVL Trees can not be generated yet, still in development");
+                    case "AVL":
+                        System.out.println(ANSI_PURPLE + "Generating AVL Trees" + ANSI_RESET);
+                        AVLTree.generateExercise();
                         break;
                     case "BH":
                         say("Binary Heapy can not be generated yet, still in development");
@@ -204,7 +204,6 @@ public class TumgadCLI {
                         say("Floyd-Warshall can not be generated yet, still in development");
                         break;
                     case "DEV":
-                        AVLTree.generateExercise();
                         say("Generating components that are still in development");
                         break;
                     default:
