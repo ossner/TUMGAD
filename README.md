@@ -2,6 +2,8 @@
 <!-- favicon by Becris from flaticon.com -->
 Exercise generation and helpful materials for the course Introduction to Algorithms and Data Structures.
 Made by fellow students from the Technical University of Munich.
+
+You can check the generator status (which exercises is TUMGAD capable of generating) [here](https://github.com/users/SebastianOner/projects/1)
 ## About
 TUMGAD is a tool for anyone wanting to learn about the foundations of Algorithms and Data Structures, though it 
 was mainly developed for Students of the Technical University of Munich [Course IN0007](https://campus.tum.de/tumonline/WBMODHB.wbShowMHBReadOnly?pKnotenNr=452818).
