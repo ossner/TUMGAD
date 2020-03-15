@@ -5,9 +5,7 @@
 ### Hashing
 
 - [Chaining](https://sebastianoner.github.io/TUMGAD/src/Algorithms/Hashing/Chaining/HashingChaining)
-- [Universal](https://sebastianoner.github.io/TUMGAD/src/Algorithms/Hashing/Universal/UniversalHashing)
 - [Linear Probing](https://sebastianoner.github.io/TUMGAD/src/Algorithms/Hashing/LinearProbing/HashingLinearProbing)
-- [Perfect Hashing](https://sebastianoner.github.io/TUMGAD/src/Algorithms/Hashing/Perfect/PerfectHashing)
 - [Double Hashing](https://sebastianoner.github.io/TUMGAD/src/Algorithms/Hashing/Double/DoubleHashing)
 
 ### Sorting
@@ -20,10 +18,14 @@
 
 #### Traversal
 
-- [Breadth-First-Search](https://sebastianoner.github.io/TUMGAD/src/Algorithms/Graphs/Traversal/BFS)
-- [Depth-First-Search](https://sebastianoner.github.io/TUMGAD/src/Algorithms/Graphs/Traversal/DFS)
+- [Breadth-First Search](https://sebastianoner.github.io/TUMGAD/src/Algorithms/Graphs/Traversal/BFS)
+- [Depth-First Search](https://sebastianoner.github.io/TUMGAD/src/Algorithms/Graphs/Traversal/DFS)
 
 ## Data Structures
+
+### Search Structures
+
+- [AVL Trees](https://sebastianoner.github.io/TUMGAD/src/DataStructures/SearchStructures/AVLTrees/AVLTrees)
 
 ### Sequences
 
