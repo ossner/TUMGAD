@@ -183,7 +183,8 @@ public class TumgadCLI {
                         Graph.generateExercise();
                         break;
                     case "AB":
-                        say("AB Trees can not be generated yet, still in development");
+                        System.out.println(ANSI_PURPLE + "Generating (a,b) Trees" + ANSI_RESET);
+                        BTree.generateExercise();
                         break;
                     case "AVL":
                         System.out.println(ANSI_PURPLE + "Generating AVL Trees" + ANSI_RESET);
@@ -205,7 +206,6 @@ public class TumgadCLI {
                         say("Floyd-Warshall can not be generated yet, still in development");
                         break;
                     case "DEV":
-                        BTree.generateExercise();
                         say("Generating components that are still in development");
                         break;
                     default:
