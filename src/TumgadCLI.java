@@ -4,6 +4,7 @@ import Algorithms.Hashing.Double.DoubleHashing;
 import Algorithms.Sorting.MergeSort.MergeSort;
 import Algorithms.Sorting.QuickSort.QuickSort;
 import Algorithms.Sorting.RadixSort.RadixSort;
+import DataStructures.SearchStructures.ABTrees.BTree;
 import DataStructures.SearchStructures.AVLTrees.AVLTree;
 import DataStructures.Sequences.Arrays.DynamicArray;
 import Util.Terminal;
@@ -204,6 +205,7 @@ public class TumgadCLI {
                         say("Floyd-Warshall can not be generated yet, still in development");
                         break;
                     case "DEV":
+                        BTree.generateExercise();
                         say("Generating components that are still in development");
                         break;
                     default:
