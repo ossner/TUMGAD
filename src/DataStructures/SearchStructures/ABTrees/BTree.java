@@ -3,7 +3,6 @@ package DataStructures.SearchStructures.ABTrees;
 import Util.Terminal;
 
 import java.util.Arrays;
-import java.util.Iterator;
 
 class BTreeNode {
     int[] keys;
@@ -258,22 +257,19 @@ class BTreeNode {
         BTreeNode child = children[idx];
         BTreeNode sibling = children[idx + 1];
         child.keys[minDeg - 1] = keys[idx];
-        if (sibling.numKeys >= 0) {
-            System.arraycopy(sibling.keys, 0, child.keys, minDeg, sibling.numKeys);
+        for (int i = 0; i < sibling.numKeys; ++i) {
+            child.keys[i + minDeg] = sibling.keys[i];
         }
-
         if (!child.isLeaf) {
-            if (sibling.numKeys + 1 >= 0) {
-                System.arraycopy(sibling.children, 0, child.children, minDeg, sibling.numKeys + 1);
+            for (int i = 0; i <= sibling.numKeys; ++i) {
+                child.children[i + minDeg] = sibling.children[i];
             }
         }
-
-        if (numKeys - idx + 1 >= 0) {
-            System.arraycopy(keys, idx + 1, keys, idx + 1 - 1, numKeys - idx + 1);
+        for (int i = idx + 1; i < numKeys; ++i) {
+            keys[i - 1] = keys[i];
         }
-
-        if (numKeys + 1 - idx + 2 >= 0) {
-            System.arraycopy(children, idx + 2, children, idx + 2 - 1, numKeys + 1 - idx + 2);
+        for (int i = idx + 2; i <= numKeys; ++i) {
+            children[i - 1] = children[i];
         }
         child.numKeys += sibling.numKeys + 1;
         numKeys--;
@@ -379,28 +375,28 @@ public class BTree {
         Terminal.replaceinSB(exerciseStringBuilder, "%$ABCELL$", "\\cellcolor{tumgadPurple}");
         Terminal.replaceinSB(solutionStringBuilder, "%$ABCELL$", "\\cellcolor{tumgadRed}");
 
+        BTree tree = new BTree(2); // (a,b) = (2,4)
         int[] values = Terminal.generateRandomArray(10, 10);
-        // (a,b) tree to BTree mappings:
-        // 2,3
-        // 3,5
-        // etc.
-        BTree tree = new BTree(2);
-        tree.insert(8);
-        tree.insert(19);
-        tree.insert(11);
-        tree.insert(18);
-        tree.insert(13);
-        tree.insert(1);
-        tree.insert(6);
-        tree.insert(22);
-        tree.treeToTex();
-        tree.delete(11);
-        tree.treeToTex();
-        System.out.println(tree.root);
-        for (int i = 0; i < tree.root.children.length; i++) {
-            System.out.println(tree.root.children[i]);
+        for (int i = 0; i < 8; i++) {
+            tree.insert(values[i]);
         }
-        tree.traverse();
+        Terminal.replaceinSB(abTreeExerciseStringBuilder, "%$INITTREE$", tree.treeToTex());
+        Terminal.replaceinSB(abTreeExerciseStringBuilder, "$DELETIONS$", "" + values[3] + ", " + values[1]);
+        Terminal.replaceinSB(abTreeExerciseStringBuilder, "$INSERTIONS$", "" + values[8] + ", " + values[9]);
+
+        Terminal.replaceinSB(abTreeSolutionStringBuilder, "%$INITTREE$", tree.treeToTex());
+        Terminal.replaceinSB(abTreeSolutionStringBuilder, "$DELETIONS$", "" + values[3] + ", " + values[1]);
+        Terminal.replaceinSB(abTreeSolutionStringBuilder, "$INSERTIONS$", "" + values[8] + ", " + values[9]);
+
+        tree.delete(values[3]);
+        Terminal.replaceinSB(abTreeSolutionStringBuilder, "%$ABTREE$", "Delete: \\underline{\\color{tumgadRed}" + values[3] + "\\color{black}}\n" + tree.treeToTex() + "%$ABTREE$");
+        tree.delete(values[1]);
+        Terminal.replaceinSB(abTreeSolutionStringBuilder, "%$ABTREE$", "Delete: \\underline{\\color{tumgadRed}" + values[1] + "\\color{black}}\n" + tree.treeToTex() + "%$ABTREE$");
+        tree.insert(values[8]);
+        Terminal.replaceinSB(abTreeSolutionStringBuilder, "%$ABTREE$", "Insert: \\underline{\\color{tumgadRed}" + values[8] + "\\color{black}}\n" + tree.treeToTex() + "%$ABTREE$");
+        tree.insert(values[9]);
+        Terminal.replaceinSB(abTreeSolutionStringBuilder, "%$ABTREE$", "Insert: \\underline{\\color{tumgadRed}" + values[9] + "\\color{black}}\n" + tree.treeToTex() + "%$ABTREE$");
+
 
         Terminal.replaceinSB(exerciseStringBuilder, "%$ABTREES$", "\\newpage\n" + abTreeExerciseStringBuilder.toString());
         Terminal.replaceinSB(solutionStringBuilder, "%$ABTREES$", "\\newpage\n" + abTreeSolutionStringBuilder.toString());
@@ -410,12 +406,12 @@ public class BTree {
 
     }
 
-    private void treeToTex() {
-        Terminal.replaceinSB(abTreeExerciseStringBuilder, "%$ABTREE$", "\\begin{center}\\begin{tikzpicture}\n\\tikzstyle{bplus}=[rectangle split, rectangle split horizontal,rectangle split ignore empty parts,draw]\n" +
+    private String treeToTex() {
+        return "\\begin{center}\\begin{tikzpicture}\n\\tikzstyle{bplus}=[rectangle split, rectangle split horizontal,rectangle split ignore empty parts,draw]\n" +
                 "\\tikzstyle{every node}=[bplus]\n" +
                 "\\tikzstyle{level 1}=[sibling distance=45mm]\n" +
                 "\\tikzstyle{level 2}=[sibling distance=20mm]\n" +
                 "\\tikzstyle{level 3}=[sibling distance=15mm]\n" +
-                this.root.rootToTex() + ";\n\\end{tikzpicture}\\end{center}\n%$ABTREE$");
+                this.root.rootToTex() + ";\n\\end{tikzpicture}\\end{center}\n";
     }
 }
