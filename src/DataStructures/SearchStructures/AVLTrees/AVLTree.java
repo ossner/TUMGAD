@@ -334,6 +334,7 @@ public class AVLTree {
     }
 
     public static void generateExercise() {
+        checkBoxWritten = true;
         avlTreeExerciseStringBuilder = Terminal.readFile("src/DataStructures/SearchStructures/AVLTrees/AVLTreeExerciseTemplate.tex");
         avlTreeSolutionStringBuilder = Terminal.readFile("src/DataStructures/SearchStructures/AVLTrees/AVLTreeSolutionTemplate.tex");
 
@@ -366,7 +367,7 @@ public class AVLTree {
         Terminal.replaceinSB(avlTreeSolutionStringBuilder, "$FIRSTINSERTS$", Terminal.printArray(firstInserts));
         Terminal.replaceinSB(avlTreeSolutionStringBuilder, "$DELETIONS$", Terminal.printArray(deletions));
         Terminal.replaceinSB(avlTreeSolutionStringBuilder, "$SECONDINSERTS$", Terminal.printArray(secondInserts));
-
+        checkBoxWritten = false;
         for (int i = 0; i < firstInserts.length; i++) {
             tree.root = tree.insert(tree.root, firstInserts[i]);
             if (!checkBoxWritten) {
