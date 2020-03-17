@@ -65,7 +65,6 @@ public class DynamicArray {
 
         Terminal.replaceinSB(arraySolutionStringBuilder, "INITIALWVALUE", "" + exerciseArray.getB().length);
         Terminal.replaceinSB(arraySolutionStringBuilder, "INITIALNVALUE", "" + exerciseArray.getN());
-        Terminal.replaceinSB(arraySolutionStringBuilder, "INITALPHAVALUE", "" + exerciseArray.getAlpha());
         Terminal.replaceinSB(arraySolutionStringBuilder, "INITIALBETAVALUE", "" + exerciseArray.getBeta());
 
         // generate the initial sequence of pop operations on the array
