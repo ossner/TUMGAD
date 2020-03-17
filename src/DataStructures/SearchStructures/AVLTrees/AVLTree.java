@@ -2,9 +2,7 @@ package DataStructures.SearchStructures.AVLTrees;
 
 import Util.Terminal;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Random;
 
 class Node {
@@ -396,12 +394,12 @@ public class AVLTree {
         }
 
         if (new Random().nextBoolean()) {
-            Terminal.replaceinSB(avlTreeExerciseStringBuilder, "$PRINTORDER$", "PostOrder");
-            Terminal.replaceinSB(avlTreeSolutionStringBuilder, "$PRINTORDER$", "PostOrder");
+            Terminal.replaceinSB(avlTreeExerciseStringBuilder, "$PRINTORDER$", "Post-Order");
+            Terminal.replaceinSB(avlTreeSolutionStringBuilder, "$PRINTORDER$", "Post-Order");
             Terminal.replaceinSB(avlTreeSolutionStringBuilder, "%$AVLVISITSEQUENCE$", Terminal.printArrayList(tree.postOrder(tree.root)));
         } else {
-            Terminal.replaceinSB(avlTreeExerciseStringBuilder, "$PRINTORDER$", "PreOrder");
-            Terminal.replaceinSB(avlTreeSolutionStringBuilder, "$PRINTORDER$", "PreOrder");
+            Terminal.replaceinSB(avlTreeExerciseStringBuilder, "$PRINTORDER$", "Pre-Order");
+            Terminal.replaceinSB(avlTreeSolutionStringBuilder, "$PRINTORDER$", "Pre-Order");
             Terminal.replaceinSB(avlTreeSolutionStringBuilder, "%$AVLVISITSEQUENCE$", Terminal.printArrayList(tree.preOrder(tree.root)));
         }
 
