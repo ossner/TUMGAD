@@ -120,8 +120,8 @@ public class BinaryHeap {
         Terminal.replaceinSB(exerciseStringBuilder, "%$BINARYHEAPCELL$", "\\cellcolor{tumgadPurple}");
         Terminal.replaceinSB(solutionStringBuilder, "%$BINARYHEAPCELL$", "\\cellcolor{tumgadRed}");
 
-        Terminal.replaceinSB(exerciseStringBuilder, "%$AVLTREES$", "\\newpage\n" + binaryHeapExerciseStringBuilder.toString());
-        Terminal.replaceinSB(solutionStringBuilder, "%$AVLTREES$", "\\newpage\n" + binaryHeapSolutionStringBuilder.toString());
+        Terminal.replaceinSB(exerciseStringBuilder, "%$BINARYHEAPS$", "\\newpage\n" + binaryHeapExerciseStringBuilder.toString());
+        Terminal.replaceinSB(solutionStringBuilder, "%$BINARYHEAPS$", "\\newpage\n" + binaryHeapSolutionStringBuilder.toString());
 
         Terminal.saveToFile("docs/Exercises.tex", exerciseStringBuilder);
         Terminal.saveToFile("docs/Solutions.tex", solutionStringBuilder);
