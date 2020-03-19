@@ -192,7 +192,8 @@ public class TumgadCLI {
                         AVLTree.generateExercise();
                         break;
                     case "BH":
-                        say("Binary Heapy can not be generated yet, still in development");
+                        System.out.println(ANSI_PURPLE + "Generating Binary Heaps" + ANSI_RESET);
+                        BinaryHeap.generateExercise();
                         break;
                     case "BNH":
                         say("Binomial Heaps can not be generated yet, still in development");
@@ -207,7 +208,6 @@ public class TumgadCLI {
                         say("Floyd-Warshall can not be generated yet, still in development");
                         break;
                     case "DEV":
-                        BinaryHeap.generateExercise();
                         say("Generating components that are still in development");
                         break;
                     default:
