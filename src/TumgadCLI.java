@@ -5,6 +5,7 @@ import Algorithms.Sorting.MergeSort.MergeSort;
 import Algorithms.Sorting.QuickSort.QuickSort;
 import Algorithms.Sorting.RadixSort.RadixSort;
 import DataStructures.PriorityQueues.BinaryHeaps.BinaryHeap;
+import DataStructures.PriorityQueues.BinomialHeaps.BinomialHeap;
 import DataStructures.SearchStructures.ABTrees.BTree;
 import DataStructures.SearchStructures.AVLTrees.AVLTree;
 import DataStructures.Sequences.Arrays.DynamicArray;
@@ -208,6 +209,7 @@ public class TumgadCLI {
                         say("Floyd-Warshall can not be generated yet, still in development");
                         break;
                     case "DEV":
+                        BinomialHeap.generateExercise();
                         say("Generating components that are still in development");
                         break;
                     default:
