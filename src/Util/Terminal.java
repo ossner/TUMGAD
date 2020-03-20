@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Terminal {
+    public static Random rand;
+
     public static StringBuilder readFile(String fileName) {
         BufferedReader bufferedReader;
 
@@ -65,14 +67,14 @@ public class Terminal {
      * generated array size: minsize <= arraysize <= maxsize
      */
     public static Integer[] generateRandomIntegerArray(int minsize, int maxsize) {
-        int arraySize = new Random().nextInt(maxsize - minsize + 1) + minsize;
+        int arraySize = rand.nextInt(maxsize - minsize + 1) + minsize;
         ArrayList<Integer> list = new ArrayList<>(arraySize);
         for (int i = 0; i <= arraySize; i++) {
-            list.add(new Random().nextInt(400) + 100 + new Random().nextInt(400) + 100);
+            list.add(rand.nextInt(400) + 100 + rand.nextInt(400) + 100);
         }
         Integer[] a = new Integer[arraySize];
         for (int count = 0; count < arraySize; count++) {
-            a[count] = list.remove((int) (Math.random() * list.size()));
+            a[count] = list.remove(rand.nextInt(list.size()));
         }
         return a;
     }
@@ -82,14 +84,14 @@ public class Terminal {
      * generated array size: minsize <= arraysize <= maxsize
      */
     public static int[] generateRandomArray(int minsize, int maxsize) {
-        int arraySize = new Random().nextInt(maxsize - minsize + 1) + minsize;
+        int arraySize = rand.nextInt(maxsize - minsize + 1) + minsize;
         ArrayList<Integer> list = new ArrayList<>(arraySize);
         for (int i = 0; i <= arraySize * 2; i++) {
             list.add(i);
         }
         int[] a = new int[arraySize];
         for (int count = 0; count < arraySize; count++) {
-            a[count] = list.remove((int) (Math.random() * list.size()));
+            a[count] = list.remove(rand.nextInt(list.size()));
         }
         return a;
     }
