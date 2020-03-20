@@ -14,10 +14,7 @@ import Util.Terminal;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Scanner;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -27,8 +24,10 @@ public class TumgadCLI {
     public static final String ANSI_PURPLE = "\u001B[35m";
     public static final String ANSI_GREEN = "\u001B[32m";
 
+    static StringBuilder exerciseStringBuilder;
+    static StringBuilder solutionStringBuilder;
+
     public static void main(String[] args) {
-        templateSetup();
         print(ANSI_PURPLE +
                 "  _______ _    _ __  __  _____          _____  \n" +
                 " |__   __| |  | |  \\/  |/ ____|   /\\   |  __ \\ \n" +
@@ -38,6 +37,7 @@ public class TumgadCLI {
                 "    |_|   \\____/|_|  |_|\\_____/_/    \\_\\_____/" + ANSI_RESET);
         System.out.println("Which exercises should be generated? Please select the corresponding shorthands seperated by SPACES or " + ANSI_PURPLE + "X" + ANSI_RESET + " for everything");
         System.out.println("Reminder: Each exercise can only be generated ONCE");
+        templateSetup();
         chooseExercises();
         generateLatex();
     }
@@ -48,8 +48,22 @@ public class TumgadCLI {
      * then the TeX string gets saved to the modifiable Exercises.tex (and Solutions.tex)
      */
     private static void templateSetup() {
-        StringBuilder exerciseStringBuilder = Terminal.readFile("docs/ExerciseTemplate.tex");
-        StringBuilder solutionStringBuilder = Terminal.readFile("docs/SolutionTemplate.tex");
+        exerciseStringBuilder = Terminal.readFile("docs/ExerciseTemplate.tex");
+        solutionStringBuilder = Terminal.readFile("docs/SolutionTemplate.tex");
+
+        Scanner input = new Scanner(System.in);
+        System.out.print("Do you have a seed for the exercise generation? (N/n for no)");
+        String answer = input.nextLine();
+        int seed = new Random().nextInt(Integer.MAX_VALUE);
+        try {
+            seed = Integer.parseInt(answer);
+        } catch (NumberFormatException e) {
+            error("No valid seed provided. Generating random seed...");
+        }
+        Terminal.rand = new Random(seed);
+        Terminal.replaceinSB(exerciseStringBuilder, "$RANDOMSEED$", "" + seed);
+        Terminal.replaceinSB(solutionStringBuilder, "$RANDOMSEED$", "" + seed);
+
 
         Terminal.replaceinSB(exerciseStringBuilder, "$GENERATEDDATE$", new Date().toString());
         Terminal.replaceinSB(solutionStringBuilder, "$GENERATEDDATE$", new Date().toString());
@@ -126,6 +140,7 @@ public class TumgadCLI {
      * by providing the Command line with shorthands
      */
     private static void chooseExercises() {
+        Scanner input = new Scanner(System.in);
         System.out.println(
                 "Dynamic Arrays: " + ANSI_PURPLE + "DA" + ANSI_RESET + "\n" +
                         "MergeSort: " + ANSI_PURPLE + "MS" + ANSI_RESET + "\n" +
@@ -143,7 +158,6 @@ public class TumgadCLI {
                         "Prim: " + ANSI_PURPLE + "P" + ANSI_RESET + "\n" +
                         "Floyd-Warshall: " + ANSI_PURPLE + "FW" + ANSI_RESET
         );
-        Scanner input = new Scanner(System.in);
         String answer = input.nextLine();
         String[] options;
         try {
