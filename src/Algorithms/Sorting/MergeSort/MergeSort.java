@@ -76,7 +76,7 @@ public class MergeSort {
         }
         int[] a = new int[arraySize];
         for (int count = 0; count < arraySize; count++) {
-            a[count] = list.remove((int) (Math.random() * list.size()));
+            a[count] = list.remove(Terminal.rand.nextInt(list.size()));
         }
         return a;
     }

@@ -36,11 +36,11 @@ public class DynamicArray {
      * Generates a new dynamic array with random values for alpha, beta and the initialSize
      */
     public static DynamicArray generateRandomArray() {
-        int alpha = new Random().nextInt(2) + 3;
+        int alpha = Terminal.rand.nextInt(2) + 3;
         int beta;
-        while (alpha == (beta = new Random().nextInt(2) + 2)) {
+        while (alpha == (beta = Terminal.rand.nextInt(2) + 2)) {
         }
-        int initialSize = new Random().nextInt(5) + 4;
+        int initialSize = Terminal.rand.nextInt(5) + 4;
         return new DynamicArray(beta, alpha, initialSize);
     }
 
@@ -77,11 +77,11 @@ public class DynamicArray {
         }
 
         for (int i = 0; i < 3; i++) {
-            exerciseArray.push(new Random().nextInt(100));
+            exerciseArray.push(Terminal.rand.nextInt(100));
             Terminal.replaceinSB(arrayExerciseStringBuilder, "$EXERCISEBGENERATION$", exerciseArray.arrayToTable() + "\\vspace{10px}\\\\\n" + "$EXERCISEBGENERATION$\n");
             Terminal.replaceinSB(arraySolutionStringBuilder, "$EXERCISEBGENERATION$", exerciseArray.arrayToTable() + "\\vspace{10px}\\\\\n" + "$EXERCISEBGENERATION$\n");
         }
-        exerciseArray.push(new Random().nextInt(100));
+        exerciseArray.push(Terminal.rand.nextInt(100));
         Terminal.replaceinSB(arrayExerciseStringBuilder, "$EXERCISEBGENERATION$", exerciseArray.arrayToTable() + "\\vspace{10px}\\\\\n");
         Terminal.replaceinSB(arraySolutionStringBuilder, "$EXERCISEBGENERATION$", exerciseArray.arrayToTable() + "\\vspace{10px}\\\\\n");
 
@@ -108,7 +108,7 @@ public class DynamicArray {
             exerciseCOperations += "pop(), ";
         }
         for (int i = 0; i < 4; i++) {
-            int pushValue = new Random().nextInt(100);
+            int pushValue = Terminal.rand.nextInt(100);
             Terminal.replaceinSB(arraySolutionStringBuilder, "$OPERATIONSCGENERATION$", "\\vspace{10px}push(" + pushValue + "):\n");
             exerciseArray.push(pushValue);
             Terminal.replaceinSB(arraySolutionStringBuilder, "$ARRAYSCGENERATION$", exerciseArray.arrayToTable()
@@ -206,9 +206,9 @@ public class DynamicArray {
     }
 
     public void fillArrayRandom() {
-        int numInserts = new Random().nextInt(5) + 2;
+        int numInserts = Terminal.rand.nextInt(5) + 2;
         for (int i = 0; i < numInserts; i++) {
-            push(new Random().nextInt(100));
+            push(Terminal.rand.nextInt(100));
         }
     }
 

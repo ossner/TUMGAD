@@ -6,7 +6,6 @@ import Util.Terminal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 public class HashingChaining {
     static StringBuilder hashingChainingExerciseStringBuilder;
@@ -20,7 +19,7 @@ public class HashingChaining {
 
         hashFunction = DoubleHashing.generateH1Function();
         int hashTableSize = 7;
-        if (new Random().nextBoolean()) {
+        if (Terminal.rand.nextBoolean()) {
             hashTableSize = 11;
         }
         hashTable = new ArrayList[hashTableSize];

@@ -394,7 +394,7 @@ public class AVLTree {
             tree.treeToTex("%$AVLTREE$");
         }
 
-        if (new Random().nextBoolean()) {
+        if (Terminal.rand.nextBoolean()) {
             Terminal.replaceinSB(avlTreeExerciseStringBuilder, "$PRINTORDER$", "Post-Order");
             Terminal.replaceinSB(avlTreeSolutionStringBuilder, "$PRINTORDER$", "Post-Order");
             Terminal.replaceinSB(avlTreeSolutionStringBuilder, "%$AVLVISITSEQUENCE$", Terminal.printArrayList(tree.postOrder(tree.root)));

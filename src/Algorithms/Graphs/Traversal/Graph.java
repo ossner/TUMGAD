@@ -50,7 +50,7 @@ public class Graph {
      */
     static Graph generateRandomGraph() {
         // minimum of 10, max of 12
-        int numNodes = new Random().nextInt(3) + 10;
+        int numNodes = Terminal.rand.nextInt(3) + 10;
         Graph graph = new Graph(numNodes);
         ArrayList<String> nodes = generateNodes(numNodes);
         HashMap<String, Integer> nodeNumMap = assignNodeNumbers(nodes);
@@ -74,7 +74,7 @@ public class Graph {
             numbers.add(i);
         }
         for (int i = 1; i < nodes.size(); i++) {
-            int rand = new Random().nextInt(numbers.size());
+            int rand = Terminal.rand.nextInt(numbers.size());
             numMap.put(nodes.get(i), numbers.get(rand));
             numbers.remove(rand);
         }
@@ -111,7 +111,7 @@ public class Graph {
 
         // remove numremoval many nodes, but never the node 00
         while (numRemovals > 0) {
-            nodes.remove(new Random().nextInt(nodes.size() - 1) + 1);
+            nodes.remove(Terminal.rand.nextInt(nodes.size() - 1) + 1);
             numRemovals--;
         }
         return nodes;

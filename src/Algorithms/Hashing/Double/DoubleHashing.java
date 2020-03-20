@@ -31,7 +31,7 @@ public class DoubleHashing {
      * generates a first hashfunction matching /\([1-9]x \+ 9\) mod 11/
      */
     public static int[] generateH1Function() {
-        Random rand = new Random();
+        Random rand = Terminal.rand;
         int[] a = new int[2];
         a[0] = (rand.nextInt(10) + 1);
         a[1] = (rand.nextInt(10));
@@ -43,7 +43,7 @@ public class DoubleHashing {
      */
     static int[] generateH2Function() {
         int[] primes = {5, 7, 11};
-        Random rand = new Random();
+        Random rand = Terminal.rand;
         int[] a = new int[2];
         a[0] = primes[rand.nextInt(3)];
         a[1] = a[0];
@@ -60,7 +60,7 @@ public class DoubleHashing {
         // The next couple of lines generate the numbers the students will have to work with
         int[] numbers = Terminal.generateRandomArray(7, 7);
 
-        int numOfFirstInsertions = new Random().nextInt(3) + 4;
+        int numOfFirstInsertions = Terminal.rand.nextInt(3) + 4;
         int numOfSecondInsertions = 7 - numOfFirstInsertions;
         Integer[] firstInsertions = new Integer[numOfFirstInsertions];
 
@@ -70,7 +70,7 @@ public class DoubleHashing {
 
         List<Integer> deletions = new ArrayList<>(Arrays.asList(firstInsertions));
         while (deletions.size() > 3) {
-            deletions.remove(new Random().nextInt(deletions.size()));
+            deletions.remove(Terminal.rand.nextInt(deletions.size()));
         }
         int[] deletionsArr = new int[3];
         for (int i = 0; i < deletions.size(); i++) {

@@ -75,7 +75,7 @@ public class BinaryHeap {
         binaryHeapSolutionStringBuilder = Terminal.readFile("src/DataStructures/PriorityQueues/BinaryHeaps/BinaryHeapSolutionTemplate.tex");
 
         BinaryHeap heap;
-        if (new Random().nextBoolean()) {
+        if (Terminal.rand.nextBoolean()) {
             heap = new BinaryHeap(true);
             Terminal.replaceinSB(binaryHeapExerciseStringBuilder, "$MINMAX$", "min-");
             Terminal.replaceinSB(binaryHeapSolutionStringBuilder, "$MINMAX$", "min-");
