@@ -2,3 +2,91 @@
 \\
 \noindent
 Given the following directed graph:
+\begin{center}
+    \begin{tikzpicture}[
+        > = stealth', % arrow head style
+        auto,
+        node distance = 6cm, % distance between nodes
+        semithick % line style
+    ]
+        \node[state] (a) {a};
+        \node[state] (b) [right of=a] {b};
+        \node[state] (c) [below of=b] {c};
+        \node[state] (d) [below of=a] {d};
+        %$EDGES$
+    \end{tikzpicture}
+\end{center}
+Follow the Floyd-Warshall algorithm for APSP and enter the node distance matrix after each step.\\
+Assume the algorithm continues with the next element lexicographically.\\
+As always, unknown distances should be abstracted as infinity.\\
+\begin{center}
+    \noindent\fbox{\parbox{7cm}{\vspace{7px}Initial Matrix:
+        \begin{center}
+            \begin{tabular}{P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}}
+                &a&b&c&d\\
+                \hline
+                a&&&&\\[2ex]
+                \hline
+                b&&&&\\[2ex]
+                \hline
+                c&&&&\\[2ex]
+                \hline
+                d&&&&\\[2ex]
+            \end{tabular}
+        \end{center}}}
+    \\
+    \vspace{20px}
+    \noindent\fbox{\parbox{7cm}{\vspace{7px}Matrix for k = \underline{\hspace{0.75cm}}:
+        \begin{center}
+            \begin{tabular}{P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}}
+                &a&b&c&d\\
+                \hline
+                a&&&&\\[2ex]
+                \hline
+                b&&&&\\[2ex]
+                \hline
+                c&&&&\\[2ex]
+                \hline
+                d&&&&\\[2ex]
+            \end{tabular}
+        \end{center}}}\hspace{20px}\noindent\fbox{\parbox{7cm}{\vspace{7px}Matrix for k = \underline{\hspace{0.75cm}}:
+        \begin{center}
+            \begin{tabular}{P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}}
+                &a&b&c&d\\
+                \hline
+                a&&&&\\[2ex]
+                \hline
+                b&&&&\\[2ex]
+                \hline
+                c&&&&\\[2ex]
+                \hline
+                d&&&&\\[2ex]
+            \end{tabular}
+        \end{center}}}\\\vspace{20px}\noindent\fbox{\parbox{7cm}{\vspace{7px}Matrix for k = \underline{\hspace{0.75cm}}:
+        \begin{center}
+            \begin{tabular}{P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}}
+                &a&b&c&d\\
+                \hline
+                a&&&&\\[2ex]
+                \hline
+                b&&&&\\[2ex]
+                \hline
+                c&&&&\\[2ex]
+                \hline
+                d&&&&\\[2ex]
+            \end{tabular}
+        \end{center}}}\hspace{20px}\noindent\fbox{\parbox{7cm}{\vspace{7px}Matrix for k = \underline{\hspace{0.75cm}}:
+        \begin{center}
+            \begin{tabular}{P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}|P{0.75cm}}
+                &a&b&c&d\\
+                \hline
+                a&&&&\\[2ex]
+                \hline
+                b&&&&\\[2ex]
+                \hline
+                c&&&&\\[2ex]
+                \hline
+                d&&&&\\[2ex]
+            \end{tabular}
+        \end{center}}}%$DISTTABLE$
+\end{center}

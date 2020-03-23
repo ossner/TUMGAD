@@ -2,3 +2,24 @@
 \\
 \noindent
 Given the following directed graph:
+\begin{center}
+    \begin{tikzpicture}[
+        > = stealth', % arrow head style
+        auto,
+        node distance = 6cm, % distance between nodes
+        semithick % line style
+    ]
+        \node[state] (a) {a};
+        \node[state] (b) [right of=a] {b};
+        \node[state] (c) [below of=b] {c};
+        \node[state] (d) [below of=a] {d};
+
+        %$EDGES$
+    \end{tikzpicture}
+\end{center}
+Follow the Floyd-Warshall algorithm for APSP and enter the node distance matrix after each step.\\
+Assume the algorithm continues with the next element lexicographically.\\
+As always, unknown distances should be abstracted as infinity.\\
+\begin{center}
+%$DISTTABLE$
+\end{center}
