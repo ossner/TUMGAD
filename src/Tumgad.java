@@ -166,7 +166,7 @@ public class Tumgad {
                 options = new String[]{"DA", "MS", "QS", "RS", "HC", "HD", "TRAV", "AB", "AVL", "BH", "BNH", "D", "P", "FW"};
             } else {
                 options = answer.split(" ");
-                options = new HashSet<String>(Arrays.asList(options)).toArray(new String[0]); // remove duplicates
+                options = new HashSet<>(Arrays.asList(options)).toArray(new String[0]); // remove duplicates
             }
             for (int i = 0; i < options.length; i++) {
                 String option = options[i];
@@ -215,17 +215,17 @@ public class Tumgad {
                         System.out.println(ANSI_PURPLE + "Generating Binomial Heaps" + ANSI_RESET);
                         BinomialHeap.generateExercise();
                         break;
+                    case "FW":
+                        FloydWarshall.generateExercise();
+                        System.out.println(ANSI_PURPLE + "Generating Floyd Warshall" + ANSI_RESET);
+                        break;
                     case "D":
                         say("Dijkstra's algorithm can not be generated yet, still in development");
                         break;
                     case "P":
                         say("Prim's algorithm can not be generated yet, still in development");
                         break;
-                    case "FW":
-                        say("Floyd-Warshall can not be generated yet, still in development");
-                        break;
                     case "DEV":
-                        FloydWarshall.generateExercise();
                         say("Generating components that are still in development");
                         break;
                     default:
