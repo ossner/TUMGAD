@@ -1,0 +1,377 @@
+\textbf{\LARGE{\color{tumgadPurple}Binomial Heaps}}\\
+\\
+\noindent
+Given the following
+\href{https://sebastianoner.github.io/TUMGAD/src/DataStructures/PriorityQueues/BinomialHeaps/BinomialHeaps}{\underline{Binomial Heap}}:
+%$INITHEAP$
+a) Execute the known deleteMin() operation \textbf{four times} on the above heap and be careful to meet the heap-criteria after each step.\\
+You can use the pre-prints provided below, be sure to clearly mark trees that are unused:\\\
+    \newline
+\noindent\fbox{\parbox{\textwidth}{\vspace{5px}deleteMin(): \underline{min = \hspace{1cm}}
+    \begin{center}
+        \begin{tikzpicture}[node distance = 2cm, semithick, baseline={([yshift={-\ht\strutbox}]current bounding box.north)},outer sep=0pt,inner sep=0pt]
+            \node[state] (18) {};
+        \end{tikzpicture}
+        \hspace{10px}
+        \begin{tikzpicture}[node distance = 2cm, semithick, baseline={([yshift={-\ht\strutbox}]current bounding box.north)},outer sep=0pt,inner sep=0pt]
+            \node[state] (14) {};
+            \node[state] (25) [below of=14] {};
+            \path (14) edge node {} (25);
+        \end{tikzpicture}
+        \hspace{10px}
+        \begin{tikzpicture}[node distance = 2cm, semithick, baseline={([yshift={-\ht\strutbox}]current bounding box.north)},outer sep=0pt,inner sep=0pt]
+            \node[state] (11) {};
+            \node[state] (16) [below of=11] {};
+            \path (11) edge node {} (16);
+            \node[state] (19) [left of=16] {};
+            \path (11) edge node {} (19);
+            \node[state] (28) [below of=19] {};
+            \path (19) edge node {} (28);
+        \end{tikzpicture}
+        \hspace{10px}
+        \begin{tikzpicture}[node distance = 2cm, semithick, baseline={([yshift={-\ht\strutbox}]current bounding box.north)},outer sep=0pt,inner sep=0pt]
+            \node[state] (0) {};
+            \node[state] (2) [below of=0] {};
+            \path (0) edge node {} (2);
+            \node[state] (11) [left of=2] {};
+            \path (0) edge node {} (11);
+            \node[state] (16) [below of=11] {};
+            \path (11) edge node {} (16);
+            \node[state] (1) [left of=11] {};
+            \path (0) edge node {} (1);
+            \node[state] (14) [below of=1] {};
+            \path (1) edge node {} (14);
+            \node[state] (3) [left of=14] {};
+            \path (1) edge node {} (3);
+            \node[state] (18) [below of=3] {};
+            \path (3) edge node {} (18);
+        \end{tikzpicture}
+    \end{center}}}\vspace{10px}
+\noindent\fbox{\parbox{\textwidth}{\vspace{5px}deleteMin(): \underline{min = \hspace{1cm}}
+    \begin{center}
+        \begin{tikzpicture}[node distance = 2cm, semithick, baseline={([yshift={-\ht\strutbox}]current bounding box.north)},outer sep=0pt,inner sep=0pt]
+            \node[state] (18) {};
+        \end{tikzpicture}
+        \hspace{10px}
+        \begin{tikzpicture}[node distance = 2cm, semithick, baseline={([yshift={-\ht\strutbox}]current bounding box.north)},outer sep=0pt,inner sep=0pt]
+            \node[state] (14) {};
+            \node[state] (25) [below of=14] {};
+            \path (14) edge node {} (25);
+        \end{tikzpicture}
+        \hspace{10px}
+        \begin{tikzpicture}[node distance = 2cm, semithick, baseline={([yshift={-\ht\strutbox}]current bounding box.north)},outer sep=0pt,inner sep=0pt]
+            \node[state] (11) {};
+            \node[state] (16) [below of=11] {};
+            \path (11) edge node {} (16);
+            \node[state] (19) [left of=16] {};
+            \path (11) edge node {} (19);
+            \node[state] (28) [below of=19] {};
+            \path (19) edge node {} (28);
+        \end{tikzpicture}
+        \hspace{10px}
+        \begin{tikzpicture}[node distance = 2cm, semithick, baseline={([yshift={-\ht\strutbox}]current bounding box.north)},outer sep=0pt,inner sep=0pt]
+            \node[state] (0) {};
+            \node[state] (2) [below of=0] {};
+            \path (0) edge node {} (2);
+            \node[state] (11) [left of=2] {};
+            \path (0) edge node {} (11);
+            \node[state] (16) [below of=11] {};
+            \path (11) edge node {} (16);
+            \node[state] (1) [left of=11] {};
+            \path (0) edge node {} (1);
+            \node[state] (14) [below of=1] {};
+            \path (1) edge node {} (14);
+            \node[state] (3) [left of=14] {};
+            \path (1) edge node {} (3);
+            \node[state] (18) [below of=3] {};
+            \path (3) edge node {} (18);
+        \end{tikzpicture}
+    \end{center}}}\vspace{10px}
+\noindent\fbox{\parbox{\textwidth}{\vspace{5px}deleteMin(): \underline{min = \hspace{1cm}}
+    \begin{center}
+        \begin{tikzpicture}[node distance = 2cm, semithick, baseline={([yshift={-\ht\strutbox}]current bounding box.north)},outer sep=0pt,inner sep=0pt]
+            \node[state] (18) {};
+        \end{tikzpicture}
+        \hspace{10px}
+        \begin{tikzpicture}[node distance = 2cm, semithick, baseline={([yshift={-\ht\strutbox}]current bounding box.north)},outer sep=0pt,inner sep=0pt]
+            \node[state] (14) {};
+            \node[state] (25) [below of=14] {};
+            \path (14) edge node {} (25);
+        \end{tikzpicture}
+        \hspace{10px}
+        \begin{tikzpicture}[node distance = 2cm, semithick, baseline={([yshift={-\ht\strutbox}]current bounding box.north)},outer sep=0pt,inner sep=0pt]
+            \node[state] (11) {};
+            \node[state] (16) [below of=11] {};
+            \path (11) edge node {} (16);
+            \node[state] (19) [left of=16] {};
+            \path (11) edge node {} (19);
+            \node[state] (28) [below of=19] {};
+            \path (19) edge node {} (28);
+        \end{tikzpicture}
+        \hspace{10px}
+        \begin{tikzpicture}[node distance = 2cm, semithick, baseline={([yshift={-\ht\strutbox}]current bounding box.north)},outer sep=0pt,inner sep=0pt]
+            \node[state] (0) {};
+            \node[state] (2) [below of=0] {};
+            \path (0) edge node {} (2);
+            \node[state] (11) [left of=2] {};
+            \path (0) edge node {} (11);
+            \node[state] (16) [below of=11] {};
+            \path (11) edge node {} (16);
+            \node[state] (1) [left of=11] {};
+            \path (0) edge node {} (1);
+            \node[state] (14) [below of=1] {};
+            \path (1) edge node {} (14);
+            \node[state] (3) [left of=14] {};
+            \path (1) edge node {} (3);
+            \node[state] (18) [below of=3] {};
+            \path (3) edge node {} (18);
+        \end{tikzpicture}
+    \end{center}}}\vspace{10px}
+\noindent\fbox{\parbox{\textwidth}{\vspace{5px}deleteMin(): \underline{min = \hspace{1cm}}
+    \begin{center}
+        \begin{tikzpicture}[node distance = 2cm, semithick, baseline={([yshift={-\ht\strutbox}]current bounding box.north)},outer sep=0pt,inner sep=0pt]
+            \node[state] (18) {};
+        \end{tikzpicture}
+        \hspace{10px}
+        \begin{tikzpicture}[node distance = 2cm, semithick, baseline={([yshift={-\ht\strutbox}]current bounding box.north)},outer sep=0pt,inner sep=0pt]
+            \node[state] (14) {};
+            \node[state] (25) [below of=14] {};
+            \path (14) edge node {} (25);
+        \end{tikzpicture}
+        \hspace{10px}
+        \begin{tikzpicture}[node distance = 2cm, semithick, baseline={([yshift={-\ht\strutbox}]current bounding box.north)},outer sep=0pt,inner sep=0pt]
+            \node[state] (11) {};
+            \node[state] (16) [below of=11] {};
+            \path (11) edge node {} (16);
+            \node[state] (19) [left of=16] {};
+            \path (11) edge node {} (19);
+            \node[state] (28) [below of=19] {};
+            \path (19) edge node {} (28);
+        \end{tikzpicture}
+        \hspace{10px}
+        \begin{tikzpicture}[node distance = 2cm, semithick, baseline={([yshift={-\ht\strutbox}]current bounding box.north)},outer sep=0pt,inner sep=0pt]
+            \node[state] (0) {};
+            \node[state] (2) [below of=0] {};
+            \path (0) edge node {} (2);
+            \node[state] (11) [left of=2] {};
+            \path (0) edge node {} (11);
+            \node[state] (16) [below of=11] {};
+            \path (11) edge node {} (16);
+            \node[state] (1) [left of=11] {};
+            \path (0) edge node {} (1);
+            \node[state] (14) [below of=1] {};
+            \path (1) edge node {} (14);
+            \node[state] (3) [left of=14] {};
+            \path (1) edge node {} (3);
+            \node[state] (18) [below of=3] {};
+            \path (3) edge node {} (18);
+        \end{tikzpicture}
+    \end{center}}}\vspace{10px}
+\\
+\newline
+b) Now insert the following 5 values:
+\begin{center}
+    $INSERTIONS$
+\end{center}
+again, make sure to meet the heap-criteria after each step.\\
+\newline
+\noindent\fbox{\parbox{\textwidth}{\vspace{5px}Insert: \underline{\hspace{1cm}}
+    \begin{center}
+        \begin{tikzpicture}[node distance = 2cm, semithick, baseline={([yshift={-\ht\strutbox}]current bounding box.north)},outer sep=0pt,inner sep=0pt]
+            \node[state] (18) {};
+        \end{tikzpicture}
+        \hspace{10px}
+        \begin{tikzpicture}[node distance = 2cm, semithick, baseline={([yshift={-\ht\strutbox}]current bounding box.north)},outer sep=0pt,inner sep=0pt]
+            \node[state] (14) {};
+            \node[state] (25) [below of=14] {};
+            \path (14) edge node {} (25);
+        \end{tikzpicture}
+        \hspace{10px}
+        \begin{tikzpicture}[node distance = 2cm, semithick, baseline={([yshift={-\ht\strutbox}]current bounding box.north)},outer sep=0pt,inner sep=0pt]
+            \node[state] (11) {};
+            \node[state] (16) [below of=11] {};
+            \path (11) edge node {} (16);
+            \node[state] (19) [left of=16] {};
+            \path (11) edge node {} (19);
+            \node[state] (28) [below of=19] {};
+            \path (19) edge node {} (28);
+        \end{tikzpicture}
+        \hspace{10px}
+        \begin{tikzpicture}[node distance = 2cm, semithick, baseline={([yshift={-\ht\strutbox}]current bounding box.north)},outer sep=0pt,inner sep=0pt]
+            \node[state] (0) {};
+            \node[state] (2) [below of=0] {};
+            \path (0) edge node {} (2);
+            \node[state] (11) [left of=2] {};
+            \path (0) edge node {} (11);
+            \node[state] (16) [below of=11] {};
+            \path (11) edge node {} (16);
+            \node[state] (1) [left of=11] {};
+            \path (0) edge node {} (1);
+            \node[state] (14) [below of=1] {};
+            \path (1) edge node {} (14);
+            \node[state] (3) [left of=14] {};
+            \path (1) edge node {} (3);
+            \node[state] (18) [below of=3] {};
+            \path (3) edge node {} (18);
+        \end{tikzpicture}
+    \end{center}}}\vspace{10px}
+\noindent\fbox{\parbox{\textwidth}{\vspace{5px}Insert: \underline{\hspace{1cm}}
+    \begin{center}
+        \begin{tikzpicture}[node distance = 2cm, semithick, baseline={([yshift={-\ht\strutbox}]current bounding box.north)},outer sep=0pt,inner sep=0pt]
+            \node[state] (18) {};
+        \end{tikzpicture}
+        \hspace{10px}
+        \begin{tikzpicture}[node distance = 2cm, semithick, baseline={([yshift={-\ht\strutbox}]current bounding box.north)},outer sep=0pt,inner sep=0pt]
+            \node[state] (14) {};
+            \node[state] (25) [below of=14] {};
+            \path (14) edge node {} (25);
+        \end{tikzpicture}
+        \hspace{10px}
+        \begin{tikzpicture}[node distance = 2cm, semithick, baseline={([yshift={-\ht\strutbox}]current bounding box.north)},outer sep=0pt,inner sep=0pt]
+            \node[state] (11) {};
+            \node[state] (16) [below of=11] {};
+            \path (11) edge node {} (16);
+            \node[state] (19) [left of=16] {};
+            \path (11) edge node {} (19);
+            \node[state] (28) [below of=19] {};
+            \path (19) edge node {} (28);
+        \end{tikzpicture}
+        \hspace{10px}
+        \begin{tikzpicture}[node distance = 2cm, semithick, baseline={([yshift={-\ht\strutbox}]current bounding box.north)},outer sep=0pt,inner sep=0pt]
+            \node[state] (0) {};
+            \node[state] (2) [below of=0] {};
+            \path (0) edge node {} (2);
+            \node[state] (11) [left of=2] {};
+            \path (0) edge node {} (11);
+            \node[state] (16) [below of=11] {};
+            \path (11) edge node {} (16);
+            \node[state] (1) [left of=11] {};
+            \path (0) edge node {} (1);
+            \node[state] (14) [below of=1] {};
+            \path (1) edge node {} (14);
+            \node[state] (3) [left of=14] {};
+            \path (1) edge node {} (3);
+            \node[state] (18) [below of=3] {};
+            \path (3) edge node {} (18);
+        \end{tikzpicture}
+    \end{center}}}\vspace{10px}
+\noindent\fbox{\parbox{\textwidth}{\vspace{5px}Insert: \underline{\hspace{1cm}}
+    \begin{center}
+        \begin{tikzpicture}[node distance = 2cm, semithick, baseline={([yshift={-\ht\strutbox}]current bounding box.north)},outer sep=0pt,inner sep=0pt]
+            \node[state] (18) {};
+        \end{tikzpicture}
+        \hspace{10px}
+        \begin{tikzpicture}[node distance = 2cm, semithick, baseline={([yshift={-\ht\strutbox}]current bounding box.north)},outer sep=0pt,inner sep=0pt]
+            \node[state] (14) {};
+            \node[state] (25) [below of=14] {};
+            \path (14) edge node {} (25);
+        \end{tikzpicture}
+        \hspace{10px}
+        \begin{tikzpicture}[node distance = 2cm, semithick, baseline={([yshift={-\ht\strutbox}]current bounding box.north)},outer sep=0pt,inner sep=0pt]
+            \node[state] (11) {};
+            \node[state] (16) [below of=11] {};
+            \path (11) edge node {} (16);
+            \node[state] (19) [left of=16] {};
+            \path (11) edge node {} (19);
+            \node[state] (28) [below of=19] {};
+            \path (19) edge node {} (28);
+        \end{tikzpicture}
+        \hspace{10px}
+        \begin{tikzpicture}[node distance = 2cm, semithick, baseline={([yshift={-\ht\strutbox}]current bounding box.north)},outer sep=0pt,inner sep=0pt]
+            \node[state] (0) {};
+            \node[state] (2) [below of=0] {};
+            \path (0) edge node {} (2);
+            \node[state] (11) [left of=2] {};
+            \path (0) edge node {} (11);
+            \node[state] (16) [below of=11] {};
+            \path (11) edge node {} (16);
+            \node[state] (1) [left of=11] {};
+            \path (0) edge node {} (1);
+            \node[state] (14) [below of=1] {};
+            \path (1) edge node {} (14);
+            \node[state] (3) [left of=14] {};
+            \path (1) edge node {} (3);
+            \node[state] (18) [below of=3] {};
+            \path (3) edge node {} (18);
+        \end{tikzpicture}
+    \end{center}}}\vspace{10px}
+\noindent\fbox{\parbox{\textwidth}{\vspace{5px}Insert: \underline{\hspace{1cm}}
+    \begin{center}
+        \begin{tikzpicture}[node distance = 2cm, semithick, baseline={([yshift={-\ht\strutbox}]current bounding box.north)},outer sep=0pt,inner sep=0pt]
+            \node[state] (18) {};
+        \end{tikzpicture}
+        \hspace{10px}
+        \begin{tikzpicture}[node distance = 2cm, semithick, baseline={([yshift={-\ht\strutbox}]current bounding box.north)},outer sep=0pt,inner sep=0pt]
+            \node[state] (14) {};
+            \node[state] (25) [below of=14] {};
+            \path (14) edge node {} (25);
+        \end{tikzpicture}
+        \hspace{10px}
+        \begin{tikzpicture}[node distance = 2cm, semithick, baseline={([yshift={-\ht\strutbox}]current bounding box.north)},outer sep=0pt,inner sep=0pt]
+            \node[state] (11) {};
+            \node[state] (16) [below of=11] {};
+            \path (11) edge node {} (16);
+            \node[state] (19) [left of=16] {};
+            \path (11) edge node {} (19);
+            \node[state] (28) [below of=19] {};
+            \path (19) edge node {} (28);
+        \end{tikzpicture}
+        \hspace{10px}
+        \begin{tikzpicture}[node distance = 2cm, semithick, baseline={([yshift={-\ht\strutbox}]current bounding box.north)},outer sep=0pt,inner sep=0pt]
+            \node[state] (0) {};
+            \node[state] (2) [below of=0] {};
+            \path (0) edge node {} (2);
+            \node[state] (11) [left of=2] {};
+            \path (0) edge node {} (11);
+            \node[state] (16) [below of=11] {};
+            \path (11) edge node {} (16);
+            \node[state] (1) [left of=11] {};
+            \path (0) edge node {} (1);
+            \node[state] (14) [below of=1] {};
+            \path (1) edge node {} (14);
+            \node[state] (3) [left of=14] {};
+            \path (1) edge node {} (3);
+            \node[state] (18) [below of=3] {};
+            \path (3) edge node {} (18);
+        \end{tikzpicture}
+    \end{center}}}\vspace{10px}
+\noindent\fbox{\parbox{\textwidth}{\vspace{5px}Insert: \underline{\hspace{1cm}}
+    \begin{center}
+        \begin{tikzpicture}[node distance = 2cm, semithick, baseline={([yshift={-\ht\strutbox}]current bounding box.north)},outer sep=0pt,inner sep=0pt]
+            \node[state] (18) {};
+        \end{tikzpicture}
+        \hspace{10px}
+        \begin{tikzpicture}[node distance = 2cm, semithick, baseline={([yshift={-\ht\strutbox}]current bounding box.north)},outer sep=0pt,inner sep=0pt]
+            \node[state] (14) {};
+            \node[state] (25) [below of=14] {};
+            \path (14) edge node {} (25);
+        \end{tikzpicture}
+        \hspace{10px}
+        \begin{tikzpicture}[node distance = 2cm, semithick, baseline={([yshift={-\ht\strutbox}]current bounding box.north)},outer sep=0pt,inner sep=0pt]
+            \node[state] (11) {};
+            \node[state] (16) [below of=11] {};
+            \path (11) edge node {} (16);
+            \node[state] (19) [left of=16] {};
+            \path (11) edge node {} (19);
+            \node[state] (28) [below of=19] {};
+            \path (19) edge node {} (28);
+        \end{tikzpicture}
+        \hspace{10px}
+        \begin{tikzpicture}[node distance = 2cm, semithick, baseline={([yshift={-\ht\strutbox}]current bounding box.north)},outer sep=0pt,inner sep=0pt]
+            \node[state] (0) {};
+            \node[state] (2) [below of=0] {};
+            \path (0) edge node {} (2);
+            \node[state] (11) [left of=2] {};
+            \path (0) edge node {} (11);
+            \node[state] (16) [below of=11] {};
+            \path (11) edge node {} (16);
+            \node[state] (1) [left of=11] {};
+            \path (0) edge node {} (1);
+            \node[state] (14) [below of=1] {};
+            \path (1) edge node {} (14);
+            \node[state] (3) [left of=14] {};
+            \path (1) edge node {} (3);
+            \node[state] (18) [below of=3] {};
+            \path (3) edge node {} (18);
+        \end{tikzpicture}
+    \end{center}}}
