@@ -112,8 +112,8 @@ public class DoubleHashing {
         StringBuilder exerciseStringBuilder = Terminal.readFile("docs/Exercises.tex");
         StringBuilder solutionStringBuilder = Terminal.readFile("docs/Solutions.tex");
 
-        Terminal.replaceinSB(exerciseStringBuilder, "%$DoubleHashing$", "\\cellcolor{tumgadPurple}");
-        Terminal.replaceinSB(solutionStringBuilder, "%$DoubleHashing$", "\\cellcolor{tumgadRed}");
+        Terminal.replaceinSB(exerciseStringBuilder, "%$DHCELL$", "\\cellcolor{tumgadPurple}");
+        Terminal.replaceinSB(solutionStringBuilder, "%$DHCELL$", "\\cellcolor{tumgadRed}");
 
         Terminal.replaceinSB(exerciseStringBuilder, "%$DOUBLEHASHING$", "\\newpage\n" + doubleHashingExerciseStringBuilder.toString());
         Terminal.replaceinSB(solutionStringBuilder, "%$DOUBLEHASHING$", "\\newpage\n" + doubleHashingSolutionStringBuilder.toString());

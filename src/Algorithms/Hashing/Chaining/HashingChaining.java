@@ -52,8 +52,8 @@ public class HashingChaining {
         StringBuilder exerciseStringBuilder = Terminal.readFile("docs/Exercises.tex");
         StringBuilder solutionStringBuilder = Terminal.readFile("docs/Solutions.tex");
 
-        Terminal.replaceinSB(exerciseStringBuilder, "%$HashingChaining$", "\\cellcolor{tumgadPurple}");
-        Terminal.replaceinSB(solutionStringBuilder, "%$HashingChaining$", "\\cellcolor{tumgadRed}");
+        Terminal.replaceinSB(exerciseStringBuilder, "%$HCCELL$", "\\cellcolor{tumgadPurple}");
+        Terminal.replaceinSB(solutionStringBuilder, "%$HCCELL$", "\\cellcolor{tumgadRed}");
 
         Terminal.replaceinSB(exerciseStringBuilder, "%$HASHINGCHAINING$", "\\newpage\n" + hashingChainingExerciseStringBuilder.toString());
         Terminal.replaceinSB(solutionStringBuilder, "%$HASHINGCHAINING$", "\\newpage\n" + hashingChainingSolutionStringBuilder.toString());

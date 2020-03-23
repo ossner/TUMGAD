@@ -27,8 +27,8 @@ public class QuickSort {
 
         s.sort(a);
 
-        Terminal.replaceinSB(exerciseStringBuilder, "%$QuickSort$", "\\cellcolor{tumgadPurple}");
-        Terminal.replaceinSB(solutionStringBuilder, "%$QuickSort$", "\\cellcolor{tumgadRed}");
+        Terminal.replaceinSB(exerciseStringBuilder, "%$QSCELL$", "\\cellcolor{tumgadPurple}");
+        Terminal.replaceinSB(solutionStringBuilder, "%$QSCELL$", "\\cellcolor{tumgadRed}");
 
         Terminal.replaceinSB(exerciseStringBuilder, "%$QUICKSORT$", "\\newpage\n" + quickSortExerciseStringBuilder.toString());
         Terminal.replaceinSB(solutionStringBuilder, "%$QUICKSORT$", "\\newpage\n" + quickSortSolutionStringBuilder.toString());

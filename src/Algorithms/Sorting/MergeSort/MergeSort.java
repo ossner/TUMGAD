@@ -28,8 +28,8 @@ public class MergeSort {
         printSplit(a, a.length);
         printMerge(a);
 
-        Terminal.replaceinSB(exerciseStringBuilder, "%$MergeSort$", "\\cellcolor{tumgadPurple}");
-        Terminal.replaceinSB(solutionStringBuilder, "%$MergeSort$", "\\cellcolor{tumgadRed}");
+        Terminal.replaceinSB(exerciseStringBuilder, "%$MSCELL$", "\\cellcolor{tumgadPurple}");
+        Terminal.replaceinSB(solutionStringBuilder, "%$MSCELL$", "\\cellcolor{tumgadRed}");
 
         Terminal.replaceinSB(exerciseStringBuilder, "%$MERGESORT$", "\\newpage\n" + mergeSortExerciseStringBuilder.toString());
         Terminal.replaceinSB(solutionStringBuilder, "%$MERGESORT$", "\\newpage\n" + mergeSortSolutionStringBuilder.toString());

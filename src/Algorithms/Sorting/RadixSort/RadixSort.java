@@ -87,8 +87,8 @@ public class RadixSort {
 
         sort(a);
 
-        Terminal.replaceinSB(exerciseStringBuilder, "%$RadixSort$", "\\cellcolor{tumgadPurple}");
-        Terminal.replaceinSB(solutionStringBuilder, "%$RadixSort$", "\\cellcolor{tumgadRed}");
+        Terminal.replaceinSB(exerciseStringBuilder, "%$RSCELL$", "\\cellcolor{tumgadPurple}");
+        Terminal.replaceinSB(solutionStringBuilder, "%$RSCELL$", "\\cellcolor{tumgadRed}");
 
         Terminal.replaceinSB(exerciseStringBuilder, "%$RADIXSORT$", "\\newpage\n" + radixSortExerciseStringBuilder.toString());
         Terminal.replaceinSB(solutionStringBuilder, "%$RADIXSORT$", "\\newpage\n" + radixSortSolutionStringBuilder.toString());
