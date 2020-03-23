@@ -23,10 +23,6 @@ public class DoubleHashing {
             "        \\end{center}\n" +
             "%$DHTABLE$";
 
-    public static void main(String[] args) {
-        generateExercise();
-    }
-
     /**
      * generates a first hashfunction matching /\([1-9]x \+ 9\) mod 11/
      */
