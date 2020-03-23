@@ -216,8 +216,8 @@ public class Tumgad {
                         BinomialHeap.generateExercise();
                         break;
                     case "FW":
-                        FloydWarshall.generateExercise();
                         System.out.println(ANSI_PURPLE + "Generating Floyd Warshall" + ANSI_RESET);
+                        FloydWarshall.generateExercise();
                         break;
                     case "D":
                         say("Dijkstra's algorithm can not be generated yet, still in development");
