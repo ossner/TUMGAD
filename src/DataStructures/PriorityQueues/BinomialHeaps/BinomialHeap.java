@@ -38,7 +38,7 @@ public class BinomialHeap {
      */
     public void insert(int key, boolean verbose) {
         if (verbose) {
-            Terminal.replaceinSB(binomialHeapSolutionStringbuilder, "%$BINHEAPINSERTIONS$", "\\noindent\\fbox{\\parbox{\\textwidth}{\\vspace{5px}Insert: \\color{tumgadRed}\\underline{" + key + "}\\color{black}\n%$BINHEAPINSERTIONS$");
+            Terminal.replaceinSB(binomialHeapSolutionStringbuilder, "%$BINHEAPINSERTIONS$", "\\noindent\\fbox{\\parbox{\\textwidth}{\\vspace{5px}Insert: \\underline{\\color{tumgadRed}" + key + "\\color{black}}\n%$BINHEAPINSERTIONS$");
         }
         BinomialTreeNode node = new BinomialTreeNode(key);
         merge(new BinomialTreeNode[]{node});
@@ -161,7 +161,7 @@ public class BinomialHeap {
      */
     public int deleteMin() {
         int min = min();
-        Terminal.replaceinSB(binomialHeapSolutionStringbuilder, "%$BINHEAPDELETIONS$", "\\noindent\\fbox{\\parbox{\\textwidth}{\\vspace{5px}deleteMin(): \\color{tumgadRed}\\underline{min = " + min + "}\\color{black}\n%$BINHEAPDELETIONS$");
+        Terminal.replaceinSB(binomialHeapSolutionStringbuilder, "%$BINHEAPDELETIONS$", "\\noindent\\fbox{\\parbox{\\textwidth}{\\vspace{5px}deleteMin(): \\underline{\\color{tumgadRed}min = " + min + "\\color{black}}\n%$BINHEAPDELETIONS$");
         BinomialTreeNode[] children = minimum.deleteMin();
         trees.remove(minimum);
         merge(children);
