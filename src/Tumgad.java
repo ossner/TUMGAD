@@ -1,3 +1,4 @@
+import Algorithms.Graphs.APSP.FloydWarshall.FloydWarshall;
 import Algorithms.Graphs.Traversal.Graph;
 import Algorithms.Hashing.Chaining.HashingChaining;
 import Algorithms.Hashing.Double.DoubleHashing;
@@ -224,6 +225,7 @@ public class Tumgad {
                         say("Floyd-Warshall can not be generated yet, still in development");
                         break;
                     case "DEV":
+                        FloydWarshall.generateExercise();
                         say("Generating components that are still in development");
                         break;
                     default:
