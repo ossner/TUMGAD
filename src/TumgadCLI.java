@@ -52,7 +52,7 @@ public class TumgadCLI {
         solutionStringBuilder = Terminal.readFile("docs/SolutionTemplate.tex");
 
         Scanner input = new Scanner(System.in);
-        System.out.print("Do you have a seed for the exercise generation? (N/n for no)");
+        System.out.print("Do you have a seed for the exercise generation? (N/n for no) ");
         String answer = input.nextLine();
         int seed = new Random().nextInt(Integer.MAX_VALUE);
         try {
