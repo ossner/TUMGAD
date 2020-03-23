@@ -27,7 +27,7 @@ exercise template. Later, the LaTeX will be compiled and the output written to P
 There are 2 main ways to use this resource:
 1. You can look at the [MarkDown (.md) files](https://sebastianoner.github.io/TUMGAD/src/routes) to find a description on how the Algorithm/Data Structure
 works.
-2. You can generate exercises and their solutions by executing the main method in the TumgadCLI.java file.
+2. You can generate exercises and their solutions by executing the main method in the Tumgad.java file.
 For this the only prerequisite is a working version of [pdflatex](https://www.latex-project.org/get/) added 
 to your [PATH](https://tex.stackexchange.com/questions/60702/setting-up-miktex-and-texworks) (However you can work around this by manually compiling docs/Exercises.tex and docs/Solutions.tex).
 
