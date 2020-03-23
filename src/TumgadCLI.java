@@ -211,7 +211,8 @@ public class TumgadCLI {
                         BinaryHeap.generateExercise();
                         break;
                     case "BNH":
-                        say("Binomial Heaps can not be generated yet, still in development");
+                        System.out.println(ANSI_PURPLE + "Generating Binomial Heaps" + ANSI_RESET);
+                        BinomialHeap.generateExercise();
                         break;
                     case "D":
                         say("Dijkstra's algorithm can not be generated yet, still in development");
@@ -223,7 +224,6 @@ public class TumgadCLI {
                         say("Floyd-Warshall can not be generated yet, still in development");
                         break;
                     case "DEV":
-                        BinomialHeap.generateExercise();
                         say("Generating components that are still in development");
                         break;
                     default:
