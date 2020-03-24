@@ -1,4 +1,5 @@
 import Algorithms.Graphs.APSP.FloydWarshall.FloydWarshall;
+import Algorithms.Graphs.ShortestPaths.Dijkstra;
 import Algorithms.Graphs.Traversal.Graph;
 import Algorithms.Hashing.Chaining.HashingChaining;
 import Algorithms.Hashing.Double.DoubleHashing;
@@ -226,6 +227,7 @@ public class Tumgad {
                         say("Prim's algorithm can not be generated yet, still in development");
                         break;
                     case "DEV":
+                        Dijkstra.generateExercise();
                         say("Generating components that are still in development");
                         break;
                     default:
