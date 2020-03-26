@@ -20,12 +20,6 @@ public class Dijkstra {
 
         int[][] nodeMatrix = generateNodeMatrix(numNodes);
         Collections.sort(nodeList);
-        for (int i = 0; i < nodeMatrix.length; i++) {
-            for (int j = 0; j < nodeMatrix[0].length; j++) {
-                System.out.print(nodeMatrix[i][j] + ", ");
-            }
-            System.out.println();
-        }
         char maxChar = generateGraphNodes(nodeMatrix);
         int[][] distMatrix = generateDistMatrix(nodeMatrix, numNodes + 2);
         generateGraphEdges(nodeMatrix, distMatrix);
@@ -125,13 +119,6 @@ public class Dijkstra {
                 max--;
             }
         }
-        for (int i = 0; i < distMatrix.length; i++) {
-            for (int j = 0; j < distMatrix.length; j++) {
-                System.out.print(distMatrix[i][j] + ", ");
-            }
-            System.out.println();
-        }
-        return distMatrix;
     }
 
     private static int getNodeNum(int[][] nodeMatrix, int i, int j) {
@@ -139,7 +126,6 @@ public class Dijkstra {
         for (int k = 0; k < nodeMatrix.length; k++) {
             for (int l = 0; l < nodeMatrix[0].length; l++) {
                 if (k == i && l == j) {
-                    System.out.println("i: " + i + "\nj: " + j + "\nNodeNum: " + nodeNum);
                     return nodeNum;
                 }
                 if (nodeMatrix[k][l] == 1) {
