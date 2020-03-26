@@ -7,7 +7,7 @@ Given the following graph:
     \begin{tikzpicture}[
         > = stealth, % arrow head style
         auto,
-        node distance = 2.25cm, % distance between nodes
+        node distance = 3cm, % distance between nodes
         semithick % line style
     ]
         \node[state, fill=tumgadBlue] (00) {%00
@@ -80,9 +80,7 @@ Given the following graph:
         };
         \node[state, draw=none] (44) [right of=43] {%44
         };
-        \node[state, draw=none] (45) [right of=44] {%45
-        };
-        \node[state, fill=tumgadBlue] (46) [right of=45] {%46
+        \node[state, fill=tumgadBlue] (45) [right of=44] {%45
         };
 
         %$CONNECTIONS$
