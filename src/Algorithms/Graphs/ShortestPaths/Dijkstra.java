@@ -53,14 +53,18 @@ public class Dijkstra {
                 if (distMatrix[i][j] != 0) {
                     Terminal.replaceinSB(dijkstraSolutionStringBuilder, "%$CONNECTIONS$", "\\path (" + nodeList.get(i)
                             + ") edge node[pos=0.25] {" + distMatrix[i][j] + "} (" + nodeList.get(j) + ");\n%$CONNECTIONS$");
+                    Terminal.replaceinSB(dijkstraExerciseStringBuilder, "%$CONNECTIONS$", "\\path (" + nodeList.get(i)
+                            + ") edge node[pos=0.25] {" + distMatrix[i][j] + "} (" + nodeList.get(j) + ");\n%$CONNECTIONS$");
                 }
             }
         }
         index = 0;
         for (int i = 0; i < distMatrix.length - 1; i++) {
             if (distMatrix[i][i + 1] != 0 && index < nodeList.size() - 1) {
-                Terminal.replaceinSB(dijkstraSolutionStringBuilder, "%$CONNECTIONS$", "\\path (" + nodeList.get(index++)
-                        + ") edge node[pos=0.25] {" + distMatrix[i][i + 1] + "} (" + nodeList.get(index) + ");\n%$CONNECTIONS$");
+                Terminal.replaceinSB(dijkstraSolutionStringBuilder, "%$CONNECTIONS$", "\\path (" + nodeList.get(index)
+                        + ") edge node[pos=0.2] {" + distMatrix[i][i + 1] + "} (" + nodeList.get(index + 1) + ");\n%$CONNECTIONS$");
+                Terminal.replaceinSB(dijkstraExerciseStringBuilder, "%$CONNECTIONS$", "\\path (" + nodeList.get(index++)
+                        + ") edge node[pos=0.2] {" + distMatrix[i][i + 1] + "} (" + nodeList.get(index) + ");\n%$CONNECTIONS$");
             }
         }
     }
