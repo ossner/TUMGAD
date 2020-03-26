@@ -16,7 +16,7 @@ public class Dijkstra {
         dijkstraExerciseStringBuilder = Terminal.readFile("src/Algorithms/Graphs/ShortestPaths/DijkstraExerciseTemplate.tex");
         dijkstraSolutionStringBuilder = Terminal.readFile("src/Algorithms/Graphs/ShortestPaths/DijkstraSolutionTemplate.tex");
 
-        int numNodes = Terminal.rand.nextInt(3) + 10;
+        int numNodes = Terminal.rand.nextInt(3) + 11;
 
         int[][] nodeMatrix = generateNodeMatrix(numNodes);
         Collections.sort(nodeList);
@@ -28,7 +28,7 @@ public class Dijkstra {
         }
         char maxChar = generateGraphNodes(nodeMatrix);
         int[][] distMatrix = generateDistMatrix(nodeMatrix, numNodes + 2);
-        generateGraphEdges(distMatrix);
+        generateGraphEdges(nodeMatrix, distMatrix);
 
         Terminal.replaceinSB(dijkstraExerciseStringBuilder, "MAXCHAR", "" + maxChar);
         Terminal.replaceinSB(dijkstraSolutionStringBuilder, "MAXCHAR", "" + maxChar);
@@ -46,24 +46,54 @@ public class Dijkstra {
         Terminal.saveToFile("docs/Solutions.tex", solutionStringBuilder);
     }
 
-    private static void generateGraphEdges(int[][] distMatrix) {
+    private static void generateGraphEdges(int[][] nodeMatrix, int[][] distMatrix) {
         for (int i = 0; i < distMatrix.length; i++) {
             for (int j = i + 1; j < distMatrix[0].length; j++) {
                 if (distMatrix[i][j] != 0) {
                     if (i == 0 && j > 1) {
                         Terminal.replaceinSB(dijkstraSolutionStringBuilder, "%$CONNECTIONS$", "\\path (" + nodeList.get(i)
-                                + ") edge[bend right=" + j * 5 + "] node[pos=0.25] {" + distMatrix[i][j] + "} (" + nodeList.get(j) + ");\n%$CONNECTIONS$");
+                                + ") edge[bend right=" + (j * 5 - j) + "] node[pos=0.25] {" + distMatrix[i][j] + "} (" + nodeList.get(j) + ");\n%$CONNECTIONS$");
                         Terminal.replaceinSB(dijkstraExerciseStringBuilder, "%$CONNECTIONS$", "\\path (" + nodeList.get(i)
-                                + ") edge[bend right=" + j * 5 + "] node[pos=0.25] {" + distMatrix[i][j] + "} (" + nodeList.get(j) + ");\n%$CONNECTIONS$");
-                        continue;
+                                + ") edge[bend right=" + (j * 5 - j) + "] node[pos=0.25] {" + distMatrix[i][j] + "} (" + nodeList.get(j) + ");\n%$CONNECTIONS$");
+                    } else if (j == i + 1 && acrossLeft(i, j)) {
+                        if (pathClear(nodeMatrix, i, j)) {
+                            Terminal.replaceinSB(dijkstraSolutionStringBuilder, "%$CONNECTIONS$", "\\path (" + nodeList.get(i)
+                                    + ") edge[bend right=8] node[pos=0.18] {" + distMatrix[i][j] + "} (" + nodeList.get(j) + ");\n%$CONNECTIONS$");
+                            Terminal.replaceinSB(dijkstraExerciseStringBuilder, "%$CONNECTIONS$", "\\path (" + nodeList.get(i)
+                                    + ") edge[bend right=8] node[pos=0.18] {" + distMatrix[i][j] + "} (" + nodeList.get(j) + ");\n%$CONNECTIONS$");
+                        } else {
+                            Terminal.replaceinSB(dijkstraSolutionStringBuilder, "%$CONNECTIONS$", "\\path (" + nodeList.get(i)
+                                    + ") edge[bend right=4] node[pos=0.18] {" + distMatrix[i][j] + "} (" + nodeList.get(j) + ");\n%$CONNECTIONS$");
+                            Terminal.replaceinSB(dijkstraExerciseStringBuilder, "%$CONNECTIONS$", "\\path (" + nodeList.get(i)
+                                    + ") edge[bend right=4] node[pos=0.18] {" + distMatrix[i][j] + "} (" + nodeList.get(j) + ");\n%$CONNECTIONS$");
+                        }
+                    } else {
+                        Terminal.replaceinSB(dijkstraSolutionStringBuilder, "%$CONNECTIONS$", "\\path (" + nodeList.get(i)
+                                + ") edge node[pos=0.3] {" + distMatrix[i][j] + "} (" + nodeList.get(j) + ");\n%$CONNECTIONS$");
+                        Terminal.replaceinSB(dijkstraExerciseStringBuilder, "%$CONNECTIONS$", "\\path (" + nodeList.get(i)
+                                + ") edge node[pos=0.3] {" + distMatrix[i][j] + "} (" + nodeList.get(j) + ");\n%$CONNECTIONS$");
                     }
-                    Terminal.replaceinSB(dijkstraSolutionStringBuilder, "%$CONNECTIONS$", "\\path (" + nodeList.get(i)
-                            + ") edge node[pos=0.25] {" + distMatrix[i][j] + "} (" + nodeList.get(j) + ");\n%$CONNECTIONS$");
-                    Terminal.replaceinSB(dijkstraExerciseStringBuilder, "%$CONNECTIONS$", "\\path (" + nodeList.get(i)
-                            + ") edge node[pos=0.25] {" + distMatrix[i][j] + "} (" + nodeList.get(j) + ");\n%$CONNECTIONS$");
                 }
             }
         }
+    }
+
+    private static boolean pathClear(int[][] nodeMatrix, int i, int j) {
+        int row1 = Integer.parseInt("" + nodeList.get(i).charAt(0));
+        int col1 = Integer.parseInt("" + nodeList.get(i).charAt(1));
+        int row2 = Integer.parseInt("" + nodeList.get(j).charAt(0));
+        int col2 = Integer.parseInt("" + nodeList.get(j).charAt(1));
+
+        for (int k = col2 + 1; k < col1; k++) {
+            if (nodeMatrix[row1][k] == 1 && nodeMatrix[row2][k+1] == 1) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean acrossLeft(int i, int j) {
+        return nodeList.get(i).charAt(0) != nodeList.get(j).charAt(0) && nodeList.get(i).charAt(1) != nodeList.get(j).charAt(1);
     }
 
     private static int[][] generateDistMatrix(int[][] nodeMatrix, int numNodes) {
@@ -86,7 +116,7 @@ public class Dijkstra {
             }
         }
         int max = 2; // A maximum of 2 extra connections to A
-        for (int i = 1; i < nodeMatrix.length-1; i++) {
+        for (int i = 1; i < nodeMatrix.length - 1; i++) {
             if (max == 0) {
                 return distMatrix;
             }
