@@ -1,0 +1,93 @@
+\textbf{\LARGE{\color{tumgadPurple}Dijkstra's Algorithm}}\\
+\\
+\noindent
+Given the following graph:
+
+\begin{center}
+    \begin{tikzpicture}[
+        > = stealth, % arrow head style
+        auto,
+        node distance = 2.25cm, % distance between nodes
+        semithick % line style
+    ]
+        \node[state, fill=tumgadBlue] (00) {%00
+        };
+        \node[state, draw=none] (01) [right of=00] {%01
+        };
+        \node[state, draw=none] (02) [right of=01] {%02
+        };
+        \node[state, draw=none] (03) [right of=02] {%03
+        };
+        \node[state, draw=none] (04) [right of=03] {%04
+        };
+        \node[state, draw=none] (05) [right of=04] {%05
+        };
+        \node[state, draw=none] (06) [right of=05] {%06
+        };
+
+        \node[state, draw=none] (10) [below of=00] {%10
+        };
+        \node[state, draw=none] (11) [right of=10] {%11
+        };
+        \node[state, draw=none] (12) [right of=11] {%12
+        };
+        \node[state, draw=none] (13) [right of=12] {%13
+        };
+        \node[state, draw=none] (14) [right of=13] {%14
+        };
+        \node[state, draw=none] (15) [right of=14] {%15
+        };
+        \node[state, draw=none] (16) [right of=15] {%16
+        };
+
+        \node[state, draw=none] (20) [below of=10] {%20
+        };
+        \node[state, draw=none] (21) [right of=20] {%21
+        };
+        \node[state, draw=none] (22) [right of=21] {%22
+        };
+        \node[state, draw=none] (23) [right of=22] {%23
+        };
+        \node[state, draw=none] (24) [right of=23] {%24
+        };
+        \node[state, draw=none] (25) [right of=24] {%25
+        };
+        \node[state, draw=none] (26) [right of=25] {%26
+        };
+
+        \node[state, draw=none] (30) [below of=20] {%30
+        };
+        \node[state, draw=none] (31) [right of=30] {%31
+        };
+        \node[state, draw=none] (32) [right of=31] {%32
+        };
+        \node[state, draw=none] (33) [right of=32] {%33
+        };
+        \node[state, draw=none] (34) [right of=33] {%34
+        };
+        \node[state, draw=none] (35) [right of=34] {%35
+        };
+        \node[state, draw=none] (36) [right of=35] {%36
+        };
+
+        \node[state, draw=none] (40) [below of=30] {%40
+        };
+        \node[state, draw=none] (41) [right of=40] {%41
+        };
+        \node[state, draw=none] (42) [right of=41] {%42
+        };
+        \node[state, draw=none] (43) [right of=42] {%43
+        };
+        \node[state, draw=none] (44) [right of=43] {%44
+        };
+        \node[state, draw=none] (45) [right of=44] {%45
+        };
+        \node[state, fill=tumgadBlue] (46) [right of=45] {%46
+        };
+
+        %$CONNECTIONS$
+    \end{tikzpicture}
+\end{center}
+a) Follow the algorithm of Dijkstra as covered in the lecture and find the shortest path from node $A$ to node $MAXCHAR$.\\
+Note the algorithms priority queue after every step, as well as the changes made to the queue in the step.\\
+If nodes have equal priorities, the algorithm follows the node that was inserted first.\\
