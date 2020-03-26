@@ -47,24 +47,21 @@ public class Dijkstra {
     }
 
     private static void generateGraphEdges(int[][] distMatrix) {
-        int index = 0;
         for (int i = 0; i < distMatrix.length; i++) {
-            for (int j = i + 2; j < distMatrix[0].length; j++) {
+            for (int j = i + 1; j < distMatrix[0].length; j++) {
                 if (distMatrix[i][j] != 0) {
+                    if (i == 0 && j > 1) {
+                        Terminal.replaceinSB(dijkstraSolutionStringBuilder, "%$CONNECTIONS$", "\\path (" + nodeList.get(i)
+                                + ") edge[bend right=" + j * 5 + "] node[pos=0.25] {" + distMatrix[i][j] + "} (" + nodeList.get(j) + ");\n%$CONNECTIONS$");
+                        Terminal.replaceinSB(dijkstraExerciseStringBuilder, "%$CONNECTIONS$", "\\path (" + nodeList.get(i)
+                                + ") edge[bend right=" + j * 5 + "] node[pos=0.25] {" + distMatrix[i][j] + "} (" + nodeList.get(j) + ");\n%$CONNECTIONS$");
+                        continue;
+                    }
                     Terminal.replaceinSB(dijkstraSolutionStringBuilder, "%$CONNECTIONS$", "\\path (" + nodeList.get(i)
                             + ") edge node[pos=0.25] {" + distMatrix[i][j] + "} (" + nodeList.get(j) + ");\n%$CONNECTIONS$");
                     Terminal.replaceinSB(dijkstraExerciseStringBuilder, "%$CONNECTIONS$", "\\path (" + nodeList.get(i)
                             + ") edge node[pos=0.25] {" + distMatrix[i][j] + "} (" + nodeList.get(j) + ");\n%$CONNECTIONS$");
                 }
-            }
-        }
-        index = 0;
-        for (int i = 0; i < distMatrix.length - 1; i++) {
-            if (distMatrix[i][i + 1] != 0 && index < nodeList.size() - 1) {
-                Terminal.replaceinSB(dijkstraSolutionStringBuilder, "%$CONNECTIONS$", "\\path (" + nodeList.get(index)
-                        + ") edge node[pos=0.2] {" + distMatrix[i][i + 1] + "} (" + nodeList.get(index + 1) + ");\n%$CONNECTIONS$");
-                Terminal.replaceinSB(dijkstraExerciseStringBuilder, "%$CONNECTIONS$", "\\path (" + nodeList.get(index++)
-                        + ") edge node[pos=0.2] {" + distMatrix[i][i + 1] + "} (" + nodeList.get(index) + ");\n%$CONNECTIONS$");
             }
         }
     }
@@ -74,18 +71,28 @@ public class Dijkstra {
         int[][] distMatrix = new int[numNodes][numNodes];
         for (int i = 0; i < nodeMatrix.length; i++) {
             for (int j = i + 1; j < nodeMatrix[0].length && currNode < numNodes - 1; j++) {
-                distMatrix[currNode][++currNode] = Terminal.rand.nextInt(5) + 3;
+                distMatrix[currNode][++currNode] = Terminal.rand.nextInt(5) + 4;
             }
         }
         currNode = 0;
         for (int i = 0; i < nodeMatrix.length - 1; i++) {
-            for (int j = 0; j < nodeMatrix[0].length; j++) {
+            for (int j = 0; j < nodeMatrix[0].length && currNode < numNodes - 1; j++) {
                 if (nodeMatrix[i][j] == 1) {
                     if (nodeMatrix[i + 1][j] == 1 && distMatrix[currNode][getNodeNum(nodeMatrix, i + 1, j)] == 0) {
                         distMatrix[currNode][getNodeNum(nodeMatrix, i + 1, j)] = Terminal.rand.nextInt(5) + 7;
                     }
                     currNode++;
                 }
+            }
+        }
+        int max = 2; // A maximum of 2 extra connections to A
+        for (int i = 1; i < nodeMatrix.length-1; i++) {
+            if (max == 0) {
+                return distMatrix;
+            }
+            if (nodeMatrix[i][1] == 1) {
+                distMatrix[0][getNodeNum(nodeMatrix, i, 1)] = Terminal.rand.nextInt(5) + (11 * i);
+                max--;
             }
         }
         for (int i = 0; i < distMatrix.length; i++) {
