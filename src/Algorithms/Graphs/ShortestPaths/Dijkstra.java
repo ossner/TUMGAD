@@ -79,7 +79,7 @@ public class Dijkstra {
         int col2 = Integer.parseInt("" + nodeList.get(j).charAt(1));
 
         for (int k = col2 + 1; k < col1; k++) {
-            if (nodeMatrix[row1][k] == 1 && nodeMatrix[row2][k+1] == 1) {
+            if (nodeMatrix[row1][k] == 1 && nodeMatrix[row2][k + 1] == 1) {
                 return false;
             }
         }
@@ -119,6 +119,7 @@ public class Dijkstra {
                 max--;
             }
         }
+        return distMatrix;
     }
 
     private static int getNodeNum(int[][] nodeMatrix, int i, int j) {
@@ -169,5 +170,40 @@ public class Dijkstra {
         nodeList.add("45");
         nodeMatrix[4][5] = 1; // last node
         return nodeMatrix;
+    }
+}
+
+class QueueElement {
+    int nodeNum;
+    int prio;
+
+    public QueueElement(int nodeNum, int prio) {
+        this.nodeNum = nodeNum;
+        this.prio = prio;
+    }
+
+    @Override
+    public String toString() {
+        return "(" + ((char) ('A' + nodeNum)) + ", " + prio + ")";
+    }
+}
+
+class Queue {
+    ArrayList<QueueElement> queue;
+
+    public Queue() {
+        queue = new ArrayList<>();
+    }
+
+    void insert(QueueElement element) {
+        int i = 0;
+        while (i < queue.size() && queue.get(i).prio <= element.prio) {
+            i++;
+        }
+        queue.add(i, element);
+    }
+
+    QueueElement deQueue() {
+        return queue.remove(0);
     }
 }
