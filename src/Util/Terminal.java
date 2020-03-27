@@ -43,7 +43,10 @@ public class Terminal {
         return ret;
     }
 
-    public static String printArrayList(ArrayList<Integer> list) {
+    public static String printArrayList(ArrayList list) {
+        if (list.size() == 0) {
+            return "";
+        }
         String ret = "" + list.get(0);
         for (int i = 1; i < list.size(); i++) {
             ret += ", " + list.get(i);
