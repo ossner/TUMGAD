@@ -9,8 +9,8 @@ import java.util.Objects;
 
 public class Dijkstra {
 
-    private static StringBuilder dijkstraExerciseStringBuilder;
-    private static StringBuilder dijkstraSolutionStringBuilder;
+    static StringBuilder dijkstraExerciseStringBuilder;
+    static StringBuilder dijkstraSolutionStringBuilder;
     private static List<String> nodeList = new ArrayList<>();
 
     public static void generateExercise() {
@@ -24,7 +24,8 @@ public class Dijkstra {
         char maxChar = generateGraphNodes(nodeMatrix);
         int[][] distMatrix = generateDistMatrix(nodeMatrix, numNodes + 2);
         generateGraphEdges(nodeMatrix, distMatrix);
-        dijkstra(distMatrix);
+        Terminal.replaceinSB(dijkstraSolutionStringBuilder, "$MINLEN$",
+                "\\color{tumgadRed}" + dijkstra(distMatrix) + "\\color{black}");
 
         Terminal.replaceinSB(dijkstraExerciseStringBuilder, "MAXCHAR", "" + maxChar);
         Terminal.replaceinSB(dijkstraSolutionStringBuilder, "MAXCHAR", "" + maxChar);
@@ -42,16 +43,23 @@ public class Dijkstra {
         Terminal.saveToFile("docs/Solutions.tex", solutionStringBuilder);
     }
 
-    private static void dijkstra(int[][] distMatrix) {
+    private static int dijkstra(int[][] distMatrix) {
         Queue q = new Queue();
+        Queue path = new Queue();
         q.insert(new QueueElement(0, 0));
-        while (q.queue.size() > 0) {
+        for (int i = 0; i < distMatrix.length - 1; i++) {
             QueueElement first = q.deQueue();
+            path.insert(first);
             int offset = first.prio;
             int nodeNum = first.nodeNum;
             q.addNeighbors(nodeNum, distMatrix, offset);
-            System.out.println(q);
+            Terminal.replaceinSB(dijkstraSolutionStringBuilder, "%$QUEUEPRINT$",
+                    "\\color{tumgadRed}" + Terminal.printArrayList(q.queue) + "\\color{black}");
         }
+        QueueElement last = q.deQueue();
+        path.insert(last);
+        System.out.println(path);
+        return last.prio;
     }
 
     private static void generateGraphEdges(int[][] nodeMatrix, int[][] distMatrix) {
@@ -262,10 +270,18 @@ class Queue {
     }
 
     public void addNeighbors(int i, int[][] distMatrix, int offset) {
+        Queue printQueue = new Queue();
         for (int j = 0; j < distMatrix.length; j++) {
             if (distMatrix[i][j] != 0) {
-                insert(new QueueElement(j, distMatrix[i][j] + offset));
+                QueueElement temp = new QueueElement(j, distMatrix[i][j] + offset);
+                printQueue.insert(temp);
+                insert(temp);
             }
+        }
+        if (printQueue.queue.size() > 0) {
+            Terminal.replaceinSB(Dijkstra.dijkstraSolutionStringBuilder, "%$QUEUECHANGE$",
+                    "\\color{tumgadRed}" + Terminal.printArrayList(printQueue.queue) + "\\color{black}\\\\\n\\hline" +
+                            "\n%$QUEUEPRINT$ & %$QUEUECHANGE$");
         }
     }
 }
