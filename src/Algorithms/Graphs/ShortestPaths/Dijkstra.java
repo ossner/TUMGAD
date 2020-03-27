@@ -5,6 +5,7 @@ import Util.Terminal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class Dijkstra {
 
@@ -23,6 +24,7 @@ public class Dijkstra {
         char maxChar = generateGraphNodes(nodeMatrix);
         int[][] distMatrix = generateDistMatrix(nodeMatrix, numNodes + 2);
         generateGraphEdges(nodeMatrix, distMatrix);
+        dijkstra(distMatrix);
 
         Terminal.replaceinSB(dijkstraExerciseStringBuilder, "MAXCHAR", "" + maxChar);
         Terminal.replaceinSB(dijkstraSolutionStringBuilder, "MAXCHAR", "" + maxChar);
@@ -38,6 +40,18 @@ public class Dijkstra {
 
         Terminal.saveToFile("docs/Exercises.tex", exerciseStringBuilder);
         Terminal.saveToFile("docs/Solutions.tex", solutionStringBuilder);
+    }
+
+    private static void dijkstra(int[][] distMatrix) {
+        Queue q = new Queue();
+        q.insert(new QueueElement(0, 0));
+        while (q.queue.size() > 0) {
+            QueueElement first = q.deQueue();
+            int offset = first.prio;
+            int nodeNum = first.nodeNum;
+            q.addNeighbors(nodeNum, distMatrix, offset);
+            System.out.println(q);
+        }
     }
 
     private static void generateGraphEdges(int[][] nodeMatrix, int[][] distMatrix) {
@@ -119,6 +133,12 @@ public class Dijkstra {
                 max--;
             }
         }
+        for (int i = 0; i < distMatrix.length; i++) {
+            for (int j = 0; j < distMatrix[0].length; j++) {
+                System.out.print(distMatrix[i][j] + ", ");
+            }
+            System.out.println();
+        }
         return distMatrix;
     }
 
@@ -186,24 +206,66 @@ class QueueElement {
     public String toString() {
         return "(" + ((char) ('A' + nodeNum)) + ", " + prio + ")";
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        QueueElement that = (QueueElement) o;
+        return nodeNum == that.nodeNum;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nodeNum);
+    }
 }
 
 class Queue {
     ArrayList<QueueElement> queue;
+    ArrayList<Integer> pastQueue;
 
     public Queue() {
         queue = new ArrayList<>();
+        pastQueue = new ArrayList<>();
     }
 
     void insert(QueueElement element) {
+        if (queue.contains(element) && element.prio > queue.get(queue.indexOf(element)).prio || pastQueue.contains(element.nodeNum)) {
+            return;
+        }
         int i = 0;
         while (i < queue.size() && queue.get(i).prio <= element.prio) {
             i++;
         }
         queue.add(i, element);
+        for (int j = 0; j < queue.size(); j++) {
+            if (queue.get(j).nodeNum == element.nodeNum && queue.get(j) != element) {
+                queue.remove(j);
+            }
+        }
     }
 
     QueueElement deQueue() {
-        return queue.remove(0);
+        QueueElement element = queue.remove(0);
+        pastQueue.add(element.nodeNum);
+        return element;
+    }
+
+    @Override
+    public String toString() {
+        return queue.toString();
+    }
+
+    public void addNeighbors(int i, int[][] distMatrix, int offset) {
+        for (int j = 0; j < distMatrix.length; j++) {
+            if (distMatrix[i][j] != 0) {
+                insert(new QueueElement(j, distMatrix[i][j] + offset));
+            }
+        }
     }
 }
