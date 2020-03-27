@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class Dijkstra {
-
     static StringBuilder dijkstraExerciseStringBuilder;
     static StringBuilder dijkstraSolutionStringBuilder;
     private static List<String> nodeList = new ArrayList<>();
@@ -45,11 +44,11 @@ public class Dijkstra {
 
     private static int dijkstra(int[][] distMatrix) {
         Queue q = new Queue();
-        Queue path = new Queue();
+        Queue shortestPaths = new Queue();
         q.insert(new QueueElement(0, 0));
         for (int i = 0; i < distMatrix.length - 1; i++) {
             QueueElement first = q.deQueue();
-            path.insert(first);
+            shortestPaths.insert(first);
             int offset = first.prio;
             int nodeNum = first.nodeNum;
             q.addNeighbors(nodeNum, distMatrix, offset);
@@ -57,8 +56,8 @@ public class Dijkstra {
                     "\\color{tumgadRed}" + Terminal.printArrayList(q.queue) + "\\color{black}");
         }
         QueueElement last = q.deQueue();
-        path.insert(last);
-        System.out.println(path);
+        shortestPaths.insert(last);
+        System.out.println(shortestPaths);
         return last.prio;
     }
 
@@ -274,14 +273,28 @@ class Queue {
         for (int j = 0; j < distMatrix.length; j++) {
             if (distMatrix[i][j] != 0) {
                 QueueElement temp = new QueueElement(j, distMatrix[i][j] + offset);
-                printQueue.insert(temp);
+                if (!queue.contains(temp) || queue.get(queue.indexOf(temp)).prio > temp.prio) {
+                    printQueue.insert(temp);
+                }
                 insert(temp);
             }
         }
-        if (printQueue.queue.size() > 0) {
+        if (printQueue.queue.size() == 0) {
+            Terminal.replaceinSB(Dijkstra.dijkstraSolutionStringBuilder, "%$QUEUECHANGE$",
+                    "\\color{tumgadRed}---\\color{black}\\\\\n\\hline" +
+                            "\n%$QUEUEPRINT$ & %$QUEUECHANGE$");
+        }else  {
             Terminal.replaceinSB(Dijkstra.dijkstraSolutionStringBuilder, "%$QUEUECHANGE$",
                     "\\color{tumgadRed}" + Terminal.printArrayList(printQueue.queue) + "\\color{black}\\\\\n\\hline" +
                             "\n%$QUEUEPRINT$ & %$QUEUECHANGE$");
+        }
+    }
+
+    class Path {
+        ArrayList<Integer> nodeSeq;
+        int length;
+
+        public Path() {
         }
     }
 }
