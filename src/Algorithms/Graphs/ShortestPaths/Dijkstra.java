@@ -51,14 +51,37 @@ public class Dijkstra {
             shortestPaths.insert(first);
             int offset = first.prio;
             int nodeNum = first.nodeNum;
+            // If we arrive at the final node earlier than normal
+            if (nodeNum == distMatrix.length - 1) {
+                shortestPaths.insert(first);
+                printShortestPath(distMatrix, shortestPaths);
+                return first.prio;
+            }
             q.addNeighbors(nodeNum, distMatrix, offset);
             Terminal.replaceinSB(dijkstraSolutionStringBuilder, "%$QUEUEPRINT$",
                     "\\color{tumgadRed}" + Terminal.printArrayList(q.queue) + "\\color{black}");
         }
         QueueElement last = q.deQueue();
         shortestPaths.insert(last);
-        System.out.println(shortestPaths);
+        printShortestPath(distMatrix, shortestPaths);
         return last.prio;
+    }
+
+    private static void printShortestPath(int[][] distMatrix, Queue shortestPaths) {
+        ArrayList<Integer> path = new ArrayList<>();
+        for (int i = shortestPaths.queue.size() - 1; i >= 0; i--) {
+            for (int j = i - 1; j >= 0; j--) {
+                if (shortestPaths.queue.get(i).prio - shortestPaths.queue.get(j).prio == distMatrix[shortestPaths.queue.get(j).nodeNum][shortestPaths.queue.get(i).nodeNum]) {
+                    path.add(shortestPaths.queue.get(i).nodeNum);
+                    i = j + 1;
+                    break;
+                }
+            }
+        }
+        Terminal.replaceinSB(dijkstraSolutionStringBuilder, "%$SOLUTIONPATH$", "\\color{tumgadRed} %$SOLUTIONPATH$");
+        for (int i = path.size() - 1; i >= 0; i--) {
+            Terminal.replaceinSB(dijkstraSolutionStringBuilder, "%$SOLUTIONPATH$", "$\\rightarrow$" + ((char) ('A' + path.get(i))) + "%$SOLUTIONPATH$");
+        }
     }
 
     private static void generateGraphEdges(int[][] nodeMatrix, int[][] distMatrix) {
@@ -139,12 +162,6 @@ public class Dijkstra {
                 distMatrix[0][getNodeNum(nodeMatrix, i, 1)] = Terminal.rand.nextInt(5) + (11 * i);
                 max--;
             }
-        }
-        for (int i = 0; i < distMatrix.length; i++) {
-            for (int j = 0; j < distMatrix[0].length; j++) {
-                System.out.print(distMatrix[i][j] + ", ");
-            }
-            System.out.println();
         }
         return distMatrix;
     }
@@ -273,7 +290,7 @@ class Queue {
         for (int j = 0; j < distMatrix.length; j++) {
             if (distMatrix[i][j] != 0) {
                 QueueElement temp = new QueueElement(j, distMatrix[i][j] + offset);
-                if (!queue.contains(temp) || queue.get(queue.indexOf(temp)).prio > temp.prio) {
+                if (!pastQueue.contains(temp.nodeNum) && (!queue.contains(temp) || queue.get(queue.indexOf(temp)).prio > temp.prio)) {
                     printQueue.insert(temp);
                 }
                 insert(temp);
@@ -283,18 +300,10 @@ class Queue {
             Terminal.replaceinSB(Dijkstra.dijkstraSolutionStringBuilder, "%$QUEUECHANGE$",
                     "\\color{tumgadRed}---\\color{black}\\\\\n\\hline" +
                             "\n%$QUEUEPRINT$ & %$QUEUECHANGE$");
-        }else  {
+        } else {
             Terminal.replaceinSB(Dijkstra.dijkstraSolutionStringBuilder, "%$QUEUECHANGE$",
                     "\\color{tumgadRed}" + Terminal.printArrayList(printQueue.queue) + "\\color{black}\\\\\n\\hline" +
                             "\n%$QUEUEPRINT$ & %$QUEUECHANGE$");
-        }
-    }
-
-    class Path {
-        ArrayList<Integer> nodeSeq;
-        int length;
-
-        public Path() {
         }
     }
 }
