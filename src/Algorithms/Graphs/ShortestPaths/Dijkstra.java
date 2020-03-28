@@ -10,24 +10,26 @@ import java.util.Objects;
 public class Dijkstra {
     static StringBuilder dijkstraExerciseStringBuilder;
     static StringBuilder dijkstraSolutionStringBuilder;
-    private static List<String> nodeList = new ArrayList<>();
+    private static List<String> nodeList = new ArrayList<>(); // List of LaTeX node-id's makes it easier to generate the TeX
 
     public static void generateExercise() {
         dijkstraExerciseStringBuilder = Terminal.readFile("src/Algorithms/Graphs/ShortestPaths/DijkstraExerciseTemplate.tex");
         dijkstraSolutionStringBuilder = Terminal.readFile("src/Algorithms/Graphs/ShortestPaths/DijkstraSolutionTemplate.tex");
 
-        int numNodes = Terminal.rand.nextInt(3) + 11;
+        int numNodes = Terminal.rand.nextInt(3) + 11; // Number of nodes between start and end
 
         int[][] nodeMatrix = generateNodeMatrix(numNodes);
         Collections.sort(nodeList);
         char maxChar = generateGraphNodes(nodeMatrix);
         int[][] distMatrix = generateDistMatrix(nodeMatrix, numNodes + 2);
         generateGraphEdges(nodeMatrix, distMatrix);
-        Terminal.replaceinSB(dijkstraSolutionStringBuilder, "$MINLEN$",
-                "\\color{tumgadRed}" + dijkstra(distMatrix) + "\\color{black}");
 
         Terminal.replaceinSB(dijkstraExerciseStringBuilder, "MAXCHAR", "" + maxChar);
         Terminal.replaceinSB(dijkstraSolutionStringBuilder, "MAXCHAR", "" + maxChar);
+
+        Terminal.replaceinSB(dijkstraSolutionStringBuilder, "$MINLEN$",
+                "\\color{tumgadRed}" + dijkstra(distMatrix) + "\\color{black}");
+
 
         StringBuilder exerciseStringBuilder = Terminal.readFile("docs/Exercises.tex");
         StringBuilder solutionStringBuilder = Terminal.readFile("docs/Solutions.tex");
@@ -42,22 +44,26 @@ public class Dijkstra {
         Terminal.saveToFile("docs/Solutions.tex", solutionStringBuilder);
     }
 
+    /**
+     * The actual Dijkstra implementation, although the Queue class does a lot of the heavy-lifting
+     */
     private static int dijkstra(int[][] distMatrix) {
-        Queue q = new Queue();
-        Queue shortestPaths = new Queue();
-        q.insert(new QueueElement(0, 0));
+        Queue q = new Queue(); // the priority Queue containing the next nodes to be visited and their distances
+        Queue shortestPaths = new Queue(); // a queue that keeps all the nodes, only updating the lengths from a to the nodes
+
+        q.insert(new QueueElement(0, 0)); // the first node is trivially always the same
         for (int i = 0; i < distMatrix.length - 1; i++) {
             QueueElement first = q.deQueue();
             shortestPaths.insert(first);
             int offset = first.prio;
             int nodeNum = first.nodeNum;
-            // If we arrive at the final node earlier than normal
+            // If we arrive at the final node earlier than normally
             if (nodeNum == distMatrix.length - 1) {
                 shortestPaths.insert(first);
                 printShortestPath(distMatrix, shortestPaths);
                 return first.prio;
             }
-            q.addNeighbors(nodeNum, distMatrix, offset);
+            q.addNeighbors(nodeNum, distMatrix, offset); // insert the neighbours of the node in question into the queue
             Terminal.replaceinSB(dijkstraSolutionStringBuilder, "%$QUEUEPRINT$",
                     "\\color{tumgadRed}" + Terminal.printArrayList(q.queue) + "\\color{black}");
         }
@@ -84,6 +90,12 @@ public class Dijkstra {
         }
     }
 
+    /**
+     * generates the LaTeX verteces with the weights specified in the dist matrix
+     *
+     * @param nodeMatrix the binary NodeMatrix
+     * @param distMatrix the dist matrix specifying the weights between nodes
+     */
     private static void generateGraphEdges(int[][] nodeMatrix, int[][] distMatrix) {
         for (int i = 0; i < distMatrix.length; i++) {
             for (int j = i + 1; j < distMatrix[0].length; j++) {
@@ -116,6 +128,15 @@ public class Dijkstra {
         }
     }
 
+    /**
+     * checks if a path between nodes is clear (not obstructed by another path)
+     * used for nodes when the first node and the second are in different rows and columns
+     *
+     * @param i the node first in the sequence
+     * @param j the node to the left and below of the i node
+     *
+     * @return whether or not the path between the two nodes is clear
+     */
     private static boolean pathClear(int[][] nodeMatrix, int i, int j) {
         int row1 = Integer.parseInt("" + nodeList.get(i).charAt(0));
         int col1 = Integer.parseInt("" + nodeList.get(i).charAt(1));
@@ -130,19 +151,35 @@ public class Dijkstra {
         return true;
     }
 
+    /**
+     * asserts whether the nodes i and j are in different rows AND different columns
+     * (i.e. whether you have to go across)
+     */
     private static boolean acrossLeft(int i, int j) {
         return nodeList.get(i).charAt(0) != nodeList.get(j).charAt(0) && nodeList.get(i).charAt(1) != nodeList.get(j).charAt(1);
     }
 
+    /**
+     * Generates random values for the upper half of the dist-matrix (as the graph is non-directional)
+     * the values are depending on how many nodes the vertex skips, to make it harder to find a path
+     *
+     * @param nodeMatrix the binary nodeMatrix
+     * @param numNodes the number of nodes in the graph makes up the dimensions of the dist matrix
+     *
+     * @return a numNodes x numNodes int-array with the vertex weights between each of the nodes
+     * "taxing" the weights based on how far they would get you (faster paths => higher tax)
+     */
     private static int[][] generateDistMatrix(int[][] nodeMatrix, int numNodes) {
         int currNode = 0;
         int[][] distMatrix = new int[numNodes][numNodes];
+        // connect each node with its successor
         for (int i = 0; i < nodeMatrix.length; i++) {
             for (int j = i + 1; j < nodeMatrix[0].length && currNode < numNodes - 1; j++) {
                 distMatrix[currNode][++currNode] = Terminal.rand.nextInt(5) + 4;
             }
         }
         currNode = 0;
+        // connect each node with the node below it
         for (int i = 0; i < nodeMatrix.length - 1; i++) {
             for (int j = 0; j < nodeMatrix[0].length && currNode < numNodes - 1; j++) {
                 if (nodeMatrix[i][j] == 1) {
@@ -153,6 +190,7 @@ public class Dijkstra {
                 }
             }
         }
+        // connect the A-node with up to two nodes in the first column (heavily taxed)
         int max = 2; // A maximum of 2 extra connections to A
         for (int i = 1; i < nodeMatrix.length - 1; i++) {
             if (max == 0) {
@@ -166,6 +204,16 @@ public class Dijkstra {
         return distMatrix;
     }
 
+    /**
+     * provided with the coordinates of a node and the nodeMatrix, the method finds the
+     * corresponding nodeNumber
+     *
+     * @param nodeMatrix the binary nodeMatrix
+     * @param i the row the searched node is in
+     * @param j the column the wanted node is in
+     *
+     * @return the nodeNumber of the node with the given coordinates
+     */
     private static int getNodeNum(int[][] nodeMatrix, int i, int j) {
         int nodeNum = 0;
         for (int k = 0; k < nodeMatrix.length; k++) {
@@ -181,6 +229,13 @@ public class Dijkstra {
         return -1;
     }
 
+    /**
+     * makes the nodes specified in the nodeMatrix visible in the LaTeX templates
+     *
+     * @param nodeMatrix the nodeMatrix with the position of the nodes
+     *
+     * @return the highest node number as a char to replace in the template
+     */
     private static char generateGraphNodes(int[][] nodeMatrix) {
         int numLabeled = 0;
         for (int i = 0; i < nodeMatrix.length; i++) {
@@ -195,12 +250,19 @@ public class Dijkstra {
                 }
             }
         }
-        return (char) ('A' + --numLabeled);
+        return (char) ('A' + --numLabeled); // the last node
     }
 
+    /**
+     * Generates a binary node matrix, where a 1 stands for a node present, 0 for no node
+     * present.
+     *
+     * @param numNodes number of nodes that have to be generated (i.e. the ones beside start and end)
+     * @return a 5x6 binary matrix specifying the position of graph nodes
+     */
     private static int[][] generateNodeMatrix(int numNodes) {
         int[][] nodeMatrix = new int[5][6];
-        nodeList.add("00");
+        nodeList.add("00"); //
         nodeMatrix[0][0] = 1; // first node
         while (numNodes > 0) {
             int x = Terminal.rand.nextInt(nodeMatrix.length);
@@ -258,7 +320,12 @@ class Queue {
         pastQueue = new ArrayList<>();
     }
 
+    /**
+     * inserts a QueueElement ito this queue, if it matches the criteria
+     */
     void insert(QueueElement element) {
+        // if there is already a node with this number in the queue and its distance is already lower, we will not insert it
+        // Also if the node was already inserted into the queue before and already visited (i.e. it's in the pastQueue)
         if (queue.contains(element) && element.prio > queue.get(queue.indexOf(element)).prio || pastQueue.contains(element.nodeNum)) {
             return;
         }
@@ -285,6 +352,10 @@ class Queue {
         return queue.toString();
     }
 
+    /**
+     * inserts the neighbours of this node into the queue list with the distances specified in the
+     * dist Matrix
+     */
     public void addNeighbors(int i, int[][] distMatrix, int offset) {
         Queue printQueue = new Queue();
         for (int j = 0; j < distMatrix.length; j++) {
