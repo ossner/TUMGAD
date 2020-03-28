@@ -22,6 +22,7 @@ determined by the balances:
 | 2 | -1 |left-right|
 | -2 | 1 |right-left|
 
+## Insert
 Insertion into an AVL tree works just like in a BS Tree, just
 remember to keep track of the balances. 
 
@@ -37,6 +38,7 @@ is needed to satisfy the tree conditions:
 ![Beautiful rotation arrows brought to you by MS Paint](../../../../resources/AVLRRotationExample.png)
 ![After Rotation the balances are ](../../../../resources/AVLRRotationAfter.png)
 
+## Deletion
 Deleting a node from an AVL Tree is sometimes slightly more complicated.
 If the node is a leaf, you simply remove it, update balances and
 re-balance if necessary.
@@ -44,6 +46,8 @@ re-balance if necessary.
 If the node is not a leaf, you switch it with its in-order successor,
 remove the new leaf, up update balances and
 re-balance if necessary.
+
+## Time Complexity:
 
 | Access | Search | Insertion | Deletion |
 |----|----|----|----|
