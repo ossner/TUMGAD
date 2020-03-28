@@ -26,8 +26,7 @@ determined by the balances:
 Insertion into an AVL tree works just like in a BS Tree, just
 remember to keep track of the balances. 
 
-Example: Insert 1 into the
-above tree:
+Example: Insert 1 into the above tree:
 
 ![An unbalanced AVL tree with the balance of every node noted in red](../../../../resources/AVLInsertBalanceExample.png)
 
@@ -36,6 +35,7 @@ of 2 and its child node a balance of 1, thus a right-rotation
 is needed to satisfy the tree conditions:
 
 ![Beautiful rotation arrows brought to you by MS Paint](../../../../resources/AVLRRotationExample.png)
+
 ![After Rotation the balances are ](../../../../resources/AVLRRotationAfter.png)
 
 ## Deletion
