@@ -221,13 +221,13 @@ public class Tumgad {
                         FloydWarshall.generateExercise();
                         break;
                     case "D":
-                        say("Dijkstra's algorithm can not be generated yet, still in development");
+                        System.out.println(ANSI_PURPLE + "Generating Dijkstra's Algorithm" + ANSI_RESET);
+                        Dijkstra.generateExercise();
                         break;
                     case "P":
                         say("Prim's algorithm can not be generated yet, still in development");
                         break;
                     case "DEV":
-                        Dijkstra.generateExercise();
                         say("Generating components that are still in development");
                         break;
                     default:
