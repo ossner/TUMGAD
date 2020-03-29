@@ -1,0 +1,567 @@
+package DataStructures.SearchStructures.ABTrees;
+
+import Util.Terminal;
+
+import java.util.ArrayList;
+
+abstract class ABTreeNode {
+    /**
+     * The lower bound of the node degree.
+     */
+    protected int a;
+
+    /**
+     * The upper bound of the node degree.
+     */
+    protected int b;
+
+    ABTreeNode(int a, int b) {
+        this.a = a;
+        this.b = b;
+    }
+
+    /**
+     * inserts a key into the tree.
+     *
+     * @param key the key to be inserted
+     */
+    public abstract void insert(int key);
+
+    /**
+     * decides, whether you can steak out of this node or not.
+     *
+     * @return 'true' if you can steam, 'false' else
+     */
+    public abstract boolean canSteal();
+
+    /**
+     * looks for key in the tree.
+     *
+     * @param key the key in question
+     * @return 'true' if the key is in the tree, 'false' else
+     */
+    public abstract boolean find(int key);
+
+    /**
+     * removes a key 'key' in the subtree, id it is present.
+     *
+     * @param key the key to be removed
+     * @return 'true' if the key was found and removed, 'false' else
+     */
+    public abstract boolean remove(int key);
+
+    /**
+     * calculated the height of the subtree
+     *
+     * @return the found height
+     */
+    public abstract int height();
+
+    /**
+     * finds the minimal element in the sub tree
+     *
+     * @return the minimum
+     */
+    public abstract Integer min();
+
+    /**
+     * Finds the maximum element in the sub tree
+     *
+     * @return the max element
+     */
+    public abstract Integer max();
+
+    /**
+     * Checks if this is a valid ab tree
+     *
+     * @return 'true' if it is a valid (a,b)-Tree, 'false' else
+     */
+    public abstract boolean validAB(boolean root);
+
+    abstract String toTex();
+}
+
+public class ABTree {
+    static StringBuilder abTreeExerciseStringBuilder;
+    static StringBuilder abTreeSolutionStringBuilder;
+
+    static public void generateExercise() {
+        abTreeExerciseStringBuilder = Terminal.readFile("src/DataStructures/SearchStructures/ABTrees/ABTreeExerciseTemplate.tex");
+        abTreeSolutionStringBuilder = Terminal.readFile("src/DataStructures/SearchStructures/ABTrees/ABTreeSolutionTemplate.tex");
+
+        int a = Terminal.rand.nextInt(2) + 2;
+        int b = 2 * a + Terminal.rand.nextInt(2) - 1;
+        ABTree tree = new ABTree(a, b);
+        int[] values = Terminal.generateRandomArray(19, 19);
+        for (int i = 0; i < 14; i++) {
+            tree.insert(values[i]);
+        }
+
+        Terminal.replaceinSB(abTreeExerciseStringBuilder, "$ABVALUES$", "a = " + a + " and b = " + b);
+        Terminal.replaceinSB(abTreeSolutionStringBuilder, "$ABVALUES$", "a = " + a + " and b = " + b);
+
+        Terminal.replaceinSB(abTreeSolutionStringBuilder, "%$INITTREE$", tree.toTex());
+        Terminal.replaceinSB(abTreeExerciseStringBuilder, "%$INITTREE$", tree.toTex());
+
+        int[] deletions = new int[]{values[0], values[5], values[8], values[12], values[3]};
+        int[] insertions = new int[5];
+
+        System.out.println(Terminal.printArray(values));
+
+        System.arraycopy(values, 14, insertions, 0, 5);
+
+        Terminal.replaceinSB(abTreeExerciseStringBuilder, "$DELETIONS$", Terminal.printArray(deletions));
+        Terminal.replaceinSB(abTreeSolutionStringBuilder, "$DELETIONS$", Terminal.printArray(deletions));
+
+        Terminal.replaceinSB(abTreeExerciseStringBuilder, "$INSERTIONS$", Terminal.printArray(insertions));
+        Terminal.replaceinSB(abTreeSolutionStringBuilder, "$INSERTIONS$", Terminal.printArray(insertions));
+
+        for (int i = 0; i < deletions.length; i++) {
+            Terminal.replaceinSB(abTreeSolutionStringBuilder, "%$ABTREE$", "Delete: \\underline{" +
+                    "\\color{tumgadRed}" + deletions[i] + "\\color{black}}\n%$ABTREE$");
+            tree.remove(deletions[i]);
+            Terminal.replaceinSB(abTreeSolutionStringBuilder, "%$ABTREE$", tree.toTex() + "%$ABTREE$");
+        }
+
+        for (int i = 0; i < insertions.length; i++) {
+            Terminal.replaceinSB(abTreeSolutionStringBuilder, "%$ABTREE$", "Insert: \\underline{" +
+                    "\\color{tumgadRed}" + insertions[i] + "\\color{black}}\n%$ABTREE$");
+            tree.insert(insertions[i]);
+            Terminal.replaceinSB(abTreeSolutionStringBuilder, "%$ABTREE$", tree.toTex() + "%$ABTREE$");
+        }
+
+
+        StringBuilder exerciseStringBuilder = Terminal.readFile("docs/Exercises.tex");
+        StringBuilder solutionStringBuilder = Terminal.readFile("docs/Solutions.tex");
+
+        Terminal.replaceinSB(exerciseStringBuilder, "%$ABCELL$", "\\cellcolor{tumgadPurple}");
+        Terminal.replaceinSB(solutionStringBuilder, "%$ABCELL$", "\\cellcolor{tumgadRed}");
+
+        Terminal.replaceinSB(exerciseStringBuilder, "%$ABTREES$", "\\newpage\n" + abTreeExerciseStringBuilder.toString());
+        Terminal.replaceinSB(solutionStringBuilder, "%$ABTREES$", "\\newpage\n" + abTreeSolutionStringBuilder.toString());
+
+        Terminal.saveToFile("docs/Exercises.tex", exerciseStringBuilder);
+        Terminal.saveToFile("docs/Solutions.tex", solutionStringBuilder);
+
+    }
+
+    private final int a;
+    private final int b;
+    private ABTreeInnerNode root = null;
+
+    public ABTree(int a, int b) {
+        if (a < 2) {
+            throw new RuntimeException("Invalid a");
+        } else if (b < 2 * a - 1) {
+            throw new RuntimeException("Invalid b");
+        }
+        this.a = a;
+        this.b = b;
+    }
+
+    public boolean validAB() {
+        return root == null || root.validAB(true);
+    }
+
+    public int height() {
+        if (root == null) {
+            return 0;
+        }
+        return root.height();
+    }
+
+    public boolean find(int key) {
+        return root != null && root.find(key);
+    }
+
+    public void insert(int key) {
+        if (root != null) {
+            root.insert(key);
+            if (root.getChildren().size() > b) {
+                int middle = b / 2;
+
+                ArrayList<Integer> keysLeft = new ArrayList<>();
+                ArrayList<ABTreeNode> childrenLeft = new ArrayList<>();
+                ArrayList<Integer> keysRight = new ArrayList<>();
+                ArrayList<ABTreeNode> childrenRight = new ArrayList<>();
+
+                for (int i = 0; i < root.getKeys().size(); i++) {
+                    if (i < middle) {
+                        keysLeft.add(root.getKeys().get(i));
+                        childrenLeft.add(root.getChildren().get(i));
+                    } else if (i == middle) {
+                        childrenLeft.add(root.getChildren().get(i));
+                    } else {
+                        keysRight.add(root.getKeys().get(i));
+                        childrenRight.add(root.getChildren().get(i));
+                    }
+                }
+                childrenRight.add(root.getChildren().get(root.getChildren().size() - 1));
+
+                ABTreeInnerNode leftNew = new ABTreeInnerNode(keysLeft, childrenLeft, a, b);
+                ABTreeInnerNode rightNew = new ABTreeInnerNode(keysRight, childrenRight, a, b);
+
+                root = new ABTreeInnerNode(root.getKeys().get(middle), leftNew, rightNew, a, b);
+            }
+        } else {
+            root = new ABTreeInnerNode(key, a, b);
+        }
+    }
+
+    public boolean remove(int key) {
+        if (root != null) {
+            boolean result = root.remove(key);
+            if (root.getChildren().size() < 2 && root.getChildren().get(0) instanceof ABTreeInnerNode) {
+                root = (ABTreeInnerNode) root.getChildren().get(0);
+            } else if (root.getChildren().size() < 2) {
+                root = null;
+            }
+            return result;
+        }
+        return false;
+    }
+
+    private String toTex() {
+        int l1Dist = root.height() == 3 ? 60 : 25;
+        if (b>=5) { // small issue with overlapping nodes at this value
+            l1Dist = 35;
+        }
+        int l2Dist = 20;
+        String ret = "\\begin{center}\\begin{tikzpicture}\n\\tikzstyle{bplus}=[rectangle split, rectangle split horizontal,rectangle split ignore empty parts,draw]\n" +
+                "\\tikzstyle{every node}=[bplus]\n" +
+                "\\tikzstyle{level 1}=[sibling distance=" + l1Dist + "mm]\n" +
+                "\\tikzstyle{level 2}=[sibling distance=" + l2Dist + "mm]\n" +
+                "\\node {" + root.getKeys().get(0);
+
+        for (int i = 1; i < root.getKeys().size(); i++) {
+            ret += "\\nodepart{" + Terminal.numberString(i + 1) + "}" + root.getKeys().get(i);
+        }
+
+        ret += "} [->]";
+        for (int i = 0; i < root.getChildren().size(); i++) {
+            ret += root.getChildren().get(i).toTex();
+        }
+        return ret + ";\n\\end{tikzpicture}\\end{center}\n";
+    }
+}
+
+
+class ABTreeInnerNode extends ABTreeNode {
+
+    private ArrayList<Integer> keys;
+    private ArrayList<ABTreeNode> children;
+
+    public ABTreeInnerNode(ArrayList<Integer> keys, ArrayList<ABTreeNode> children, int a, int b) {
+        super(a, b);
+        this.keys = keys;
+        this.children = children;
+    }
+
+    public ABTreeInnerNode(int key, ABTreeNode left, ABTreeNode right, int a, int b) {
+        super(a, b);
+        keys = new ArrayList<>();
+        children = new ArrayList<>();
+        keys.add(key);
+        children.add(left);
+        children.add(right);
+    }
+
+    public ABTreeInnerNode(int key, int a, int b) {
+        this(key, new ABTreeLeaf(a, b), new ABTreeLeaf(a, b), a, b);
+    }
+
+    public ArrayList<ABTreeNode> getChildren() {
+        return children;
+    }
+
+    public ArrayList<Integer> getKeys() {
+        return keys;
+    }
+
+    @Override
+    public void insert(int key) {
+        int index;
+        for (index = 0; index < keys.size(); index++) {
+            if (keys.get(index) == key) {
+                return;
+            }
+            if (keys.get(index) > key) {
+                break;
+            }
+        }
+        ABTreeNode child = children.get(index);
+        child.insert(key);
+
+        if (child instanceof ABTreeLeaf) {
+            ABTreeLeaf newLeaf = new ABTreeLeaf(a, b);
+            keys.add(index, key);
+            children.add(index, newLeaf);
+        } else {
+            ABTreeInnerNode innerChild = (ABTreeInnerNode) child;
+            if (innerChild.children.size() > b) {
+                int middle = b / 2;
+
+                ArrayList<Integer> keysLeft = new ArrayList<>();
+                ArrayList<ABTreeNode> childrenLeft = new ArrayList<>();
+                ArrayList<Integer> keysRight = new ArrayList<>();
+                ArrayList<ABTreeNode> childrenRight = new ArrayList<>();
+
+                for (int i = 0; i < innerChild.keys.size(); i++) {
+                    if (i < middle) {
+                        keysLeft.add(innerChild.keys.get(i));
+                        childrenLeft.add(innerChild.children.get(i));
+                    } else if (i == middle) {
+                        childrenLeft.add(innerChild.children.get(i));
+                    } else {
+                        keysRight.add(innerChild.keys.get(i));
+                        childrenRight.add(innerChild.children.get(i));
+                    }
+                }
+                childrenRight.add(innerChild.children.get(innerChild.children.size() - 1));
+
+                ABTreeInnerNode leftNew = new ABTreeInnerNode(keysLeft, childrenLeft, a, b);
+                ABTreeInnerNode rightNew = new ABTreeInnerNode(keysRight, childrenRight, a, b);
+
+                keys.add(index, innerChild.keys.get(middle));
+                children.set(index, leftNew);
+                children.add(index + 1, rightNew);
+            }
+        }
+    }
+
+    @Override
+    public boolean canSteal() {
+        return children.size() > a;
+    }
+
+    @Override
+    public boolean find(int key) {
+        for (int i = 0; i < keys.size(); i++) {
+            if (keys.get(i) == key) {
+                return true;
+            } else if (keys.get(i) > key) {
+                return children.get(i).find(key);
+            }
+        }
+        return children.get(children.size() - 1).find(key);
+    }
+
+    @Override
+    public boolean remove(int key) {
+        for (int index = 0; index < children.size(); index++) {
+            ABTreeNode child = children.get(index);
+            if (index == keys.size() || keys.get(index) > key) {
+                boolean result = child.remove(key);
+                if (result) {
+                    balanceChildren(index);
+                }
+                return result;
+            } else if (keys.get(index) == key) {
+                if (child instanceof ABTreeLeaf) {
+                    assert (index < keys.size());
+                    keys.remove(index);
+                    children.remove(index);
+                } else {
+                    keys.set(index, ((ABTreeInnerNode) child).removeRightMostChild());
+                    balanceChildren(index);
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void balanceChildren(int index) {
+        assert (children.get(index) instanceof ABTreeInnerNode);
+        ABTreeInnerNode innerChild = (ABTreeInnerNode) children.get(index);
+        if (innerChild.children.size() < a) {
+            if (index - 1 >= 0 && children.get(index - 1).canSteal()) {
+                ABTreeInnerNode leftNeighbor = (ABTreeInnerNode) children.get(index - 1);
+                innerChild.children.add(0, leftNeighbor.children.get(leftNeighbor.children.size() - 1));
+                leftNeighbor.children.remove(leftNeighbor.children.size() - 1);
+
+                innerChild.keys.add(0, keys.get(index - 1));
+                keys.set(index - 1, leftNeighbor.keys.get(leftNeighbor.keys.size() - 1));
+                leftNeighbor.keys.remove(leftNeighbor.keys.size() - 1);
+            } else if (index + 1 < children.size() && children.get(index + 1).canSteal()) {
+                ABTreeInnerNode rightNeighbor = (ABTreeInnerNode) children.get(index + 1);
+                innerChild.children.add(rightNeighbor.children.get(0));
+                rightNeighbor.children.remove(0);
+
+                innerChild.keys.add(keys.get(index));
+                keys.set(index, rightNeighbor.keys.get(0));
+                rightNeighbor.keys.remove(0);
+            } else // verschmelze mit Nachbarknoten
+                if (index + 1 < children.size()) {
+                    mergeChildren(index);
+                } else {
+                    mergeChildren(index - 1);
+                }
+        }
+    }
+
+    private void mergeChildren(int keyIndex) {
+        ABTreeInnerNode node0 = (ABTreeInnerNode) children.get(keyIndex);
+        ABTreeInnerNode node1 = (ABTreeInnerNode) children.get(keyIndex + 1);
+
+        ArrayList<Integer> keys = new ArrayList<>();
+        keys.addAll(node0.keys);
+        keys.add(this.keys.get(keyIndex));
+        keys.addAll(node1.keys);
+
+        ArrayList<ABTreeNode> children = new ArrayList<>();
+        children.addAll(node0.children);
+        children.addAll(node1.children);
+
+        ABTreeInnerNode newNode = new ABTreeInnerNode(keys, children, a, b);
+
+        this.children.remove(keyIndex + 1);
+        this.children.set(keyIndex, newNode);
+        this.keys.remove(keyIndex);
+    }
+
+    private int removeRightMostChild() {
+        ABTreeNode child = children.get(children.size() - 1);
+        if (child instanceof ABTreeLeaf) {
+            children.remove(children.size() - 1);
+            int key = keys.get(keys.size() - 1);
+            keys.remove(keys.size() - 1);
+            return key;
+        } else {
+            int key = ((ABTreeInnerNode) child).removeRightMostChild();
+            balanceChildren(children.size() - 1);
+            return key;
+        }
+    }
+
+    @Override
+    public int height() {
+        return 1 + children.get(0).height();
+    }
+
+    @Override
+    public Integer min() {
+        Integer result = children.get(0).min();
+        if (result == null) {
+            result = keys.get(0);
+        }
+        return result;
+    }
+
+    @Override
+    public Integer max() {
+        Integer result = children.get(children.size() - 1).max();
+        if (result == null) {
+            result = keys.get(keys.size() - 1);
+        }
+        return result;
+    }
+
+    @Override
+    public boolean validAB(boolean root) {
+        if (children.size() < (root ? 2 : a)) {
+            System.err.println("children.size < a");
+            return false;
+        }
+        if (children.size() > b) {
+            System.err.println("children.size > b");
+            return false;
+        }
+        int h = height();
+        for (int i = 0; i < children.size(); i++) {
+            if (!children.get(i).validAB(false)) {
+                System.err.println(String.format("child %d invalid", i));
+                return false;
+            }
+            if (h != children.get(i).height() + 1) {
+                System.err.println(String.format("child %d has invalid height", i));
+                return false;
+            }
+        }
+        if (h == 1) {
+            return true;
+        }
+        for (int i = 0; i < keys.size(); i++) {
+            Integer min = children.get(i).min();
+            Integer max = children.get(i).max();
+            if (max != null && max >= keys.get(i)) {
+                System.err.println(String.format("max %d >= key(%d) %d", max, i, keys.get(i)));
+                return false;
+            }
+            if (min != null && min >= keys.get(i)) {
+                System.err.println(String.format("min %d >= key(%d) %d", min, i, keys.get(i)));
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    String toTex() {
+
+        String ret = "child {node[draw,rectangle split,rectangle split parts=" + this.getKeys().size() + "]{" +
+                this.getKeys().get(0);
+
+        for (int i = 1; i < this.getKeys().size(); i++) {
+            ret += "\\nodepart{" + Terminal.numberString(i + 1) + "}" + this.getKeys().get(i);
+        }
+        ret += "}";
+
+        for (int i = 0; i < children.size(); i++) {
+            ret += children.get(i).toTex();
+        }
+        return ret + "}";
+    }
+}
+
+
+class ABTreeLeaf extends ABTreeNode {
+
+    public ABTreeLeaf(int a, int b) {
+        super(a, b);
+    }
+
+    @Override
+    public void insert(int key) {
+    }
+
+    @Override
+    public boolean canSteal() {
+        return false;
+    }
+
+    @Override
+    public boolean find(int key) {
+        return false;
+    }
+
+    @Override
+    public boolean remove(int key) {
+        return false;
+    }
+
+    @Override
+    public int height() {
+        return 0;
+    }
+
+    @Override
+    public Integer min() {
+        return null;
+    }
+
+    @Override
+    public Integer max() {
+        return null;
+    }
+
+    @Override
+    public boolean validAB(boolean root) {
+        return true;
+    }
+
+    @Override
+    String toTex() {
+        return "";
+    }
+}

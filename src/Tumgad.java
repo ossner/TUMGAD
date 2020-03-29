@@ -8,7 +8,7 @@ import Algorithms.Sorting.QuickSort.QuickSort;
 import Algorithms.Sorting.RadixSort.RadixSort;
 import DataStructures.PriorityQueues.BinaryHeaps.BinaryHeap;
 import DataStructures.PriorityQueues.BinomialHeaps.BinomialHeap;
-import DataStructures.SearchStructures.ABTrees.BTree;
+import DataStructures.SearchStructures.ABTrees.ABTree;
 import DataStructures.SearchStructures.AVLTrees.AVLTree;
 import DataStructures.Sequences.Arrays.DynamicArray;
 import Util.Terminal;
@@ -202,7 +202,7 @@ public class Tumgad {
                         break;
                     case "AB":
                         System.out.println(ANSI_PURPLE + "Generating (a,b) Trees" + ANSI_RESET);
-                        BTree.generateExercise();
+                        ABTree.generateExercise();
                         break;
                     case "AVL":
                         System.out.println(ANSI_PURPLE + "Generating AVL Trees" + ANSI_RESET);
