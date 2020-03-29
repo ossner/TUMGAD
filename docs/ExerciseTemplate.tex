@@ -33,6 +33,11 @@
 \cfoot{TUMGAD was created by Sebastian Oßner and Daniel Krüger \href{https://github.com/SebastianOner/TUMGAD}{\underline{View it on GitHub}}}
 \renewcommand{\footrulewidth}{0.4pt}
 
+\newcommand\invisiblesection[1]{%
+    \refstepcounter{section}%
+    \addcontentsline{toc}{section}{\protect\numberline{\thesection}#1}%
+    \sectionmark{#1}}
+
 \begin{document}
 
     \begin{center}
