@@ -34,8 +34,8 @@ public class Dijkstra {
         StringBuilder exerciseStringBuilder = Terminal.readFile("docs/Exercises.tex");
         StringBuilder solutionStringBuilder = Terminal.readFile("docs/Solutions.tex");
 
-        Terminal.replaceinSB(exerciseStringBuilder, "%$DIJKSTRACELL$", "\\cellcolor{tumgadPurple}\\hyperref[sec:dijkstra]{\\color{tumgadPurple}WORD\\color{black}}");
-        Terminal.replaceinSB(solutionStringBuilder, "%$DIJKSTRACELL$", "\\cellcolor{tumgadRed}\\hyperref[sec:dijkstra]{\\color{tumgadRed}WORD\\color{black}}");
+        Terminal.replaceinSB(exerciseStringBuilder, "%$DIJKSTRACELL$", "\\cellcolor{tumgadPurple}");
+        Terminal.replaceinSB(solutionStringBuilder, "%$DIJKSTRACELL$", "\\cellcolor{tumgadRed}");
 
         Terminal.replaceinSB(exerciseStringBuilder, "%$DIJKSTRA$", "\\newpage\n" + dijkstraExerciseStringBuilder.toString());
         Terminal.replaceinSB(solutionStringBuilder, "%$DIJKSTRA$", "\\newpage\n" + dijkstraSolutionStringBuilder.toString());
