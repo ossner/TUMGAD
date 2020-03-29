@@ -106,8 +106,6 @@ public class ABTree {
         int[] deletions = new int[]{values[0], values[5], values[8], values[12], values[3]};
         int[] insertions = new int[5];
 
-        System.out.println(Terminal.printArray(values));
-
         System.arraycopy(values, 14, insertions, 0, 5);
 
         Terminal.replaceinSB(abTreeExerciseStringBuilder, "$DELETIONS$", Terminal.printArray(deletions));
@@ -117,17 +115,21 @@ public class ABTree {
         Terminal.replaceinSB(abTreeSolutionStringBuilder, "$INSERTIONS$", Terminal.printArray(insertions));
 
         for (int i = 0; i < deletions.length; i++) {
-            Terminal.replaceinSB(abTreeSolutionStringBuilder, "%$ABTREE$", "Delete: \\underline{" +
+            Terminal.replaceinSB(abTreeSolutionStringBuilder, "%$ABTREE$", "\\begin{center}\n" +
+                    "    \\noindent\\fbox{\n" +
+                    "        \\parbox{\\textwidth}{Delete: \\underline{" +
                     "\\color{tumgadRed}" + deletions[i] + "\\color{black}}\n%$ABTREE$");
             tree.remove(deletions[i]);
-            Terminal.replaceinSB(abTreeSolutionStringBuilder, "%$ABTREE$", tree.toTex() + "%$ABTREE$");
+            Terminal.replaceinSB(abTreeSolutionStringBuilder, "%$ABTREE$", tree.toTex() + "}}\\end{center}%$ABTREE$");
         }
 
         for (int i = 0; i < insertions.length; i++) {
-            Terminal.replaceinSB(abTreeSolutionStringBuilder, "%$ABTREE$", "Insert: \\underline{" +
+            Terminal.replaceinSB(abTreeSolutionStringBuilder, "%$ABTREE$", "\\begin{center}\n" +
+                    "    \\noindent\\fbox{\n" +
+                    "        \\parbox{\\textwidth}{Insert: \\underline{" +
                     "\\color{tumgadRed}" + insertions[i] + "\\color{black}}\n%$ABTREE$");
             tree.insert(insertions[i]);
-            Terminal.replaceinSB(abTreeSolutionStringBuilder, "%$ABTREE$", tree.toTex() + "%$ABTREE$");
+            Terminal.replaceinSB(abTreeSolutionStringBuilder, "%$ABTREE$", tree.toTex() + "}}\\end{center}%$ABTREE$");
         }
 
 
@@ -222,7 +224,7 @@ public class ABTree {
     }
 
     private String toTex() {
-        int l1Dist = root.height() == 3 ? 60 : 25;
+        int l1Dist = root.height() == 3 ? 55 : 25;
         if (b>=5) { // small issue with overlapping nodes at this value
             l1Dist = 35;
         }
@@ -460,21 +462,17 @@ class ABTreeInnerNode extends ABTreeNode {
     @Override
     public boolean validAB(boolean root) {
         if (children.size() < (root ? 2 : a)) {
-            System.err.println("children.size < a");
             return false;
         }
         if (children.size() > b) {
-            System.err.println("children.size > b");
             return false;
         }
         int h = height();
         for (int i = 0; i < children.size(); i++) {
             if (!children.get(i).validAB(false)) {
-                System.err.println(String.format("child %d invalid", i));
                 return false;
             }
             if (h != children.get(i).height() + 1) {
-                System.err.println(String.format("child %d has invalid height", i));
                 return false;
             }
         }
@@ -485,11 +483,9 @@ class ABTreeInnerNode extends ABTreeNode {
             Integer min = children.get(i).min();
             Integer max = children.get(i).max();
             if (max != null && max >= keys.get(i)) {
-                System.err.println(String.format("max %d >= key(%d) %d", max, i, keys.get(i)));
                 return false;
             }
             if (min != null && min >= keys.get(i)) {
-                System.err.println(String.format("min %d >= key(%d) %d", min, i, keys.get(i)));
                 return false;
             }
         }
