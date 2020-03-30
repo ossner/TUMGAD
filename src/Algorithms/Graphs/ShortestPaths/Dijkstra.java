@@ -10,7 +10,7 @@ import java.util.Objects;
 public class Dijkstra {
     static StringBuilder dijkstraExerciseStringBuilder;
     static StringBuilder dijkstraSolutionStringBuilder;
-    private static List<String> nodeList = new ArrayList<>(); // List of LaTeX node-id's makes it easier to generate the TeX
+    private static ArrayList<String> nodeList = new ArrayList<>(); // List of LaTeX node-id's makes it easier to generate the TeX
 
     public static void generateExercise() {
         dijkstraExerciseStringBuilder = Terminal.readFile("src/Algorithms/Graphs/ShortestPaths/DijkstraExerciseTemplate.tex");
@@ -105,8 +105,8 @@ public class Dijkstra {
                                 + ") edge[bend right=" + (j * 5 - j) + "] node[pos=0.25] {" + distMatrix[i][j] + "} (" + nodeList.get(j) + ");\n%$CONNECTIONS$");
                         Terminal.replaceinSB(dijkstraExerciseStringBuilder, "%$CONNECTIONS$", "\\path (" + nodeList.get(i)
                                 + ") edge[bend right=" + (j * 5 - j) + "] node[pos=0.25] {" + distMatrix[i][j] + "} (" + nodeList.get(j) + ");\n%$CONNECTIONS$");
-                    } else if (j == i + 1 && acrossLeft(i, j)) {
-                        if (pathClear(nodeMatrix, i, j)) {
+                    } else if (j == i + 1 && acrossLeft(i, j, nodeList)) {
+                        if (pathClear(nodeMatrix, i, j, nodeList)) {
                             Terminal.replaceinSB(dijkstraSolutionStringBuilder, "%$CONNECTIONS$", "\\path (" + nodeList.get(i)
                                     + ") edge[bend right=8] node[pos=0.18] {" + distMatrix[i][j] + "} (" + nodeList.get(j) + ");\n%$CONNECTIONS$");
                             Terminal.replaceinSB(dijkstraExerciseStringBuilder, "%$CONNECTIONS$", "\\path (" + nodeList.get(i)
@@ -137,7 +137,7 @@ public class Dijkstra {
      *
      * @return whether or not the path between the two nodes is clear
      */
-    private static boolean pathClear(int[][] nodeMatrix, int i, int j) {
+    public static boolean pathClear(int[][] nodeMatrix, int i, int j, List<String> nodeList) {
         int row1 = Integer.parseInt("" + nodeList.get(i).charAt(0));
         int col1 = Integer.parseInt("" + nodeList.get(i).charAt(1));
         int row2 = Integer.parseInt("" + nodeList.get(j).charAt(0));
@@ -155,7 +155,7 @@ public class Dijkstra {
      * asserts whether the nodes i and j are in different rows AND different columns
      * (i.e. whether you have to go across)
      */
-    private static boolean acrossLeft(int i, int j) {
+    public static boolean acrossLeft(int i, int j, ArrayList<String> nodeList) {
         return nodeList.get(i).charAt(0) != nodeList.get(j).charAt(0) && nodeList.get(i).charAt(1) != nodeList.get(j).charAt(1);
     }
 
@@ -169,7 +169,7 @@ public class Dijkstra {
      * @return a numNodes x numNodes int-array with the vertex weights between each of the nodes
      * "taxing" the weights based on how far they would get you (faster paths => higher tax)
      */
-    private static int[][] generateDistMatrix(int[][] nodeMatrix, int numNodes) {
+    public static int[][] generateDistMatrix(int[][] nodeMatrix, int numNodes) {
         int currNode = 0;
         int[][] distMatrix = new int[numNodes][numNodes];
         // connect each node with its successor
@@ -214,7 +214,7 @@ public class Dijkstra {
      *
      * @return the nodeNumber of the node with the given coordinates
      */
-    private static int getNodeNum(int[][] nodeMatrix, int i, int j) {
+    public static int getNodeNum(int[][] nodeMatrix, int i, int j) {
         int nodeNum = 0;
         for (int k = 0; k < nodeMatrix.length; k++) {
             for (int l = 0; l < nodeMatrix[0].length; l++) {
