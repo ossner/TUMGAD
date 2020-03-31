@@ -27,7 +27,7 @@
 ## Data Structures
 ### Search Structures
 - [AVL Trees](https://sebastianoner.github.io/TUMGAD/src/DataStructures/SearchStructures/AVLTrees/AVLTrees)
-- [(a,b) and B Trees](https://sebastianoner.github.io/TUMGAD/src/DataStructures/SearchStructures/AVLTrees/AVLTrees)
+- [(a,b) and B Trees](https://sebastianoner.github.io/TUMGAD/src/DataStructures/SearchStructures/ABTrees/ABTrees)
 
 ### Sequences
 - [Arrays](https://sebastianoner.github.io/TUMGAD/src/DataStructures/Sequences/Arrays/Arrays)
