@@ -1,4 +1,4 @@
-# Routes to TUMGAD components:
+# Routes to TUMGAD Explanations:
 
 ## Algorithms
 
