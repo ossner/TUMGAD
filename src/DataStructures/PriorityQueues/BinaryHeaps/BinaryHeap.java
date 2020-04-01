@@ -129,7 +129,7 @@ public class BinaryHeap {
         for (int i = 0; i < inserts.length; i++) {
             heap.insert(inserts[i]);
             if (i == 2) {
-                Terminal.replaceinSB(binaryHeapSolutionStringBuilder, "%$INSERTIONHEAPS$", "\\newpage\n%$INSERTIONHEAPS$");
+                Terminal.replaceinSB(binaryHeapSolutionStringBuilder, "%$INSERTIONHEAPS$", "\\newpage\\noindent\n%$INSERTIONHEAPS$");
             }
             Terminal.replaceinSB(binaryHeapSolutionStringBuilder, "%$INSERTIONHEAPS$", "Insert: \\underline{\\color{tumgadRed}" + inserts[i] + "\\color{black}}" + heap.heapToTex() + "%$INSERTIONHEAPS$");
         }
