@@ -26,7 +26,6 @@ public class BinaryHeap {
         swap(0, heapList.size() - 1);
         heapList.remove(heapList.size() - 1);
         siftDown(0);
-        siftDown(0);
     }
 
     private void siftUp() {
@@ -44,9 +43,30 @@ public class BinaryHeap {
         }
     }
 
+    private int minIndex(int a, int b) {
+        if (heapList.get(a) <= heapList.get(b)) {
+            return a;
+        } else {
+            return b;
+        }
+    }
+
+    private int maxIndex(int a, int b) {
+        if (heapList.get(a) >= heapList.get(b)) {
+            return a;
+        } else {
+            return b;
+        }
+    }
+
     private void siftDown(int index) {
         if (min) {
-            if (2 * index + 1 < heapList.size() && heapList.get(index) > heapList.get(2 * index + 1)) {
+            if (2 * index + 1 < heapList.size() && heapList.get(index) > heapList.get(2 * index + 1) && 2
+                    * index + 2 < heapList.size() && heapList.get(index) > heapList.get(2 * index + 2)) {
+                int minChildIndex = minIndex(2 * index + 1, 2 * index + 2);
+                swap(index, minChildIndex);
+                siftDown(minChildIndex);
+            } else if (2 * index + 1 < heapList.size() && heapList.get(index) > heapList.get(2 * index + 1)) {
                 swap(index, 2 * index + 1);
                 siftDown(2 * index + 1);
             } else if (2 * index + 2 < heapList.size() && heapList.get(index) > heapList.get(2 * index + 2)) {
@@ -54,7 +74,12 @@ public class BinaryHeap {
                 siftDown(2 * index + 2);
             }
         } else {
-            if (2 * index + 1 < heapList.size() && heapList.get(index) < heapList.get(2 * index + 1)) {
+            if (2 * index + 1 < heapList.size() && heapList.get(index) < heapList.get(2 * index + 1) && 2
+                    * index + 2 < heapList.size() && heapList.get(index) < heapList.get(2 * index + 2)) {
+                int maxChildIndex = maxIndex(2 * index + 1, 2 * index + 2);
+                swap(index, maxChildIndex);
+                siftDown(maxChildIndex);
+            } else if (2 * index + 1 < heapList.size() && heapList.get(index) < heapList.get(2 * index + 1)) {
                 swap(index, 2 * index + 1);
                 siftDown(2 * index + 1);
             } else if (2 * index + 2 < heapList.size() && heapList.get(index) < heapList.get(2 * index + 2)) {
