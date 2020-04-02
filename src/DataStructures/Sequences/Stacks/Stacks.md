@@ -5,7 +5,7 @@ When another sheet is added, it is placed on top of the stack.
 Therefore, the element which was last added to the stack is the first one to be removed.
 
 ## Implementation
-The implementation-details are similar to the implementation of dynamic list.
+The implementation-details are similar to the implementation of a dynamic list.
 However, only the last element of the sequence can be popped or pushed
 
 ### pop()

@@ -1,12 +1,12 @@
 # QuickSort
-QuickSort is an efficient but instable sorting algorithm that uses the divide and conquer principle.
+QuickSort is an efficient but unstable sorting algorithm that uses the divide and conquer principle.
 QuickSort depends on a pivot element that influences the efficiency greatly:
 
 ## The algorithm
 1. Choose pivot element // e.g. first, middle or random element
 2. Split array into smaller arrays depending on Pivotelement
-3. recursively sort sub-array with smaller keys
-3. recursively sort sub-array with bigger keys
+3. recursively sort the sub-array with smaller keys
+4. recursively sort the sub-array with bigger keys
 
 ## Pivot element
 There are multiple strategies one can use when choosing the pivot element:

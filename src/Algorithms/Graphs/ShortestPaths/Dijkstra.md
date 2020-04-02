@@ -1,8 +1,8 @@
 # Dijkstra's Algorithm for Shortest Paths
 Named after Edsger W. Dijkstra, the 
 Dijkstra algorithm is a fairly simple 
-approach to solve the problem of 
-finding a shortest path between nodes in 
+approach to solving the problem of 
+finding the shortest path between nodes in 
 a weighted graph.
 
 To achieve this the algorithm manages a special
@@ -23,12 +23,12 @@ while adding up their distances with the distance of the first node
 4. Repeat 2 & 3 until you reached the desired node or every node has been visited
 
 A lot of this iteration of the algorithm depends on the implementation 
-of the priority queue however:
+of the priority queue, however:
 
 insertIntoQueue(...):
 - If the node is not already in the queue and never was in the queue
 (i.e. has not been visited) insert at priority and then lexicographically
-- If the node is in the queue, but with a lower priority (higher distance),
+- If the node is in the queue but with a lower priority (higher distance),
 update the distance and sort by priority and then lexicographically
 
 So in the above example this is what the queue and its updates would look like:

@@ -2,9 +2,9 @@
 
 One of the simplest ways to traverse a graph is with the Breath-Frist search algorithm.
 
-Where this algorithm explore the graph layer by layer starting from 
+Where this algorithm explores the graph layer by layer starting from 
 a node s, where s forms the layer 0.
-The direct neighbors reachable from layer 0 form layer 1 and so on...
+The direct neighbors reachable from layer 0 from layer 1 and so on...
 
 Generally, the nodes that are neighbors of a node in layer `i`, but not neighbors
 of the nodes in layers `0,...,i-1` form layer i+1.

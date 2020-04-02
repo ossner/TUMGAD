@@ -8,7 +8,7 @@ Trivially, in a graph with e.g. 5 nodes there are 20 distances
 to be considered (not counting the ones from a node to itself)
 
 It is easiest to align this information in a table to keep track
-of the distances. Unknown/Unreachable distances are by defenition
+of the distances. Unknown/Unreachable distances are by definition
 filled with infinity.
 
 Consider the following example graph:
@@ -20,8 +20,8 @@ After initialization the table looks like this:
 ![](../../../../../resources/FWInitTable.png)
 
 Now, step by step we look at the next node lexicographically (a first)
-and iterate through the column of a line by line. The node at 
-the current step will be labeled x.
+and iterate through the column of a line by line. The node
+at the current step will be labelled x.
 
 We will have to start another iteration over the line of a, call
 that y.

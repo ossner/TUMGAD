@@ -17,12 +17,12 @@ that tree. If this is the case the heap is called a min-heap
 
 ## Insertion (example: 4)
 When inserting a node into the heap, you have to first 
-add it as a leaf at the first avaiable position:
+add it as a leaf at the first available position:
 
 ![Inserting the key 4 into the heap](../../../../resources/BinaryHeapInsertionExample.png)
 
 Afterwards, we need to make sure the invariant of the minimal
-value as the root is guranteed, to do this, we compare
+value as the root is guaranteed, to do this, we compare
 the inserted node with its parent and swap the two if the parent
 is bigger (smaller in a max-heap).
 
@@ -44,7 +44,7 @@ priority. In a Binary heap, this element is always the
 root node.
 
 Removing the root is simple, you just swap it with the
-last leaf in the tree, delete it, and then sift 
+last leaf in the tree, delete it and then sift 
 the new root down if the priority of one of the children is 
 higher.
 
@@ -76,8 +76,8 @@ Because of how these priority queues operate and their relative
 efficiency, they are quite useful for things like sorting algorithms.
 
 As you might guess, if you insert `n` elements into the binary heap and then
-remove the root `n` times, you are able to sort these elements based on their
-priotiry. This algorithm is called heapsort.
+remove the root `n` times, you can sort these elements based on their
+priority. This algorithm is called heapsort.
 
 As you can extract from the table below, the insertion into a tree
 works in `O(1)` time, the deletion in `O(log n)`. Thus
