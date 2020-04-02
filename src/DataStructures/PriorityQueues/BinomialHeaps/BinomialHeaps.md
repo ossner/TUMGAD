@@ -101,3 +101,9 @@ in 3 new trees, the min-node now being 19.
 
 Remember that if there were trees with the same height
 in the heap, we would have had to merge them.
+
+## Time Complexity:
+
+| Insertion  | Deletion  | Merge |
+|----|----|----|
+| `O(1)` | `O(log n)` | `O(log n)` |
