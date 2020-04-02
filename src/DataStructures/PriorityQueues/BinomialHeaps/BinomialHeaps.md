@@ -50,7 +50,7 @@ After inserting a value (say 8) we get our new heap:
 ![Adding a value to a heap like this is the simplest insertion](../../../../resources/BinomialHeapInsertionEasyExampleAfter.png)
 
 If the inserted value has a higher priority than our min node, the pointer
-(see [deletion](https://sebastianoner.github.io/TUMGAD/src/DataStructures/PriorityQueues/BinomialHeaps/BinomialHeaps#Removing-the-highest-priority-node))
+(see [deletion](https://sebastianoner.github.io/TUMGAD/src/DataStructures/PriorityQueues/BinomialHeaps/BinomialHeaps#removing-the-highest-priority-node))
 
 This is by far the simplest insertion there can be. However, it is not always
 the case (obviously) because if there is another tree in the heap with height
