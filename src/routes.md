@@ -25,12 +25,16 @@
 - [Prim's Algorithm](https://sebastianoner.github.io/TUMGAD/src/Algorithms/Graphs/MinimalSpanningTrees/Prim/Prim)
 
 ## Data Structures
-### Search Structures
-- [AVL Trees](https://sebastianoner.github.io/TUMGAD/src/DataStructures/SearchStructures/AVLTrees/AVLTrees)
-- [(a,b) Trees](https://sebastianoner.github.io/TUMGAD/src/DataStructures/SearchStructures/ABTrees/ABTrees)
-
 ### Sequences
 - [Arrays](https://sebastianoner.github.io/TUMGAD/src/DataStructures/Sequences/Arrays/Arrays)
 - [Lists](https://sebastianoner.github.io/TUMGAD/src/DataStructures/Sequences/Lists/Lists)
 - [Queues](https://sebastianoner.github.io/TUMGAD/src/DataStructures/Sequences/Queues/Queues)
 - [Stacks](https://sebastianoner.github.io/TUMGAD/src/DataStructures/Sequences/Stacks/Stacks)
+
+### Search Structures
+- [AVL Trees](https://sebastianoner.github.io/TUMGAD/src/DataStructures/SearchStructures/AVLTrees/AVLTrees)
+- [(a,b) Trees](https://sebastianoner.github.io/TUMGAD/src/DataStructures/SearchStructures/ABTrees/ABTrees)
+
+### Priority Queues
+- [Binary Heaps](https://sebastianoner.github.io/TUMGAD/src/DataStructures/PriorityQueues/BinaryHeaps/BinaryHeaps)
+- [Binomial Heaps](https://sebastianoner.github.io/TUMGAD/src/DataStructures/PriorityQueues/BinomialHeaps/BinomialHeaps)
