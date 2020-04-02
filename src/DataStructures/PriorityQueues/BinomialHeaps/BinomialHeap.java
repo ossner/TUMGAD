@@ -14,7 +14,7 @@ public class BinomialHeap {
      * Constructor creating an empty binary heap
      */
     public BinomialHeap() {
-        trees = new ArrayList<BinomialTreeNode>();
+        trees = new ArrayList<>();
         minimum = null;
     }
 
@@ -215,11 +215,11 @@ public class BinomialHeap {
     private String heapToTex() {
         String ret = "\\begin{center}\n" +
                 "\\begin{tikzpicture}[node distance = 2cm, semithick, baseline={([yshift={-\\ht\\strutbox}]current bounding box.north)},outer sep=0pt,inner sep=0pt]";
-        ret += trees.get(0).treeToTex();
+        ret += trees.get(0).equals(minimum) ? trees.get(0).treeToTex(true) : trees.get(0).treeToTex(false);
         for (int i = 1; i < trees.size(); i++) {
             ret += "\\end{tikzpicture}\n\\hspace{10px}\n" +
                     "\\begin{tikzpicture}[node distance = 2cm, semithick, baseline={([yshift={-\\ht\\strutbox}]current bounding box.north)},outer sep=0pt,inner sep=0pt]";
-            ret += trees.get(i).treeToTex();
+            ret += trees.get(i).equals(minimum) ? trees.get(i).treeToTex(true) : trees.get(i).treeToTex(false);
         }
         return ret + "\\end{tikzpicture}\n" +
                 "\\end{center}";
@@ -287,14 +287,18 @@ class BinomialTreeNode {
         return children;
     }
 
-    public String treeToTex() {
-        return treeToTex(null, null);
+    public String treeToTex(boolean isMin) {
+        return treeToTex(null, null, isMin);
     }
 
-    private String treeToTex(BinomialTreeNode sibling, BinomialTreeNode parent) {
+    private String treeToTex(BinomialTreeNode sibling, BinomialTreeNode parent, boolean isMin) {
         String ret = "";
         if (parent == null) {
-            ret += "\\node[state, fill=tumgadBlue] (" + this.key + ") {$" + this.key + "$};";
+            if (isMin) {
+                ret += "\\node[state, fill=tumgadCyan] (" + this.key + ") {$" + this.key + "$};";
+            } else {
+                ret += "\\node[state] (" + this.key + ") {$" + this.key + "$};";
+            }
         } else if (sibling == null) {
             ret += "\\node[state] (" + key + ") [below of=" + parent.key + "] {$" + key + "$};";
             ret += "\n\\path (" + parent.key + ") edge node {} (" + key + ");";
@@ -304,7 +308,7 @@ class BinomialTreeNode {
         }
         BinomialTreeNode s = null;
         for (BinomialTreeNode c : children) {
-            ret += c.treeToTex(s, this);
+            ret += c.treeToTex(s, this, false);
             s = c;
         }
         return ret;
