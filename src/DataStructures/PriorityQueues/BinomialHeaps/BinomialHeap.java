@@ -18,6 +18,57 @@ public class BinomialHeap {
         minimum = null;
     }
 
+    public static void generateExercise() {
+        binomialHeapExerciseStringbuilder = Terminal.readFile("src/DataStructures/PriorityQueues/BinomialHeaps/BinomialHeapExerciseTemplate.tex");
+        binomialHeapSolutionStringbuilder = Terminal.readFile("src/DataStructures/PriorityQueues/BinomialHeaps/BinomialHeapSolutionTemplate.tex");
+
+        StringBuilder exerciseStringBuilder = Terminal.readFile("docs/Exercises.tex");
+        StringBuilder solutionStringBuilder = Terminal.readFile("docs/Solutions.tex");
+
+        Terminal.replaceinSB(exerciseStringBuilder, "%$BINOMIALHEAPCELL$", "\\cellcolor{tumgadPurple}");
+        Terminal.replaceinSB(solutionStringBuilder, "%$BINOMIALHEAPCELL$", "\\cellcolor{tumgadRed}");
+
+        int[] values = Terminal.generateRandomArray(16, 16);
+        BinomialHeap heap = generateInitHeap(values);
+
+        Terminal.replaceinSB(binomialHeapSolutionStringbuilder, "%$INITHEAP$", heap.heapToTex());
+        Terminal.replaceinSB(binomialHeapExerciseStringbuilder, "%$INITHEAP$", heap.heapToTex());
+
+        for (int i = 0; i < 4; i++) {
+            heap.deleteMin();
+            Terminal.replaceinSB(binomialHeapSolutionStringbuilder, "%$BINHEAPDELETIONS$", heap.heapToTex() + "}}\\vspace{10px}\n%$BINHEAPDELETIONS$");
+        }
+
+        int[] insertions = new int[5];
+        System.arraycopy(values, 11, insertions, 0, 5);
+        Terminal.replaceinSB(binomialHeapExerciseStringbuilder, "$INSERTIONS$", Terminal.printArray(insertions));
+        Terminal.replaceinSB(binomialHeapSolutionStringbuilder, "$INSERTIONS$", Terminal.printArray(insertions));
+
+        for (int i = 0; i < insertions.length; i++) {
+            heap.insert(insertions[i], true);
+            Terminal.replaceinSB(binomialHeapSolutionStringbuilder, "%$BINHEAPINSERTIONS$", heap.heapToTex() + "}}\\vspace{10px}\n%$BINHEAPINSERTIONS$");
+        }
+
+        Terminal.replaceinSB(exerciseStringBuilder, "%$BINOMIALHEAPS$", "\\newpage\n" + binomialHeapExerciseStringbuilder.toString());
+        Terminal.replaceinSB(solutionStringBuilder, "%$BINOMIALHEAPS$", "\\newpage\n" + binomialHeapSolutionStringbuilder.toString());
+
+        Terminal.saveToFile("docs/Exercises.tex", exerciseStringBuilder);
+        Terminal.saveToFile("docs/Solutions.tex", solutionStringBuilder);
+    }
+
+    /**
+     * generates the initial heap on which the rest of the operations will be executed
+     *
+     * @param values the int-array of initial values
+     */
+    private static BinomialHeap generateInitHeap(int[] values) {
+        BinomialHeap heap = new BinomialHeap();
+        for (int i = 0; i < 11; i++) {
+            heap.insert(values[i], false);
+        }
+        return heap;
+    }
+
     /**
      * Finds the minimal in the binomial heap
      *
@@ -33,7 +84,7 @@ public class BinomialHeap {
     /**
      * Method inserting a key into the heap
      *
-     * @param key the key to be inserted
+     * @param key     the key to be inserted
      * @param verbose whether or not to write the insertion to LaTeX
      */
     public void insert(int key, boolean verbose) {
@@ -95,16 +146,6 @@ public class BinomialHeap {
                     minimum = trees.get(i);
                 }
             }
-        }
-    }
-
-    private class Pair<T, S> {
-        public T First;
-        public S Second;
-
-        public Pair(T t, S s) {
-            First = t;
-            Second = s;
         }
     }
 
@@ -184,55 +225,14 @@ public class BinomialHeap {
                 "\\end{center}";
     }
 
-    public static void generateExercise() {
-        binomialHeapExerciseStringbuilder = Terminal.readFile("src/DataStructures/PriorityQueues/BinomialHeaps/BinomialHeapExerciseTemplate.tex");
-        binomialHeapSolutionStringbuilder = Terminal.readFile("src/DataStructures/PriorityQueues/BinomialHeaps/BinomialHeapSolutionTemplate.tex");
+    private class Pair<T, S> {
+        public T First;
+        public S Second;
 
-        StringBuilder exerciseStringBuilder = Terminal.readFile("docs/Exercises.tex");
-        StringBuilder solutionStringBuilder = Terminal.readFile("docs/Solutions.tex");
-
-        Terminal.replaceinSB(exerciseStringBuilder, "%$BINOMIALHEAPCELL$", "\\cellcolor{tumgadPurple}");
-        Terminal.replaceinSB(solutionStringBuilder, "%$BINOMIALHEAPCELL$", "\\cellcolor{tumgadRed}");
-
-        int[] values = Terminal.generateRandomArray(16, 16);
-        BinomialHeap heap = generateInitHeap(values);
-
-        Terminal.replaceinSB(binomialHeapSolutionStringbuilder, "%$INITHEAP$", heap.heapToTex());
-        Terminal.replaceinSB(binomialHeapExerciseStringbuilder, "%$INITHEAP$", heap.heapToTex());
-
-        for (int i = 0; i < 4; i++) {
-            heap.deleteMin();
-            Terminal.replaceinSB(binomialHeapSolutionStringbuilder, "%$BINHEAPDELETIONS$", heap.heapToTex() + "}}\\vspace{10px}\n%$BINHEAPDELETIONS$");
+        public Pair(T t, S s) {
+            First = t;
+            Second = s;
         }
-
-        int[] insertions = new int[5];
-        System.arraycopy(values, 11, insertions, 0, 5);
-        Terminal.replaceinSB(binomialHeapExerciseStringbuilder, "$INSERTIONS$", Terminal.printArray(insertions));
-        Terminal.replaceinSB(binomialHeapSolutionStringbuilder, "$INSERTIONS$", Terminal.printArray(insertions));
-
-        for (int i = 0; i < insertions.length; i++) {
-            heap.insert(insertions[i], true);
-            Terminal.replaceinSB(binomialHeapSolutionStringbuilder, "%$BINHEAPINSERTIONS$", heap.heapToTex() + "}}\\vspace{10px}\n%$BINHEAPINSERTIONS$");
-        }
-
-        Terminal.replaceinSB(exerciseStringBuilder, "%$BINOMIALHEAPS$", "\\newpage\n" + binomialHeapExerciseStringbuilder.toString());
-        Terminal.replaceinSB(solutionStringBuilder, "%$BINOMIALHEAPS$", "\\newpage\n" + binomialHeapSolutionStringbuilder.toString());
-
-        Terminal.saveToFile("docs/Exercises.tex", exerciseStringBuilder);
-        Terminal.saveToFile("docs/Solutions.tex", solutionStringBuilder);
-    }
-
-    /**
-     * generates the initial heap on which the rest of the operations will be executed
-     *
-     * @param values the int-array of initial values
-     */
-    private static BinomialHeap generateInitHeap(int[] values) {
-        BinomialHeap heap = new BinomialHeap();
-        for (int i = 0; i < 11; i++) {
-            heap.insert(values[i], false);
-        }
-        return heap;
     }
 }
 
@@ -243,18 +243,6 @@ class BinomialTreeNode {
     public BinomialTreeNode(int key) {
         this.key = key;
         this.children = new BinomialTreeNode[0];
-    }
-
-    public int min() {
-        return key;
-    }
-
-    public int rank() {
-        return children.length;
-    }
-
-    public BinomialTreeNode[] deleteMin() {
-        return children;
     }
 
     /**
@@ -287,14 +275,16 @@ class BinomialTreeNode {
         return smaller;
     }
 
-    private void print(int depth) {
-        for (int i = 0; i < depth; i++) {
-            System.out.print("\t");
-        }
-        System.out.print("[rank: " + rank() + " key: " + min() + "]\n");
-        for (BinomialTreeNode c : children) {
-            c.print(depth + 1);
-        }
+    public int min() {
+        return key;
+    }
+
+    public int rank() {
+        return children.length;
+    }
+
+    public BinomialTreeNode[] deleteMin() {
+        return children;
     }
 
     public String treeToTex() {
@@ -304,7 +294,7 @@ class BinomialTreeNode {
     private String treeToTex(BinomialTreeNode sibling, BinomialTreeNode parent) {
         String ret = "";
         if (parent == null) {
-            ret += "\\node[state] (" + this.key + ") {$" + this.key + "$};";
+            ret += "\\node[state, fill=tumgadBlue] (" + this.key + ") {$" + this.key + "$};";
         } else if (sibling == null) {
             ret += "\\node[state] (" + key + ") [below of=" + parent.key + "] {$" + key + "$};";
             ret += "\n\\path (" + parent.key + ") edge node {} (" + key + ");";
