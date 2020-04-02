@@ -3,9 +3,9 @@ package Algorithms.Graphs.APSP.FloydWarshall;
 import Util.Terminal;
 
 public class FloydWarshall {
+    final static int INF = 99999;
     private static StringBuilder fwExerciseStringBuilder;
     private static StringBuilder fwSolutionStringBuilder;
-    final static int INF = 99999;
 
     public static void generateExercise() {
         fwExerciseStringBuilder = Terminal.readFile("src/Algorithms/Graphs/APSP/FloydWarshall/FWExerciseTemplate.tex");

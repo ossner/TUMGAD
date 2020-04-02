@@ -84,6 +84,18 @@ abstract class ABTreeNode {
 public class ABTree {
     static StringBuilder abTreeExerciseStringBuilder;
     static StringBuilder abTreeSolutionStringBuilder;
+    private final int a;
+    private final int b;
+    private ABTreeInnerNode root = null;
+    public ABTree(int a, int b) {
+        if (a < 2) {
+            throw new RuntimeException("Invalid a");
+        } else if (b < 2 * a - 1) {
+            throw new RuntimeException("Invalid b");
+        }
+        this.a = a;
+        this.b = b;
+    }
 
     static public void generateExercise() {
         abTreeExerciseStringBuilder = Terminal.readFile("src/DataStructures/SearchStructures/ABTrees/ABTreeExerciseTemplate.tex");
@@ -145,20 +157,6 @@ public class ABTree {
         Terminal.saveToFile("docs/Exercises.tex", exerciseStringBuilder);
         Terminal.saveToFile("docs/Solutions.tex", solutionStringBuilder);
 
-    }
-
-    private final int a;
-    private final int b;
-    private ABTreeInnerNode root = null;
-
-    public ABTree(int a, int b) {
-        if (a < 2) {
-            throw new RuntimeException("Invalid a");
-        } else if (b < 2 * a - 1) {
-            throw new RuntimeException("Invalid b");
-        }
-        this.a = a;
-        this.b = b;
     }
 
     public boolean validAB() {
@@ -225,7 +223,7 @@ public class ABTree {
 
     private String toTex() {
         int l1Dist = root.height() == 3 ? 55 : 25;
-        if (b>=5) { // small issue with overlapping nodes at this value
+        if (b >= 5) { // small issue with overlapping nodes at this value
             l1Dist = 35;
         }
         int l2Dist = 20;

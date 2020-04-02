@@ -120,10 +120,11 @@ public class DoubleHashing {
 
     /**
      * Insert a value into a hashtable, ensuring it to get a free space using double hashing
+     *
      * @param hashTable the current state of the hashtable the value should be inserted into
-     * @param value the int value to be inserted
-     * @param h1 the first hashfunction
-     * @param h2 the second hash-function, coming into play if the value collides
+     * @param value     the int value to be inserted
+     * @param h1        the first hashfunction
+     * @param h2        the second hash-function, coming into play if the value collides
      */
     private static void insertToTable(int[] hashTable, int value, int[] h1, int[] h2) {
         int firstHash, hashValue;
@@ -137,11 +138,12 @@ public class DoubleHashing {
         }
         hashTable[hashValue] = value;
         Terminal.replaceinSB(doubleHashingSolutionStringBuilder, "%$DHTABLE$", tableTemplate
-                .replace("$DHOPERATION$", "Insert(" + value +")")
+                .replace("$DHOPERATION$", "Insert(" + value + ")")
                 .replace("$DHPOSITIONS$", positionString)
                 .replace("$DHTABLEROW$", arrayToRow(hashTable))
         );
     }
+
     /**
      * see insertFromTable, only with delete
      */
@@ -157,7 +159,7 @@ public class DoubleHashing {
         }
         hashTable[hashValue] = -1;
         Terminal.replaceinSB(doubleHashingSolutionStringBuilder, "%$DHTABLE$", tableTemplate
-                .replace("$DHOPERATION$", "Delete(" + value +")")
+                .replace("$DHOPERATION$", "Delete(" + value + ")")
                 .replace("$DHPOSITIONS$", positionString)
                 .replace("$DHTABLEROW$", arrayToRow(hashTable))
         );
@@ -165,6 +167,7 @@ public class DoubleHashing {
 
     /**
      * generates a LaTeX-friendly row from a provided array
+     *
      * @param hashTable the array that should be converted into a LaTeX table row
      */
     private static String arrayToRow(int[] hashTable) {
@@ -178,10 +181,10 @@ public class DoubleHashing {
     /**
      * generates the separate insertions/deletion steps of the operations (always 10)
      *
-     * @param h1 The first hash-function
-     * @param h2 The second hash-function, if a collision appears
-     * @param firstInsertions the first couple of values that should be inserted into the hashtable
-     * @param deletionsArr the 3 values that should be deleted after the insertions (a subset of firstInsertions)
+     * @param h1               The first hash-function
+     * @param h2               The second hash-function, if a collision appears
+     * @param firstInsertions  the first couple of values that should be inserted into the hashtable
+     * @param deletionsArr     the 3 values that should be deleted after the insertions (a subset of firstInsertions)
      * @param secondInsertions the last couple of values to be inserted
      */
     private static void generateSteps(int[] h1, int[] h2, Integer[] firstInsertions, int[] deletionsArr, int[] secondInsertions) {
@@ -203,13 +206,13 @@ public class DoubleHashing {
     /**
      * Generates a collision table, a table that gives you the values to which
      * the numbers in question map to when inserted into the hashfunctions
-     *
+     * <p>
      * This method generates the table with a width/depth of 5, meaning you can look up
      * the initial hash-value and 4 collision values after
      *
      * @param numbers the numbers that have to be inserted into the table
-     * @param h1 first hash function
-     * @param h2 second hash function
+     * @param h1      first hash function
+     * @param h2      second hash function
      */
     private static void generateCollisionTable(Integer[] numbers, int[] h1, int[] h2) {
 

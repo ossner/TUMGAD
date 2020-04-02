@@ -3,7 +3,6 @@ package DataStructures.SearchStructures.AVLTrees;
 import Util.Terminal;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 class Node {
     int key, height;
@@ -18,8 +17,97 @@ class Node {
 public class AVLTree {
     private static StringBuilder avlTreeExerciseStringBuilder;
     private static StringBuilder avlTreeSolutionStringBuilder;
-    private Node root;
     private static boolean checkBoxWritten;
+    private Node root;
+
+    public static void generateExercise() {
+        checkBoxWritten = true;
+        avlTreeExerciseStringBuilder = Terminal.readFile("src/DataStructures/SearchStructures/AVLTrees/AVLTreeExerciseTemplate.tex");
+        avlTreeSolutionStringBuilder = Terminal.readFile("src/DataStructures/SearchStructures/AVLTrees/AVLTreeSolutionTemplate.tex");
+
+        StringBuilder exerciseStringBuilder = Terminal.readFile("docs/Exercises.tex");
+        StringBuilder solutionStringBuilder = Terminal.readFile("docs/Solutions.tex");
+
+        Terminal.replaceinSB(exerciseStringBuilder, "%$AVLCELL$", "\\cellcolor{tumgadPurple}");
+        Terminal.replaceinSB(solutionStringBuilder, "%$AVLCELL$", "\\cellcolor{tumgadRed}");
+
+        int[] values = Terminal.generateRandomArray(12, 12);
+        int[] initValues = new int[5];
+        int[] firstInserts = new int[5];
+        int[] secondInserts = new int[2];
+
+        System.arraycopy(values, 0, initValues, 0, 5);
+        System.arraycopy(values, 5, firstInserts, 0, 5);
+        System.arraycopy(values, 10, secondInserts, 0, 2);
+
+        int[] deletions = new int[]{initValues[1], firstInserts[3]};
+
+        AVLTree tree = new AVLTree();
+        for (int i = 0; i < initValues.length; i++) {
+            tree.root = tree.insert(tree.root, initValues[i]);
+        }
+        tree.treeToTex("%$INITTREE$");
+        Terminal.replaceinSB(avlTreeExerciseStringBuilder, "$FIRSTINSERTS$", Terminal.printArray(firstInserts));
+        Terminal.replaceinSB(avlTreeExerciseStringBuilder, "$DELETIONS$", Terminal.printArray(deletions));
+        Terminal.replaceinSB(avlTreeExerciseStringBuilder, "$SECONDINSERTS$", Terminal.printArray(secondInserts));
+
+        Terminal.replaceinSB(avlTreeSolutionStringBuilder, "$FIRSTINSERTS$", Terminal.printArray(firstInserts));
+        Terminal.replaceinSB(avlTreeSolutionStringBuilder, "$DELETIONS$", Terminal.printArray(deletions));
+        Terminal.replaceinSB(avlTreeSolutionStringBuilder, "$SECONDINSERTS$", Terminal.printArray(secondInserts));
+        checkBoxWritten = false;
+        for (int i = 0; i < firstInserts.length; i++) {
+            tree.root = tree.insert(tree.root, firstInserts[i]);
+            if (!checkBoxWritten) {
+                writeCheckboxNoRotation(firstInserts[i], true);
+            }
+            checkBoxWritten = false;
+            tree.treeToTex("%$AVLTREE$");
+        }
+        for (int i = 0; i < deletions.length; i++) {
+            tree.root = tree.deleteNode(tree.root, deletions[i]);
+            if (!checkBoxWritten) {
+                writeCheckboxNoRotation(deletions[i], false);
+            }
+            checkBoxWritten = false;
+            tree.treeToTex("%$AVLTREE$");
+        }
+        Terminal.replaceinSB(avlTreeSolutionStringBuilder, "%$AVLTREE$", "\\newpage\\noindent%$AVLTREE$");
+        for (int i = 0; i < secondInserts.length; i++) {
+            tree.root = tree.insert(tree.root, secondInserts[i]);
+            if (!checkBoxWritten) {
+                writeCheckboxNoRotation(secondInserts[i], true);
+            }
+            checkBoxWritten = false;
+            tree.treeToTex("%$AVLTREE$");
+        }
+
+        if (Terminal.rand.nextBoolean()) {
+            Terminal.replaceinSB(avlTreeExerciseStringBuilder, "$PRINTORDER$", "Post-Order");
+            Terminal.replaceinSB(avlTreeSolutionStringBuilder, "$PRINTORDER$", "Post-Order");
+            Terminal.replaceinSB(avlTreeSolutionStringBuilder, "%$AVLVISITSEQUENCE$", Terminal.printArrayList(tree.postOrder(tree.root)));
+        } else {
+            Terminal.replaceinSB(avlTreeExerciseStringBuilder, "$PRINTORDER$", "Pre-Order");
+            Terminal.replaceinSB(avlTreeSolutionStringBuilder, "$PRINTORDER$", "Pre-Order");
+            Terminal.replaceinSB(avlTreeSolutionStringBuilder, "%$AVLVISITSEQUENCE$", Terminal.printArrayList(tree.preOrder(tree.root)));
+        }
+
+        Terminal.replaceinSB(exerciseStringBuilder, "%$AVLTREES$", "\\newpage\n" + avlTreeExerciseStringBuilder.toString());
+        Terminal.replaceinSB(solutionStringBuilder, "%$AVLTREES$", "\\newpage\n" + avlTreeSolutionStringBuilder.toString());
+
+        Terminal.saveToFile("docs/Exercises.tex", exerciseStringBuilder);
+        Terminal.saveToFile("docs/Solutions.tex", solutionStringBuilder);
+    }
+
+    private static void writeCheckboxNoRotation(int number, boolean insert) {
+        Terminal.replaceinSB(avlTreeSolutionStringBuilder, "%$AVLTREE$", "\n" + (insert ? "Insert" : "Delete") +
+                ": \\underline{\\color{tumgadRed}" + number + "\\color{black}}\n" +
+                "\\hspace{.1cm}\n" +
+                "\\makebox[2.3cm][l]{$\\square$ l rotation}\n" +
+                "\\makebox[2.3cm][l]{$\\square$ r rotation}\n" +
+                "\\makebox[2.5cm][l]{$\\square$ l-r rotation}\n" +
+                "\\makebox[2.5cm][l]{$\\square$ r-l rotation}\n" +
+                "\\makebox[2.3cm][l]{$\\boxtimes$ no rotation}\n%$AVLTREE$");
+    }
 
     /**
      * returns the height of the tree
@@ -331,94 +419,5 @@ public class AVLTree {
             ret += "child{node[circle,draw]{" + root.right.key + "}" + treeToTex(root.right) + "}";
         }
         return ret;
-    }
-
-    public static void generateExercise() {
-        checkBoxWritten = true;
-        avlTreeExerciseStringBuilder = Terminal.readFile("src/DataStructures/SearchStructures/AVLTrees/AVLTreeExerciseTemplate.tex");
-        avlTreeSolutionStringBuilder = Terminal.readFile("src/DataStructures/SearchStructures/AVLTrees/AVLTreeSolutionTemplate.tex");
-
-        StringBuilder exerciseStringBuilder = Terminal.readFile("docs/Exercises.tex");
-        StringBuilder solutionStringBuilder = Terminal.readFile("docs/Solutions.tex");
-
-        Terminal.replaceinSB(exerciseStringBuilder, "%$AVLCELL$", "\\cellcolor{tumgadPurple}");
-        Terminal.replaceinSB(solutionStringBuilder, "%$AVLCELL$", "\\cellcolor{tumgadRed}");
-
-        int[] values = Terminal.generateRandomArray(12, 12);
-        int[] initValues = new int[5];
-        int[] firstInserts = new int[5];
-        int[] secondInserts = new int[2];
-
-        System.arraycopy(values, 0, initValues, 0, 5);
-        System.arraycopy(values, 5, firstInserts, 0, 5);
-        System.arraycopy(values, 10, secondInserts, 0, 2);
-
-        int[] deletions = new int[]{initValues[1], firstInserts[3]};
-
-        AVLTree tree = new AVLTree();
-        for (int i = 0; i < initValues.length; i++) {
-            tree.root = tree.insert(tree.root, initValues[i]);
-        }
-        tree.treeToTex("%$INITTREE$");
-        Terminal.replaceinSB(avlTreeExerciseStringBuilder, "$FIRSTINSERTS$", Terminal.printArray(firstInserts));
-        Terminal.replaceinSB(avlTreeExerciseStringBuilder, "$DELETIONS$", Terminal.printArray(deletions));
-        Terminal.replaceinSB(avlTreeExerciseStringBuilder, "$SECONDINSERTS$", Terminal.printArray(secondInserts));
-
-        Terminal.replaceinSB(avlTreeSolutionStringBuilder, "$FIRSTINSERTS$", Terminal.printArray(firstInserts));
-        Terminal.replaceinSB(avlTreeSolutionStringBuilder, "$DELETIONS$", Terminal.printArray(deletions));
-        Terminal.replaceinSB(avlTreeSolutionStringBuilder, "$SECONDINSERTS$", Terminal.printArray(secondInserts));
-        checkBoxWritten = false;
-        for (int i = 0; i < firstInserts.length; i++) {
-            tree.root = tree.insert(tree.root, firstInserts[i]);
-            if (!checkBoxWritten) {
-                writeCheckboxNoRotation(firstInserts[i], true);
-            }
-            checkBoxWritten = false;
-            tree.treeToTex("%$AVLTREE$");
-        }
-        for (int i = 0; i < deletions.length; i++) {
-            tree.root = tree.deleteNode(tree.root, deletions[i]);
-            if (!checkBoxWritten) {
-                writeCheckboxNoRotation(deletions[i], false);
-            }
-            checkBoxWritten = false;
-            tree.treeToTex("%$AVLTREE$");
-        }
-        Terminal.replaceinSB(avlTreeSolutionStringBuilder, "%$AVLTREE$", "\\newpage\\noindent%$AVLTREE$");
-        for (int i = 0; i < secondInserts.length; i++) {
-            tree.root = tree.insert(tree.root, secondInserts[i]);
-            if (!checkBoxWritten) {
-                writeCheckboxNoRotation(secondInserts[i], true);
-            }
-            checkBoxWritten = false;
-            tree.treeToTex("%$AVLTREE$");
-        }
-
-        if (Terminal.rand.nextBoolean()) {
-            Terminal.replaceinSB(avlTreeExerciseStringBuilder, "$PRINTORDER$", "Post-Order");
-            Terminal.replaceinSB(avlTreeSolutionStringBuilder, "$PRINTORDER$", "Post-Order");
-            Terminal.replaceinSB(avlTreeSolutionStringBuilder, "%$AVLVISITSEQUENCE$", Terminal.printArrayList(tree.postOrder(tree.root)));
-        } else {
-            Terminal.replaceinSB(avlTreeExerciseStringBuilder, "$PRINTORDER$", "Pre-Order");
-            Terminal.replaceinSB(avlTreeSolutionStringBuilder, "$PRINTORDER$", "Pre-Order");
-            Terminal.replaceinSB(avlTreeSolutionStringBuilder, "%$AVLVISITSEQUENCE$", Terminal.printArrayList(tree.preOrder(tree.root)));
-        }
-
-        Terminal.replaceinSB(exerciseStringBuilder, "%$AVLTREES$", "\\newpage\n" + avlTreeExerciseStringBuilder.toString());
-        Terminal.replaceinSB(solutionStringBuilder, "%$AVLTREES$", "\\newpage\n" + avlTreeSolutionStringBuilder.toString());
-
-        Terminal.saveToFile("docs/Exercises.tex", exerciseStringBuilder);
-        Terminal.saveToFile("docs/Solutions.tex", solutionStringBuilder);
-    }
-
-    private static void writeCheckboxNoRotation(int number, boolean insert) {
-        Terminal.replaceinSB(avlTreeSolutionStringBuilder, "%$AVLTREE$", "\n" + (insert ? "Insert" : "Delete") +
-                ": \\underline{\\color{tumgadRed}" + number + "\\color{black}}\n" +
-                "\\hspace{.1cm}\n" +
-                "\\makebox[2.3cm][l]{$\\square$ l rotation}\n" +
-                "\\makebox[2.3cm][l]{$\\square$ r rotation}\n" +
-                "\\makebox[2.5cm][l]{$\\square$ l-r rotation}\n" +
-                "\\makebox[2.5cm][l]{$\\square$ r-l rotation}\n" +
-                "\\makebox[2.3cm][l]{$\\boxtimes$ no rotation}\n%$AVLTREE$");
     }
 }

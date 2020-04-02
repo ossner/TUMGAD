@@ -2,8 +2,6 @@ package DataStructures.Sequences.Arrays;
 
 import Util.Terminal;
 
-import java.util.Random;
-
 /**
  * Class represents Dynamic Array (read about it in the md),
  * an unbounded Array that changes its size based on its current size

@@ -134,7 +134,6 @@ public class Dijkstra {
      *
      * @param i the node first in the sequence
      * @param j the node to the left and below of the i node
-     *
      * @return whether or not the path between the two nodes is clear
      */
     public static boolean pathClear(int[][] nodeMatrix, int i, int j, List<String> nodeList) {
@@ -164,8 +163,7 @@ public class Dijkstra {
      * the values are depending on how many nodes the vertex skips, to make it harder to find a path
      *
      * @param nodeMatrix the binary nodeMatrix
-     * @param numNodes the number of nodes in the graph makes up the dimensions of the dist matrix
-     *
+     * @param numNodes   the number of nodes in the graph makes up the dimensions of the dist matrix
      * @return a numNodes x numNodes int-array with the vertex weights between each of the nodes
      * "taxing" the weights based on how far they would get you (faster paths => higher tax)
      */
@@ -209,9 +207,8 @@ public class Dijkstra {
      * corresponding nodeNumber
      *
      * @param nodeMatrix the binary nodeMatrix
-     * @param i the row the searched node is in
-     * @param j the column the wanted node is in
-     *
+     * @param i          the row the searched node is in
+     * @param j          the column the wanted node is in
      * @return the nodeNumber of the node with the given coordinates
      */
     public static int getNodeNum(int[][] nodeMatrix, int i, int j) {
@@ -233,7 +230,6 @@ public class Dijkstra {
      * makes the nodes specified in the nodeMatrix visible in the LaTeX templates
      *
      * @param nodeMatrix the nodeMatrix with the position of the nodes
-     *
      * @return the highest node number as a char to replace in the template
      */
     private static char generateGraphNodes(int[][] nodeMatrix) {
