@@ -262,6 +262,7 @@ public class Tumgad {
         try { // Incredibly ugly, only until we figure out the bug
             Prim.generateExercise();
         } catch (IndexOutOfBoundsException e) {
+            System.out.println("Error generating prim");
             gerneratePrimAlg();
         }
     }
