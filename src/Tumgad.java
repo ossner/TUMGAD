@@ -176,6 +176,14 @@ public class Tumgad {
                         System.out.println(ANSI_PURPLE + "Generating Dynamic Array" + ANSI_RESET);
                         gernerateDynamicArray();
                         break;
+                    case "HC":
+                        System.out.println(ANSI_PURPLE + "Generating Hashing with Chaining" + ANSI_RESET);
+                        HashingChaining.generateExercise();
+                        break;
+                    case "HD":
+                        System.out.println(ANSI_PURPLE + "Generating Double Hashing" + ANSI_RESET);
+                        DoubleHashing.generateExercise();
+                        break;
                     case "MS":
                         System.out.println(ANSI_PURPLE + "Generating MergeSort" + ANSI_RESET);
                         MergeSort.generateExercise();
@@ -188,26 +196,6 @@ public class Tumgad {
                         System.out.println(ANSI_PURPLE + "Generating RadixSort" + ANSI_RESET);
                         RadixSort.generateExercise();
                         break;
-                    case "HC":
-                        System.out.println(ANSI_PURPLE + "Generating Hashing with Chaining" + ANSI_RESET);
-                        HashingChaining.generateExercise();
-                        break;
-                    case "HD":
-                        System.out.println(ANSI_PURPLE + "Generating Double Hashing" + ANSI_RESET);
-                        DoubleHashing.generateExercise();
-                        break;
-                    case "TRAV":
-                        System.out.println(ANSI_PURPLE + "Generating Traversal" + ANSI_RESET);
-                        Graph.generateExercise();
-                        break;
-                    case "AB":
-                        System.out.println(ANSI_PURPLE + "Generating (a,b) Trees" + ANSI_RESET);
-                        ABTree.generateExercise();
-                        break;
-                    case "AVL":
-                        System.out.println(ANSI_PURPLE + "Generating AVL Trees" + ANSI_RESET);
-                        AVLTree.generateExercise();
-                        break;
                     case "BH":
                         System.out.println(ANSI_PURPLE + "Generating Binary Heaps" + ANSI_RESET);
                         BinaryHeap.generateExercise();
@@ -215,6 +203,18 @@ public class Tumgad {
                     case "BNH":
                         System.out.println(ANSI_PURPLE + "Generating Binomial Heaps" + ANSI_RESET);
                         BinomialHeap.generateExercise();
+                        break;
+                    case "AVL":
+                        System.out.println(ANSI_PURPLE + "Generating AVL Trees" + ANSI_RESET);
+                        AVLTree.generateExercise();
+                        break;
+                    case "AB":
+                        System.out.println(ANSI_PURPLE + "Generating (a,b) Trees" + ANSI_RESET);
+                        ABTree.generateExercise();
+                        break;
+                    case "TRAV":
+                        System.out.println(ANSI_PURPLE + "Generating Traversal" + ANSI_RESET);
+                        Graph.generateExercise();
                         break;
                     case "FW":
                         System.out.println(ANSI_PURPLE + "Generating Floyd Warshall" + ANSI_RESET);
