@@ -61,12 +61,11 @@ public class Tumgad {
         try {
             seed = Integer.parseInt(answer);
         } catch (NumberFormatException e) {
-            error("No valid seed provided. Generating random seed...");
+            error("No valid seed provided. Generating random seed... " + seed);
         }
         Terminal.rand = new Random(seed);
         Terminal.replaceinSB(exerciseStringBuilder, "$RANDOMSEED$", "" + seed);
         Terminal.replaceinSB(solutionStringBuilder, "$RANDOMSEED$", "" + seed);
-
 
         Terminal.replaceinSB(exerciseStringBuilder, "$GENERATEDDATE$", new Date().toString());
         Terminal.replaceinSB(solutionStringBuilder, "$GENERATEDDATE$", new Date().toString());
@@ -226,10 +225,10 @@ public class Tumgad {
                         Dijkstra.generateExercise();
                         break;
                     case "P":
-                        say("Prim's algorithm can not be generated yet, still in development");
+                        System.out.println(ANSI_PURPLE + "Generating Prim's Algorithm" + ANSI_RESET);
+                        gerneratePrimAlg();
                         break;
                     case "DEV":
-                        Prim.generateExercise();
                         say("Generating components that are still in development");
                         break;
                     default:
@@ -256,6 +255,14 @@ public class Tumgad {
             DynamicArray.generateExercise();
         } catch (IndexOutOfBoundsException e) {
             gernerateDynamicArray();
+        }
+    }
+
+    private static void gerneratePrimAlg() {
+        try { // Incredibly ugly, only until we figure out the bug
+            Prim.generateExercise();
+        } catch (IndexOutOfBoundsException e) {
+            gerneratePrimAlg();
         }
     }
 }
