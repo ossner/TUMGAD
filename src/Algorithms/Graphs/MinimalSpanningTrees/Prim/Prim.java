@@ -20,9 +20,6 @@ public class Prim {
         int[][] nodeMatrix = generateNodeMatrix(numNodes);
         generateGraphNodes(nodeMatrix);
         Collections.sort(nodeList);
-        int[][] distMatrix = generateDistMatrix(nodeMatrix, numNodes + 2);
-        generateGraphEdges(distMatrix);
-        generateSolutionEdges(primAlg(distMatrix));
 
         StringBuilder exerciseStringBuilder = Terminal.readFile("docs/Exercises.tex");
         StringBuilder solutionStringBuilder = Terminal.readFile("docs/Solutions.tex");
@@ -35,75 +32,6 @@ public class Prim {
 
         Terminal.saveToFile("docs/Exercises.tex", exerciseStringBuilder);
         Terminal.saveToFile("docs/Solutions.tex", solutionStringBuilder);
-    }
-
-    private static int[][] primAlg(int[][] distMatrix) {
-        ArrayList<Integer> addedNodes = new ArrayList<>();
-        int[][] newDist = new int[distMatrix.length][distMatrix.length];
-        addedNodes.add(0);
-        while (addedNodes.size() < distMatrix.length - 1) {
-            int[] min = new int[]{9999, 9999};
-            int[] newMin;
-            int maxJ = 0;
-            for (int j = 0; j < addedNodes.size(); j++) {
-                newMin = findMin(distMatrix[addedNodes.get(j)]);
-                if ((newMin[1] < min[1] || (newMin[1] == min[1] && newMin[0] < min[0])) &&
-                        newDist[addedNodes.get(j)][newMin[0]] == 0 && !addedNodes.contains(newMin[0])) {
-                    min = newMin;
-                    maxJ = j;
-                }
-            }
-            newDist[addedNodes.get(maxJ)][min[0]] = distMatrix[addedNodes.get(maxJ)][min[0]];
-            distMatrix[addedNodes.get(maxJ)][min[0]] = 0;
-            distMatrix[min[0]][addedNodes.get(maxJ)] = 0;
-                addedNodes.add(min[0]);
-        }
-        return newDist;
-    }
-
-    private static int[] findMin(int[] arr) {
-        int minVal = 9999;
-        int minIndex = 0;
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] < minVal && arr[i] != 0) {
-                minVal = arr[i];
-                minIndex = i;
-            }
-        }
-        return new int[]{minIndex, minVal};
-    }
-
-    public static int[][] generateDistMatrix(int[][] nodeMatrix, int numNodes) {
-        int currNode = 0;
-        int[][] distMatrix = new int[numNodes][numNodes];
-        // connect each node with the node below it
-        for (int i = 0; i < nodeMatrix.length - 1; i++) {
-            for (int j = 0; j < nodeMatrix[0].length && currNode < numNodes - 1; j++) {
-                if (nodeMatrix[i][j] == 1) {
-                    if (nodeMatrix[i + 1][j] == 1) {
-                        distMatrix[currNode][getNodeNum(nodeMatrix, i + 1, j)] = Terminal.rand.nextInt(8) + 1;
-                    }
-                    currNode++;
-                }
-            }
-        }
-        currNode = 0;
-        // connect each node with the node to the right of it
-        for (int i = 0; i < nodeMatrix.length; i++) {
-            for (int j = 0; j < nodeMatrix[0].length - 1 && currNode < numNodes - 1; j++) {
-                currNode = getNodeNum(nodeMatrix, i, j);
-                if (nodeMatrix[i][j] == 1 && nodeMatrix[i][j + 1] == 1) {
-                    distMatrix[currNode][currNode + 1] = Terminal.rand.nextInt(8) + 1;
-                }
-            }
-        }
-
-        for (int i = 0; i < distMatrix.length; i++) {
-            for (int j = 0; j < i; j++) {
-                distMatrix[i][j] = distMatrix[j][i];
-            }
-        }
-        return distMatrix;
     }
 
     private static void generateGraphNodes(int[][] nodeMatrix) {

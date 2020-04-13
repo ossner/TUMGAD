@@ -225,10 +225,10 @@ public class Tumgad {
                         Dijkstra.generateExercise();
                         break;
                     case "P":
-                        System.out.println(ANSI_PURPLE + "Generating Prim's Algorithm" + ANSI_RESET);
-                        gerneratePrimAlg();
+                        System.out.println("Prim's Algorithm can not be generated yet.");
                         break;
                     case "DEV":
+                        gerneratePrimAlg();
                         say("Generating components that are still in development");
                         break;
                     default:
