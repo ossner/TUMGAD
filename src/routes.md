@@ -1,12 +1,6 @@
 # Routes to TUMGAD Explanations:
 
 ## Algorithms
-
-### Hashing
-- [Chaining](https://sebastianoner.github.io/TUMGAD/src/Algorithms/Hashing/Chaining/HashingChaining)
-- [Linear Probing](https://sebastianoner.github.io/TUMGAD/src/Algorithms/Hashing/LinearProbing/HashingLinearProbing)
-- [Double Hashing](https://sebastianoner.github.io/TUMGAD/src/Algorithms/Hashing/Double/DoubleHashing)
-
 ### Sorting
 - [MergeSort](https://sebastianoner.github.io/TUMGAD/src/Algorithms/Sorting/MergeSort/MergeSort)
 - [QuickSort](https://sebastianoner.github.io/TUMGAD/src/Algorithms/Sorting/QuickSort/QuickSort)
