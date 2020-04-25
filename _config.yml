@@ -1,5 +1,6 @@
 remote_theme: "dracula/gh-pages"
 title: TUMGAD
-description: Exercise generation for famous algorithms and data structures
+description: Exercise generation and helpful materials for the Introduction to Algorithms and Data Structures 📚
+icon: docs/favicon.png
 show_header: true
 colorspace: purple
