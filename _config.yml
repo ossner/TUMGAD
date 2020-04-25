@@ -1,3 +1,4 @@
 remote_theme: "dracula/gh-pages"
-icon: favicon.png
+show_header: false
+icon: /assets/images/favicon.png
 title: TUMGAD
