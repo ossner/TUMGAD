@@ -1,1 +1,2 @@
-theme: jekyll-theme-cayman
+remote_theme: "dracula/gh-pages"
+icon: docs/favicon.ico
