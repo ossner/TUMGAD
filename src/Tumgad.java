@@ -228,7 +228,7 @@ public class Tumgad {
                         System.out.println("Prim's Algorithm can not be generated yet.");
                         break;
                     case "DEV":
-                        gerneratePrimAlg();
+                        Prim.generateExercise();
                         say("Generating components that are still in development");
                         break;
                     default:
@@ -255,15 +255,6 @@ public class Tumgad {
             DynamicArray.generateExercise();
         } catch (IndexOutOfBoundsException e) {
             gernerateDynamicArray();
-        }
-    }
-
-    private static void gerneratePrimAlg() {
-        try { // Incredibly ugly, only until we figure out the bug
-            Prim.generateExercise();
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("Error generating prim");
-            gerneratePrimAlg();
         }
     }
 }
