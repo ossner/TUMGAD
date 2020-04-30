@@ -173,8 +173,7 @@ public class Tumgad {
                 String option = options[i];
                 switch (option.toUpperCase()) {
                     case "DA":
-                        System.out.println(ANSI_PURPLE + "Generating Dynamic Array" + ANSI_RESET);
-                        gernerateDynamicArray();
+                        System.out.println("Dynamic Arrays can not be generated yet.");
                         break;
                     case "HC":
                         System.out.println(ANSI_PURPLE + "Generating Hashing with Chaining" + ANSI_RESET);
@@ -229,6 +228,7 @@ public class Tumgad {
                         break;
                     case "DEV":
                         Prim.generateExercise();
+                        DynamicArray.generateExercise();
                         say("Generating components that are still in development");
                         break;
                     default:
@@ -245,16 +245,5 @@ public class Tumgad {
 
     private static void say(String toSay) {
         System.out.println(new Date().toString() + ": " + toSay);
-    }
-
-    /**
-     * Forgive me father for I have sinned, Don't look into this method for only pain you'll find
-     */
-    private static void gernerateDynamicArray() {
-        try { // Incredibly ugly, only until we figure out the bug
-            DynamicArray.generateExercise();
-        } catch (IndexOutOfBoundsException e) {
-            gernerateDynamicArray();
-        }
     }
 }
