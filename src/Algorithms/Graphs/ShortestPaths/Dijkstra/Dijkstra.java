@@ -13,8 +13,8 @@ public class Dijkstra {
     private static ArrayList<String> nodeList = new ArrayList<>(); // List of LaTeX node-id's makes it easier to generate the TeX
 
     public static void generateExercise() {
-        dijkstraExerciseStringBuilder = Terminal.readFile("src/Algorithms/Graphs/ShortestPaths/DijkstraExerciseTemplate.tex");
-        dijkstraSolutionStringBuilder = Terminal.readFile("src/Algorithms/Graphs/ShortestPaths/DijkstraSolutionTemplate.tex");
+        dijkstraExerciseStringBuilder = Terminal.readFile("src/Algorithms/Graphs/ShortestPaths/Dijkstra/DijkstraExerciseTemplate.tex");
+        dijkstraSolutionStringBuilder = Terminal.readFile("src/Algorithms/Graphs/ShortestPaths/Dijkstra/DijkstraSolutionTemplate.tex");
 
         int numNodes = Terminal.rand.nextInt(3) + 11; // Number of nodes between start and end
 
