@@ -1,5 +1,5 @@
 import Algorithms.Graphs.APSP.FloydWarshall.FloydWarshall;
-import Algorithms.Graphs.ShortestPaths.Dijkstra;
+import Algorithms.Graphs.ShortestPaths.Dijkstra.Dijkstra;
 import Algorithms.Graphs.Traversal.Graph;
 import Algorithms.Hashing.Chaining.HashingChaining;
 import Algorithms.Hashing.Double.DoubleHashing;

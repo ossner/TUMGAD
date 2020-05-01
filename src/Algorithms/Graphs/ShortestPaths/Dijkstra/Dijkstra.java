@@ -1,4 +1,4 @@
-package Algorithms.Graphs.ShortestPaths;
+package Algorithms.Graphs.ShortestPaths.Dijkstra;
 
 import Util.Terminal;
 

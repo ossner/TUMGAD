@@ -16,7 +16,7 @@
 - [Depth-First Search](https://sebastianoner.github.io/TUMGAD/src/Algorithms/Graphs/Traversal/DFS)
 
 #### Shortest Paths
-- [Dijkstra](https://sebastianoner.github.io/TUMGAD/src/Algorithms/Graphs/ShortestPaths/Dijkstra)
+- [Dijkstra](https://sebastianoner.github.io/TUMGAD/src/Algorithms/Graphs/ShortestPaths/Dijkstra/Dijkstra)
 - [Floyd-Warshall (APSP)](https://sebastianoner.github.io/TUMGAD/src/Algorithms/Graphs/APSP/FloydWarshall/Floyd-Warshall)
 
 #### Minimal Spanning Trees
