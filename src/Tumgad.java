@@ -1,5 +1,4 @@
 import Algorithms.Graphs.APSP.FloydWarshall.FloydWarshall;
-import Algorithms.Graphs.MinimalSpanningTrees.Prim.Prim;
 import Algorithms.Graphs.ShortestPaths.Dijkstra;
 import Algorithms.Graphs.Traversal.Graph;
 import Algorithms.Hashing.Chaining.HashingChaining;
@@ -11,7 +10,6 @@ import DataStructures.PriorityQueues.BinaryHeaps.BinaryHeap;
 import DataStructures.PriorityQueues.BinomialHeaps.BinomialHeap;
 import DataStructures.SearchStructures.ABTrees.ABTree;
 import DataStructures.SearchStructures.AVLTrees.AVLTree;
-import DataStructures.Sequences.Arrays.DynamicArray;
 import Util.Terminal;
 
 import java.io.BufferedReader;
@@ -144,8 +142,7 @@ public class Tumgad {
     private static void chooseExercises() {
         Scanner input = new Scanner(System.in);
         System.out.println(
-                "Dynamic Arrays: " + ANSI_PURPLE + "DA" + ANSI_RESET + "\n" +
-                        "MergeSort: " + ANSI_PURPLE + "MS" + ANSI_RESET + "\n" +
+                "MergeSort: " + ANSI_PURPLE + "MS" + ANSI_RESET + "\n" +
                         "QuickSort: " + ANSI_PURPLE + "QS" + ANSI_RESET + "\n" +
                         "RadixSort: " + ANSI_PURPLE + "RS" + ANSI_RESET + "\n" +
                         "Hashing (Chaining): " + ANSI_PURPLE + "HC" + ANSI_RESET + "\n" +
@@ -156,15 +153,14 @@ public class Tumgad {
                         "AVL Trees: " + ANSI_PURPLE + "AVL" + ANSI_RESET + "\n" +
                         "Binary Heaps: " + ANSI_PURPLE + "BH" + ANSI_RESET + "\n" +
                         "Binomial Heaps: " + ANSI_PURPLE + "BNH" + ANSI_RESET + "\n" +
-                        "Dijkstra: " + ANSI_PURPLE + "D" + ANSI_RESET + "\n" +
-                        "Prim: " + ANSI_PURPLE + "P" + ANSI_RESET + "\n" +
-                        "Floyd-Warshall: " + ANSI_PURPLE + "FW" + ANSI_RESET
+                        "Floyd-Warshall: " + ANSI_PURPLE + "FW" + ANSI_RESET + "\n" +
+                        "Dijkstra: " + ANSI_PURPLE + "D" + ANSI_RESET
         );
         String answer = input.nextLine();
         String[] options;
         try {
             if (answer.equalsIgnoreCase("X")) {
-                options = new String[]{"DA", "MS", "QS", "RS", "HC", "HD", "TRAV", "AB", "AVL", "BH", "BNH", "D", "P", "FW"};
+                options = new String[]{"MS", "QS", "RS", "HC", "HD", "TRAV", "AB", "AVL", "BH", "BNH", "D", "FW"};
             } else {
                 options = answer.split(" ");
                 options = new HashSet<>(Arrays.asList(options)).toArray(new String[0]); // remove duplicates
@@ -172,9 +168,6 @@ public class Tumgad {
             for (int i = 0; i < options.length; i++) {
                 String option = options[i];
                 switch (option.toUpperCase()) {
-                    case "DA":
-                        System.out.println("Dynamic Arrays can not be generated yet.");
-                        break;
                     case "HC":
                         System.out.println(ANSI_PURPLE + "Generating Hashing with Chaining" + ANSI_RESET);
                         HashingChaining.generateExercise();
@@ -223,12 +216,7 @@ public class Tumgad {
                         System.out.println(ANSI_PURPLE + "Generating Dijkstra's Algorithm" + ANSI_RESET);
                         Dijkstra.generateExercise();
                         break;
-                    case "P":
-                        System.out.println("Prim's Algorithm can not be generated yet.");
-                        break;
                     case "DEV":
-                        Prim.generateExercise();
-                        DynamicArray.generateExercise();
                         say("Generating components that are still in development");
                         break;
                     default:
