@@ -4,7 +4,7 @@ import Util.Terminal;
 
 import java.util.ArrayList;
 
-abstract class ABTreeNode {
+abstract class ABNode {
     /**
      * The lower bound of the node degree.
      */
@@ -15,7 +15,7 @@ abstract class ABTreeNode {
      */
     protected int b;
 
-    ABTreeNode(int a, int b) {
+    ABNode(int a, int b) {
         this.a = a;
         this.b = b;
     }
@@ -25,14 +25,14 @@ abstract class ABTreeNode {
      *
      * @param key the key to be inserted
      */
-    public abstract void insert(int key);
+    abstract void insert(int key);
 
     /**
-     * decides, whether you can steak out of this node or not.
+     * decides, whether you can steal out of this node or not.
      *
      * @return 'true' if you can steam, 'false' else
      */
-    public abstract boolean canSteal();
+    abstract boolean canSteal();
 
     /**
      * looks for key in the tree.
@@ -40,7 +40,7 @@ abstract class ABTreeNode {
      * @param key the key in question
      * @return 'true' if the key is in the tree, 'false' else
      */
-    public abstract boolean find(int key);
+    abstract boolean find(int key);
 
     /**
      * removes a key 'key' in the subtree, id it is present.
@@ -48,36 +48,39 @@ abstract class ABTreeNode {
      * @param key the key to be removed
      * @return 'true' if the key was found and removed, 'false' else
      */
-    public abstract boolean remove(int key);
+    abstract boolean remove(int key);
 
     /**
      * calculated the height of the subtree
      *
      * @return the found height
      */
-    public abstract int height();
+    abstract int height();
 
     /**
      * finds the minimal element in the sub tree
      *
      * @return the minimum
      */
-    public abstract Integer min();
+    abstract Integer min();
 
     /**
      * Finds the maximum element in the sub tree
      *
      * @return the max element
      */
-    public abstract Integer max();
+    abstract Integer max();
 
     /**
      * Checks if this is a valid ab tree
      *
      * @return 'true' if it is a valid (a,b)-Tree, 'false' else
      */
-    public abstract boolean validAB(boolean root);
+    abstract boolean validAB(boolean root);
 
+    /**
+     * Converts a (a,b) Tree into a Tikzpicture
+     */
     abstract String toTex();
 }
 
@@ -86,13 +89,9 @@ public class ABTree {
     static StringBuilder abTreeSolutionStringBuilder;
     private final int a;
     private final int b;
-    private ABTreeInnerNode root = null;
-    public ABTree(int a, int b) {
-        if (a < 2) {
-            throw new RuntimeException("Invalid a");
-        } else if (b < 2 * a - 1) {
-            throw new RuntimeException("Invalid b");
-        }
+    private ABNestedNode root = null;
+
+    ABTree(int a, int b) {
         this.a = a;
         this.b = b;
     }
@@ -148,6 +147,8 @@ public class ABTree {
         StringBuilder exerciseStringBuilder = Terminal.readFile("docs/Exercises.tex");
         StringBuilder solutionStringBuilder = Terminal.readFile("docs/Solutions.tex");
 
+        assert exerciseStringBuilder != null;
+        assert solutionStringBuilder != null;
         Terminal.replaceinSB(exerciseStringBuilder, "%$ABCELL$", "\\cellcolor{tumgadPurple}");
         Terminal.replaceinSB(solutionStringBuilder, "%$ABCELL$", "\\cellcolor{tumgadRed}");
 
@@ -159,60 +160,47 @@ public class ABTree {
 
     }
 
-    public boolean validAB() {
-        return root == null || root.validAB(true);
-    }
-
-    public int height() {
-        if (root == null) {
-            return 0;
-        }
-        return root.height();
-    }
-
-    public boolean find(int key) {
+    boolean search(int key) {
         return root != null && root.find(key);
     }
 
-    public void insert(int key) {
-        if (root != null) {
-            root.insert(key);
-            if (root.getChildren().size() > b) {
-                int middle = b / 2;
+    void insert(int key) {
+        if (root == null) {
+            root = new ABNestedNode(key, a, b);
+            return;
+        }
+        root.insert(key);
+        if (root.getChildren().size() > b) {
+            ArrayList<Integer> keysL = new ArrayList<>(),  keysR = new ArrayList<>();
+            ArrayList<ABNode> childL = new ArrayList<>(), childR = new ArrayList<>();
 
-                ArrayList<Integer> keysLeft = new ArrayList<>();
-                ArrayList<ABTreeNode> childrenLeft = new ArrayList<>();
-                ArrayList<Integer> keysRight = new ArrayList<>();
-                ArrayList<ABTreeNode> childrenRight = new ArrayList<>();
+            int middle = b / 2;
 
-                for (int i = 0; i < root.getKeys().size(); i++) {
-                    if (i < middle) {
-                        keysLeft.add(root.getKeys().get(i));
-                        childrenLeft.add(root.getChildren().get(i));
-                    } else if (i == middle) {
-                        childrenLeft.add(root.getChildren().get(i));
-                    } else {
-                        keysRight.add(root.getKeys().get(i));
-                        childrenRight.add(root.getChildren().get(i));
-                    }
+            for (int i = 0; i < root.getKeys().size(); i++) {
+                if (i < middle) {
+                    keysL.add(root.getKeys().get(i));
+                    childL.add(root.getChildren().get(i));
+                } else if (i == middle) {
+                    childL.add(root.getChildren().get(i));
+                } else {
+                    keysR.add(root.getKeys().get(i));
+                    childR.add(root.getChildren().get(i));
                 }
-                childrenRight.add(root.getChildren().get(root.getChildren().size() - 1));
-
-                ABTreeInnerNode leftNew = new ABTreeInnerNode(keysLeft, childrenLeft, a, b);
-                ABTreeInnerNode rightNew = new ABTreeInnerNode(keysRight, childrenRight, a, b);
-
-                root = new ABTreeInnerNode(root.getKeys().get(middle), leftNew, rightNew, a, b);
             }
-        } else {
-            root = new ABTreeInnerNode(key, a, b);
+            childR.add(root.getChildren().get(root.getChildren().size() - 1));
+
+            ABNestedNode leftNew = new ABNestedNode(keysL, childL, a, b);
+            ABNestedNode rightNew = new ABNestedNode(keysR, childR, a, b);
+
+            root = new ABNestedNode(root.getKeys().get(middle), leftNew, rightNew, a, b);
         }
     }
 
-    public boolean remove(int key) {
+    boolean remove(int key) {
         if (root != null) {
             boolean result = root.remove(key);
-            if (root.getChildren().size() < 2 && root.getChildren().get(0) instanceof ABTreeInnerNode) {
-                root = (ABTreeInnerNode) root.getChildren().get(0);
+            if (root.getChildren().size() < 2 && root.getChildren().get(0) instanceof ABNestedNode) {
+                root = (ABNestedNode) root.getChildren().get(0);
             } else if (root.getChildren().size() < 2) {
                 root = null;
             }
@@ -246,18 +234,18 @@ public class ABTree {
 }
 
 
-class ABTreeInnerNode extends ABTreeNode {
+class ABNestedNode extends ABNode {
 
-    private ArrayList<Integer> keys;
-    private ArrayList<ABTreeNode> children;
+    final ArrayList<Integer> keys; // keys stored in the node and subnodes are saved in this list
+    final ArrayList<ABNode> children;
 
-    public ABTreeInnerNode(ArrayList<Integer> keys, ArrayList<ABTreeNode> children, int a, int b) {
+    ABNestedNode(ArrayList<Integer> keys, ArrayList<ABNode> children, int a, int b) {
         super(a, b);
         this.keys = keys;
         this.children = children;
     }
 
-    public ABTreeInnerNode(int key, ABTreeNode left, ABTreeNode right, int a, int b) {
+    ABNestedNode(int key, ABNode left, ABNode right, int a, int b) {
         super(a, b);
         keys = new ArrayList<>();
         children = new ArrayList<>();
@@ -266,20 +254,20 @@ class ABTreeInnerNode extends ABTreeNode {
         children.add(right);
     }
 
-    public ABTreeInnerNode(int key, int a, int b) {
-        this(key, new ABTreeLeaf(a, b), new ABTreeLeaf(a, b), a, b);
+    ABNestedNode(int key, int a, int b) {
+        this(key, new ABLeafNode(a, b), new ABLeafNode(a, b), a, b);
     }
 
-    public ArrayList<ABTreeNode> getChildren() {
+    ArrayList<ABNode> getChildren() {
         return children;
     }
 
-    public ArrayList<Integer> getKeys() {
+    ArrayList<Integer> getKeys() {
         return keys;
     }
 
     @Override
-    public void insert(int key) {
+    void insert(int key) {
         int index;
         for (index = 0; index < keys.size(); index++) {
             if (keys.get(index) == key) {
@@ -289,22 +277,20 @@ class ABTreeInnerNode extends ABTreeNode {
                 break;
             }
         }
-        ABTreeNode child = children.get(index);
+        ABNode child = children.get(index);
         child.insert(key);
 
-        if (child instanceof ABTreeLeaf) {
-            ABTreeLeaf newLeaf = new ABTreeLeaf(a, b);
+        if (child instanceof ABLeafNode) {
+            ABLeafNode newLeaf = new ABLeafNode(a, b);
             keys.add(index, key);
             children.add(index, newLeaf);
         } else {
-            ABTreeInnerNode innerChild = (ABTreeInnerNode) child;
+            ABNestedNode innerChild = (ABNestedNode) child;
             if (innerChild.children.size() > b) {
-                int middle = b / 2;
+                ArrayList<Integer> keysLeft = new ArrayList<>(), keysRight = new ArrayList<>();
+                ArrayList<ABNode> childrenLeft = new ArrayList<>(), childrenRight = new ArrayList<>();
 
-                ArrayList<Integer> keysLeft = new ArrayList<>();
-                ArrayList<ABTreeNode> childrenLeft = new ArrayList<>();
-                ArrayList<Integer> keysRight = new ArrayList<>();
-                ArrayList<ABTreeNode> childrenRight = new ArrayList<>();
+                int middle = b / 2;
 
                 for (int i = 0; i < innerChild.keys.size(); i++) {
                     if (i < middle) {
@@ -319,8 +305,8 @@ class ABTreeInnerNode extends ABTreeNode {
                 }
                 childrenRight.add(innerChild.children.get(innerChild.children.size() - 1));
 
-                ABTreeInnerNode leftNew = new ABTreeInnerNode(keysLeft, childrenLeft, a, b);
-                ABTreeInnerNode rightNew = new ABTreeInnerNode(keysRight, childrenRight, a, b);
+                ABNestedNode leftNew = new ABNestedNode(keysLeft, childrenLeft, a, b);
+                ABNestedNode rightNew = new ABNestedNode(keysRight, childrenRight, a, b);
 
                 keys.add(index, innerChild.keys.get(middle));
                 children.set(index, leftNew);
@@ -330,12 +316,12 @@ class ABTreeInnerNode extends ABTreeNode {
     }
 
     @Override
-    public boolean canSteal() {
+    boolean canSteal() {
         return children.size() > a;
     }
 
     @Override
-    public boolean find(int key) {
+    boolean find(int key) {
         for (int i = 0; i < keys.size(); i++) {
             if (keys.get(i) == key) {
                 return true;
@@ -347,9 +333,9 @@ class ABTreeInnerNode extends ABTreeNode {
     }
 
     @Override
-    public boolean remove(int key) {
+    boolean remove(int key) {
         for (int index = 0; index < children.size(); index++) {
-            ABTreeNode child = children.get(index);
+            ABNode child = children.get(index);
             if (index == keys.size() || keys.get(index) > key) {
                 boolean result = child.remove(key);
                 if (result) {
@@ -357,12 +343,11 @@ class ABTreeInnerNode extends ABTreeNode {
                 }
                 return result;
             } else if (keys.get(index) == key) {
-                if (child instanceof ABTreeLeaf) {
-                    assert (index < keys.size());
+                if (child instanceof ABLeafNode) {
                     keys.remove(index);
                     children.remove(index);
                 } else {
-                    keys.set(index, ((ABTreeInnerNode) child).removeRightMostChild());
+                    keys.set(index, ((ABNestedNode) child).removeRightMostChild());
                     balanceChildren(index);
                 }
                 return true;
@@ -371,12 +356,12 @@ class ABTreeInnerNode extends ABTreeNode {
         return false;
     }
 
-    private void balanceChildren(int index) {
-        assert (children.get(index) instanceof ABTreeInnerNode);
-        ABTreeInnerNode innerChild = (ABTreeInnerNode) children.get(index);
+    void balanceChildren(int index) {
+        assert (children.get(index) instanceof ABNestedNode);
+        ABNestedNode innerChild = (ABNestedNode) children.get(index);
         if (innerChild.children.size() < a) {
             if (index - 1 >= 0 && children.get(index - 1).canSteal()) {
-                ABTreeInnerNode leftNeighbor = (ABTreeInnerNode) children.get(index - 1);
+                ABNestedNode leftNeighbor = (ABNestedNode) children.get(index - 1);
                 innerChild.children.add(0, leftNeighbor.children.get(leftNeighbor.children.size() - 1));
                 leftNeighbor.children.remove(leftNeighbor.children.size() - 1);
 
@@ -384,14 +369,14 @@ class ABTreeInnerNode extends ABTreeNode {
                 keys.set(index - 1, leftNeighbor.keys.get(leftNeighbor.keys.size() - 1));
                 leftNeighbor.keys.remove(leftNeighbor.keys.size() - 1);
             } else if (index + 1 < children.size() && children.get(index + 1).canSteal()) {
-                ABTreeInnerNode rightNeighbor = (ABTreeInnerNode) children.get(index + 1);
+                ABNestedNode rightNeighbor = (ABNestedNode) children.get(index + 1);
                 innerChild.children.add(rightNeighbor.children.get(0));
                 rightNeighbor.children.remove(0);
 
                 innerChild.keys.add(keys.get(index));
                 keys.set(index, rightNeighbor.keys.get(0));
                 rightNeighbor.keys.remove(0);
-            } else // verschmelze mit Nachbarknoten
+            } else // Merge node with neighbor
                 if (index + 1 < children.size()) {
                     mergeChildren(index);
                 } else {
@@ -400,47 +385,47 @@ class ABTreeInnerNode extends ABTreeNode {
         }
     }
 
-    private void mergeChildren(int keyIndex) {
-        ABTreeInnerNode node0 = (ABTreeInnerNode) children.get(keyIndex);
-        ABTreeInnerNode node1 = (ABTreeInnerNode) children.get(keyIndex + 1);
+    void mergeChildren(int keyIndex) {
+        ABNestedNode node0 = (ABNestedNode) children.get(keyIndex);
+        ABNestedNode node1 = (ABNestedNode) children.get(keyIndex + 1);
 
         ArrayList<Integer> keys = new ArrayList<>();
         keys.addAll(node0.keys);
         keys.add(this.keys.get(keyIndex));
         keys.addAll(node1.keys);
 
-        ArrayList<ABTreeNode> children = new ArrayList<>();
+        ArrayList<ABNode> children = new ArrayList<>();
         children.addAll(node0.children);
         children.addAll(node1.children);
 
-        ABTreeInnerNode newNode = new ABTreeInnerNode(keys, children, a, b);
+        ABNestedNode newNode = new ABNestedNode(keys, children, a, b);
 
         this.children.remove(keyIndex + 1);
         this.children.set(keyIndex, newNode);
         this.keys.remove(keyIndex);
     }
 
-    private int removeRightMostChild() {
-        ABTreeNode child = children.get(children.size() - 1);
-        if (child instanceof ABTreeLeaf) {
+    int removeRightMostChild() {
+        ABNode child = children.get(children.size() - 1);
+        if (child instanceof ABLeafNode) {
             children.remove(children.size() - 1);
             int key = keys.get(keys.size() - 1);
             keys.remove(keys.size() - 1);
             return key;
         } else {
-            int key = ((ABTreeInnerNode) child).removeRightMostChild();
+            int key = ((ABNestedNode) child).removeRightMostChild();
             balanceChildren(children.size() - 1);
             return key;
         }
     }
 
     @Override
-    public int height() {
+    int height() {
         return 1 + children.get(0).height();
     }
 
     @Override
-    public Integer min() {
+    Integer min() {
         Integer result = children.get(0).min();
         if (result == null) {
             result = keys.get(0);
@@ -449,7 +434,7 @@ class ABTreeInnerNode extends ABTreeNode {
     }
 
     @Override
-    public Integer max() {
+    Integer max() {
         Integer result = children.get(children.size() - 1).max();
         if (result == null) {
             result = keys.get(keys.size() - 1);
@@ -458,7 +443,7 @@ class ABTreeInnerNode extends ABTreeNode {
     }
 
     @Override
-    public boolean validAB(boolean root) {
+    boolean validAB(boolean root) {
         if (children.size() < (root ? 2 : a)) {
             return false;
         }
@@ -509,52 +494,45 @@ class ABTreeInnerNode extends ABTreeNode {
 }
 
 
-class ABTreeLeaf extends ABTreeNode {
+class ABLeafNode extends ABNode {
 
-    public ABTreeLeaf(int a, int b) {
+    ABLeafNode(int a, int b) {
         super(a, b);
     }
 
     @Override
-    public void insert(int key) {
+    void insert(int key) {
+        // do nothing
     }
 
-    @Override
-    public boolean canSteal() {
+    boolean canSteal() {
         return false;
     }
 
-    @Override
-    public boolean find(int key) {
+    boolean find(int key) {
         return false;
     }
 
-    @Override
-    public boolean remove(int key) {
+    boolean remove(int key) {
         return false;
     }
 
-    @Override
-    public int height() {
+    int height() {
         return 0;
     }
 
-    @Override
-    public Integer min() {
+    Integer min() {
         return null;
     }
 
-    @Override
-    public Integer max() {
+    Integer max() {
         return null;
     }
 
-    @Override
-    public boolean validAB(boolean root) {
+    boolean validAB(boolean root) {
         return true;
     }
 
-    @Override
     String toTex() {
         return "";
     }
