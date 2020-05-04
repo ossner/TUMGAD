@@ -32,7 +32,7 @@ abstract class ABNode {
      *
      * @return 'true' if you can steam, 'false' else
      */
-    abstract boolean canSteal();
+    abstract boolean stealable();
 
     /**
      * looks for key in the tree.
@@ -76,7 +76,7 @@ abstract class ABNode {
      *
      * @return 'true' if it is a valid (a,b)-Tree, 'false' else
      */
-    abstract boolean validAB(boolean root);
+    abstract boolean isValid(boolean root);
 
     /**
      * Converts a (a,b) Tree into a Tikzpicture
@@ -160,10 +160,6 @@ public class ABTree {
 
     }
 
-    boolean search(int key) {
-        return root != null && root.find(key);
-    }
-
     void insert(int key) {
         if (root == null) {
             root = new ABNestedNode(key, a, b);
@@ -171,7 +167,7 @@ public class ABTree {
         }
         root.insert(key);
         if (root.getChildren().size() > b) {
-            ArrayList<Integer> keysL = new ArrayList<>(),  keysR = new ArrayList<>();
+            ArrayList<Integer> keysL = new ArrayList<>(), keysR = new ArrayList<>();
             ArrayList<ABNode> childL = new ArrayList<>(), childR = new ArrayList<>();
 
             int middle = b / 2;
@@ -180,11 +176,11 @@ public class ABTree {
                 if (i < middle) {
                     keysL.add(root.getKeys().get(i));
                     childL.add(root.getChildren().get(i));
-                } else if (i == middle) {
-                    childL.add(root.getChildren().get(i));
-                } else {
+                } else if (i > middle) {
                     keysR.add(root.getKeys().get(i));
                     childR.add(root.getChildren().get(i));
+                } else {
+                    childL.add(root.getChildren().get(i));
                 }
             }
             childR.add(root.getChildren().get(root.getChildren().size() - 1));
@@ -316,7 +312,7 @@ class ABNestedNode extends ABNode {
     }
 
     @Override
-    boolean canSteal() {
+    boolean stealable() {
         return children.size() > a;
     }
 
@@ -347,7 +343,7 @@ class ABNestedNode extends ABNode {
                     keys.remove(index);
                     children.remove(index);
                 } else {
-                    keys.set(index, ((ABNestedNode) child).removeRightMostChild());
+                    keys.set(index, ((ABNestedNode) child).removeBiggestChild());
                     balanceChildren(index);
                 }
                 return true;
@@ -360,7 +356,7 @@ class ABNestedNode extends ABNode {
         assert (children.get(index) instanceof ABNestedNode);
         ABNestedNode innerChild = (ABNestedNode) children.get(index);
         if (innerChild.children.size() < a) {
-            if (index - 1 >= 0 && children.get(index - 1).canSteal()) {
+            if (index - 1 >= 0 && children.get(index - 1).stealable()) {
                 ABNestedNode leftNeighbor = (ABNestedNode) children.get(index - 1);
                 innerChild.children.add(0, leftNeighbor.children.get(leftNeighbor.children.size() - 1));
                 leftNeighbor.children.remove(leftNeighbor.children.size() - 1);
@@ -368,7 +364,7 @@ class ABNestedNode extends ABNode {
                 innerChild.keys.add(0, keys.get(index - 1));
                 keys.set(index - 1, leftNeighbor.keys.get(leftNeighbor.keys.size() - 1));
                 leftNeighbor.keys.remove(leftNeighbor.keys.size() - 1);
-            } else if (index + 1 < children.size() && children.get(index + 1).canSteal()) {
+            } else if (index + 1 < children.size() && children.get(index + 1).stealable()) {
                 ABNestedNode rightNeighbor = (ABNestedNode) children.get(index + 1);
                 innerChild.children.add(rightNeighbor.children.get(0));
                 rightNeighbor.children.remove(0);
@@ -405,7 +401,7 @@ class ABNestedNode extends ABNode {
         this.keys.remove(keyIndex);
     }
 
-    int removeRightMostChild() {
+    int removeBiggestChild() {
         ABNode child = children.get(children.size() - 1);
         if (child instanceof ABLeafNode) {
             children.remove(children.size() - 1);
@@ -413,7 +409,7 @@ class ABNestedNode extends ABNode {
             keys.remove(keys.size() - 1);
             return key;
         } else {
-            int key = ((ABNestedNode) child).removeRightMostChild();
+            int key = ((ABNestedNode) child).removeBiggestChild();
             balanceChildren(children.size() - 1);
             return key;
         }
@@ -443,7 +439,7 @@ class ABNestedNode extends ABNode {
     }
 
     @Override
-    boolean validAB(boolean root) {
+    boolean isValid(boolean root) {
         if (children.size() < (root ? 2 : a)) {
             return false;
         }
@@ -452,7 +448,7 @@ class ABNestedNode extends ABNode {
         }
         int h = height();
         for (int i = 0; i < children.size(); i++) {
-            if (!children.get(i).validAB(false)) {
+            if (!children.get(i).isValid(false)) {
                 return false;
             }
             if (h != children.get(i).height() + 1) {
@@ -505,7 +501,7 @@ class ABLeafNode extends ABNode {
         // do nothing
     }
 
-    boolean canSteal() {
+    boolean stealable() {
         return false;
     }
 
@@ -529,7 +525,7 @@ class ABLeafNode extends ABNode {
         return null;
     }
 
-    boolean validAB(boolean root) {
+    boolean isValid(boolean root) {
         return true;
     }
 
