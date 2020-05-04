@@ -3,6 +3,7 @@ package DataStructures.PriorityQueues.BinomialHeaps;
 import Util.Terminal;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class BinomialHeap {
     static StringBuilder binomialHeapExerciseStringbuilder;
@@ -75,9 +76,6 @@ public class BinomialHeap {
      * @return the int-value of the minimal node
      */
     public int min() {
-        if (minimum == null) {
-            throw new RuntimeException("There is no minimal element in the heap (empty)");
-        }
         return minimum.min();
     }
 
@@ -171,20 +169,14 @@ public class BinomialHeap {
         if (count == 0) {
             return result;
         } else if (count == 1) {
-            if (a != null) {
-                result.First = a;
-            } else if (b != null) {
-                result.First = b;
-            } else if (carry != null) {
-                result.First = carry;
-            }
+            result.First = Objects.requireNonNullElseGet(a, () -> Objects.requireNonNullElse(b, carry));
             return result;
         } else if (count == 2) {
             if (a == null) {
                 result.Second = BinomialTreeNode.merge(b, carry);
             } else if (b == null) {
                 result.Second = BinomialTreeNode.merge(a, carry);
-            } else if (carry == null) {
+            } else {
                 result.Second = BinomialTreeNode.merge(a, b);
             }
             return result;
@@ -198,15 +190,13 @@ public class BinomialHeap {
     /**
      * Deletes the minimal element of the heap and returns it
      *
-     * @return the minimal element that was deleted
      */
-    public int deleteMin() {
+    public void deleteMin() {
         int min = min();
         Terminal.replaceinSB(binomialHeapSolutionStringbuilder, "%$BINHEAPDELETIONS$", "\\noindent\\fbox{\\parbox{\\textwidth}{\\vspace{5px}deleteMin(): \\underline{\\color{tumgadRed}min = " + min + "\\color{black}}\n%$BINHEAPDELETIONS$");
         BinomialTreeNode[] children = minimum.deleteMin();
         trees.remove(minimum);
         merge(children);
-        return min;
     }
 
     /**
