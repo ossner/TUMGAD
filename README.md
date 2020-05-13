@@ -22,7 +22,12 @@ will be replaced with the generated structures.
 
 Easy example: The implementation for QuickSort generates a random array and converts it
 to a string (simple enough) and then that string replaces the placeholder "$INITARRAY$" in the 
-exercise template. Later, the LaTeX will be compiled and the output written to PDF. 
+exercise template. Later, the LaTeX will be compiled and the output written to two PDFs, one
+with the exercise, the other with the solutions. 
+
+![](resources/example.png)
+
+For a complete example, you can look at [these PDFs](docs)
 
 ## How to Use
 For a **detailed setup and usage guide**, have a look [at this](Setup.md).
