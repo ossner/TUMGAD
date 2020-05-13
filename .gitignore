@@ -39,7 +39,6 @@ desktop.ini
 
 # LaTeX generated
 *.aux
-*.pdf
 *.out
 *.xwm
 docs/Exercises.tex
