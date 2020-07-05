@@ -31,7 +31,7 @@
 
 ### Search Structures
 - [AVL Trees](https://ossner.github.io/TUMGAD/src/DataStructures/SearchStructures/AVLTrees/AVLTrees)
-- [(a,b) Trees](https://ossner.github.io/TUMGAD/src/DataStructures/SearchStructures/ABTrees/ABTrees)
+- [(a,b)-Trees](https://ossner.github.io/TUMGAD/src/DataStructures/SearchStructures/ABTrees/ABTrees)
 
 ### Priority Queues
 - [Binary Heaps](https://ossner.github.io/TUMGAD/src/DataStructures/PriorityQueues/BinaryHeaps/BinaryHeaps)

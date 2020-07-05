@@ -53,7 +53,7 @@ same exercises **every time** this makes it easier if you want to repeat
 more difficult exercises or share them.
 
 After the seed, you can select which exercises should be generated enter 
-your selections separated by a space (ex: `TRAV AB AVL`) or simply type X
+your selections separated by a space (ex: `TRAV AB AVL`) or simply type `X`
 to generate everything.
 
 Please note that the first execution might take

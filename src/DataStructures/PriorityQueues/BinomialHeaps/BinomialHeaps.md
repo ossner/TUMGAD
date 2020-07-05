@@ -43,6 +43,7 @@ the basics of insertion, more often than not, results in merging.
 The action of purely inserting a value into a tree could not be simpler.
 You just have to add the new node as a tree with height 0 to the heap.
 Consider this heap:
+
 ![Inserting a value into a heap](../../../../resources/BinomialHeapInsertionEasyExample.png)
 
 After inserting a value (say 8) we get our new heap:
