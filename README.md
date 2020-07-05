@@ -32,7 +32,10 @@ to a string (simple enough) and then that string replaces the placeholder "$INIT
 exercise template. Later, the LaTeX will be compiled and the output written to two PDFs, one
 with the exercise, the other with the solutions. 
 
+![](resources/example2.png)
+
 ![](resources/example.png)
+
 
 For a complete example, you can look at [these PDFs](docs)
 
