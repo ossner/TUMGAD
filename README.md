@@ -39,10 +39,10 @@ to your [PATH](https://tex.stackexchange.com/questions/60702/setting-up-miktex-a
 Please note: For now, the exercise generator is optimized for IDE, if you want to use it in your command line, you will likely
 have to make some small adjustments.
 
-Visit [sebastianoner.github.io/TUMGAD](https://sebastianoner.github.io/TUMGAD)
+Visit [ossner.github.io/TUMGAD/](https://ossner.github.io/TUMGAD/src/routes)
 ## Contributing
-If you spot an issue you can report it [here](https://github.com/SebastianOner/TUMGAD/issues/new?assignees=&labels=&template=bug_report.md&title=)
+If you spot an issue you can report it [here](https://github.com/ossner/TUMGAD/issues/new?assignees=&labels=&template=bug_report.md&title=)
 
-If you have an idea for a feature you can submit it [here](https://github.com/SebastianOner/TUMGAD/issues/new?assignees=&labels=&template=feature_request.md&title=)
+If you have an idea for a feature you can submit it [here](https://github.com/ossner/TUMGAD/issues/new?assignees=&labels=&template=feature_request.md&title=)
 
 Or just submit a pull request if you're familiar with GitHub. Contributing guidelines can be found [here](CONTRIBUTING.md)
