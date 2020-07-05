@@ -10,7 +10,7 @@ Some of the Exercises TUMGAD can generate:
 - Dijkstra's Algorithm
 - ...
 
-You can check the generator status (which exercises is TUMGAD capable of generating) [here](https://github.com/users/SebastianOner/projects/1)
+You can check the generator status (which exercises is TUMGAD capable of generating) [here](https://github.com/users/ossner/projects/1)
 ## About
 TUMGAD is a tool for anyone wanting to learn about some the most famous Algorithms and Data Structures, though it 
 was mainly developed for Students of the Technical University of Munich.
