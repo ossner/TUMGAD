@@ -13,17 +13,13 @@ the program in an IDE
     Get the JDK 13 [here](https://www.oracle.com/java/technologies/javase-jdk13-downloads.html).
 
 ## Adding to PATH
-You have to add both **pdflatex** and **java** to your PATH environment variable
+You have to add **pdflatex** to your PATH environment variable
 
-1. pdflatex: On Windows and Linux the PATH should be set automatically,
-for macOS, you can look at the official instructions [here](https://miktex.org/howto/modify-path)
+On Windows and Linux the PATH should be set automatically,
+for macOS, you can look at the official instructions [here](https://miktex.org/howto/modify-path).
 
-    You can check if you have LaTeX added by opening a new Terminal and simply typing
-`pdflatex`. If you don't get an error, it is set up correctly
-
-2. Java: Adding java to PATH is only necessary if you intend to use the
-jar file provided in the repository, if that's the case I trust you know 
-how to set environment variables. 
+You can check if you have LaTeX added by opening a new Terminal and simply typing
+`pdflatex`. If you don't get an error, it is set up correctly.
 
 ## Installation
 Due to a lack of functionality from eclipse, I strongly recommend you use
