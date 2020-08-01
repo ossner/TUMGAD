@@ -56,5 +56,7 @@ After the seed, you can select which exercises should be generated enter
 your selections separated by a space (ex: `TRAV AB AVL`) or simply type `X`
 to generate everything.
 
+Some PDF viewers cannot handle dynamic reloading of the PDF files, this means, depending on the PDF viewer, you might need to close the viewer before re-generating a file
+
 Please note that the first execution might take
 exceptionally long, since LaTeX has to download a multitude of packages.
