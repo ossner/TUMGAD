@@ -24,7 +24,7 @@ public class DoubleHashing {
             "%$DHTABLE$";
 
     /**
-     * generates a first hashfunction matching /\([1-9]x \+ 9\) mod 11/
+     * generates a first hashfunction like ([1-9]x + 9) mod 11
      */
     public static int[] generateH1Function() {
         Random rand = Terminal.rand;
@@ -38,7 +38,7 @@ public class DoubleHashing {
      * h2(x) = prime1 - (x % prime2)
      */
     static int[] generateH2Function() {
-        int[] primes = {5, 7, 11};
+        int[] primes = {3, 5, 7};
         Random rand = Terminal.rand;
         int[] a = new int[2];
         a[0] = primes[rand.nextInt(3)];
@@ -82,7 +82,7 @@ public class DoubleHashing {
             secondInsertions[i] = deletionsArr[k++];
         }
 
-        ArrayList allInsertions = new ArrayList(Arrays.asList(firstInsertions));
+        ArrayList<Integer> allInsertions = new ArrayList<>(Arrays.asList(firstInsertions));
         for (int i = 0; i < numOfSecondInsertions; i++) {
             allInsertions.add(secondInsertions[i]);
         }
