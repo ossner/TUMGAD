@@ -147,7 +147,6 @@ public class Tumgad {
                         "RadixSort: " + ANSI_PURPLE + "RS" + ANSI_RESET + "\n" +
                         "Hashing (Chaining): " + ANSI_PURPLE + "HC" + ANSI_RESET + "\n" +
                         "Hashing (Double): " + ANSI_PURPLE + "HD" + ANSI_RESET + "\n" +
-                        "Hashing (Perfect): " + ANSI_PURPLE + "HP" + ANSI_RESET + "\n" +
                         "Graph-Traversal (BFS & DFS): " + ANSI_PURPLE + "TRAV" + ANSI_RESET + "\n" +
                         "AB Trees: " + ANSI_PURPLE + "AB" + ANSI_RESET + "\n" +
                         "AVL Trees: " + ANSI_PURPLE + "AVL" + ANSI_RESET + "\n" +
