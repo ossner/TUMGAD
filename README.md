@@ -1,6 +1,6 @@
 # TUMGAD
 <!-- favicon by Becris from flaticon.com -->
-Exercise generation and helpful materials for the course Introduction to Algorithms and Data Structures.
+Exercise generator for the course Introduction to Algorithms and Data Structures.
 Developed by students from the Technical University of Munich primarily for fellow students.
 
 Some of the Exercises TUMGAD can generate:
