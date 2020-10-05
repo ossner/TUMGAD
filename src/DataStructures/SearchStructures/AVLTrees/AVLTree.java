@@ -54,7 +54,9 @@ public class AVLTree {
         Terminal.replaceinSB(avlTreeSolutionStringBuilder, "$FIRSTINSERTS$", Terminal.printArray(firstInserts));
         Terminal.replaceinSB(avlTreeSolutionStringBuilder, "$DELETIONS$", Terminal.printArray(deletions));
         Terminal.replaceinSB(avlTreeSolutionStringBuilder, "$SECONDINSERTS$", Terminal.printArray(secondInserts));
+
         checkBoxWritten = false;
+
         for (int i = 0; i < firstInserts.length; i++) {
             tree.root = tree.insert(tree.root, firstInserts[i]);
             if (!checkBoxWritten) {
@@ -261,13 +263,13 @@ public class AVLTree {
     }
 
     /**
-     * returns a reference to the minimal node in the given tree
+     * returns a reference to the maximum node in the given tree
      */
-    Node minValueNode(Node node) {
+    Node maxValueNode(Node node) {
         Node current = node;
 
-        while (current.left != null) {
-            current = current.left;
+        while (current.right != null) {
+            current = current.right;
         }
 
         return current;
@@ -283,29 +285,26 @@ public class AVLTree {
         } else if (key > root.key) {
             root.right = deleteNode(root.right, key);
         } else {
-
-            // node with only one child or no child
+            // The node to be deleted has a maximum of one child. This also means that the child in question
+            // has no chilren, because that would mean the balance difference is too high. And that's super duper illegal
             if (root.left == null || root.right == null) {
-                Node temp = null;
-                if (temp == root.left) {
+                Node temp;
+                if (root.left == null) {
                     temp = root.right;
                 } else {
                     temp = root.left;
                 }
-                // No child case
-                if (temp == null) {
-                    root = null;
-                } else {
-                    root = temp;
-                }
+                root = temp;
             } else {
-                Node temp = minValueNode(root.right);
+                // Node to be deleted has two children, in which case the minimum node from the left subtree (predecessor)
+                // will be deleted. this varies based on implementation and is usually standardized this way
+                Node temp = maxValueNode(root.left);
                 root.key = temp.key;
-                root.right = deleteNode(root.right, temp.key);
+                root.left = deleteNode(root.left, temp.key);
             }
         }
 
-        // If the tree had only one node then return
+        // If the tree only had one node then return null (this won't happen in exercise gen though)
         if (root == null) {
             return root;
         }
