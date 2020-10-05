@@ -43,9 +43,9 @@ Deleting a node from an AVL Tree is sometimes slightly more complicated.
 If the node is a leaf, you simply remove it, update balances and
 re-balance if necessary.
 
-If the node is not a leaf, you switch it with its in-order successor,
-remove the new leaf, update balances and
-re-balance if necessary.
+If the node is not a leaf, you switch it with its in-order predecessor
+(i.e. the maximum node in the left subtree),
+remove the node you want to remove (as it is now a leaf), update balances and re-balance if necessary.
 
 ## Time Complexity:
 
