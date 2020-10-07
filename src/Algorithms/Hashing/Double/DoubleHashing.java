@@ -54,7 +54,7 @@ public class DoubleHashing {
         int[] hash2 = generateH2Function();
 
         // The next couple of lines generate the numbers the students will have to work with
-        int[] numbers = Terminal.generateRandomArray(7, 7);
+        int[] numbers = Terminal.generateRandomArray(6, 6);
 
         int numOfFirstInsertions = Terminal.rand.nextInt(3) + 4;
         int numOfSecondInsertions = 7 - numOfFirstInsertions;
@@ -74,13 +74,12 @@ public class DoubleHashing {
         }
         int[] secondInsertions = new int[numOfSecondInsertions];
         int j = 0;
-        for (int i = numOfFirstInsertions + 1; i < numbers.length; i++) {
+        for (int i = numOfFirstInsertions; i < numbers.length; i++) {
             secondInsertions[j++] = numbers[i];
         }
-        int k = 0;
-        for (int i = j; i < numOfSecondInsertions; i++) {
-            secondInsertions[i] = deletionsArr[k++];
-        }
+
+        // There will always be 1 unfilled position which we fill with the first number we deleted (just 'cause)
+        secondInsertions[j] = deletionsArr[0];
 
         ArrayList<Integer> allInsertions = new ArrayList<>(Arrays.asList(firstInsertions));
         for (int i = 0; i < numOfSecondInsertions; i++) {
