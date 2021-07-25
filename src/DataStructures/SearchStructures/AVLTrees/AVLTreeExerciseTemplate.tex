@@ -1,3 +1,67 @@
+\newcommand{\emptyavltree}{
+    \begin{center}
+        \begin{tikzpicture}[level/.style={sibling distance=144pt/##1},level 3/.style={sibling distance=36pt},minimum size=30pt,scale=0.8,level distance=36pt,
+            every node/.style={transform shape}]
+            \node[circle,draw](z){}
+            child{node[circle,draw]{}
+            child{node[circle,draw]{}
+            child{node[circle,draw]{}
+            child[missing]{}
+            child[missing]{}}
+            child{node[circle,draw]{}
+            child[missing]{}
+            child[missing]{}}}
+            child{node[circle,draw]{}
+            child{node[circle,draw]{}
+            child[missing]{}
+            child[missing]{}}
+            child{node[circle,draw]{}
+            child[missing]{}
+            child[missing]{}}}}
+            child{node[circle,draw]{}
+            child{node[circle,draw]{}
+            child{node[circle,draw]{}
+            child[missing]{}
+            child[missing]{}}
+            child{node[circle,draw]{}
+            child[missing]{}
+            child[missing]{}}}
+            child{node[circle,draw]{}
+            child{node[circle,draw]{}
+            child[missing]{}
+            child[missing]{}}
+            child{node[circle,draw]{}
+            child[missing]{}
+            child[missing]{}}}};
+        \end{tikzpicture}
+    \end{center}
+}
+
+\newcommand{\chooserotation}{
+    \hspace{0pt}
+    \makebox[2.8cm][l]{$\square\,$ l rotation}
+    \makebox[2.8cm][l]{$\square\,$ r rotation}
+    \makebox[2.8cm][l]{$\square\,$ l-r rotation}
+    \makebox[2.8cm][l]{$\square\,$ r-l rotation}
+    \makebox[2.2cm][l]{$\square\,$ no rotation}
+}
+
+\newcommand{\emptystep}[1]{
+    \begin{center}
+        \noindent\fbox{
+            \parbox{\textwidth}{
+                \vspace{6pt}\hspace{0pt}
+                #1: \underline{\hspace{1cm}}
+                \vspace{-18pt}
+                \emptyavltree
+                \vspace{-3pt}
+                \chooserotation
+                \vspace{6pt}
+            }
+        }
+    \end{center}
+}
+
 \textbf{\LARGE{\color{tumgadPurple}AVL Trees}}\\
 \\
 \noindent
@@ -10,397 +74,17 @@ if any rotation was performed.
     Delete: $DELETIONS$\\
     Insert: $SECONDINSERTS$\\
 \end{center}
-Insert: \underline{\hspace{.8cm}}
-\hspace{.1cm}
-\makebox[2.3cm][l]{$\square$ l rotation}
-\makebox[2.3cm][l]{$\square$ r rotation}
-\makebox[2.5cm][l]{$\square$ l-r rotation}
-\makebox[2.5cm][l]{$\square$ r-l rotation}
-\makebox[2.3cm][l]{$\square$ no rotation}
-\begin{center}
-    \begin{tikzpicture}[level/.style={sibling distance=55mm/#1},minimum size=25pt,scale=0.8,
-    every node/.style={transform shape}]
-        \node[circle,draw](z){}
-        child{node[circle,draw]{}
-            child{node[circle,draw]{}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}}
-            child{node[circle,draw]{}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}}}
-        child{node[circle,draw]{}
-            child{node[circle,draw]{}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}}
-            child{node[circle,draw]{}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}}};
-    \end{tikzpicture}
-\end{center}
-Insert: \underline{\hspace{.8cm}}
-\hspace{.1cm}
-\makebox[2.3cm][l]{$\square$ l rotation}
-\makebox[2.3cm][l]{$\square$ r rotation}
-\makebox[2.5cm][l]{$\square$ l-r rotation}
-\makebox[2.5cm][l]{$\square$ r-l rotation}
-\makebox[2.3cm][l]{$\square$ no rotation}
-\begin{center}
-    \begin{tikzpicture}[level/.style={sibling distance=55mm/#1},minimum size=25pt,scale=0.8,
-    every node/.style={transform shape}]
-        \node[circle,draw](z){}
-        child{node[circle,draw]{}
-            child{node[circle,draw]{}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}}
-            child{node[circle,draw]{}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}}}
-        child{node[circle,draw]{}
-            child{node[circle,draw]{}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}}
-            child{node[circle,draw]{}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}}};
-    \end{tikzpicture}
-\end{center}
-\newpage
-\noindent
-Insert: \underline{\hspace{.8cm}}
-\hspace{.1cm}
-\makebox[2.3cm][l]{$\square$ l rotation}
-\makebox[2.3cm][l]{$\square$ r rotation}
-\makebox[2.5cm][l]{$\square$ l-r rotation}
-\makebox[2.5cm][l]{$\square$ r-l rotation}
-\makebox[2.3cm][l]{$\square$ no rotation}
-\begin{center}
-    \begin{tikzpicture}[level/.style={sibling distance=55mm/#1},minimum size=25pt,scale=0.8,
-    every node/.style={transform shape}]
-        \node[circle,draw](z){}
-        child{node[circle,draw]{}
-            child{node[circle,draw]{}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}}
-            child{node[circle,draw]{}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}}}
-        child{node[circle,draw]{}
-            child{node[circle,draw]{}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}}
-            child{node[circle,draw]{}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}}};
-    \end{tikzpicture}
-\end{center}
-Insert: \underline{\hspace{.8cm}}
-\hspace{.1cm}
-\makebox[2.3cm][l]{$\square$ l rotation}
-\makebox[2.3cm][l]{$\square$ r rotation}
-\makebox[2.5cm][l]{$\square$ l-r rotation}
-\makebox[2.5cm][l]{$\square$ r-l rotation}
-\makebox[2.3cm][l]{$\square$ no rotation}
-\begin{center}
-    \begin{tikzpicture}[level/.style={sibling distance=55mm/#1},minimum size=25pt,scale=0.8,
-    every node/.style={transform shape}]
-        \node[circle,draw](z){}
-        child{node[circle,draw]{}
-            child{node[circle,draw]{}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}}
-            child{node[circle,draw]{}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}}}
-        child{node[circle,draw]{}
-            child{node[circle,draw]{}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}}
-            child{node[circle,draw]{}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}}};
-    \end{tikzpicture}
-\end{center}
-Insert: \underline{\hspace{.8cm}}
-\hspace{.1cm}
-\makebox[2.3cm][l]{$\square$ l rotation}
-\makebox[2.3cm][l]{$\square$ r rotation}
-\makebox[2.5cm][l]{$\square$ l-r rotation}
-\makebox[2.5cm][l]{$\square$ r-l rotation}
-\makebox[2.3cm][l]{$\square$ no rotation}
-\begin{center}
-    \begin{tikzpicture}[level/.style={sibling distance=55mm/#1},minimum size=25pt,scale=0.8,
-    every node/.style={transform shape}]
-        \node[circle,draw](z){}
-        child{node[circle,draw]{}
-            child{node[circle,draw]{}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}}
-            child{node[circle,draw]{}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}}}
-        child{node[circle,draw]{}
-            child{node[circle,draw]{}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}}
-            child{node[circle,draw]{}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}}};
-    \end{tikzpicture}
-\end{center}
-Delete: \underline{\hspace{.8cm}}
-\hspace{.1cm}
-\makebox[2.3cm][l]{$\square$ l rotation}
-\makebox[2.3cm][l]{$\square$ r rotation}
-\makebox[2.5cm][l]{$\square$ l-r rotation}
-\makebox[2.5cm][l]{$\square$ r-l rotation}
-\makebox[2.3cm][l]{$\square$ no rotation}
-\begin{center}
-    \begin{tikzpicture}[level/.style={sibling distance=55mm/#1},minimum size=25pt,scale=0.8,
-    every node/.style={transform shape}]
-        \node[circle,draw](z){}
-        child{node[circle,draw]{}
-            child{node[circle,draw]{}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}}
-            child{node[circle,draw]{}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}}}
-        child{node[circle,draw]{}
-            child{node[circle,draw]{}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}}
-            child{node[circle,draw]{}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}}};
-    \end{tikzpicture}
-\end{center}
-\newpage
-\noindent
-Delete: \underline{\hspace{.8cm}}
-\hspace{.1cm}
-\makebox[2.3cm][l]{$\square$ l rotation}
-\makebox[2.3cm][l]{$\square$ r rotation}
-\makebox[2.5cm][l]{$\square$ l-r rotation}
-\makebox[2.5cm][l]{$\square$ r-l rotation}
-\makebox[2.3cm][l]{$\square$ no rotation}
-\begin{center}
-    \begin{tikzpicture}[level/.style={sibling distance=55mm/#1},minimum size=25pt,scale=0.8,
-    every node/.style={transform shape}]
-        \node[circle,draw](z){}
-        child{node[circle,draw]{}
-            child{node[circle,draw]{}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}}
-            child{node[circle,draw]{}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}}}
-        child{node[circle,draw]{}
-            child{node[circle,draw]{}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}}
-            child{node[circle,draw]{}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}}};
-    \end{tikzpicture}
-\end{center}
-Insert: \underline{\hspace{.8cm}}
-\hspace{.1cm}
-\makebox[2.3cm][l]{$\square$ l rotation}
-\makebox[2.3cm][l]{$\square$ r rotation}
-\makebox[2.5cm][l]{$\square$ l-r rotation}
-\makebox[2.5cm][l]{$\square$ r-l rotation}
-\makebox[2.3cm][l]{$\square$ no rotation}
-\begin{center}
-    \begin{tikzpicture}[level/.style={sibling distance=55mm/#1},minimum size=25pt,scale=0.8,
-    every node/.style={transform shape}]
-        \node[circle,draw](z){}
-        child{node[circle,draw]{}
-            child{node[circle,draw]{}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}}
-            child{node[circle,draw]{}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}}}
-        child{node[circle,draw]{}
-            child{node[circle,draw]{}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}}
-            child{node[circle,draw]{}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}}};
-    \end{tikzpicture}
-\end{center}
-Insert: \underline{\hspace{.8cm}}
-\hspace{.1cm}
-\makebox[2.3cm][l]{$\square$ l rotation}
-\makebox[2.3cm][l]{$\square$ r rotation}
-\makebox[2.5cm][l]{$\square$ l-r rotation}
-\makebox[2.5cm][l]{$\square$ r-l rotation}
-\makebox[2.3cm][l]{$\square$ no rotation}
-\begin{center}
-    \begin{tikzpicture}[level/.style={sibling distance=55mm/#1},minimum size=25pt,scale=0.8,
-    every node/.style={transform shape}]
-        \node[circle,draw](z){}
-        child{node[circle,draw]{}
-            child{node[circle,draw]{}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}}
-            child{node[circle,draw]{}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}}}
-        child{node[circle,draw]{}
-            child{node[circle,draw]{}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}}
-            child{node[circle,draw]{}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}
-                child{node[circle,draw]{}
-                    child[missing]{}
-                    child[missing]{}}}};
-    \end{tikzpicture}
-\end{center}
+
+\emptystep{Insert}
+\emptystep{Insert}
+\emptystep{Insert}
+\emptystep{Insert}
+\emptystep{Insert}
+\emptystep{Delete}
+\emptystep{Delete}
+\emptystep{Insert}
+\emptystep{Insert}
+
 Now give the $PRINTORDER$ visitation sequence of the AVL-Tree:\\
 \\
 \noindent\fbox{

@@ -394,12 +394,12 @@ public class AVLTree {
 
     void treeToTex(String placeholder) {
         if (placeholder.equals("%$INITTREE$")) {
-            Terminal.replaceinSB(avlTreeExerciseStringBuilder, placeholder, "\\begin{center}\\begin{tikzpicture}[level/.style={sibling distance=55mm/#1},minimum size=20pt,scale=.8,\n" +
+            Terminal.replaceinSB(avlTreeExerciseStringBuilder, placeholder, "\\begin{center}\\begin{tikzpicture}[level/.style={sibling distance=144pt/#1},level 3/.style={sibling distance=36pt},minimum size=24pt,scale=.8,\n" +
                     "every node/.style={transform shape}]\n" +
                     "\\node[circle,draw](z){" + this.root.key + "}" + treeToTex(this.root) + ";\\end{tikzpicture}\\end{center}" +
                     placeholder);
         }
-        Terminal.replaceinSB(avlTreeSolutionStringBuilder, placeholder, "\\begin{center}\\begin{tikzpicture}[level/.style={sibling distance=55mm/#1},minimum size=20pt,scale=.8,\n" +
+        Terminal.replaceinSB(avlTreeSolutionStringBuilder, placeholder, "\\begin{center}\\begin{tikzpicture}[level/.style={sibling distance=144pt/#1},level 3/.style={sibling distance=36pt},minimum size=24pt,scale=.8,\n" +
                 "every node/.style={transform shape}]\n" +
                 "\\node[circle,draw](z){" + this.root.key + "}" + treeToTex(this.root) + ";\\end{tikzpicture}\\end{center}" +
                 placeholder);
